@@ -1,0 +1,34 @@
+# minimum required CMAKE version
+CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
+
+# compiler must be 11 or 14
+SET (CMAKE_CXX_STANDARD 14)
+
+set ( antlr_vscode_generated_files ${CMAKE_CURRENT_SOURCE_DIR}/.antlr )
+
+# set (INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/usr/local)
+set (INSTALL_DIR /usr/local)
+
+
+list(APPEND ANTLR4CPP_INCLUDE_DIRS ${INSTALL_DIR}/include/antlr4-runtime)
+foreach(src_path misc atn dfa tree support)
+  list(APPEND ANTLR4CPP_INCLUDE_DIRS ${INSTALL_DIR}/include/antlr4-runtime/${src_path})
+endforeach(src_path)
+
+set(ANTLR4CPP_LIBS "${INSTALL_DIR}/lib")
+
+# add antrl4cpp artifacts to project environment
+include_directories( ${ANTLR4CPP_INCLUDE_DIRS} )
+link_directories( ${ANTLR4CPP_LIBS} )
+message(STATUS "Found antlr4cpp libs: ${ANTLR4CPP_LIBS} and includes: ${ANTLR4CPP_INCLUDE_DIRS} ")
+
+
+# include generated files in project environment
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/.antlr)
+
+FILE(GLOB generated_files ${CMAKE_CURRENT_SOURCE_DIR}/.antlr/*.cpp)
+
+
+# add generated grammar to binary target
+add_executable(Clouds CloudsMain.cpp ${generated_files})
+target_link_libraries(Clouds antlr4-runtime)
