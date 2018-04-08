@@ -8,6 +8,7 @@ set ( antlr_vscode_generated_files ${CMAKE_CURRENT_SOURCE_DIR}/.antlr )
 
 # set (INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/usr/local)
 set (INSTALL_DIR /usr/local)
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 
 list(APPEND ANTLR4CPP_INCLUDE_DIRS ${INSTALL_DIR}/include/antlr4-runtime)

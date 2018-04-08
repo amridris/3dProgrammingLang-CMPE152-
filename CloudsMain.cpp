@@ -19,7 +19,7 @@ using namespace std;
 int main(int, const char **)
 {
     ifstream ins;
-    ins.open("t.expr");
+    ins.open("sample_programs/t.expr");
 
     ANTLRInputStream input(ins);
     CloudsLexer lexer(&input);
