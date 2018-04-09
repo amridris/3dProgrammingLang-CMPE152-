@@ -6,6 +6,7 @@ prog:   stat+ ;
 
 stat:   expr NEWLINE                # printExpr
     |   ID '=' expr NEWLINE         # assign
+    |   (TYPE ' ')* ID INIT_LIST* NEWLINE         # declaration
     |   NEWLINE                     # blank
     ;
 
@@ -16,6 +17,17 @@ expr:   expr op=('*'|'/') expr      # MulDiv
     |   '(' expr ')'                # parens
     ;
 
+
+INIT_LIST: '{' (INT ',')* INT '}'
+   // |       '{' (INIT_TYPE )
+    ;
+TYPE:   'circle'
+    |   'triangle'
+    |   'square'
+    ;
+INIT_TYPE:  'height'
+    |       'width'
+    ;
 MUL :   '*' ; // assigns token name to '*' used above in grammar
 DIV :   '/' ;
 ADD :   '+' ;
