@@ -6,7 +6,7 @@ prog:   stat+ ;
 
 stat:   expr NEWLINE                                # printExpr
     |   ID '=' expr NEWLINE                         # assign
-    |   TYPE ID ('{'init_list'}')* NEWLINE          # declaration
+    |   TYPE ID ('{' init_list '}')* NEWLINE          # declaration
     |   NEWLINE                                     # blank
     ;
 
