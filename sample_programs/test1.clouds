@@ -1,3 +1,5 @@
-triangle exTri{1}
-square exSq{2}
-circle exCirc{3}
+i=5
+sphere exSph{radius=1}
+cube exCu{length=1,width=2,height=3}
+cylinder exCyl{radius=1,height=2}
+cone exCone{radius=1,height=4}
