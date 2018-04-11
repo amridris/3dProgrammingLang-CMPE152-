@@ -55,7 +55,7 @@ actions //done once in order
 
     exCu /= 3
 
-    exCu ~ 50R
+    exCu ~R 50
 
     move exCu in exSph at 5
     WAIT(5s)
