@@ -1,71 +1,51 @@
-grammar Clouds;  // A tiny subset of Pascal
+grammar Clouds;
 
-program : header block '.' ;
-header  : PROGRAM IDENTIFIER ';' ;
-block   : declarations compound_stmt ;
+/** The start rule; begin parsing here. */
 
-declarations : VAR decl_list ';' ;
-decl_list    : decl ( ';' decl )* ;
-decl         : var_list ':' type_id ;
-var_list     : var_id ( ',' var_id )* ;
-var_id       : IDENTIFIER ;
-type_id      : IDENTIFIER ;
+prog:   stat+ ;
 
-compound_stmt : BEGIN stmt_list END ;
+stat:   expr NEWLINE                                # printExpr
+    |   ID '=' expr NEWLINE                         # assign
+    |   TYPE ID ('{' init_list '}')* NEWLINE        # declaration
+    |   NEWLINE                                     # blank
+    ;
 
-stmt : compound_stmt    # compoundStmt
-     | assignment_stmt  # assignmentStmt
-     | repeat_stmt      # repeatStmt
-     | if_stmt          # ifStmt
-     |                  # emptyStmt
-     ;
-     
-stmt_list       : stmt ( ';' stmt )* ;
-assignment_stmt : variable ':=' expr ;
-repeat_stmt     : REPEAT stmt_list UNTIL expr ;
-if_stmt         : IF expr THEN stmt ( ELSE stmt )? ;
+expr:   expr op=('*'|'/') expr      # MulDiv
+    |   expr op=('+'|'-') expr      # AddSub
+    |   INT                         # int
+    |   ID                          # id
+    |   '(' expr ')'                # parens
+    ;
 
-variable : IDENTIFIER ;
 
-expr : expr mul_div_op expr     # mulDivExpr
-     | expr add_sub_op expr     # addSubExpr
-     | expr rel_op expr         # relExpr
-     | number                   # numberConst
-     | IDENTIFIER               # identifier
-     | '(' expr ')'             # parens
-     ;
-     
-number : sign? INTEGER ;
-sign   : '+' | '-' ;
-     
-mul_div_op : MUL_OP | DIV_OP ;
-add_sub_op : ADD_OP | SUB_OP ;
-rel_op     : EQ_OP | NE_OP | LT_OP | LE_OP | GT_OP | GE_OP ;
+init_list: (init_var ',')* init_var;
 
-PROGRAM : 'PROGRAM' ;
-BEGIN   : 'BEGIN' ;
-END     : 'END' ;
-VAR     : 'VAR' ;
-REPEAT  : 'REPEAT' ;
-UNTIL   : 'UNTIL' ;
-IF      : 'IF' ;
-THEN    : 'THEN' ;
-ELSE    : 'ELSE';
+init_var: INIT_TYPE '=' expr;
 
-IDENTIFIER : [a-zA-Z][a-zA-Z0-9]* ;
-INTEGER    : [0-9] ;
 
-MUL_OP :   '*' ;
-DIV_OP :   '/' ;
-ADD_OP :   '+' ;
-SUB_OP :   '-' ;
 
-EQ_OP : '=' ;
-NE_OP : '<>' ;
-LT_OP : '<' ;
-LE_OP : '<=' ;
-GT_OP : '>' ;
-GE_OP : '>=' ;
 
-NEWLINE : '\r'? '\n' -> skip  ;
-WS      : [ \t]+ -> skip ; 
+TYPE:   'sphere'
+    |   'cube'
+    |   'cylinder'
+    |   'cone'
+//    |   'tetrahedron'
+    ;
+
+INIT_TYPE:  'height'
+    |       'width'
+    |       'radius'
+    |       'length'
+    |       '3dpoint'
+    ;
+    
+MUL :   '*' ; // assigns token name to '*' used above in grammar
+DIV :   '/' ;
+ADD :   '+' ;
+SUB :   '-' ;
+ID  :   [a-zA-Z]+ ;      // match identifiers
+INT :   [0-9]+ ;         // match integers
+NEWLINE:'\r'? '\n' ;     // return newlines to parser (is end-statement signal)
+WS  :  [ \t]+ -> skip ; // toss out whitespace
+
+
