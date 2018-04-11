@@ -26,10 +26,11 @@ message(STATUS "Found antlr4cpp libs: ${ANTLR4CPP_LIBS} and includes: ${ANTLR4CP
 
 # include generated files in project environment
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/.antlr)
+# include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-FILE(GLOB generated_files ${CMAKE_CURRENT_SOURCE_DIR}/.antlr/*.cpp)
-
+FILE(GLOB anltr4files ${CMAKE_CURRENT_SOURCE_DIR}/.antlr/*.cpp)
+FILE(GLOB_RECURSE srcfiles ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 
 # add generated grammar to binary target
-add_executable(Clouds CloudsMain.cpp ${generated_files})
+add_executable(Clouds CloudsMain.cpp ${anltr4files} ${srcfiles})
 target_link_libraries(Clouds antlr4-runtime)
