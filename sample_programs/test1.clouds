@@ -11,7 +11,7 @@ Clouds test1
     move object in point at speed //move forever in direction at speed
     stop object
     teleport to point
-    colision
+    collision
     finish //immediately stops simulation
     WHEN //continuous polling
     IF //done at runtime
