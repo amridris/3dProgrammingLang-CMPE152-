@@ -3,3 +3,16 @@ sphere exSph{radius=1}
 cube exCu{length=1,width=2,height=3}
 cylinder exCyl{radius=1,height=2}
 cone exCone{radius=1,height=4}
+
+
+exCu = exCu*3
+exCu *= 3
+
+exCu /= 3
+
+exCu ~ 50R
+
+function f(cube c, sphere s)
+    exCu=c
+
+f(exCu, exSph)
