@@ -8,7 +8,7 @@ prog:   stat+ ; //this is redundant for "program", maybe have this for "block"?
 
 stat:   expr NEWLINE                                # printExpr
     |   ID '=' expr NEWLINE                         # assign
-    |   TYPE ID ('{' init_list '}')* NEWLINE        # declaration //dont have "init_list" defined
+    |   TYPE ID ('{' init_list '}')* NEWLINE        # declaration //dont have "init_list" defined yet
     |   NEWLINE                                     # blank
     ;
 
@@ -93,5 +93,3 @@ INT :   [0-9]+ ;         // match integers
 
 NEWLINE:'\r'? '\n' ;     // return newlines to parser (is end-statement signal)
 WS  :  [ \t]+ -> skip ; // toss out whitespace
-
-
