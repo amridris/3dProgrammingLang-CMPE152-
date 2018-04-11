@@ -1,7 +1,7 @@
 grammar Clouds;  // A tiny subset of Pascal
 
 program : header block '.' ;
-header  : PROGRAM IDENTIFIER ';' ;
+header  : CLOUDS IDENTIFIER ';' ;
 block   : declarations compound_stmt ;
 
 declarations : VAR decl_list ';' ;
@@ -38,11 +38,12 @@ expr : expr mul_div_op expr     # mulDivExpr
 number : sign? INTEGER ;
 sign   : '+' | '-' ;
      
-mul_div_op : MUL_OP | DIV_OP ;
-add_sub_op : ADD_OP | SUB_OP ;
-rel_op     : EQ_OP | NE_OP | LT_OP | LE_OP | GT_OP | GE_OP ;
+mul_div_op : MUL_OP | DIV_OP ; //multiple or divide
+add_sub_op : ADD_OP | SUB_OP ; //add or subtract 
+rel_op     : EQ_OP | NE_OP | LT_OP | LE_OP | GT_OP | GE_OP ; //relational operators
+rot_op     : ROLL_OP | PITCH_OP | YAW_OP ; //rotational operators
 
-PROGRAM : 'PROGRAM' ;
+CLOUDS : 'Clouds' ;
 BEGIN   : 'BEGIN' ;
 END     : 'END' ;
 VAR     : 'VAR' ;
@@ -60,12 +61,21 @@ DIV_OP :   '/' ;
 ADD_OP :   '+' ;
 SUB_OP :   '-' ;
 
-EQ_OP : '=' ;
-NE_OP : '<>' ;
-LT_OP : '<' ;
-LE_OP : '<=' ;
-GT_OP : '>' ;
-GE_OP : '>=' ;
+MUL_EQ :   '*=';
+DIV_EQ :   '/=';
+ADD_EQ :   '+=';
+SUB_EQ :   '-=';
+
+EQ_OP :    '=' ;
+NE_OP :    '!=';
+LT_OP :    '<' ;
+LE_OP :    '<=';
+GT_OP :    '>' ;
+GE_OP :    '>=';
+
+ROLL_OP : '~R' ; //roll
+PITCH_OP :'~P' ; //pitch
+YAW_OP :  '~Y' ; //yaw
 
 NEWLINE : '\r'? '\n' -> skip  ;
 WS      : [ \t]+ -> skip ; 
