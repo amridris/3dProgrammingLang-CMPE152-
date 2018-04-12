@@ -1,0 +1,70 @@
+/*
+POSSIBLE FEATURES
+keywords:
+    environment 
+    //stores a section of only objects and detections
+    //USE CASE: load multiple environments at once
+
+    load
+    //to load envirnoments, if multiple envirnoments are allowed
+
+    external, any
+    // used to set up detections with objects outside delcared environment
+    // any is used to denote all objects not in environment
+
+    USE TABS FOR SCOPE
+    //cleaner code
+
+    gravity
+    //to make simulation more realistic
+*/
+
+
+Clouds validexpressions
+
+
+//only run once, different grammar?
+//putnenv not allowed?
+environment environment_object
+{
+    point point_object_1 = [ x = 2, y = 2, z = 2 ]
+    point point_object_2 = point_object_1
+    point_object_2.x += 1
+    point point_object_3 = point_object_1
+    point_object_3.y += 1
+    point point_object_4 = point_object_1
+    point_object_4.z += 1
+
+    sphere_point = [ x = 20, y = 0, z = 0 ]
+    
+
+    sphere sphere_object = [radius = 2]
+    cube cube_object = [height=1, width=1, length=2]
+
+    int time_to_move_cube = 5;
+    int move_cube_time = 20;
+
+    putnenv cube_object center
+    putnenv sphere_object sphere_point
+
+    //automatically put in environment
+    tetra tetra_object = [point_object_1, point_object_2, point_object_3, point_object_4]
+
+    colision colision_object between sphere_object cube_object
+
+    WHEN(colision_object) THEN sphere_object.velocity = -sphere_object.velocity
+
+    move cube_object to [ x = 2, y = 0, z = 0] in time_to_move_cube at move_cube_time
+}
+
+simulation //acts like main in cpp
+{
+    move cube_object to [ x = 1, y = 0, z = 0 ] in time_to_move_cube
+    IF(cube_object.speed > 20) THEN cube_object.speed = 10
+    wait time_to_move_cube
+
+    move sphere_object to [ x=19, y = 0, z = 0] in time_to_move_cube
+    wait time_to_move_cube/2
+    pause
+    print(sphere_object.center)
+}
