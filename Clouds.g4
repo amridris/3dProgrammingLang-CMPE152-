@@ -22,14 +22,25 @@ stat : scope    # scope_node
      | assignment_stmt  # assignmentStmt
      | repeat_stmt      # repeatStmt
      | if_stmt          # ifStmt
+     | custom_stmt      # customStmt
      |                  # emptyStmt
      ;
 
 scope : '{' stmt_list '}';  
 stmt_list       : stat ( NEWLINE stat )* ;
-assignment_stmt : variable ':=' expr ;
+assignment_stmt : variable '=' expr ;
 repeat_stmt     : REPEAT stmt_list UNTIL expr ;
 if_stmt         : IF expr THEN stat ( ELSE stat )? ;
+custom_stmt     : move_stmt     #moveStmt
+                | PAUSE         #pause
+                | wait_stmt     #waitStmt
+                ;
+
+
+wait_stmt       : WAIT variable;
+move_stmt       : MOVE variable TO variable MOVE_3 variable
+                | MOVE variable 
+                ;
 
 variable: ID;
 
@@ -38,10 +49,17 @@ expr : expr mul_div_op expr     # mulDivExpr
      | expr add_sub_op expr     # addSubExpr
      | expr rel_op expr         # relExpr
      | expr rot_op expr         # rotExpr
+     | '[' init_item (',' init_item) ']'        # init_list
      | number                   # numberConst
      | ID                       # identifier
      | '(' expr ')'             # parens
      ;
+
+init_item   : init_type ;
+
+init_type   : HEIGHT
+            | WIDTH
+            ;
 
 expression
     : methodCall
@@ -83,13 +101,31 @@ ELSE    : 'ELSE'   ;
 CENTER  : 'center' ;
 TELEPORT : 'teleport' ;
 COLISION : 'collision';
-STOP : 'stop' ;
+PAUSE : 'pause' ;
+WAIT : 'wait'   ;
 MOVE : 'move' ;
+TO  :     'to'  ;
+MOVE_3  :   IN    
+        |   FOR
+        |   AT  
+        ;
+AT  :   'at';
+IN  :   'in';
+FOR :   'for';
 FINISH : 'finish' ;
 PUTNEVN : 'putnevn' ;
 FUNCTION : 'function' ;
 ENVIRNOMENT : 'environment' ;
 SIMULATION : 'simulation' ;
+
+//init keywords
+HEIGHT  : 'hieght';
+WIDTH   : 'width';
+LENGTH  : 'length';
+RADIUS  : 'radius';
+X       : 'x';
+Y       : 'y';
+Z       : 'z';
 
 //operators
 MUL :   '*' ; // assigns token name to '*' used above in grammar
@@ -119,13 +155,6 @@ TYPE:   'sphere'
     |   'cylinder'
     |   'cone'
 //    |   'tetrahedron'
-    ;
-
-INIT_TYPE:  'height'
-    |       'width'
-    |       'radius'
-    |       'length'
-    |       '3dpoint'
     ;
 
 ID  :   [a-zA-Z]+ ;      // match identifiers
