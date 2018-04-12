@@ -28,7 +28,9 @@ stat : scope    # scope_node
 
 scope : '{' stmt_list '}';  
 stmt_list       : stat ( NEWLINE stat )* ;
-assignment_stmt : variable '=' expr ;
+assignment_stmt : variable '=' expr 
+                | ID variable '=' expr
+                ;
 repeat_stmt     : REPEAT stmt_list UNTIL expr ;
 if_stmt         : IF expr THEN stat ( ELSE stat )? ;
 custom_stmt     : move_stmt     #moveStmt
@@ -38,7 +40,7 @@ custom_stmt     : move_stmt     #moveStmt
 
 
 wait_stmt       : WAIT variable;
-move_stmt       : MOVE variable TO variable MOVE_3 variable
+move_stmt       : MOVE expr TO expr MOVE_3 expr
                 | MOVE variable 
                 ;
 
@@ -49,16 +51,21 @@ expr : expr mul_div_op expr     # mulDivExpr
      | expr add_sub_op expr     # addSubExpr
      | expr rel_op expr         # relExpr
      | expr rot_op expr         # rotExpr
-     | '[' init_item (',' init_item) ']'        # init_list
+     | '[' init_list ']'        # initList
      | number                   # numberConst
      | ID                       # identifier
      | '(' expr ')'             # parens
      ;
 
-init_item   : init_type ;
+init_list   : init_type '=' expr (',' init_type '=' expr)*  ;
 
 init_type   : HEIGHT
             | WIDTH
+            | LENGTH
+            | RADIUS
+            | X 
+            | Y 
+            | Z 
             ;
 
 expression
