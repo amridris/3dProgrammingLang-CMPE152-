@@ -1,27 +1,37 @@
 grammar Clouds;
 
-program : header block '.' ;
+program : header block;
 header  : CLOUDS ID ';' ;
 block   : environments run_simulation ;
 
-environments: ENVIRNOMENT ID '{' env_stat+ '}';
+//environments: ENVIRNOMENT ID '{' env_stat+ '}'; //use this later
+environments: ENVIRNOMENT ID scope;
 
-run_simulation: SIMULATION '{' sim_stat+ '}';                   
+// run_simulation: SIMULATION '{' sim_stat+ '}'; //use this later
+run_simulation: SIMULATION scope;                   
  
  //need to fix this, dont have declarations or compound_stmt defined
 
-env_stat:   stat; //add other value envirnoment statements
+//env_stat:   stat; //add other value envirnoment statements
 
-sim_stat:   stat; //add other simulaiton statments
+//sim_stat:   ; //add other simulaiton statments
 
-scope : '{' stat+ '}';
 
-stat:   expr NEWLINE                                # printExpr
-    |   ID '=' expr NEWLINE                         # assign
-    |   TYPE ID ('{' init_list '}')* NEWLINE        # declaration //dont have "init_list" defined yet
-    |   NEWLINE                                     # blank
-    ;
-init_list: ;
+
+stat : scope    # scope_node
+     | assignment_stmt  # assignmentStmt
+     | repeat_stmt      # repeatStmt
+     | if_stmt          # ifStmt
+     |                  # emptyStmt
+     ;
+
+scope : '{' stmt_list '}';  
+stmt_list       : stat ( NEWLINE stat )* ;
+assignment_stmt : variable ':=' expr ;
+repeat_stmt     : REPEAT stmt_list UNTIL expr ;
+if_stmt         : IF expr THEN stat ( ELSE stat )? ;
+
+variable: ID;
 
 
 expr : expr mul_div_op expr     # mulDivExpr
