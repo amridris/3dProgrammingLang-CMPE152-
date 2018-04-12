@@ -41,14 +41,17 @@ environment environment_object
     sphere sphere_object = [radius = 2]
     cube cube_object = [height=1, width=1, length=2]
 
-    int time_to_move_cube = 5;
-    int move_cube_time = 20;
+    int time_to_move_cube = 5
+    int move_cube_time = 20
+    int degrees_to_rotate
 
     putnenv cube_object center
     putnenv sphere_object sphere_point
 
     //automatically put in environment
     tetra tetra_object = [point_object_1, point_object_2, point_object_3, point_object_4]
+
+    tetra_object ~Y degrees_to_rotate
 
     colision colision_object between sphere_object cube_object
 
