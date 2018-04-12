@@ -2,13 +2,19 @@ grammar Clouds;
 
 program : header block '.' ;
 header  : CLOUDS ID ';' ;
-block   : declarations compound_stmt ;
-compound_stmt: ;
+block   : environments run_simulation ;
 
-declarations: ;
+environments: ENVIRNOMENT ID '{' env_stat+ '}';
+
+run_simulation: SIMULATION '{' sim_stat+ '}';                   
+ 
  //need to fix this, dont have declarations or compound_stmt defined
 
-prog:   stat+ ; //this is redundant for "program", maybe have this for "block"?
+env_stat:   stat; //add other value envirnoment statements
+
+sim_stat:   stat; //add other simulaiton statments
+
+scope : '{' stat+ '}';
 
 stat:   expr NEWLINE                                # printExpr
     |   ID '=' expr NEWLINE                         # assign
@@ -29,19 +35,16 @@ expr : expr mul_div_op expr     # mulDivExpr
 
 expression
     : methodCall
-    | STRING
+    | ID
     ;
-STRING: ;
-
 
 methodCall
     : methodName '(' methodCallArguments ')'
     ;
 
 methodName
-    : NAME
+    : ID
     ;
-NAME: ;
 
 
 methodCallArguments
@@ -75,9 +78,8 @@ MOVE : 'move' ;
 FINISH : 'finish' ;
 PUTNEVN : 'putnevn' ;
 FUNCTION : 'function' ;
-SETUP : 'setup' ;
-DETECTIONS : 'detections' ;
-ACTIONS : 'actions' ;
+ENVIRNOMENT : 'environment' ;
+SIMULATION : 'simulation' ;
 
 //operators
 MUL :   '*' ; // assigns token name to '*' used above in grammar
