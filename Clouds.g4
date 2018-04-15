@@ -18,7 +18,7 @@ run_simulation: SIMULATION scope;
 
 
 
-stat : scope    # scope_node
+stat : scope            # scope_node
      | assignment_stmt  # assignmentStmt
      | repeat_stmt      # repeatStmt
      | if_stmt          # ifStmt
@@ -27,22 +27,36 @@ stat : scope    # scope_node
      ;
 
 scope : '{' stmt_list '}';  
+
+//statements
 stmt_list       : stat ( NEWLINE stat )* ;
+
 assignment_stmt : variable '=' expr 
                 | ID variable '=' expr
                 ;
+
 repeat_stmt     : REPEAT stmt_list UNTIL expr ;
+
 if_stmt         : IF expr THEN stat ( ELSE stat )? ;
+
 custom_stmt     : move_stmt     #moveStmt
                 | PAUSE         #pause
                 | wait_stmt     #waitStmt
                 ;
 
+put_stmt        : PUTNEVN variable CENTER
+                | PUTNEVN variable TYPE
+                ;
 
 wait_stmt       : WAIT variable;
+
 move_stmt       : MOVE expr TO expr MOVE_3 expr
                 | MOVE variable 
                 ;
+
+when_stmt       : WHEN expr THEN stat ;
+
+print_stmt      : PRINT '(' variable ')';
 
 variable: ID;
 
@@ -81,7 +95,6 @@ methodName
     : ID
     ;
 
-
 methodCallArguments
     : // No arguments
     | expression (',' expression)*  // Some arguments
@@ -96,34 +109,36 @@ rel_op     : EQ_OP | NE_OP | LT_OP | LE_OP | GT_OP | GE_OP ; //relational operat
 rot_op     : ROLL_OP | PITCH_OP | YAW_OP ; //rotational operators
 
 //key words
-CLOUDS : 'Clouds'  ;
-BEGIN   : 'BEGIN'  ;
-END     : 'END'    ;
-VAR     : 'VAR'    ;
-REPEAT  : 'REPEAT' ;
-UNTIL   : 'UNTIL'  ;
-IF      : 'IF'     ;
-THEN    : 'THEN'   ;
-ELSE    : 'ELSE'   ;
-CENTER  : 'center' ;
-TELEPORT : 'teleport' ;
-COLISION : 'collision';
-PAUSE : 'pause' ;
-WAIT : 'wait'   ;
-MOVE : 'move' ;
-TO  :     'to'  ;
-MOVE_3  :   IN    
-        |   FOR
-        |   AT  
-        ;
-AT  :   'at';
-IN  :   'in';
-FOR :   'for';
-FINISH : 'finish' ;
-PUTNEVN : 'putnevn' ;
-FUNCTION : 'function' ;
+CLOUDS      : 'Clouds'      ;
+BEGIN       : 'BEGIN'       ;
+END         : 'END'         ;
+VAR         : 'VAR'         ;
+REPEAT      : 'REPEAT'      ;
+UNTIL       : 'UNTIL'       ;
+IF          : 'IF'          ;
+THEN        : 'THEN'        ;
+ELSE        : 'ELSE'        ;
+WHEN        : 'WHEN'        ;
+CENTER      : 'center'      ;
+TELEPORT    : 'teleport'    ;
+COLISION    : 'collision'   ;
+PAUSE       : 'pause'       ;
+WAIT        : 'wait'        ;
+MOVE        : 'move'        ;
+TO          : 'to'          ;
+MOVE_3      :   IN    
+            |   FOR
+            |   AT  
+            ;
+AT          : 'at'          ;
+IN          : 'in'          ;
+FOR         : 'for'         ;
+FINISH      : 'finish'      ;
+PUTNEVN     : 'putnevn'     ;
+FUNCTION    : 'function'    ;
 ENVIRNOMENT : 'environment' ;
-SIMULATION : 'simulation' ;
+SIMULATION  : 'simulation'  ;
+PRINT       : 'print'       ;
 
 //init keywords
 HEIGHT  : 'hieght';
@@ -156,12 +171,15 @@ ROLL_OP : '~R' ; //roll
 PITCH_OP :'~P' ; //pitch
 YAW_OP :  '~Y' ; //yaw
 
+COM_OP : '//' ;
+
 //types
 TYPE:   'sphere'
     |   'cube'
     |   'cylinder'
     |   'cone'
-//    |   'tetrahedron'
+    |   'tetra'
+    |   'point'
     ;
 
 ID  :   [a-zA-Z]+ ;      // match identifiers
@@ -169,3 +187,4 @@ INT :   [0-9]+ ;         // match integers
 
 NEWLINE:'\r'? '\n' ;     // return newlines to parser (is end-statement signal)
 WS  :  [ \t]+ -> skip ; // toss out whitespace
+COMMENT : COM_OP -> skip ; //skip comments

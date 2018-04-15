@@ -20,7 +20,7 @@ keywords:
 */
 
 
-Clouds assignment6
+Clouds assignment6;
 
 
 //only run once, different grammar?
@@ -69,5 +69,5 @@ simulation //acts like main in cpp
     move sphere_object to [ x=19, y = 0, z = 0] in time_to_move_cube
     wait time_to_move_cube/2
     pause
-    print(sphere_object.center)
+    print(sphere_object.center) //does this mean print in the center?
 }
