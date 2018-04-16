@@ -23,6 +23,9 @@ stat : scope            # scope_node
      | repeat_stmt      # repeatStmt
      | if_stmt          # ifStmt
      | custom_stmt      # customStmt
+     | when_stmt        # whenStmt
+     | print_stmt       # printStmt
+     | put_stmt         # putStmt
      |                  # emptyStmt
      ;
 
