@@ -186,7 +186,7 @@ TYPE:   'sphere'
     |   'point'
     ;
 
-COORDINATES: '['X '=' INT ',' Y '=' INT ',' Z '=' INT ']';    // Coordinates will be used to set location within enviroment
+
 FLOAT: INT+ '.' INT*                                          //Float definition
      |      '.' INT+;	
      
