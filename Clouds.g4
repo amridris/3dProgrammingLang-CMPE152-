@@ -64,7 +64,11 @@ when_stmt       : WHEN expr THEN stat ;
 
 print_stmt      : PRINT '(' variable ')';
 
-variable: ID;
+variable: ID
+        | ID '.' ID
+        | ID '.' CENTER
+        |
+        ;
 
 
 expr : expr mul_div_op expr     # mulDivExpr
