@@ -5,7 +5,7 @@ header  : CLOUDS ID NEWLINE;
 block   : NEWLINE* environments NEWLINE* run_simulation ;
 
 //environments: ENVIRNOMENT ID '{' env_stat+ '}'; //use this later
-environments: ENVIRNOMENT ID scope;
+environments: ENVIRNOMENT ID NEWLINE* scope;
 
 // run_simulation: SIMULATION '{' sim_stat+ '}'; //use this later
 run_simulation: SIMULATION scope;                   
@@ -32,10 +32,11 @@ stat : scope            # scope_node
 scope : '{' stmt_list '}';  
 
 //statements
-stmt_list       : stat ( NEWLINE stat )* ;
+stmt_list       : stat ( NEWLINE+ stat )* ;
 
-assignment_stmt : variable '=' expr 
-                | ID variable '=' expr
+assignment_stmt : variable assignment_operators expr 
+                | ID variable assignment_operators expr
+                | ID variable
                 ;
 
 repeat_stmt     : REPEAT stmt_list UNTIL expr ;
@@ -107,10 +108,14 @@ methodCallArguments
 number : sign? INT | sign? FLOAT;
 sign   : '+' | '-' ;
 
+assignment_operators : EQ_OP | ADD_EQ | SUB_EQ | MUL_EQ | DIV_EQ ;
+
 mul_div_op : MUL | DIV ; //multiple or divide
 add_sub_op : ADD | SUB ; //add or subtract
 rel_op     : EQ_OP | NE_OP | LT_OP | LE_OP | GT_OP | GE_OP ; //relational operators
 rot_op     : ROLL_OP | PITCH_OP | YAW_OP ; //rotational operators
+
+
 
 //key words
 CLOUDS      : 'Clouds'      ;

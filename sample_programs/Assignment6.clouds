@@ -3,13 +3,13 @@ Clouds assignment
 
 environment environmentObject           
 {
-    point pointObject1 = [ x = 2, y = 2, z = 2 ]
-    point pointObject2 = pointObject1
-    pointObject2.x += 1
-    point pointobject3 = pointObject1
-    pointObject3.y += 1
-    point pointobject4 = pointObject1
-    pointObject4.z += 1
+    point pointObjectOne = [ x = 2, y = 2, z = 2 ]
+    point pointObjectTwo = pointObjectOne
+    pointObjectTwo.x += 1
+    point pointobjectThree = pointObjectOne
+    pointObjectThree.y += 1
+    point pointobjectFour = pointObjectOne
+    pointObjectFour.z += 1
 
     spherepoint = [ x = 20, y = 0, z = 0 ]
     
@@ -25,7 +25,7 @@ environment environmentObject
     putnenv sphereobject spherepoint
 
     //automatically put in environment
-    tetra tetraobject = [pointobject1, pointobject2, pointobject3, pointobject4]
+    tetra tetraobject = [pointObjectOne, pointObjectTwo, pointObjectThree, pointObject4Four]
 
     tetraobject ~Y degreestorotate
 
