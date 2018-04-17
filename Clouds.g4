@@ -71,6 +71,7 @@ expr : expr mul_div_op expr     # mulDivExpr
      | '[' init_list ']'        # initList
      | number                   # numberConst
      | ID                       # identifier
+     | FLOAT                    # float
      | '(' expr ')'             # parens
      ;
 
