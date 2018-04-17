@@ -18,21 +18,24 @@ run_simulation: SIMULATION scope;
 
 
 
-stat : scope            # scope_node
-     | assignment_stmt  # assignmentStmt
+scope : '{' stmt_list '}';  
+
+//statements
+stmt_list       : NEWLINE* stat ( NEWLINE+ stat )* ;
+
+
+
+stat : //scope            # scope_node| 
+        assignment_stmt  # assignmentStmt
      | repeat_stmt      # repeatStmt
      | if_stmt          # ifStmt
      | custom_stmt      # customStmt
      | when_stmt        # whenStmt
      | print_stmt       # printStmt
      | put_stmt         # putStmt
-     |                  # emptyStmt
+//d     |                  # emptyStmt
      ;
 
-scope : '{' stmt_list '}';  
-
-//statements
-stmt_list       : stat ( NEWLINE+ stat )* ;
 
 assignment_stmt : variable assignment_operators expr 
                 | ID variable assignment_operators expr

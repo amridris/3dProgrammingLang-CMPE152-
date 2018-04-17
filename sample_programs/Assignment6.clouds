@@ -3,7 +3,8 @@ Clouds assignment
 
 environment environmentObject           
 {
-    point pointObjectOne = [ x = 2, y = 2, z = 2 ]
+    point pointObjectOne
+    pointObjectOne = [ x = 2, y = 2, z = 2 ]
     point pointObjectTwo = pointObjectOne
     pointObjectTwo.x += 1
     point pointobjectThree = pointObjectOne
