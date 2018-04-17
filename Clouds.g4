@@ -39,7 +39,6 @@ stat : //scope            # scope_node|
 
 assignment_stmt : variable assignment_operators expr 
                 | TYPE variable assignment_operators expr
-                | TYPE variable
                 ;
 
 repeat_stmt     : REPEAT stmt_list UNTIL expr ;
@@ -153,7 +152,7 @@ SIMULATION  : 'simulation'  ;
 PRINT       : 'print'       ;
 
 //init keywords
-HEIGHT  : 'hieght';
+HEIGHT  : 'height';
 WIDTH   : 'width';
 LENGTH  : 'length';
 RADIUS  : 'radius';
@@ -192,6 +191,7 @@ TYPE:   'sphere'
     |   'cone'
     |   'tetra'
     |   'point'
+    |   'int'
     ;
 
 

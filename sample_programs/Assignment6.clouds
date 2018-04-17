@@ -3,8 +3,7 @@ Clouds assignment
 
 environment environmentObject           
 {
-    point pointObjectOne
-    pointObjectOne = [ x = 2, y = 2, z = 2 ]
+    point pointObjectOne = [ x = 2, y = 2, z = 2 ]
     point pointObjectTwo = pointObjectOne
     pointObjectTwo.x += 1
     point pointobjectThree = pointObjectOne
@@ -20,7 +19,7 @@ environment environmentObject
 
     int timetomovecube = 5
     int movecubeime = 20
-    int degreestorotate
+    int degreestorotate = 10
 
     putnenv cubeobject center
     putnenv sphereobject spherepoint
