@@ -103,7 +103,7 @@ methodCallArguments
     | expression (',' expression)*  // Some arguments
     ;
 
-number : sign? INT ;
+number : sign? INT | sign? FLOAT;
 sign   : '+' | '-' ;
 
 mul_div_op : MUL | DIV ; //multiple or divide
@@ -185,6 +185,10 @@ TYPE:   'sphere'
     |   'point'
     ;
 
+COORDINATES: '['X '=' INT ',' Y '=' INT ',' Z '=' INT ']';    // Coordinates will be used to set location within enviroment
+FLOAT: INT+ '.' INT*                                          //Float definition
+     |      '.' INT+;	
+     
 ID  :   [a-zA-Z]+ ;      // match identifiers
 INT :   [0-9]+ ;         // match integers
 
