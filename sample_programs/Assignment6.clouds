@@ -24,10 +24,9 @@ environment environmentObject
     putnenv cubeobject center
     putnenv sphereobject spherepoint
 
-    //automatically put in environment
-    tetra tetraobject = [pointObjectOne, pointObjectTwo, pointObjectThree, pointObject4Four]
+    tetra tetraobject = [p= pointObjectOne, p = pointObjectTwo, p = pointObjectThree, p = pointObjectFour]
 
-    tetraobject ~Y degreestorotate
+    tetraobject = tetraobject ~Y degreestorotate
 
     colision colisionobject between sphereobject cubeobject
 

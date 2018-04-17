@@ -50,8 +50,9 @@ custom_stmt     : move_stmt     #moveStmt
                 | wait_stmt     #waitStmt
                 ;
 
-put_stmt        : PUTNEVN variable CENTER
-                | PUTNEVN variable TYPE
+put_stmt        : PUTNENV variable CENTER
+                | PUTNENV variable TYPE
+                | PUTNENV variable variable
                 ;
 
 wait_stmt       : WAIT variable;
@@ -84,7 +85,8 @@ expr : expr mul_div_op expr     # mulDivExpr
 
 init_list   : init_type '=' expr (',' init_type '=' expr)*  ;
 
-init_type   : HEIGHT
+init_type   : 'p'
+            | HEIGHT
             | WIDTH
             | LENGTH
             | RADIUS
@@ -149,11 +151,21 @@ AT          : 'at'          ;
 IN          : 'in'          ;
 FOR         : 'for'         ;
 FINISH      : 'finish'      ;
-PUTNEVN     : 'putnevn'     ;
+PUTNENV     : 'putnenv'     ;
 FUNCTION    : 'function'    ;
 ENVIRNOMENT : 'environment' ;
 SIMULATION  : 'simulation'  ;
 PRINT       : 'print'       ;
+
+//types
+TYPE:   'sphere'
+    |   'cube'
+    |   'cylinder'
+    |   'cone'
+    |   'tetra'
+    |   POINT
+    |   'int'
+    ;
 
 //init keywords
 HEIGHT  : 'height';
@@ -163,6 +175,7 @@ RADIUS  : 'radius';
 X       : 'x';
 Y       : 'y';
 Z       : 'z';
+POINT   : 'point';
 
 //operators
 MUL :   '*' ; // assigns token name to '*' used above in grammar
@@ -188,22 +201,14 @@ YAW_OP :  '~Y' ; //yaw
 
 COM_OP : '//' ;
 
-//types
-TYPE:   'sphere'
-    |   'cube'
-    |   'cylinder'
-    |   'cone'
-    |   'tetra'
-    |   'point'
-    |   'int'
-    ;
+
 
 
 FLOAT: INT+ '.' INT*                                          //Float definition
      |      '.' INT+
      ;	
      
-ID  :   [a-zA-Z]+ ;      // match identifiers
+ID  :   [a-zA-Z.]+ ;      // match identifiers
 INT :   [0-9]+ ;         // match integers
 
 NEWLINE:'\r'? '\n' ;     // return newlines to parser (is end-statement signal)
