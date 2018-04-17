@@ -21,7 +21,7 @@ run_simulation: SIMULATION scope;
 scope : '{' stmt_list '}';  
 
 //statements
-stmt_list       : NEWLINE* stat ( NEWLINE+ stat )* ;
+stmt_list       : NEWLINE* stat ( NEWLINE+ stat NEWLINE*)* ;
 
 
 
@@ -61,8 +61,7 @@ collision_stmt  : COLISION variable BETWEEN variable variable
 
 wait_stmt       : WAIT variable;
 
-move_stmt       : MOVE expr TO expr MOVE_3 expr
-                | MOVE variable TO expr IN expr AT expr
+move_stmt       : MOVE expr TO expr MOVE_3 expr MOVE_3 expr
                 ;
 
 when_stmt       : WHEN expr THEN stat ;

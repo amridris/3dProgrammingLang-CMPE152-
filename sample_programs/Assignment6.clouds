@@ -33,9 +33,10 @@ environment environmentObject
     WHEN(colisionobject) THEN sphereobject.velocity = 2*sphereobject.velocity
 
     move cubeobject to [ x = 2, y = 0, z = 0] in timetomovecube at movecubetime
+
 }
 
-simulation //acts like main in cpp
+simulation
 {
     move cubeobject to [ x = 1, y = 0, z = 0 ] in timetomovecube
     IF(cubeobject.speed > 20) THEN cubeobject.speed = 10
