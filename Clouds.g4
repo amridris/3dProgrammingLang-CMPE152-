@@ -67,6 +67,7 @@ print_stmt      : PRINT '(' variable ')';
 
 variable: ID
         | ID '.' ID
+        | ID '.' init_type
         | ID '.' CENTER
         |
         ;
