@@ -1,7 +1,7 @@
 grammar Clouds;
 
 program : header block;
-header  : CLOUDS ID ';' ;
+header  : CLOUDS ID NEWLINE;
 block   : environments run_simulation ;
 
 //environments: ENVIRNOMENT ID '{' env_stat+ '}'; //use this later

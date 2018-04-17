@@ -2,6 +2,29 @@ Clouds test1
 
 
 /*
+POSSIBLE FEATURES
+keywords:
+    environment 
+    //stores a section of only objects and detections
+    //USE CASE: load multiple environments at once
+
+    load
+    //to load envirnoments, if multiple envirnoments are allowed
+
+    external, any
+    // used to set up detections with objects outside delcared environment
+    // any is used to denote all objects not in environment
+
+    USE TABS FOR SCOPE
+    //cleaner code
+
+    gravity
+    //to make simulation more realistic
+*/
+
+
+
+/*
     keywords
 
     center //always center of 3D envrionment

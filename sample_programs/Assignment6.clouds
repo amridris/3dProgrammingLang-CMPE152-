@@ -1,30 +1,5 @@
-/*
-POSSIBLE FEATURES
-keywords:
-    environment 
-    //stores a section of only objects and detections
-    //USE CASE: load multiple environments at once
+Clouds assignment;
 
-    load
-    //to load envirnoments, if multiple envirnoments are allowed
-
-    external, any
-    // used to set up detections with objects outside delcared environment
-    // any is used to denote all objects not in environment
-
-    USE TABS FOR SCOPE
-    //cleaner code
-
-    gravity
-    //to make simulation more realistic
-*/
-
-
-Clouds assignment6;
-
-
-//only run once, different grammar?
-//putnenv not allowed?
 environment environment_object
 {
     point point_object_1 = [ x = 2, y = 2, z = 2 ]
