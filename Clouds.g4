@@ -196,7 +196,8 @@ TYPE:   'sphere'
 
 
 FLOAT: INT+ '.' INT*                                          //Float definition
-     |      '.' INT+;	
+     |      '.' INT+
+     ;	
      
 ID  :   [a-zA-Z]+ ;      // match identifiers
 INT :   [0-9]+ ;         // match integers
