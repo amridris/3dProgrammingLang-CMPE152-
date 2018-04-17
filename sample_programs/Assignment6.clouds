@@ -1,49 +1,49 @@
 Clouds assignment
 
 
-environment environment_object           
+environment environmentObject           
 {
-    point point_object_1 = [ x = 2, y = 2, z = 2 ]
-    point point_object_2 = point_object_1
-    point_object_2.x += 1
-    point point_object_3 = point_object_1
-    point_object_3.y += 1
-    point point_object_4 = point_object_1
-    point_object_4.z += 1
+    point pointObject1 = [ x = 2, y = 2, z = 2 ]
+    point pointObject2 = pointObject1
+    pointObject2.x += 1
+    point pointobject3 = pointObject1
+    pointObject3.y += 1
+    point pointobject4 = pointObject1
+    pointObject4.z += 1
 
-    sphere_point = [ x = 20, y = 0, z = 0 ]
+    spherepoint = [ x = 20, y = 0, z = 0 ]
     
 
-    sphere sphere_object = [radius = 2]
-    cube cube_object = [height=1, width=1, length=2]
+    sphere sphereobject = [radius = 2]
+    cube cubeobject = [height=1, width=1, length=2]
 
-    int time_to_move_cube = 5
-    int move_cube_time = 20
-    int degrees_to_rotate
+    int timetomovecube = 5
+    int movecubeime = 20
+    int degreestorotate
 
-    putnenv cube_object center
-    putnenv sphere_object sphere_point
+    putnenv cubeobject center
+    putnenv sphereobject spherepoint
 
     //automatically put in environment
-    tetra tetra_object = [point_object_1, point_object_2, point_object_3, point_object_4]
+    tetra tetraobject = [pointobject1, pointobject2, pointobject3, pointobject4]
 
-    tetra_object ~Y degrees_to_rotate
+    tetraobject ~Y degreestorotate
 
-    colision colision_object between sphere_object cube_object
+    colision colisionobject between sphereobject cubeobject
 
-    WHEN(colision_object) THEN sphere_object.velocity = -sphere_object.velocity
+    WHEN(colisionobject) THEN sphereobject.velocity = -sphereobject.velocity
 
-    move cube_object to [ x = 2, y = 0, z = 0] in time_to_move_cube at move_cube_time
+    move cubeobject to [ x = 2, y = 0, z = 0] in timetomovecube at movecubetime
 }
 
 simulation //acts like main in cpp
 {
-    move cube_object to [ x = 1, y = 0, z = 0 ] in time_to_move_cube
-    IF(cube_object.speed > 20) THEN cube_object.speed = 10
-    wait time_to_move_cube
+    move cubeobject to [ x = 1, y = 0, z = 0 ] in timetomovecube
+    IF(cubeobject.speed > 20) THEN cubeobject.speed = 10
+    wait timetomovecube
 
-    move sphere_object to [ x=19, y = 0, z = 0] in time_to_move_cube
-    wait time_to_move_cube/2
+    move sphereobject to [ x=19, y = 0, z = 0] in timetomovecube
+    wait timetomovecube/2
     pause
-    print(sphere_object.center) //does this mean print in the center?
+    print(sphereobject.center) //does this mean print in the center?
 }
