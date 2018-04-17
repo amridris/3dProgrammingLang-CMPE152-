@@ -45,5 +45,5 @@ simulation
     move sphereobject to [ x=19, y = 0, z = 0] in timetomovecube
     wait timetomovecube/2
     pause
-    print(sphereobject.center) //does this mean print in the center?
+    print(sphereobject.center)
 }

@@ -8,7 +8,7 @@ block   : NEWLINE* environments NEWLINE* run_simulation ;
 environments: ENVIRNOMENT ID NEWLINE* scope;
 
 // run_simulation: SIMULATION '{' sim_stat+ '}'; //use this later
-run_simulation: SIMULATION scope;                   
+run_simulation: SIMULATION NEWLINE* scope;                   
  
  //need to fix this, dont have declarations or compound_stmt defined
 
@@ -59,9 +59,9 @@ put_stmt        : PUTNENV variable CENTER
 collision_stmt  : COLISION variable BETWEEN variable variable 
                 ;
 
-wait_stmt       : WAIT variable;
+wait_stmt       : WAIT expr;
 
-move_stmt       : MOVE expr TO expr MOVE_3 expr MOVE_3 expr
+move_stmt       : MOVE expr TO expr MOVE_3 expr (MOVE_3 expr)?
                 ;
 
 when_stmt       : WHEN expr THEN stat ;
