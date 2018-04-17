@@ -2,7 +2,7 @@ grammar Clouds;
 
 program : header block;
 header  : CLOUDS ID NEWLINE;
-block   : environments run_simulation ;
+block   : NEWLINE* environments NEWLINE* run_simulation ;
 
 //environments: ENVIRNOMENT ID '{' env_stat+ '}'; //use this later
 environments: ENVIRNOMENT ID scope;
@@ -185,7 +185,7 @@ TYPE:   'sphere'
     |   'point'
     ;
 
-ID  :   [a-zA-Z]+ ;      // match identifiers
+ID  :   [a-zA-Z_]+ ;      // match identifiers
 INT :   [0-9]+ ;         // match integers
 
 NEWLINE:'\r'? '\n' ;     // return newlines to parser (is end-statement signal)

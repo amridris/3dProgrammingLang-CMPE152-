@@ -33,7 +33,7 @@ int main(int, const char **)
     }
 
     CloudsParser parser(&tokens);
-    tree::ParseTree *tree = parser.prog();
+    tree::ParseTree *tree = parser.program();
 
     cout << endl << "Parse tree (Lisp format):" << endl;
     std::cout << tree->toStringTree(&parser) << endl;

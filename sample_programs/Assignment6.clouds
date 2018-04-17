@@ -1,6 +1,7 @@
-Clouds assignment;
+Clouds assignment
 
-environment environment_object
+
+environment environment_object           
 {
     point point_object_1 = [ x = 2, y = 2, z = 2 ]
     point point_object_2 = point_object_1
