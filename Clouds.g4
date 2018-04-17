@@ -131,9 +131,6 @@ rot_op     : ROLL_OP | PITCH_OP | YAW_OP ; //rotational operators
 
 //key words
 CLOUDS      : 'Clouds'      ;
-BEGIN       : 'BEGIN'       ;
-END         : 'END'         ;
-VAR         : 'VAR'         ;
 REPEAT      : 'REPEAT'      ;
 UNTIL       : 'UNTIL'       ;
 IF          : 'IF'          ;
