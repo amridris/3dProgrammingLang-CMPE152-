@@ -38,8 +38,8 @@ stat : //scope            # scope_node|
 
 
 assignment_stmt : variable assignment_operators expr 
-                | ID variable assignment_operators expr
-                | ID variable
+                | TYPE variable assignment_operators expr
+                | TYPE variable
                 ;
 
 repeat_stmt     : REPEAT stmt_list UNTIL expr ;
