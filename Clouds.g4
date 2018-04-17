@@ -48,6 +48,7 @@ if_stmt         : IF expr THEN stat ( ELSE stat )? ;
 custom_stmt     : move_stmt     #moveStmt
                 | PAUSE         #pause
                 | wait_stmt     #waitStmt
+                | collision_stmt #collisionStmt
                 ;
 
 put_stmt        : PUTNENV variable CENTER
@@ -55,10 +56,13 @@ put_stmt        : PUTNENV variable CENTER
                 | PUTNENV variable variable
                 ;
 
+collision_stmt  : COLISION variable BETWEEN variable variable 
+                ;
+
 wait_stmt       : WAIT variable;
 
 move_stmt       : MOVE expr TO expr MOVE_3 expr
-                | MOVE variable 
+                | MOVE variable TO expr IN expr AT expr
                 ;
 
 when_stmt       : WHEN expr THEN stat ;
@@ -156,6 +160,7 @@ FUNCTION    : 'function'    ;
 ENVIRNOMENT : 'environment' ;
 SIMULATION  : 'simulation'  ;
 PRINT       : 'print'       ;
+BETWEEN     : 'between'     ;
 
 //types
 TYPE:   'sphere'

@@ -28,9 +28,9 @@ environment environmentObject
 
     tetraobject = tetraobject ~Y degreestorotate
 
-    colision colisionobject between sphereobject cubeobject
+    collision colisionobject between sphereobject cubeobject
 
-    WHEN(colisionobject) THEN sphereobject.velocity = -sphereobject.velocity
+    WHEN(colisionobject) THEN sphereobject.velocity = 2*sphereobject.velocity
 
     move cubeobject to [ x = 2, y = 0, z = 0] in timetomovecube at movecubetime
 }
