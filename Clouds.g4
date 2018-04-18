@@ -67,8 +67,7 @@ when_stmt       : WHEN expr THEN stat ;
 print_stmt      : PRINT '(' variable ')';
 
 variable:
-        | ID '.' obj_vars
-        | ID '.' ID
+        | variable '.' obj_vars
         | ID
         ;
 
@@ -96,6 +95,7 @@ obj_vars    : 'p'
             | Z 
             | CENTER
             | VELOCITY
+            | SPEED
             ;
 
 expression
@@ -178,6 +178,8 @@ Y       : 'y';
 Z       : 'z';
 POINT   : 'point';
 VELOCITY: 'velocity';
+SPEED   : 'speed';
+
 
 //operators
 MUL :   '*' ; // assigns token name to '*' used above in grammar
