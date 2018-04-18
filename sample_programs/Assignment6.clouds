@@ -1,5 +1,12 @@
 Clouds assignment;
 
+/*
+    this 
+    is
+    a
+    block
+    comment
+*/
 
 environment environmentObject           
 {
@@ -10,6 +17,8 @@ environment environmentObject
     pointObjectThree.y += 1;
     point pointobjectFour = pointObjectOne;
     pointObjectFour.z += 1;
+
+    //this is a comment
 
     point spherepoint = [ x = 20, y = 0, z = 0 ];
     

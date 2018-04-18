@@ -217,5 +217,7 @@ INT :   [0-9]+ ;         // match integers
 
 NEWLINE : '\r'? '\n' ->skip  ;
 WS  :  [ \t]+ -> skip ; // toss out whitespace
-COMMENT : COM_OP -> skip ; //skip comments
+COMMENT : COM_OP ~[\r\n]* -> skip;
+BLOCK_COM : '/*' .*? '*/' -> skip; //skip comments
+
 
