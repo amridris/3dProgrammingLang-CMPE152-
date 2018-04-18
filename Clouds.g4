@@ -1,14 +1,14 @@
 grammar Clouds;
 
 program : header block;
-header  : CLOUDS ID NEWLINE;
-block   : NEWLINE* environments NEWLINE* run_simulation ;
+header  : CLOUDS ID SEMICOLON;
+block   : environments run_simulation ;
 
 //environments: ENVIRNOMENT ID '{' env_stat+ '}'; //use this later
-environments: ENVIRNOMENT ID NEWLINE* scope;
+environments: ENVIRNOMENT ID scope;
 
 // run_simulation: SIMULATION '{' sim_stat+ '}'; //use this later
-run_simulation: SIMULATION NEWLINE* scope;                   
+run_simulation: SIMULATION scope;                   
  
  //need to fix this, dont have declarations or compound_stmt defined
 
@@ -21,7 +21,7 @@ run_simulation: SIMULATION NEWLINE* scope;
 scope : '{' stmt_list '}';  
 
 //statements
-stmt_list       : NEWLINE* stat ( NEWLINE+ stat NEWLINE*)* ;
+stmt_list       : stat SEMICOLON (stat SEMICOLON)* ;
 
 
 
@@ -29,11 +29,14 @@ stat : //scope            # scope_node|
         assignment_stmt  # assignmentStmt
      | repeat_stmt      # repeatStmt
      | if_stmt          # ifStmt
-     | custom_stmt      # customStmt
      | when_stmt        # whenStmt
      | print_stmt       # printStmt
      | put_stmt         # putStmt
-//d     |                  # emptyStmt
+     | move_stmt     #moveStmt
+     | PAUSE         #pause
+     | wait_stmt     #waitStmt
+     | collision_stmt #collisionStmt
+//     |                  # emptyStmt
      ;
 
 
@@ -45,11 +48,6 @@ repeat_stmt     : REPEAT stmt_list UNTIL expr ;
 
 if_stmt         : IF expr THEN stat ( ELSE stat )? ;
 
-custom_stmt     : move_stmt     #moveStmt
-                | PAUSE         #pause
-                | wait_stmt     #waitStmt
-                | collision_stmt #collisionStmt
-                ;
 
 put_stmt        : PUTNENV variable CENTER
                 | PUTNENV variable TYPE
@@ -68,11 +66,10 @@ when_stmt       : WHEN expr THEN stat ;
 
 print_stmt      : PRINT '(' variable ')';
 
-variable: ID
+variable:
+        | ID '.' obj_vars
         | ID '.' ID
-        | ID '.' init_type
-        | ID '.' CENTER
-        |
+        | ID
         ;
 
 
@@ -82,14 +79,14 @@ expr : expr mul_div_op expr     # mulDivExpr
      | expr rot_op expr         # rotExpr
      | '[' init_list ']'        # initList
      | number                   # numberConst
-     | ID                       # identifier
+     | variable                       # identifier
      | FLOAT                    # float
      | '(' expr ')'             # parens
      ;
 
-init_list   : init_type '=' expr (',' init_type '=' expr)*  ;
+init_list   : obj_vars '=' expr (',' obj_vars '=' expr)*  ;
 
-init_type   : 'p'
+obj_vars    : 'p'
             | HEIGHT
             | WIDTH
             | LENGTH
@@ -97,6 +94,8 @@ init_type   : 'p'
             | X 
             | Y 
             | Z 
+            | CENTER
+            | VELOCITY
             ;
 
 expression
@@ -178,6 +177,7 @@ X       : 'x';
 Y       : 'y';
 Z       : 'z';
 POINT   : 'point';
+VELOCITY: 'velocity';
 
 //operators
 MUL :   '*' ; // assigns token name to '*' used above in grammar
@@ -202,7 +202,7 @@ PITCH_OP :'~P' ; //pitch
 YAW_OP :  '~Y' ; //yaw
 
 COM_OP : '//' ;
-
+SEMICOLON : ';';
 
 
 
@@ -210,9 +210,10 @@ FLOAT: INT+ '.' INT*                                          //Float definition
      |      '.' INT+
      ;	
      
-ID  :   [a-zA-Z.]+ ;      // match identifiers
+ID  :   [a-zA-Z]+ ;      // match identifiers
 INT :   [0-9]+ ;         // match integers
 
-NEWLINE:'\r'? '\n' ;     // return newlines to parser (is end-statement signal)
+NEWLINE : '\r'? '\n' ->skip  ;
 WS  :  [ \t]+ -> skip ; // toss out whitespace
 COMMENT : COM_OP -> skip ; //skip comments
+
