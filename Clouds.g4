@@ -165,6 +165,7 @@ TYPE:   'sphere'
     |   'cone'
     |   'tetra'
     |   POINT
+    |   'float'
     |   'int'
     ;
 
