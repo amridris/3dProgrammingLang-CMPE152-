@@ -78,8 +78,7 @@ expr : expr mul_div_op expr     # mulDivExpr
      | expr rot_op expr         # rotExpr
      | '[' init_list ']'        # initList
      | number                   # numberConst
-     | variable                       # identifier
-     | FLOAT                    # float
+     | variable                 # identifier
      | '(' expr ')'             # parens
      ;
 
