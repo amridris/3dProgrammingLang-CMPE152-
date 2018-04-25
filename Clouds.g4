@@ -82,8 +82,7 @@ expr : expr mul_div_op expr     # mulDivExpr
      | expr rot_op expr         # rotExpr
      | '[' init_list ']'        # initList
      | number                   # numberConst
-     | variable                       # identifier
-     | FLOAT                    # float
+     | variable                 # identifier
      | '(' expr ')'             # parens
      ;
 
@@ -171,6 +170,7 @@ TYPE:   'sphere'
     |   'cone'
     |   'tetra'
     |   POINT
+    |   'float'
     |   'int'
     ;
 
@@ -223,5 +223,7 @@ INT :   [0-9]+ ;         // match integers
 
 NEWLINE : '\r'? '\n' ->skip  ;
 WS  :  [ \t]+ -> skip ; // toss out whitespace
-COMMENT : COM_OP -> skip ; //skip comments
+COMMENT : COM_OP ~[\r\n]* -> skip;
+BLOCK_COM : '/*' .*? '*/' -> skip; //skip comments
+
 
