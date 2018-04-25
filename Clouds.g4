@@ -29,7 +29,7 @@ stmt_list       : stat SEMICOLON (stat SEMICOLON)* ;
 
 stat : //scope            # scope_node| 
         assignment_stmt  # assignmentStmt
-     | function         # function
+     | function         # Function_
      | repeat_stmt      # repeatStmt
      | if_stmt          # ifStmt
      | when_stmt        # whenStmt
@@ -103,22 +103,17 @@ obj_vars    : 'p'
             | SPEED
             ;
 
-expression
-    : methodCall
-    | ID
+function
+    : funcName '(' argumentList ')'
     ;
 
-methodCall
-    : methodName '(' methodCallArguments ')'
-    ;
-
-methodName
+funcName
     : ID
     ;
 
-methodCallArguments
+argumentList
     : // No arguments
-    | expression (',' expression)*  // Some arguments
+    | expr (',' expr)* 
     ;
 
 number : sign? INT | sign? FLOAT;

@@ -56,3 +56,5 @@ simulation
     pause;
     print(sphereobject.center);
 }
+
+a ()
