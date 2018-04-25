@@ -1,8 +1,10 @@
 grammar Clouds;
 
-program : header block;
+program : header block run_simulation block;
 header  : CLOUDS ID SEMICOLON;
-block   : environments run_simulation ;
+block   : environments
+        | function
+        ;
 
 //environments: ENVIRNOMENT ID '{' env_stat+ '}'; //use this later
 environments: ENVIRNOMENT ID scope;
@@ -27,6 +29,7 @@ stmt_list       : stat SEMICOLON (stat SEMICOLON)* ;
 
 stat : //scope            # scope_node| 
         assignment_stmt  # assignmentStmt
+     | function         # function
      | repeat_stmt      # repeatStmt
      | if_stmt          # ifStmt
      | when_stmt        # whenStmt
@@ -40,8 +43,9 @@ stat : //scope            # scope_node|
      ;
 
 
+
 assignment_stmt : variable assignment_operators expr 
-                | TYPE variable assignment_operators expr
+                | init_var assignment_operators expr
                 ;
 
 repeat_stmt     : REPEAT stmt_list UNTIL expr ;
@@ -83,6 +87,8 @@ expr : expr mul_div_op expr     # mulDivExpr
      ;
 
 init_list   : obj_vars '=' expr (',' obj_vars '=' expr)*  ;
+
+init_var    : TYPE variable;
 
 obj_vars    : 'p'
             | HEIGHT
