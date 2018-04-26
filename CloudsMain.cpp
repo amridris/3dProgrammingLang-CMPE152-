@@ -16,10 +16,12 @@ using namespace antlrcpp;
 using namespace antlr4;
 using namespace std;
 
-int main(int, const char **)
+int main(int argc, const char *args[])
 {
     ifstream ins;
-    ins.open("sample_programs/Assignment6.clouds");
+    std::string source_file("sample_programs/");
+    source_file.append(args[1]);
+    ins.open(source_file);
 
     ANTLRInputStream input(ins);
     CloudsLexer lexer(&input);

@@ -1,0 +1,11 @@
+Clouds basictest;
+
+environment basicenv
+{
+    point pointObject = [ x = 2, y = 3, z = 4];
+}
+
+simulation
+{
+    pause;
+}
