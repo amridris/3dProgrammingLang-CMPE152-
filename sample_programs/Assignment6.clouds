@@ -58,4 +58,7 @@ simulation
     a();
 }
 
-a ()
+a () {
+    pause;
+    print(sphereobject.center);
+}
