@@ -105,6 +105,8 @@ obj_vars    : 'p'
 
 function
     : funcName '(' argumentList ')'
+    | funcName '(' methodCall_ref ')'
+    | funcName '(' methodCall_val ')'
     ;
 
 funcName
@@ -115,6 +117,21 @@ argumentList
     : // No arguments
     | expr (',' expr)* 
     | variable
+    ;
+
+methodCallArguments
+    : // No arguments
+    | expr (',' expr)*  // Some arguments
+    ;
+
+methodCall_ref
+    : // No arguments
+    | '&' expr (',' '&'expr)*  // Some arguments
+    ;
+
+methodCall_val
+    : // No arguments
+    | '!!' expr (',' '!!'expr)*  // Some arguments
     ;
 
 
