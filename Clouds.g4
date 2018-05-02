@@ -106,7 +106,6 @@ obj_vars    : 'p'
 function
     : funcName '(' argumentList ')'
     | funcName '(' methodCall_ref ')'
-    | funcName '(' methodCall_val ')'
     ;
 
 funcName
@@ -128,15 +127,6 @@ methodCall_ref
     : // No arguments
     | '&' expr (',' '&'expr)*  // Some arguments
     ;
-
-methodCall_val
-    : // No arguments
-    | '!!' expr (',' '!!'expr)*  // Some arguments
-    ;
-
-
-
-
 
 number : sign? INT | sign? FLOAT;
 sign   : '+' | '-' ;
