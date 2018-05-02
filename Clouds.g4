@@ -162,7 +162,7 @@ BETWEEN     : 'between'     ;
 TYPE:   'sphere'
     |   'cube'
     |   'cylinder'
-    |   'cone'
+//    |   'cone'
     |   'tetra'
     |   POINT
     |   'float'
