@@ -58,3 +58,5 @@ simulation
 }
 
 a ()
+b ($obj) //pass by value
+//c (@obj) //pass by ref

@@ -114,7 +114,12 @@ funcName
 argumentList
     : // No arguments
     | expr (',' expr)* 
+    | variable
     ;
+
+
+
+
 
 number : sign? INT | sign? FLOAT;
 sign   : '+' | '-' ;
