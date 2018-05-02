@@ -103,6 +103,10 @@ public:
 
     virtual antlrcpp::Any visitArgumentList(CloudsParser::ArgumentListContext *context) = 0;
 
+    virtual antlrcpp::Any visitMethodCallArguments(CloudsParser::MethodCallArgumentsContext *context) = 0;
+
+    virtual antlrcpp::Any visitMethodCall_ref(CloudsParser::MethodCall_refContext *context) = 0;
+
     virtual antlrcpp::Any visitNumber(CloudsParser::NumberContext *context) = 0;
 
     virtual antlrcpp::Any visitSign(CloudsParser::SignContext *context) = 0;
