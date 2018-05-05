@@ -35,6 +35,8 @@ public:
     //antlrcpp::Any visitRun_simulation(CloudsParser::Run_simulationContext *ctx) override;
    /* antlrcpp::Any visitVariable(CloudsParser::VariableContext *ctx) override;
     antlrcpp::Any visitScope(CloudsParser::ScopeContext *ctx) override;
+    antlrcpp::Any visitStmt_list(CloudsParser::Stmt_listContext *ctx) override;
+    antlrcpp::Any visitAssignmentStmt(CloudsParser::Assignment_stmtContext *ctx) override;
     antlrcpp::Any visitAddSubExpr(CloudsParser::AddSubExprContext *ctx) override;
     antlrcpp::Any visitMulDivExpr(CloudsParser::MulDivExprContext *ctx) override;
     antlrcpp::Any visitRelExpr(CloudsParser::RelExprContext *ctx) override;
