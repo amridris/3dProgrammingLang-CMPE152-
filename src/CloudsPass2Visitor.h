@@ -19,6 +19,7 @@ class CloudsPass2Visitor : public CloudsBaseVisitor
 {
 private:
 	string program_name;
+	string current_environment_name;
 	ostream& j_file;
 
 public:
