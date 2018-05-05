@@ -183,6 +183,14 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitMethodCallArguments(CloudsParser::MethodCallArgumentsContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitMethodCall_ref(CloudsParser::MethodCall_refContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitNumber(CloudsParser::NumberContext *ctx) override {
     return visitChildren(ctx);
   }

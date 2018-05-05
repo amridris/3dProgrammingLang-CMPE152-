@@ -55,9 +55,10 @@ simulation
     wait timetomovecube/2;
     pause;
     print(sphereobject.center);
-    a()
+    a();
 }
 
-a ()
-b ($obj) //pass by value
-c (@obj) //pass by ref
+a () {
+    pause;
+    print(sphereobject.center);
+}

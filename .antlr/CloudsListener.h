@@ -140,6 +140,12 @@ public:
   virtual void enterArgumentList(CloudsParser::ArgumentListContext *ctx) = 0;
   virtual void exitArgumentList(CloudsParser::ArgumentListContext *ctx) = 0;
 
+  virtual void enterMethodCallArguments(CloudsParser::MethodCallArgumentsContext *ctx) = 0;
+  virtual void exitMethodCallArguments(CloudsParser::MethodCallArgumentsContext *ctx) = 0;
+
+  virtual void enterMethodCall_ref(CloudsParser::MethodCall_refContext *ctx) = 0;
+  virtual void exitMethodCall_ref(CloudsParser::MethodCall_refContext *ctx) = 0;
+
   virtual void enterNumber(CloudsParser::NumberContext *ctx) = 0;
   virtual void exitNumber(CloudsParser::NumberContext *ctx) = 0;
 

@@ -13,17 +13,17 @@ class  CloudsParser : public antlr4::Parser {
 public:
   enum {
     T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, 
-    T__7 = 8, T__8 = 9, CLOUDS = 10, REPEAT = 11, UNTIL = 12, IF = 13, THEN = 14, 
-    ELSE = 15, WHEN = 16, CENTER = 17, TELEPORT = 18, COLISION = 19, PAUSE = 20, 
-    WAIT = 21, MOVE = 22, TO = 23, MOVE_3 = 24, AT = 25, IN = 26, FOR = 27, 
-    FINISH = 28, PUTNENV = 29, FUNCTION = 30, ENVIRNOMENT = 31, SIMULATION = 32, 
-    PRINT = 33, BETWEEN = 34, TYPE = 35, HEIGHT = 36, WIDTH = 37, LENGTH = 38, 
-    RADIUS = 39, X = 40, Y = 41, Z = 42, POINT = 43, VELOCITY = 44, SPEED = 45, 
-    MUL = 46, DIV = 47, ADD = 48, SUB = 49, MUL_EQ = 50, DIV_EQ = 51, ADD_EQ = 52, 
-    SUB_EQ = 53, EQ_OP = 54, NE_OP = 55, LT_OP = 56, LE_OP = 57, GT_OP = 58, 
-    GE_OP = 59, ROLL_OP = 60, PITCH_OP = 61, YAW_OP = 62, COM_OP = 63, SEMICOLON = 64, 
-    FLOAT = 65, ID = 66, INT = 67, NEWLINE = 68, WS = 69, COMMENT = 70, 
-    BLOCK_COM = 71
+    T__7 = 8, T__8 = 9, T__9 = 10, CLOUDS = 11, REPEAT = 12, UNTIL = 13, 
+    IF = 14, THEN = 15, ELSE = 16, WHEN = 17, CENTER = 18, TELEPORT = 19, 
+    COLISION = 20, PAUSE = 21, WAIT = 22, MOVE = 23, TO = 24, MOVE_3 = 25, 
+    AT = 26, IN = 27, FOR = 28, FINISH = 29, PUTNENV = 30, FUNCTION = 31, 
+    ENVIRNOMENT = 32, SIMULATION = 33, PRINT = 34, BETWEEN = 35, TYPE = 36, 
+    HEIGHT = 37, WIDTH = 38, LENGTH = 39, RADIUS = 40, X = 41, Y = 42, Z = 43, 
+    POINT = 44, VELOCITY = 45, SPEED = 46, MUL = 47, DIV = 48, ADD = 49, 
+    SUB = 50, MUL_EQ = 51, DIV_EQ = 52, ADD_EQ = 53, SUB_EQ = 54, EQ_OP = 55, 
+    NE_OP = 56, LT_OP = 57, LE_OP = 58, GT_OP = 59, GE_OP = 60, ROLL_OP = 61, 
+    PITCH_OP = 62, YAW_OP = 63, COM_OP = 64, SEMICOLON = 65, FLOAT = 66, 
+    ID = 67, INT = 68, NEWLINE = 69, WS = 70, COMMENT = 71, BLOCK_COM = 72
   };
 
   enum {
@@ -33,8 +33,9 @@ public:
     RuleCollision_stmt = 12, RuleWait_stmt = 13, RuleMove_stmt = 14, RuleWhen_stmt = 15, 
     RulePrint_stmt = 16, RuleVariable = 17, RuleExpr = 18, RuleInit_list = 19, 
     RuleInit_var = 20, RuleObj_vars = 21, RuleFunction = 22, RuleFuncName = 23, 
-    RuleArgumentList = 24, RuleNumber = 25, RuleSign = 26, RuleAssignment_operators = 27, 
-    RuleMul_div_op = 28, RuleAdd_sub_op = 29, RuleRel_op = 30, RuleRot_op = 31
+    RuleArgumentList = 24, RuleMethodCallArguments = 25, RuleMethodCall_ref = 26, 
+    RuleNumber = 27, RuleSign = 28, RuleAssignment_operators = 29, RuleMul_div_op = 30, 
+    RuleAdd_sub_op = 31, RuleRel_op = 32, RuleRot_op = 33
   };
 
   CloudsParser(antlr4::TokenStream *input);
@@ -72,6 +73,8 @@ public:
   class FunctionContext;
   class FuncNameContext;
   class ArgumentListContext;
+  class MethodCallArgumentsContext;
+  class MethodCall_refContext;
   class NumberContext;
   class SignContext;
   class Assignment_operatorsContext;
@@ -688,6 +691,7 @@ public:
     virtual size_t getRuleIndex() const override;
     FuncNameContext *funcName();
     ArgumentListContext *argumentList();
+    MethodCall_refContext *methodCall_ref();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -729,6 +733,38 @@ public:
   };
 
   ArgumentListContext* argumentList();
+
+  class  MethodCallArgumentsContext : public antlr4::ParserRuleContext {
+  public:
+    MethodCallArgumentsContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    std::vector<ExprContext *> expr();
+    ExprContext* expr(size_t i);
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  MethodCallArgumentsContext* methodCallArguments();
+
+  class  MethodCall_refContext : public antlr4::ParserRuleContext {
+  public:
+    MethodCall_refContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    std::vector<ExprContext *> expr();
+    ExprContext* expr(size_t i);
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  MethodCall_refContext* methodCall_ref();
 
   class  NumberContext : public antlr4::ParserRuleContext {
   public:

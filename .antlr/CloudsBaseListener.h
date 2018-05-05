@@ -142,6 +142,12 @@ public:
   virtual void enterArgumentList(CloudsParser::ArgumentListContext * /*ctx*/) override { }
   virtual void exitArgumentList(CloudsParser::ArgumentListContext * /*ctx*/) override { }
 
+  virtual void enterMethodCallArguments(CloudsParser::MethodCallArgumentsContext * /*ctx*/) override { }
+  virtual void exitMethodCallArguments(CloudsParser::MethodCallArgumentsContext * /*ctx*/) override { }
+
+  virtual void enterMethodCall_ref(CloudsParser::MethodCall_refContext * /*ctx*/) override { }
+  virtual void exitMethodCall_ref(CloudsParser::MethodCall_refContext * /*ctx*/) override { }
+
   virtual void enterNumber(CloudsParser::NumberContext * /*ctx*/) override { }
   virtual void exitNumber(CloudsParser::NumberContext * /*ctx*/) override { }
 
