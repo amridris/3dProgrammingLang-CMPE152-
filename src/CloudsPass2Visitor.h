@@ -32,8 +32,9 @@ public:
     antlrcpp::Any visitEnvironments(CloudsParser::EnvironmentsContext *ctx) override;	
 	antlrcpp::Any visitStat(CloudsParser::StatContext *ctx) override;
 	antlrcpp::Any visitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) override;
-	antlrcpp::Any visitaddSubExpr(CloudsParser::addSubExprContext *ctx) override;
-	antlrcpp::Any visitmulDivExpr(CloudsParser::mulDivExprContext *ctx) override;
+	antlrcpp::Any visitAdd_sub_op(CloudsParser::Add_sub_opContext *ctx) override;
+	antlrcpp::Any visitMul_div_op(CloudsParser::mul_div_opContext *ctx) override;
+	antlrcpp::Any visitIf_stmt(CloudsParser::If_stmtContext *ctx) override;
 	antlrcpp::Any visitPut_stmt(CloudsParser::Put_stmtContext *ctx) override;
 
 

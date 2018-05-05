@@ -3,6 +3,11 @@ Clouds basictest;
 environment basicenv
 {
     point pointObject = [ x = 2, y = 3, z = 4];
+    point pointObject2 = [ x = 1, y = 4, z = 2];
+    if pointObject < pointObject2 then
+    {
+        pointObject += pointObject2;
+    }
 }
 
 simulation
