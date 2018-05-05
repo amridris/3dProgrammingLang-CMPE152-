@@ -30,11 +30,7 @@ antlrcpp::Any CloudsPass2Visitor::visitHeader(CloudsParser::HeaderContext *ctx)
     return visitChildren(ctx);
 }
 
-antlrcpp::Any CloudsPass2Visitor::visitBlock(CloudsParser::BlockContext *ctx)
 {
-    // Emit the main program header.
-    j_file << endl;
-    j_file << ".method public static main([Ljava/lang/String;)V" << endl;
     j_file << endl;
     j_file << "\tnew RunTimer" << endl;
     j_file << "\tdup" << endl;
