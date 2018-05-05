@@ -184,3 +184,8 @@ antlrcpp::Any Pass2Visitor::visitIf_stmt(CloudsParser::If_stmtContext *ctx)
     j_file  << "L002:" << endl << "\ticonst_1\t" << endl
             << "L003:" << endl << "\tifeq\tL001" << endl; 
 }
+
+antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *ctx)
+{
+    
+}

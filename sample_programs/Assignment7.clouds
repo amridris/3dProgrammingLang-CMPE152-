@@ -1,0 +1,27 @@
+Clouds assignment;
+
+/*
+    this 
+    is
+    a
+    block
+    comment
+*/
+
+environment environmentObject           
+{
+    point pointObjectOne = [ x = 2, y = 2, z = 2 ];
+
+    cube cubeobject = [height=1, width=1, length=2];
+
+    int timetomovecube = 5;
+
+    putnenv cubeobject center;
+
+}
+
+simulation
+{
+    move cubeobject to [ x = 1, y = 0, z = 0 ] in timetomovecube;
+    IF(cubeobject.speed > 20) THEN cubeobject.speed = 10;
+}

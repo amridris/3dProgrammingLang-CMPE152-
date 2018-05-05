@@ -1,11 +1,16 @@
 grammar Clouds;
 
-program : header block run_simulation block; //done 
+//program : header block run_simulation block?; //done 
+program : header block+;
 header  : CLOUDS ID SEMICOLON; //done
-block   : environments //done
-        | function      
-        ;
 
+block: environments run_simulation;
+/* //ADD WHEN FIXED
+block   : environments //done
+        | function     
+        | run_simulation //remove when fixed 
+        ;
+*/
 //environments: ENVIRNOMENT ID '{' env_stat+ '}'; //use this later
 environments: ENVIRONMENT ID scope; //done
 
@@ -54,7 +59,7 @@ if_stmt         : IF expr THEN stat ( ELSE stat )? ;
 
 
 put_stmt        : PUTNENV variable CENTER
-                | PUTNENV variable TYPE
+ //               | PUTNENV variable TYPE
                 | PUTNENV variable variable
                 ;
 
