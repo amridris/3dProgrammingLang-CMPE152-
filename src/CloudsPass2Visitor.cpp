@@ -30,6 +30,41 @@ antlrcpp::Any CloudsPass2Visitor::visitHeader(CloudsParser::HeaderContext *ctx)
     return visitChildren(ctx);
 }
 
+antlrcpp::Any Pass2Visitor::visitBlock(Pcl2Parser::MainBlockContext *ctx)
+{
+    // Emit the main program header.
+    j_file << endl;
+    j_file << ".method public static main([Ljava/lang/String;)V" << endl;
+    j_file << endl;
+    j_file << "\tnew RunTimer" << endl;
+    j_file << "\tdup" << endl;
+    j_file << "\tinvokenonvirtual RunTimer/<init>()V" << endl;
+    j_file << "\tputstatic        " << program_name
+           << "/_runTimer LRunTimer;" << endl;
+    j_file << "\tnew PascalTextIn" << endl;
+    j_file << "\tdup" << endl;
+    j_file << "\tinvokenonvirtual PascalTextIn/<init>()V" << endl;
+    j_file << "\tputstatic        " + program_name
+           << "/_standardIn LPascalTextIn;" << endl;
+
+    auto value = visitChildren(ctx);
+
+    // Emit the main program epilogue.
+    j_file << endl;
+    j_file << "\tgetstatic     " << program_name
+               << "/_runTimer LRunTimer;" << endl;
+    j_file << "\tinvokevirtual RunTimer.printElapsedTime()V" << endl;
+    j_file << endl;
+    j_file << "\treturn" << endl;
+    j_file << endl;
+    j_file << ".limit locals 16" << endl;
+    j_file << ".limit stack 16" << endl;
+    j_file << ".end method" << endl;
+
+    return value;
+}
+
+
 antlrcpp::Any CloudsPass2Visitor::visitStat(CloudsParser::StatContext *ctx)
 {
     j_file << endl << "; " + ctx->getText() << endl << endl;
