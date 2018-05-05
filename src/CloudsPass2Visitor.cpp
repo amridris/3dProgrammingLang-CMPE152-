@@ -68,6 +68,7 @@ antlrcpp::Any CloudsPass2Visitor::visitEnvironments(CloudsParser::EnvironmentsCo
     j_file << "multianewarray [[[I 3\n";
     j_file << "putstatic " << program_name << "/" 
                 << current_environment_name << " " << "[[[I\n" << endl;
+    return visitChildren(ctx);
 }
 
 
@@ -188,5 +189,5 @@ antlrcpp::Any Pass2Visitor::visitIf_stmt(CloudsParser::If_stmtContext *ctx)
 */
 antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *ctx)
 {
-    
+     return visitChildren(ctx);
 }
