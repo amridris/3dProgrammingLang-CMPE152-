@@ -116,7 +116,7 @@ argumentList
     : // No arguments
     | expr (',' expr)* 
     | variable
-    
+    ;
 
 methodCallArguments
     : // No arguments
