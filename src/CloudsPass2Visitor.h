@@ -28,6 +28,7 @@ public:
 	antlrcpp::Any visitProgram(CloudsParser::ProgramContext *ctx) override;
     antlrcpp::Any visitHeader(CloudsParser::HeaderContext *ctx) override;
 	antlrcpp::Any visitBlock(CloudsParser::BlockContext *context) override;
+    antlrcpp::Any visitEnvironments(CloudsParser::EnvironmentsContext *ctx) override;	
 	antlrcpp::Any visitStat(CloudsParser::StatContext *ctx) override;
 	antlrcpp::Any visitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) override;
 	antlrcpp::Any visitaddSubExpr(CloudsParser::addSubExprContext *ctx) override;

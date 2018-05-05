@@ -117,10 +117,7 @@ argumentList
     | expr (',' expr)* 
     | variable
     ;
-<<<<<<< HEAD
     
-=======
->>>>>>> 3a7e765b3e7e92084e8b454afd0da3393f83b525
 
 methodCallArguments
     : // No arguments

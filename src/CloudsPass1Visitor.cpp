@@ -72,12 +72,10 @@ antlrcpp::Any CloudsPass1Visitor::visitHeader(CloudsParser::HeaderContext *ctx)
     return visitChildren(ctx);
 }
 
-<<<<<<< HEAD
-=======
 
 antlrcpp::Any CloudsPass1Visitor::visitEnvironments(CloudsParser::EnvironmentsContext *ctx)
 {
+    //change to dynamic if this doesn't work
     j_file << ".field private static "
                << ctx->ID()->toString() << " " << "[[[I" << endl;
 }
->>>>>>> 3a7e765b3e7e92084e8b454afd0da3393f83b525

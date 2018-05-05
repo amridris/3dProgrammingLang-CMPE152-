@@ -64,6 +64,15 @@ antlrcpp::Any Pass2Visitor::visitBlock(Pcl2Parser::MainBlockContext *ctx)
     return value;
 }
 
+antlrcpp::Any CloudsPass2Visitor::visitEnvironments(CloudsParser::EnvironmentsContext *ctx)
+{
+    j_file << "iload 100\n" << "iload 100\n" << "iload 100\n";
+    j_file << "multianewarray [[[I 3\n";
+    j_file << "putstatic " << program_name << "/" 
+                << ctx->ID()->toString() << " " << "[[[I\n" << endl;
+}
+
+
 
 antlrcpp::Any CloudsPass2Visitor::visitStat(CloudsParser::StatContext *ctx)
 {
