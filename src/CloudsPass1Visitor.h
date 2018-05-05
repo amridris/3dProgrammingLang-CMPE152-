@@ -44,6 +44,9 @@ public:
     antlrcpp::Any visitParens(CloudsParser::ParensContext *ctx) override;
     antlrcpp::Any visitInit_list(CloudsParser::Init_listContext *ctx) override;  
     antlrcpp::Any visitInit_var(CloudsParser::Init_varContext *ctx) override;
+    antlrcpp::Any visitFunction(CloudsParser::FunctionContext *ctx) override;
+    antlrcpp::Any visitFuncName(CloudsParser::FuncNameContext *ctx) override;
+    antlrcpp::Any visitArgumentList(CloudsParser::ArgumentListContext *ctx) override;
     
     
 };
