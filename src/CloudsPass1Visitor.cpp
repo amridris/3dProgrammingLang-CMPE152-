@@ -78,24 +78,27 @@ antlrcpp::Any CloudsPass1Visitor::visitEnvironments(CloudsParser::EnvironmentsCo
     //change to dynamic if this doesn't work
     j_file << ".field private static "
                << ctx->ID()->toString() << " " << "[[[I" << endl;
+    return visitChildren(ctx);
 }
 
+/*
 antlrcpp::Any visitFunction(CloudsParser::FunctionContext *ctx) {
-
+     return visitChildren(ctx);
 }
 
 antlrcpp::Any visitFuncName(CloudsParser::FuncNameContext *ctx) {
-
+     return visitChildren(ctx);
 }
 
 antlrcpp::Any visitArgumentList(CloudsParser::ArgumentListContext *ctx) {
-
+     return visitChildren(ctx);
 }
 
 antlrcpp::Any visitMethodCallArguments(CloudsParser::MethodCallArgumentsContext *ctx) {
-
+     return visitChildren(ctx);
 }
 
 antlrcpp::Any visitMethodCall_ref(CloudsParser::MethodCall_refContext *ctx) {
-
+     return visitChildren(ctx);
 }
+*/
