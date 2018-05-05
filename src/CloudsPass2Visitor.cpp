@@ -66,10 +66,11 @@ antlrcpp::Any Pass2Visitor::visitBlock(Pcl2Parser::MainBlockContext *ctx)
 
 antlrcpp::Any CloudsPass2Visitor::visitEnvironments(CloudsParser::EnvironmentsContext *ctx)
 {
+    current_environment_name = ctx->ID()->toString();
     j_file << "iload 100\n" << "iload 100\n" << "iload 100\n";
     j_file << "multianewarray [[[I 3\n";
     j_file << "putstatic " << program_name << "/" 
-                << ctx->ID()->toString() << " " << "[[[I\n" << endl;
+                << current_environment_name << " " << "[[[I\n" << endl;
 }
 
 
@@ -98,7 +99,7 @@ antlrcpp::Any CloudsPass2Visitor::visitAssignment_stmt(CloudsParser::Assignment_
     return value;
 }
 
-antlrcpp::Any CloudsPass2Visitor::visitaddSubExpr(CloudsParser::AddSubExprContext *ctx)
+antlrcpp::Any CloudsPass2Visitor::visitAdd_Sub_op(CloudsParser::Add_sub_opContext *ctx)
 {
     auto value = visitChildren(ctx);
 
@@ -132,7 +133,7 @@ antlrcpp::Any CloudsPass2Visitor::visitaddSubExpr(CloudsParser::AddSubExprContex
     return value;
 }
 
-antlrcpp::Any CloudsPass2Visitor::visitmulDivExpr(CloudsParser::MulDivExprContext *ctx)
+antlrcpp::Any CloudsPass2Visitor::visitMul_div_op(CloudsParser::Mul_div_opContext *ctx)
 {
     auto value = visitChildren(ctx);
 
@@ -164,4 +165,26 @@ antlrcpp::Any CloudsPass2Visitor::visitmulDivExpr(CloudsParser::MulDivExprContex
     j_file << "\t" << opcode << endl;
 
     return value;
+}
+
+antlrcpp::Any Pass2Visitor::visitIf_stmt(CloudsParser::If_stmtContext *ctx)
+{
+    auto value = visitChildren(ctx->expr());
+    auto value2 = visitChildren(ctx->stat());
+
+    string type_indicator = 
+                  (ctx->expr()->type == Predefined::integer_type) ? "I"
+                | (ctx->expr()->type == Predefined::real_type)    ? "F"
+                |                                                   "?";
+
+    j_file  << "\tgetstatic\t" << program_name
+            << "/" << ctx->variable()->ID()->toString()
+            << " " << type_indicator << endl; 
+    j_file  << "\tgetstatic\t" << program_name
+            << "/" << ctx->variable()->ID()->toString()
+            << " " << type_indicator << endl; 
+    j_file  << "\ticonst_0\t" << endl
+            << "\tgoto\tL003";
+    j_file  << "L002:" << endl << "\ticonst_1\t" << endl
+            << "L003:" << endl << "\tifeq\tL001" << endl; 
 }
