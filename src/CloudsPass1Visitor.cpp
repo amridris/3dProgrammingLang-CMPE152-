@@ -80,6 +80,53 @@ antlrcpp::Any CloudsPass1Visitor::visitEnvironments(CloudsParser::EnvironmentsCo
                << ctx->ID()->toString() << " " << "[[[I" << endl;
 }
 
+ antlrcpp::Any visitScope(CloudsParser::ScopeContext *ctx){
+     //visiting stmt_list
+     return visitChildren(ctx);
+
+ }
+
+ antlrcpp::Any visitStmt_list(CloudsParser::Stmt_listContext *ctx){
+     //visiting assignment list to parse declarations
+     return visitChildren(ctx);
+ }
+
+
+antlrcpp::Any visitAssignmentStmt(CloudsParser::Assignment_stmtContext *ctx){
+    //take the variable name and push it to the stack
+    string variable_name = ctx->ID()->toString();
+    SymTabEntry *variable_id = symtab_stack->enter_local(variable_name);
+    variable_id->set_definition((Definition) DF_VARIABLE);
+    variable_id_list.push_back(variable_id);
+    //visit expressions
+    return visitChildren(ctx);
+}
+
+antlrcpp::Any visitAddSubExpr(CloudsParser::AddSubExprContext *ctx){
+
+    //AddsubExpr has two nodes and op
+   auto value = visitChildren(ctx);
+
+    TypeSpec *type1 = ctx->expr(0)->type;
+    TypeSpec *type2 = ctx->expr(1)->type;
+
+    bool integer_mode =    (type1 == Predefined::integer_type)
+                        && (type2 == Predefined::integer_type);
+    bool real_mode    =    (type1 == Predefined::real_type)
+                        && (type2 == Predefined::real_type);
+
+    TypeSpec *type = integer_mode ? Predefined::integer_type
+                   : real_mode    ? Predefined::real_type
+                   :                nullptr;
+                   
+    ctx->type = type;
+
+    return value;
+    
+}
+
+
+
 antlrcpp::Any visitFunction(CloudsParser::FunctionContext *ctx) {
 
 }
