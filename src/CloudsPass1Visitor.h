@@ -28,9 +28,8 @@ public:
 
     ostream& get_assembly_file();
 
-    antlrcpp::Any visitProgram(CloudsParser::ProgramContext *context);
-    antlrcpp::Any visitHeader(CloudsParser::HeaderContext *context);
-    
+    antlrcpp::Any visitProgram(CloudsParser::ProgramContext *context) override;
+    antlrcpp::Any visitHeader(CloudsParser::HeaderContext *context) override;  
 };
 
 #endif /* CLOUDSPASS1VISITOR_H_ */
