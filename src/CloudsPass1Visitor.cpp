@@ -71,24 +71,3 @@ antlrcpp::Any CloudsPass1Visitor::visitHeader(CloudsParser::HeaderContext *ctx)
 
     return visitChildren(ctx);
 }
-
-
-
-antlrcpp::Any visitFunction_(CloudsParser::Function_Context *ctx) override {
-    
-    return visitChildren(ctx);
-  }
-
-antlrcpp::Any visitArgumentList(CloudsParser::ArgumentListContext *ctx) override {
-
-    return visitChildren(ctx);
-  }
-antlrcpp::Any visitMethodCallArguments(CloudsParser::MethodCallArgumentsContext *ctx) override {
-    
-    return visitChildren(ctx);
-  }
-
-antlrcpp::Any visitMethodCall_ref(CloudsParser::MethodCall_refContext *ctx) override {
-
-    return visitChildren(ctx);
-  }
