@@ -1,4 +1,8 @@
 
+#include "wci/intermediate/TypeSpec.h"
+using namespace wci::intermediate;
+
+
 // Generated from d:\UbuntuFiles\CMPE152Ubuntu\cmpe152newlanguage\Clouds.g4 by ANTLR 4.7.1
 
 #pragma once
@@ -405,6 +409,7 @@ public:
   VariableContext* variable(int precedence);
   class  ExprContext : public antlr4::ParserRuleContext {
   public:
+    TypeSpec * type = nullptr;
     ExprContext(antlr4::ParserRuleContext *parent, size_t invokingState);
    
     ExprContext() : antlr4::ParserRuleContext() { }

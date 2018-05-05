@@ -1,5 +1,10 @@
 grammar Clouds;
 
+@header {
+#include "wci/intermediate/TypeSpec.h"
+using namespace wci::intermediate;
+}
+
 //program : header block run_simulation block?; //done 
 program : header block+;
 header  : CLOUDS ID SEMICOLON; //done
@@ -81,7 +86,8 @@ variable:  //Done
         ;
 
 
-expr : expr mul_div_op expr     # mulDivExpr //done first visit
+expr locals [ TypeSpec *type = nullptr ]
+     : expr mul_div_op expr     # mulDivExpr //done first visit
      | expr add_sub_op expr     # addSubExpr //done first visit
      | expr rel_op expr         # relExpr    //done first visit
      | expr rot_op expr         # rotExpr    //done first visit  
