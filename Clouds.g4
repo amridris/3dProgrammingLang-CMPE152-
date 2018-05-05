@@ -1,16 +1,16 @@
 grammar Clouds;
 
-program : header block run_simulation block;
-header  : CLOUDS ID SEMICOLON;
-block   : environments
-        | function
+program : header block run_simulation block; //done 
+header  : CLOUDS ID SEMICOLON; //done
+block   : environments //done
+        | function      
         ;
 
 //environments: ENVIRNOMENT ID '{' env_stat+ '}'; //use this later
-environments: ENVIRNOMENT ID scope;
+environments: ENVIRNOMENT ID scope; //done
 
 // run_simulation: SIMULATION '{' sim_stat+ '}'; //use this later
-run_simulation: SIMULATION scope;                   
+run_simulation: SIMULATION scope;    //Done               
  
  //need to fix this, dont have declarations or compound_stmt defined
 
@@ -70,25 +70,25 @@ when_stmt       : WHEN expr THEN stat ;
 
 print_stmt      : PRINT '(' variable ')';
 
-variable:
+variable:  //Done
         | variable '.' obj_vars
         | ID
         ;
 
 
-expr : expr mul_div_op expr     # mulDivExpr
-     | expr add_sub_op expr     # addSubExpr
-     | expr rel_op expr         # relExpr
-     | expr rot_op expr         # rotExpr
-     | '[' init_list ']'        # initList
-     | number                   # numberConst
-     | variable                 # identifier
-     | '(' expr ')'             # parens
+expr : expr mul_div_op expr     # mulDivExpr //done first visit
+     | expr add_sub_op expr     # addSubExpr //done first visit
+     | expr rel_op expr         # relExpr    //done first visit
+     | expr rot_op expr         # rotExpr    //done first visit  
+     | '[' init_list ']'        # initList   //done first visit
+     | number                   # numberConst //done first visit
+     | variable                 # identifier  //done first visit
+     | '(' expr ')'             # parens       //done first visit
      ;
 
-init_list   : obj_vars '=' expr (',' obj_vars '=' expr)*  ;
+init_list   : obj_vars '=' expr (',' obj_vars '=' expr)*  ;  //done first visit
 
-init_var    : TYPE variable;
+init_var    : TYPE variable; 
 
 obj_vars    : 'p'
             | HEIGHT
@@ -116,7 +116,7 @@ argumentList
     : // No arguments
     | expr (',' expr)* 
     | variable
-    ;
+    
 
 methodCallArguments
     : // No arguments
