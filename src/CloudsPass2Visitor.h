@@ -29,9 +29,9 @@ public:
     antlrcpp::Any visitHeader(CloudsParser::HeaderContext *ctx);
 	antlrcpp::Any visitStat(CloudsParser::StatContext *ctx);
 	antlrcpp::Any visitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx);
-	antlrcpp::Any visitaddSubExpr(CloudsParser::addSubExprContext *ctx);
-	antlrcpp::Any visitmulDivExpr(CloudsParser::mulDivExprContext *ctx);
-
+	antlrcpp::Any visitAdd_Sub_op(CloudsParser::Add_Sub_opContext *ctx);
+	antlrcpp::Any visitMul_div_op(CloudsParser::Mul_div_opContext *ctx);
+	antlrcpp::Any visitIf_stmt(CloudsParser::If_stmtContext *ctx);
 };
 
 #endif /* CLOUDSPASS2VISITOR_H_ */
