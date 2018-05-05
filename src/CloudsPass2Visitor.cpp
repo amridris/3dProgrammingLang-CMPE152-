@@ -94,7 +94,7 @@ antlrcpp::Any CloudsPass2Visitor::visitAssignment_stmt(CloudsParser::Assignment_
 
     return value;
 }
-
+/*
 antlrcpp::Any CloudsPass2Visitor::visitAdd_Sub_op(CloudsParser::Add_sub_opContext *ctx)
 {
     auto value = visitChildren(ctx);
@@ -184,7 +184,7 @@ antlrcpp::Any Pass2Visitor::visitIf_stmt(CloudsParser::If_stmtContext *ctx)
     j_file  << "L002:" << endl << "\ticonst_1\t" << endl
             << "L003:" << endl << "\tifeq\tL001" << endl; 
 }
-
+*/
 antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *ctx)
 {
     
