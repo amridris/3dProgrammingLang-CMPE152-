@@ -7,7 +7,7 @@ block   : environments //done
         ;
 
 //environments: ENVIRNOMENT ID '{' env_stat+ '}'; //use this later
-environments: ENVIRNOMENT ID scope; //done
+environments: ENVIRONMENT ID scope; //done
 
 // run_simulation: SIMULATION '{' sim_stat+ '}'; //use this later
 run_simulation: SIMULATION scope;    //Done               
@@ -165,7 +165,7 @@ FOR         : 'for'         ;
 FINISH      : 'finish'      ;
 PUTNENV     : 'putnenv'     ;
 FUNCTION    : 'function'    ;
-ENVIRNOMENT : 'environment' ;
+ENVIRONMENT : 'environment' ;
 SIMULATION  : 'simulation'  ;
 PRINT       : 'print'       ;
 BETWEEN     : 'between'     ;
