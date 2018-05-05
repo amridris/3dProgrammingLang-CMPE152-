@@ -30,7 +30,7 @@ antlrcpp::Any CloudsPass2Visitor::visitHeader(CloudsParser::HeaderContext *ctx)
     return visitChildren(ctx);
 }
 
-antlrcpp::Any Pass2Visitor::visitBlock(Pcl2Parser::MainBlockContext *ctx)
+antlrcpp::Any Pass2Visitor::visitBlock(Pcl2Parser::BlockContext *ctx)
 {
     // Emit the main program header.
     j_file << endl;

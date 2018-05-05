@@ -28,8 +28,8 @@ public:
 
     ostream& get_assembly_file();
 
-    antlrcpp::Any visitProgram(CloudsParser::ProgramContext *context) override;
-    antlrcpp::Any visitHeader(CloudsParser::HeaderContext *context) override;  
+    antlrcpp::Any visitProgram(CloudsParser::ProgramContext *ctx) override;
+    antlrcpp::Any visitHeader(CloudsParser::HeaderContext *ctx) override;  
     //antlrcpp::Any visitBlock(CloudsParser::BlockContext *ctx) override;
     antlrcpp::Any visitEnvironments(CloudsParser::EnvironmentsContext *ctx) override;
     //antlrcpp::Any visitRun_simulation(CloudsParser::Run_simulationContext *ctx) override;
