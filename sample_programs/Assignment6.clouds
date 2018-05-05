@@ -1,4 +1,4 @@
-Clouds assignment;
+Clouds assignmentsix;
 
 /*
     this 
@@ -7,6 +7,11 @@ Clouds assignment;
     block
     comment
 */
+
+a () {
+    pause;
+    print(sphereobject.center);
+}
 
 environment environmentObject           
 {
@@ -56,9 +61,4 @@ simulation
     pause;
     print(sphereobject.center);
     a();
-}
-
-a () {
-    pause;
-    print(sphereobject.center);
 }

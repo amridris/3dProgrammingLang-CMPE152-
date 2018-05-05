@@ -27,6 +27,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitBody(CloudsParser::BodyContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitBlock(CloudsParser::BlockContext *ctx) override {
     return visitChildren(ctx);
   }

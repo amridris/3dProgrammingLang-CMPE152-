@@ -24,6 +24,9 @@ public:
   virtual void enterHeader(CloudsParser::HeaderContext *ctx) = 0;
   virtual void exitHeader(CloudsParser::HeaderContext *ctx) = 0;
 
+  virtual void enterBody(CloudsParser::BodyContext *ctx) = 0;
+  virtual void exitBody(CloudsParser::BodyContext *ctx) = 0;
+
   virtual void enterBlock(CloudsParser::BlockContext *ctx) = 0;
   virtual void exitBlock(CloudsParser::BlockContext *ctx) = 0;
 

@@ -31,15 +31,15 @@ public:
   };
 
   enum {
-    RuleProgram = 0, RuleHeader = 1, RuleBlock = 2, RuleEnvironments = 3, 
-    RuleRun_simulation = 4, RuleScope = 5, RuleStmt_list = 6, RuleStat = 7, 
-    RuleAssignment_stmt = 8, RuleRepeat_stmt = 9, RuleIf_stmt = 10, RulePut_stmt = 11, 
-    RuleCollision_stmt = 12, RuleWait_stmt = 13, RuleMove_stmt = 14, RuleWhen_stmt = 15, 
-    RulePrint_stmt = 16, RuleVariable = 17, RuleExpr = 18, RuleInit_list = 19, 
-    RuleInit_var = 20, RuleObj_vars = 21, RuleFunction = 22, RuleFuncName = 23, 
-    RuleArgumentList = 24, RuleMethodCallArguments = 25, RuleMethodCall_ref = 26, 
-    RuleNumber = 27, RuleSign = 28, RuleAssignment_operators = 29, RuleMul_div_op = 30, 
-    RuleAdd_sub_op = 31, RuleRel_op = 32, RuleRot_op = 33
+    RuleProgram = 0, RuleHeader = 1, RuleBody = 2, RuleBlock = 3, RuleEnvironments = 4, 
+    RuleRun_simulation = 5, RuleScope = 6, RuleStmt_list = 7, RuleStat = 8, 
+    RuleAssignment_stmt = 9, RuleRepeat_stmt = 10, RuleIf_stmt = 11, RulePut_stmt = 12, 
+    RuleCollision_stmt = 13, RuleWait_stmt = 14, RuleMove_stmt = 15, RuleWhen_stmt = 16, 
+    RulePrint_stmt = 17, RuleVariable = 18, RuleExpr = 19, RuleInit_list = 20, 
+    RuleInit_var = 21, RuleObj_vars = 22, RuleFunction = 23, RuleFuncName = 24, 
+    RuleArgumentList = 25, RuleMethodCallArguments = 26, RuleMethodCall_ref = 27, 
+    RuleNumber = 28, RuleSign = 29, RuleAssignment_operators = 30, RuleMul_div_op = 31, 
+    RuleAdd_sub_op = 32, RuleRel_op = 33, RuleRot_op = 34
   };
 
   CloudsParser(antlr4::TokenStream *input);
@@ -54,6 +54,7 @@ public:
 
   class ProgramContext;
   class HeaderContext;
+  class BodyContext;
   class BlockContext;
   class EnvironmentsContext;
   class Run_simulationContext;
@@ -92,8 +93,8 @@ public:
     ProgramContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     HeaderContext *header();
-    std::vector<BlockContext *> block();
-    BlockContext* block(size_t i);
+    BodyContext *body();
+    FunctionContext *function();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -120,6 +121,22 @@ public:
   };
 
   HeaderContext* header();
+
+  class  BodyContext : public antlr4::ParserRuleContext {
+  public:
+    BodyContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    std::vector<BlockContext *> block();
+    BlockContext* block(size_t i);
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  BodyContext* body();
 
   class  BlockContext : public antlr4::ParserRuleContext {
   public:

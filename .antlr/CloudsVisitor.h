@@ -27,6 +27,8 @@ public:
 
     virtual antlrcpp::Any visitHeader(CloudsParser::HeaderContext *context) = 0;
 
+    virtual antlrcpp::Any visitBody(CloudsParser::BodyContext *context) = 0;
+
     virtual antlrcpp::Any visitBlock(CloudsParser::BlockContext *context) = 0;
 
     virtual antlrcpp::Any visitEnvironments(CloudsParser::EnvironmentsContext *context) = 0;

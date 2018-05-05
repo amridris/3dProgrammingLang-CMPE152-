@@ -5,17 +5,16 @@ grammar Clouds;
 using namespace wci::intermediate;
 }
 
-//program : header block run_simulation block?; //done 
-program : header block+;
+program : header function? body ; //done 
 header  : CLOUDS ID SEMICOLON; //done
 
-block: environments run_simulation;
-/* //ADD WHEN FIXED
+body: block+;
+
 block   : environments //done
-        | function     
+//        | function    //add if pass1 creates them 
         | run_simulation //remove when fixed 
         ;
-*/
+
 //environments: ENVIRNOMENT ID '{' env_stat+ '}'; //use this later
 environments: ENVIRONMENT ID scope; //done
 

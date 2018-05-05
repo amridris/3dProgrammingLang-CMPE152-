@@ -72,6 +72,11 @@ antlrcpp::Any CloudsPass1Visitor::visitHeader(CloudsParser::HeaderContext *ctx)
     return visitChildren(ctx);
 }
 
+antlrcpp::Any CloudsPass1Visitor::visitBody(CloudsParser::BodyContext *ctx)
+{
+
+}
+
 
 antlrcpp::Any CloudsPass1Visitor::visitEnvironments(CloudsParser::EnvironmentsContext *ctx)
 {
@@ -81,9 +86,7 @@ antlrcpp::Any CloudsPass1Visitor::visitEnvironments(CloudsParser::EnvironmentsCo
     return visitChildren(ctx);
 }
 
-<<<<<<< HEAD
 /*
-=======
  antlrcpp::Any visitScope(CloudsParser::ScopeContext *ctx){
      //visiting stmt_list
      return visitChildren(ctx);
@@ -131,7 +134,6 @@ antlrcpp::Any visitAddSubExpr(CloudsParser::AddSubExprContext *ctx){
 
 
 
->>>>>>> 3c6aebac68e82edbce9d56dd30c14611d104d2f5
 antlrcpp::Any visitFunction(CloudsParser::FunctionContext *ctx) {
      return visitChildren(ctx);
 }

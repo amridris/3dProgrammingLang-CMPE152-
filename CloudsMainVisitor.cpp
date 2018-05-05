@@ -14,7 +14,9 @@ using namespace antlr4;
 int main(int argc, const char *args[])
 {
     ifstream ins;
-    ins.open(args[1]);
+    std::string source_file("sample_programs/");
+    source_file.append(args[1]);
+    ins.open(source_file);
 
     ANTLRInputStream input(ins);
     CloudsLexer lexer(&input);

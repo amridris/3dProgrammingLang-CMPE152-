@@ -1,4 +1,4 @@
-Clouds assignment;
+Clouds assignmentseven;
 
 /*
     this 
@@ -10,7 +10,7 @@ Clouds assignment;
 
 environment environmentObject           
 {
-    point pointObjectOne = [ x = 2, y = 2, z = 2 ];
+    //point pointObjectOne = [ x = 2, y = 2, z = 2 ];
 
     cube cubeobject = [height=1, width=1, length=2];
 

@@ -26,6 +26,9 @@ public:
   virtual void enterHeader(CloudsParser::HeaderContext * /*ctx*/) override { }
   virtual void exitHeader(CloudsParser::HeaderContext * /*ctx*/) override { }
 
+  virtual void enterBody(CloudsParser::BodyContext * /*ctx*/) override { }
+  virtual void exitBody(CloudsParser::BodyContext * /*ctx*/) override { }
+
   virtual void enterBlock(CloudsParser::BlockContext * /*ctx*/) override { }
   virtual void exitBlock(CloudsParser::BlockContext * /*ctx*/) override { }
 
