@@ -1,5 +1,5 @@
 
-// Generated from /Users/anahit/Documents/GitLocalRepo/cmpe152newlanguage/Clouds.g4 by ANTLR 4.7.1
+// Generated from d:\UbuntuFiles\CMPE152Ubuntu\cmpe152newlanguage\Clouds.g4 by ANTLR 4.7.1
 
 
 #include "CloudsListener.h"
@@ -539,290 +539,75 @@ CloudsParser::StatContext::StatContext(ParserRuleContext *parent, size_t invokin
   : ParserRuleContext(parent, invokingState) {
 }
 
+CloudsParser::Assignment_stmtContext* CloudsParser::StatContext::assignment_stmt() {
+  return getRuleContext<CloudsParser::Assignment_stmtContext>(0);
+}
+
+CloudsParser::FunctionContext* CloudsParser::StatContext::function() {
+  return getRuleContext<CloudsParser::FunctionContext>(0);
+}
+
+CloudsParser::Repeat_stmtContext* CloudsParser::StatContext::repeat_stmt() {
+  return getRuleContext<CloudsParser::Repeat_stmtContext>(0);
+}
+
+CloudsParser::If_stmtContext* CloudsParser::StatContext::if_stmt() {
+  return getRuleContext<CloudsParser::If_stmtContext>(0);
+}
+
+CloudsParser::When_stmtContext* CloudsParser::StatContext::when_stmt() {
+  return getRuleContext<CloudsParser::When_stmtContext>(0);
+}
+
+CloudsParser::Print_stmtContext* CloudsParser::StatContext::print_stmt() {
+  return getRuleContext<CloudsParser::Print_stmtContext>(0);
+}
+
+CloudsParser::Put_stmtContext* CloudsParser::StatContext::put_stmt() {
+  return getRuleContext<CloudsParser::Put_stmtContext>(0);
+}
+
+CloudsParser::Move_stmtContext* CloudsParser::StatContext::move_stmt() {
+  return getRuleContext<CloudsParser::Move_stmtContext>(0);
+}
+
+tree::TerminalNode* CloudsParser::StatContext::PAUSE() {
+  return getToken(CloudsParser::PAUSE, 0);
+}
+
+CloudsParser::Wait_stmtContext* CloudsParser::StatContext::wait_stmt() {
+  return getRuleContext<CloudsParser::Wait_stmtContext>(0);
+}
+
+CloudsParser::Collision_stmtContext* CloudsParser::StatContext::collision_stmt() {
+  return getRuleContext<CloudsParser::Collision_stmtContext>(0);
+}
+
 
 size_t CloudsParser::StatContext::getRuleIndex() const {
   return CloudsParser::RuleStat;
 }
 
-void CloudsParser::StatContext::copyFrom(StatContext *ctx) {
-  ParserRuleContext::copyFrom(ctx);
-}
-
-//----------------- WhenStmtContext ------------------------------------------------------------------
-
-CloudsParser::When_stmtContext* CloudsParser::WhenStmtContext::when_stmt() {
-  return getRuleContext<CloudsParser::When_stmtContext>(0);
-}
-
-CloudsParser::WhenStmtContext::WhenStmtContext(StatContext *ctx) { copyFrom(ctx); }
-
-void CloudsParser::WhenStmtContext::enterRule(tree::ParseTreeListener *listener) {
+void CloudsParser::StatContext::enterRule(tree::ParseTreeListener *listener) {
   auto parserListener = dynamic_cast<CloudsListener *>(listener);
   if (parserListener != nullptr)
-    parserListener->enterWhenStmt(this);
-}
-void CloudsParser::WhenStmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitWhenStmt(this);
+    parserListener->enterStat(this);
 }
 
-antlrcpp::Any CloudsParser::WhenStmtContext::accept(tree::ParseTreeVisitor *visitor) {
+void CloudsParser::StatContext::exitRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<CloudsListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->exitStat(this);
+}
+
+
+antlrcpp::Any CloudsParser::StatContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<CloudsVisitor*>(visitor))
-    return parserVisitor->visitWhenStmt(this);
+    return parserVisitor->visitStat(this);
   else
     return visitor->visitChildren(this);
 }
-//----------------- PrintStmtContext ------------------------------------------------------------------
 
-CloudsParser::Print_stmtContext* CloudsParser::PrintStmtContext::print_stmt() {
-  return getRuleContext<CloudsParser::Print_stmtContext>(0);
-}
-
-CloudsParser::PrintStmtContext::PrintStmtContext(StatContext *ctx) { copyFrom(ctx); }
-
-void CloudsParser::PrintStmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterPrintStmt(this);
-}
-void CloudsParser::PrintStmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitPrintStmt(this);
-}
-
-antlrcpp::Any CloudsParser::PrintStmtContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<CloudsVisitor*>(visitor))
-    return parserVisitor->visitPrintStmt(this);
-  else
-    return visitor->visitChildren(this);
-}
-//----------------- WaitStmtContext ------------------------------------------------------------------
-
-CloudsParser::Wait_stmtContext* CloudsParser::WaitStmtContext::wait_stmt() {
-  return getRuleContext<CloudsParser::Wait_stmtContext>(0);
-}
-
-CloudsParser::WaitStmtContext::WaitStmtContext(StatContext *ctx) { copyFrom(ctx); }
-
-void CloudsParser::WaitStmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterWaitStmt(this);
-}
-void CloudsParser::WaitStmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitWaitStmt(this);
-}
-
-antlrcpp::Any CloudsParser::WaitStmtContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<CloudsVisitor*>(visitor))
-    return parserVisitor->visitWaitStmt(this);
-  else
-    return visitor->visitChildren(this);
-}
-//----------------- IfStmtContext ------------------------------------------------------------------
-
-CloudsParser::If_stmtContext* CloudsParser::IfStmtContext::if_stmt() {
-  return getRuleContext<CloudsParser::If_stmtContext>(0);
-}
-
-CloudsParser::IfStmtContext::IfStmtContext(StatContext *ctx) { copyFrom(ctx); }
-
-void CloudsParser::IfStmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterIfStmt(this);
-}
-void CloudsParser::IfStmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitIfStmt(this);
-}
-
-antlrcpp::Any CloudsParser::IfStmtContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<CloudsVisitor*>(visitor))
-    return parserVisitor->visitIfStmt(this);
-  else
-    return visitor->visitChildren(this);
-}
-//----------------- CollisionStmtContext ------------------------------------------------------------------
-
-CloudsParser::Collision_stmtContext* CloudsParser::CollisionStmtContext::collision_stmt() {
-  return getRuleContext<CloudsParser::Collision_stmtContext>(0);
-}
-
-CloudsParser::CollisionStmtContext::CollisionStmtContext(StatContext *ctx) { copyFrom(ctx); }
-
-void CloudsParser::CollisionStmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterCollisionStmt(this);
-}
-void CloudsParser::CollisionStmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitCollisionStmt(this);
-}
-
-antlrcpp::Any CloudsParser::CollisionStmtContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<CloudsVisitor*>(visitor))
-    return parserVisitor->visitCollisionStmt(this);
-  else
-    return visitor->visitChildren(this);
-}
-//----------------- Function_Context ------------------------------------------------------------------
-
-CloudsParser::FunctionContext* CloudsParser::Function_Context::function() {
-  return getRuleContext<CloudsParser::FunctionContext>(0);
-}
-
-CloudsParser::Function_Context::Function_Context(StatContext *ctx) { copyFrom(ctx); }
-
-void CloudsParser::Function_Context::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterFunction_(this);
-}
-void CloudsParser::Function_Context::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitFunction_(this);
-}
-
-antlrcpp::Any CloudsParser::Function_Context::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<CloudsVisitor*>(visitor))
-    return parserVisitor->visitFunction_(this);
-  else
-    return visitor->visitChildren(this);
-}
-//----------------- PutStmtContext ------------------------------------------------------------------
-
-CloudsParser::Put_stmtContext* CloudsParser::PutStmtContext::put_stmt() {
-  return getRuleContext<CloudsParser::Put_stmtContext>(0);
-}
-
-CloudsParser::PutStmtContext::PutStmtContext(StatContext *ctx) { copyFrom(ctx); }
-
-void CloudsParser::PutStmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterPutStmt(this);
-}
-void CloudsParser::PutStmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitPutStmt(this);
-}
-
-antlrcpp::Any CloudsParser::PutStmtContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<CloudsVisitor*>(visitor))
-    return parserVisitor->visitPutStmt(this);
-  else
-    return visitor->visitChildren(this);
-}
-//----------------- AssignmentStmtContext ------------------------------------------------------------------
-
-CloudsParser::Assignment_stmtContext* CloudsParser::AssignmentStmtContext::assignment_stmt() {
-  return getRuleContext<CloudsParser::Assignment_stmtContext>(0);
-}
-
-CloudsParser::AssignmentStmtContext::AssignmentStmtContext(StatContext *ctx) { copyFrom(ctx); }
-
-void CloudsParser::AssignmentStmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterAssignmentStmt(this);
-}
-void CloudsParser::AssignmentStmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitAssignmentStmt(this);
-}
-
-antlrcpp::Any CloudsParser::AssignmentStmtContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<CloudsVisitor*>(visitor))
-    return parserVisitor->visitAssignmentStmt(this);
-  else
-    return visitor->visitChildren(this);
-}
-//----------------- RepeatStmtContext ------------------------------------------------------------------
-
-CloudsParser::Repeat_stmtContext* CloudsParser::RepeatStmtContext::repeat_stmt() {
-  return getRuleContext<CloudsParser::Repeat_stmtContext>(0);
-}
-
-CloudsParser::RepeatStmtContext::RepeatStmtContext(StatContext *ctx) { copyFrom(ctx); }
-
-void CloudsParser::RepeatStmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterRepeatStmt(this);
-}
-void CloudsParser::RepeatStmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitRepeatStmt(this);
-}
-
-antlrcpp::Any CloudsParser::RepeatStmtContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<CloudsVisitor*>(visitor))
-    return parserVisitor->visitRepeatStmt(this);
-  else
-    return visitor->visitChildren(this);
-}
-//----------------- PauseContext ------------------------------------------------------------------
-
-tree::TerminalNode* CloudsParser::PauseContext::PAUSE() {
-  return getToken(CloudsParser::PAUSE, 0);
-}
-
-CloudsParser::PauseContext::PauseContext(StatContext *ctx) { copyFrom(ctx); }
-
-void CloudsParser::PauseContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterPause(this);
-}
-void CloudsParser::PauseContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitPause(this);
-}
-
-antlrcpp::Any CloudsParser::PauseContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<CloudsVisitor*>(visitor))
-    return parserVisitor->visitPause(this);
-  else
-    return visitor->visitChildren(this);
-}
-//----------------- MoveStmtContext ------------------------------------------------------------------
-
-CloudsParser::Move_stmtContext* CloudsParser::MoveStmtContext::move_stmt() {
-  return getRuleContext<CloudsParser::Move_stmtContext>(0);
-}
-
-CloudsParser::MoveStmtContext::MoveStmtContext(StatContext *ctx) { copyFrom(ctx); }
-
-void CloudsParser::MoveStmtContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterMoveStmt(this);
-}
-void CloudsParser::MoveStmtContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<CloudsListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitMoveStmt(this);
-}
-
-antlrcpp::Any CloudsParser::MoveStmtContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<CloudsVisitor*>(visitor))
-    return parserVisitor->visitMoveStmt(this);
-  else
-    return visitor->visitChildren(this);
-}
 CloudsParser::StatContext* CloudsParser::stat() {
   StatContext *_localctx = _tracker.createInstance<StatContext>(_ctx, getState());
   enterRule(_localctx, 14, CloudsParser::RuleStat);
@@ -835,7 +620,6 @@ CloudsParser::StatContext* CloudsParser::stat() {
     _errHandler->sync(this);
     switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 2, _ctx)) {
     case 1: {
-      _localctx = dynamic_cast<StatContext *>(_tracker.createInstance<CloudsParser::AssignmentStmtContext>(_localctx));
       enterOuterAlt(_localctx, 1);
       setState(102);
       assignment_stmt();
@@ -843,7 +627,6 @@ CloudsParser::StatContext* CloudsParser::stat() {
     }
 
     case 2: {
-      _localctx = dynamic_cast<StatContext *>(_tracker.createInstance<CloudsParser::Function_Context>(_localctx));
       enterOuterAlt(_localctx, 2);
       setState(103);
       function();
@@ -851,7 +634,6 @@ CloudsParser::StatContext* CloudsParser::stat() {
     }
 
     case 3: {
-      _localctx = dynamic_cast<StatContext *>(_tracker.createInstance<CloudsParser::RepeatStmtContext>(_localctx));
       enterOuterAlt(_localctx, 3);
       setState(104);
       repeat_stmt();
@@ -859,7 +641,6 @@ CloudsParser::StatContext* CloudsParser::stat() {
     }
 
     case 4: {
-      _localctx = dynamic_cast<StatContext *>(_tracker.createInstance<CloudsParser::IfStmtContext>(_localctx));
       enterOuterAlt(_localctx, 4);
       setState(105);
       if_stmt();
@@ -867,7 +648,6 @@ CloudsParser::StatContext* CloudsParser::stat() {
     }
 
     case 5: {
-      _localctx = dynamic_cast<StatContext *>(_tracker.createInstance<CloudsParser::WhenStmtContext>(_localctx));
       enterOuterAlt(_localctx, 5);
       setState(106);
       when_stmt();
@@ -875,7 +655,6 @@ CloudsParser::StatContext* CloudsParser::stat() {
     }
 
     case 6: {
-      _localctx = dynamic_cast<StatContext *>(_tracker.createInstance<CloudsParser::PrintStmtContext>(_localctx));
       enterOuterAlt(_localctx, 6);
       setState(107);
       print_stmt();
@@ -883,7 +662,6 @@ CloudsParser::StatContext* CloudsParser::stat() {
     }
 
     case 7: {
-      _localctx = dynamic_cast<StatContext *>(_tracker.createInstance<CloudsParser::PutStmtContext>(_localctx));
       enterOuterAlt(_localctx, 7);
       setState(108);
       put_stmt();
@@ -891,7 +669,6 @@ CloudsParser::StatContext* CloudsParser::stat() {
     }
 
     case 8: {
-      _localctx = dynamic_cast<StatContext *>(_tracker.createInstance<CloudsParser::MoveStmtContext>(_localctx));
       enterOuterAlt(_localctx, 8);
       setState(109);
       move_stmt();
@@ -899,7 +676,6 @@ CloudsParser::StatContext* CloudsParser::stat() {
     }
 
     case 9: {
-      _localctx = dynamic_cast<StatContext *>(_tracker.createInstance<CloudsParser::PauseContext>(_localctx));
       enterOuterAlt(_localctx, 9);
       setState(110);
       match(CloudsParser::PAUSE);
@@ -907,7 +683,6 @@ CloudsParser::StatContext* CloudsParser::stat() {
     }
 
     case 10: {
-      _localctx = dynamic_cast<StatContext *>(_tracker.createInstance<CloudsParser::WaitStmtContext>(_localctx));
       enterOuterAlt(_localctx, 10);
       setState(111);
       wait_stmt();
@@ -915,7 +690,6 @@ CloudsParser::StatContext* CloudsParser::stat() {
     }
 
     case 11: {
-      _localctx = dynamic_cast<StatContext *>(_tracker.createInstance<CloudsParser::CollisionStmtContext>(_localctx));
       enterOuterAlt(_localctx, 11);
       setState(112);
       collision_stmt();

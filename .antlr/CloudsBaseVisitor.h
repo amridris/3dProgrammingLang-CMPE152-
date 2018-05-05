@@ -1,5 +1,5 @@
 
-// Generated from /Users/anahit/Documents/GitLocalRepo/cmpe152newlanguage/Clouds.g4 by ANTLR 4.7.1
+// Generated from d:\UbuntuFiles\CMPE152Ubuntu\cmpe152newlanguage\Clouds.g4 by ANTLR 4.7.1
 
 #pragma once
 
@@ -43,47 +43,7 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitAssignmentStmt(CloudsParser::AssignmentStmtContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitFunction_(CloudsParser::Function_Context *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitRepeatStmt(CloudsParser::RepeatStmtContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitIfStmt(CloudsParser::IfStmtContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitWhenStmt(CloudsParser::WhenStmtContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitPrintStmt(CloudsParser::PrintStmtContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitPutStmt(CloudsParser::PutStmtContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitMoveStmt(CloudsParser::MoveStmtContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitPause(CloudsParser::PauseContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitWaitStmt(CloudsParser::WaitStmtContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitCollisionStmt(CloudsParser::CollisionStmtContext *ctx) override {
+  virtual antlrcpp::Any visitStat(CloudsParser::StatContext *ctx) override {
     return visitChildren(ctx);
   }
 

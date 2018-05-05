@@ -1,5 +1,5 @@
 
-// Generated from /Users/anahit/Documents/GitLocalRepo/cmpe152newlanguage/Clouds.g4 by ANTLR 4.7.1
+// Generated from d:\UbuntuFiles\CMPE152Ubuntu\cmpe152newlanguage\Clouds.g4 by ANTLR 4.7.1
 
 #pragma once
 
@@ -33,27 +33,7 @@ public:
 
     virtual antlrcpp::Any visitStmt_list(CloudsParser::Stmt_listContext *context) = 0;
 
-    virtual antlrcpp::Any visitAssignmentStmt(CloudsParser::AssignmentStmtContext *context) = 0;
-
-    virtual antlrcpp::Any visitFunction_(CloudsParser::Function_Context *context) = 0;
-
-    virtual antlrcpp::Any visitRepeatStmt(CloudsParser::RepeatStmtContext *context) = 0;
-
-    virtual antlrcpp::Any visitIfStmt(CloudsParser::IfStmtContext *context) = 0;
-
-    virtual antlrcpp::Any visitWhenStmt(CloudsParser::WhenStmtContext *context) = 0;
-
-    virtual antlrcpp::Any visitPrintStmt(CloudsParser::PrintStmtContext *context) = 0;
-
-    virtual antlrcpp::Any visitPutStmt(CloudsParser::PutStmtContext *context) = 0;
-
-    virtual antlrcpp::Any visitMoveStmt(CloudsParser::MoveStmtContext *context) = 0;
-
-    virtual antlrcpp::Any visitPause(CloudsParser::PauseContext *context) = 0;
-
-    virtual antlrcpp::Any visitWaitStmt(CloudsParser::WaitStmtContext *context) = 0;
-
-    virtual antlrcpp::Any visitCollisionStmt(CloudsParser::CollisionStmtContext *context) = 0;
+    virtual antlrcpp::Any visitStat(CloudsParser::StatContext *context) = 0;
 
     virtual antlrcpp::Any visitAssignment_stmt(CloudsParser::Assignment_stmtContext *context) = 0;
 

@@ -1,5 +1,5 @@
 
-// Generated from /Users/anahit/Documents/GitLocalRepo/cmpe152newlanguage/Clouds.g4 by ANTLR 4.7.1
+// Generated from d:\UbuntuFiles\CMPE152Ubuntu\cmpe152newlanguage\Clouds.g4 by ANTLR 4.7.1
 
 #pragma once
 
@@ -203,135 +203,24 @@ public:
   class  StatContext : public antlr4::ParserRuleContext {
   public:
     StatContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-   
-    StatContext() : antlr4::ParserRuleContext() { }
-    void copyFrom(StatContext *context);
-    using antlr4::ParserRuleContext::copyFrom;
-
     virtual size_t getRuleIndex() const override;
-
-   
-  };
-
-  class  WhenStmtContext : public StatContext {
-  public:
-    WhenStmtContext(StatContext *ctx);
-
-    When_stmtContext *when_stmt();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  PrintStmtContext : public StatContext {
-  public:
-    PrintStmtContext(StatContext *ctx);
-
-    Print_stmtContext *print_stmt();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  WaitStmtContext : public StatContext {
-  public:
-    WaitStmtContext(StatContext *ctx);
-
-    Wait_stmtContext *wait_stmt();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  IfStmtContext : public StatContext {
-  public:
-    IfStmtContext(StatContext *ctx);
-
-    If_stmtContext *if_stmt();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  CollisionStmtContext : public StatContext {
-  public:
-    CollisionStmtContext(StatContext *ctx);
-
-    Collision_stmtContext *collision_stmt();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  Function_Context : public StatContext {
-  public:
-    Function_Context(StatContext *ctx);
-
-    FunctionContext *function();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  PutStmtContext : public StatContext {
-  public:
-    PutStmtContext(StatContext *ctx);
-
-    Put_stmtContext *put_stmt();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  AssignmentStmtContext : public StatContext {
-  public:
-    AssignmentStmtContext(StatContext *ctx);
-
     Assignment_stmtContext *assignment_stmt();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  RepeatStmtContext : public StatContext {
-  public:
-    RepeatStmtContext(StatContext *ctx);
-
+    FunctionContext *function();
     Repeat_stmtContext *repeat_stmt();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  PauseContext : public StatContext {
-  public:
-    PauseContext(StatContext *ctx);
-
-    antlr4::tree::TerminalNode *PAUSE();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  MoveStmtContext : public StatContext {
-  public:
-    MoveStmtContext(StatContext *ctx);
-
+    If_stmtContext *if_stmt();
+    When_stmtContext *when_stmt();
+    Print_stmtContext *print_stmt();
+    Put_stmtContext *put_stmt();
     Move_stmtContext *move_stmt();
+    antlr4::tree::TerminalNode *PAUSE();
+    Wait_stmtContext *wait_stmt();
+    Collision_stmtContext *collision_stmt();
+
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
   };
 
   StatContext* stat();

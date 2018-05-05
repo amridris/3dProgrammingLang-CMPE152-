@@ -1,5 +1,5 @@
 
-// Generated from /Users/anahit/Documents/GitLocalRepo/cmpe152newlanguage/Clouds.g4 by ANTLR 4.7.1
+// Generated from d:\UbuntuFiles\CMPE152Ubuntu\cmpe152newlanguage\Clouds.g4 by ANTLR 4.7.1
 
 #pragma once
 
@@ -35,38 +35,8 @@ public:
   virtual void enterStmt_list(CloudsParser::Stmt_listContext *ctx) = 0;
   virtual void exitStmt_list(CloudsParser::Stmt_listContext *ctx) = 0;
 
-  virtual void enterAssignmentStmt(CloudsParser::AssignmentStmtContext *ctx) = 0;
-  virtual void exitAssignmentStmt(CloudsParser::AssignmentStmtContext *ctx) = 0;
-
-  virtual void enterFunction_(CloudsParser::Function_Context *ctx) = 0;
-  virtual void exitFunction_(CloudsParser::Function_Context *ctx) = 0;
-
-  virtual void enterRepeatStmt(CloudsParser::RepeatStmtContext *ctx) = 0;
-  virtual void exitRepeatStmt(CloudsParser::RepeatStmtContext *ctx) = 0;
-
-  virtual void enterIfStmt(CloudsParser::IfStmtContext *ctx) = 0;
-  virtual void exitIfStmt(CloudsParser::IfStmtContext *ctx) = 0;
-
-  virtual void enterWhenStmt(CloudsParser::WhenStmtContext *ctx) = 0;
-  virtual void exitWhenStmt(CloudsParser::WhenStmtContext *ctx) = 0;
-
-  virtual void enterPrintStmt(CloudsParser::PrintStmtContext *ctx) = 0;
-  virtual void exitPrintStmt(CloudsParser::PrintStmtContext *ctx) = 0;
-
-  virtual void enterPutStmt(CloudsParser::PutStmtContext *ctx) = 0;
-  virtual void exitPutStmt(CloudsParser::PutStmtContext *ctx) = 0;
-
-  virtual void enterMoveStmt(CloudsParser::MoveStmtContext *ctx) = 0;
-  virtual void exitMoveStmt(CloudsParser::MoveStmtContext *ctx) = 0;
-
-  virtual void enterPause(CloudsParser::PauseContext *ctx) = 0;
-  virtual void exitPause(CloudsParser::PauseContext *ctx) = 0;
-
-  virtual void enterWaitStmt(CloudsParser::WaitStmtContext *ctx) = 0;
-  virtual void exitWaitStmt(CloudsParser::WaitStmtContext *ctx) = 0;
-
-  virtual void enterCollisionStmt(CloudsParser::CollisionStmtContext *ctx) = 0;
-  virtual void exitCollisionStmt(CloudsParser::CollisionStmtContext *ctx) = 0;
+  virtual void enterStat(CloudsParser::StatContext *ctx) = 0;
+  virtual void exitStat(CloudsParser::StatContext *ctx) = 0;
 
   virtual void enterAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) = 0;
   virtual void exitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) = 0;

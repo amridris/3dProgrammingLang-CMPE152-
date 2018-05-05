@@ -28,17 +28,17 @@ stmt_list       : stat SEMICOLON (stat SEMICOLON)* ;
 
 
 stat : //scope            # scope_node| 
-        assignment_stmt  # assignmentStmt
-     | function         # Function_
-     | repeat_stmt      # repeatStmt
-     | if_stmt          # ifStmt
-     | when_stmt        # whenStmt
-     | print_stmt       # printStmt
-     | put_stmt         # putStmt
-     | move_stmt     #moveStmt
-     | PAUSE         #pause
-     | wait_stmt     #waitStmt
-     | collision_stmt #collisionStmt
+        assignment_stmt // # assignmentStmt
+     | function         //# Function_
+     | repeat_stmt      //# repeatStmt
+     | if_stmt          //# ifStmt
+     | when_stmt       // # whenStmt
+     | print_stmt       //# printStmt
+     | put_stmt        // # putStmt
+     | move_stmt     //#moveStmt
+     | PAUSE        // #pause
+     | wait_stmt     //#waitStmt
+     | collision_stmt// #collisionStmt
 //     |                  # emptyStmt
      ;
 

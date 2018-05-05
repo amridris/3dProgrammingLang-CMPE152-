@@ -1,5 +1,5 @@
 
-// Generated from /Users/anahit/Documents/GitLocalRepo/cmpe152newlanguage/Clouds.g4 by ANTLR 4.7.1
+// Generated from d:\UbuntuFiles\CMPE152Ubuntu\cmpe152newlanguage\Clouds.g4 by ANTLR 4.7.1
 
 #pragma once
 
@@ -37,38 +37,8 @@ public:
   virtual void enterStmt_list(CloudsParser::Stmt_listContext * /*ctx*/) override { }
   virtual void exitStmt_list(CloudsParser::Stmt_listContext * /*ctx*/) override { }
 
-  virtual void enterAssignmentStmt(CloudsParser::AssignmentStmtContext * /*ctx*/) override { }
-  virtual void exitAssignmentStmt(CloudsParser::AssignmentStmtContext * /*ctx*/) override { }
-
-  virtual void enterFunction_(CloudsParser::Function_Context * /*ctx*/) override { }
-  virtual void exitFunction_(CloudsParser::Function_Context * /*ctx*/) override { }
-
-  virtual void enterRepeatStmt(CloudsParser::RepeatStmtContext * /*ctx*/) override { }
-  virtual void exitRepeatStmt(CloudsParser::RepeatStmtContext * /*ctx*/) override { }
-
-  virtual void enterIfStmt(CloudsParser::IfStmtContext * /*ctx*/) override { }
-  virtual void exitIfStmt(CloudsParser::IfStmtContext * /*ctx*/) override { }
-
-  virtual void enterWhenStmt(CloudsParser::WhenStmtContext * /*ctx*/) override { }
-  virtual void exitWhenStmt(CloudsParser::WhenStmtContext * /*ctx*/) override { }
-
-  virtual void enterPrintStmt(CloudsParser::PrintStmtContext * /*ctx*/) override { }
-  virtual void exitPrintStmt(CloudsParser::PrintStmtContext * /*ctx*/) override { }
-
-  virtual void enterPutStmt(CloudsParser::PutStmtContext * /*ctx*/) override { }
-  virtual void exitPutStmt(CloudsParser::PutStmtContext * /*ctx*/) override { }
-
-  virtual void enterMoveStmt(CloudsParser::MoveStmtContext * /*ctx*/) override { }
-  virtual void exitMoveStmt(CloudsParser::MoveStmtContext * /*ctx*/) override { }
-
-  virtual void enterPause(CloudsParser::PauseContext * /*ctx*/) override { }
-  virtual void exitPause(CloudsParser::PauseContext * /*ctx*/) override { }
-
-  virtual void enterWaitStmt(CloudsParser::WaitStmtContext * /*ctx*/) override { }
-  virtual void exitWaitStmt(CloudsParser::WaitStmtContext * /*ctx*/) override { }
-
-  virtual void enterCollisionStmt(CloudsParser::CollisionStmtContext * /*ctx*/) override { }
-  virtual void exitCollisionStmt(CloudsParser::CollisionStmtContext * /*ctx*/) override { }
+  virtual void enterStat(CloudsParser::StatContext * /*ctx*/) override { }
+  virtual void exitStat(CloudsParser::StatContext * /*ctx*/) override { }
 
   virtual void enterAssignment_stmt(CloudsParser::Assignment_stmtContext * /*ctx*/) override { }
   virtual void exitAssignment_stmt(CloudsParser::Assignment_stmtContext * /*ctx*/) override { }
