@@ -81,10 +81,12 @@ public class ThreeDObjects
             center.y += objvelocity.dy;
             center.z += objvelocity.dz;
         }
+        abstract void buildSpace(); 
 
         point center;
         //private int moveTime;
         velocity objvelocity;
+        Boolean[][][] objectSpace;
     }
     
     class rectPrism extends ThreeDObject
@@ -98,6 +100,18 @@ public class ThreeDObjects
             width = argWidth;
             length = argLength;
         }
+
+        @Override
+        void buildSpace() {
+            objectSpace = new Boolean[width] [height] [length];
+            for(Boolean[][] twoD: objectSpace){
+                for(Boolean[] oneD: twoD){
+                    for(Boolean elem: oneD){
+                        elem = true;
+                    }
+                }
+            }
+        }
     }
 
     class sphere extends ThreeDObject
@@ -109,6 +123,23 @@ public class ThreeDObjects
             super();
             radius = argradius;
         }
+
+        @Override
+        void buildSpace(){
+            int dist = 0;
+            Boolean hasSphere = false;
+            objectSpace = new Boolean[radius*2][radius*2][radius*2];
+            for(int x = -radius; x<radius; x++){
+                for(int y = -radius; y<radius; y++){
+                    for(int z = -radius; z<radius; z++){
+                        int dist = sqrt(x*x+y*y+z*z);
+                        if(dist <= radius) { hasSphere = true;}
+                        else {hasSphere = false;}
+                        objectSpace[x+radius][y+radius][z+radius] = hasSphere;
+                    }
+                }
+            }
+        }
     }
 
     class cylinder extends ThreeDObject
@@ -119,6 +150,23 @@ public class ThreeDObjects
             super();
             radius = argradius;
             height = argheight;
+        }
+
+        @Override
+        void buildSpace(){
+            int dist = 0;
+            Boolean hasSphere = false;
+                objectSpace = new Boolean[radius*2][height][radius*2];
+            for(int x = -radius; x<radius; x++){
+                for(int y = -radius; y<radius; y++){
+                    for(int z = -radius; z<radius; z++){
+                        int dist = sqrt(x*x+y*y+z*z);
+                        if(dist <= radius) { hasSphere = true;}
+                        else {hasSphere = false;}
+                        objectSpace[x+radius][y+radius][z+radius] = hasSphere;
+                    }
+                }
+            }
         }
     }
 //WORKON
