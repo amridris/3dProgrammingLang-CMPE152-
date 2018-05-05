@@ -20,7 +20,7 @@ CloudsPass2Visitor::~CloudsPass2Visitor() {}
 
 antlrcpp::Any CloudsPass2Visitor::visitProgram(CloudsParser::ProgramContext *ctx)
 {
-    auto value = visitCHildren(ctx);
+    auto value = visitChildren(ctx);
     return value;
 }
 
