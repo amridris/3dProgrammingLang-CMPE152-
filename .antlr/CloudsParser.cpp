@@ -1,5 +1,5 @@
 
-// Generated from /Users/anahit/Documents/GitLocalRepo/cmpe152newlanguage/Clouds.g4 by ANTLR 4.7.1
+// Generated from d:\UbuntuFiles\CMPE152Ubuntu\cmpe152newlanguage\Clouds.g4 by ANTLR 4.7.1
 
 
 #include "CloudsListener.h"
@@ -226,7 +226,7 @@ CloudsParser::BlockContext* CloudsParser::block() {
     setState(79);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
-      case CloudsParser::ENVIRNOMENT: {
+      case CloudsParser::ENVIRONMENT: {
         enterOuterAlt(_localctx, 1);
         setState(77);
         environments();
@@ -260,8 +260,8 @@ CloudsParser::EnvironmentsContext::EnvironmentsContext(ParserRuleContext *parent
   : ParserRuleContext(parent, invokingState) {
 }
 
-tree::TerminalNode* CloudsParser::EnvironmentsContext::ENVIRNOMENT() {
-  return getToken(CloudsParser::ENVIRNOMENT, 0);
+tree::TerminalNode* CloudsParser::EnvironmentsContext::ENVIRONMENT() {
+  return getToken(CloudsParser::ENVIRONMENT, 0);
 }
 
 tree::TerminalNode* CloudsParser::EnvironmentsContext::ID() {
@@ -307,7 +307,7 @@ CloudsParser::EnvironmentsContext* CloudsParser::environments() {
   try {
     enterOuterAlt(_localctx, 1);
     setState(81);
-    match(CloudsParser::ENVIRNOMENT);
+    match(CloudsParser::ENVIRONMENT);
     setState(82);
     match(CloudsParser::ID);
     setState(83);
@@ -3515,7 +3515,7 @@ std::vector<std::string> CloudsParser::_symbolicNames = {
   "", "", "", "", "", "", "", "", "", "", "", "CLOUDS", "REPEAT", "UNTIL", 
   "IF", "THEN", "ELSE", "WHEN", "CENTER", "TELEPORT", "COLISION", "PAUSE", 
   "WAIT", "MOVE", "TO", "MOVE_3", "AT", "IN", "FOR", "FINISH", "PUTNENV", 
-  "FUNCTION", "ENVIRNOMENT", "SIMULATION", "PRINT", "BETWEEN", "TYPE", "HEIGHT", 
+  "FUNCTION", "ENVIRONMENT", "SIMULATION", "PRINT", "BETWEEN", "TYPE", "HEIGHT", 
   "WIDTH", "LENGTH", "RADIUS", "X", "Y", "Z", "POINT", "VELOCITY", "SPEED", 
   "MUL", "DIV", "ADD", "SUB", "MUL_EQ", "DIV_EQ", "ADD_EQ", "SUB_EQ", "EQ_OP", 
   "NE_OP", "LT_OP", "LE_OP", "GT_OP", "GE_OP", "ROLL_OP", "PITCH_OP", "YAW_OP", 

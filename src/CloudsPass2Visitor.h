@@ -19,19 +19,24 @@ class CloudsPass2Visitor : public CloudsBaseVisitor
 {
 private:
 	string program_name;
+	string current_environment_name;
 	ostream& j_file;
 
 public:
 	CloudsPass2Visitor(ostream& j_file);
     virtual ~CloudsPass2Visitor();
 
-	antlrcpp::Any visitProgram(CloudsParser::ProgramContext *ctx);
-    antlrcpp::Any visitHeader(CloudsParser::HeaderContext *ctx);
-	antlrcpp::Any visitStat(CloudsParser::StatContext *ctx);
-	antlrcpp::Any visitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx);
-	antlrcpp::Any visitAdd_Sub_op(CloudsParser::Add_Sub_opContext *ctx);
-	antlrcpp::Any visitMul_div_op(CloudsParser::Mul_div_opContext *ctx);
-	antlrcpp::Any visitIf_stmt(CloudsParser::If_stmtContext *ctx);
+	antlrcpp::Any visitProgram(CloudsParser::ProgramContext *ctx) override;
+    antlrcpp::Any visitHeader(CloudsParser::HeaderContext *ctx) override;
+	antlrcpp::Any visitBlock(CloudsParser::BlockContext *context) override;
+    antlrcpp::Any visitEnvironments(CloudsParser::EnvironmentsContext *ctx) override;	
+	antlrcpp::Any visitStat(CloudsParser::StatContext *ctx) override;
+	antlrcpp::Any visitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) override;
+	antlrcpp::Any visitAdd_sub_op(CloudsParser::Add_sub_opContext *ctx) override;
+	antlrcpp::Any visitMul_div_op(CloudsParser::mul_div_opContext *ctx) override;
+	antlrcpp::Any visitIf_stmt(CloudsParser::If_stmtContext *ctx) override;
+
+
 };
 
 #endif /* CLOUDSPASS2VISITOR_H_ */

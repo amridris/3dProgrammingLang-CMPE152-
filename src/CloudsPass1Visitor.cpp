@@ -44,7 +44,7 @@ antlrcpp::Any CloudsPass1Visitor::visitHeader(CloudsParser::HeaderContext *ctx)
 {
 //    cout << "=== visitHeader: " + ctx->getText() << endl;
 
-    string program_name = ctx->IDENTIFIER()->toString();
+    string program_name = ctx->ID()->toString();
 
     program_id = symtab_stack->enter_local(program_name);
     program_id->set_definition((Definition)DF_PROGRAM);
@@ -70,4 +70,12 @@ antlrcpp::Any CloudsPass1Visitor::visitHeader(CloudsParser::HeaderContext *ctx)
     j_file << ".field private static _standardIn LPascalTextIn;" << endl;
 
     return visitChildren(ctx);
+}
+
+
+antlrcpp::Any CloudsPass1Visitor::visitEnvironments(CloudsParser::EnvironmentsContext *ctx)
+{
+    //change to dynamic if this doesn't work
+    j_file << ".field private static "
+               << ctx->ID()->toString() << " " << "[[[I" << endl;
 }
