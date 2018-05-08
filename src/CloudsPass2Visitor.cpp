@@ -152,14 +152,14 @@ antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *c
     string put_var_name = ctx->ID()->toString();
     int put_var_number = 0;
     for(int counter = 0; counter <3; counter++){
-        j_file << "\tgetstatic\t" << program_name <<"/"<< put_var_name << "center\n";
+        j_file << "\tgetstatic\t" << program_name <<"/"<< put_var_name << "center [I\n";
         j_file << "\tldc\t" << counter << endl;
         j_file << "\tldc\t0" <<endl;
         j_file << "\tiastore\n" << endl;
     }
     
 
-    j_file << "\tgetstatic\t" << program_name << "/" << current_environment_name<<endl;
+    j_file << "\tgetstatic\t" << program_name << "/" << current_environment_name << " [[[I" <<endl;
     j_file << "\tldc 50\n" << "\taaload\n"
             << "\tldc 50\n" << "\taaload\n"
             << "\tldc 50\n";
@@ -287,7 +287,7 @@ antlrcpp::Any CloudsPass2Visitor::visitRun_simulation(CloudsParser::Run_simulati
     j_file << "iconst_3\nanewarray     java/lang/Object\ndup\n";
     for(int counter = 0; counter <3; counter ++){
         j_file << "ldc " << counter << endl;
-        j_file << "getstatic\t"<< output_var_name << "center [I\n"
+        j_file << "getstatic\t"<< program_name << "/"<<output_var_name << "center [I\n"
                 <<"ldc " << counter <<"\niaload\n";
         j_file << "invokestatic  java/lang/Integer/valueOf(I)Ljava/lang/Integer;\naastore\n";
         j_file << "dup\n";

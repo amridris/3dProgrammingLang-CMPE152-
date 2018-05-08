@@ -17,5 +17,5 @@ environment environmentObject
 
 simulation
 {
-
+    pause;
 }

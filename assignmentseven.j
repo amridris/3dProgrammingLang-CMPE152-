@@ -63,22 +63,22 @@
 
 ; putnenvcubeobject
 
-	getstatic	assignmentseven/cubeobjectcenter
+	getstatic	assignmentseven/cubeobjectcenter [I
 	ldc	0
 	ldc	0
 	iastore
 
-	getstatic	assignmentseven/cubeobjectcenter
+	getstatic	assignmentseven/cubeobjectcenter [I
 	ldc	1
 	ldc	0
 	iastore
 
-	getstatic	assignmentseven/cubeobjectcenter
+	getstatic	assignmentseven/cubeobjectcenter [I
 	ldc	2
 	ldc	0
 	iastore
 
-	getstatic	assignmentseven/environmentObject
+	getstatic	assignmentseven/environmentObject [[[I
 	ldc 50
 	aaload
 	ldc 50
@@ -95,21 +95,21 @@ iconst_3
 anewarray     java/lang/Object
 dup
 ldc 0
-getstatic	cubeobjectcenter [I
+getstatic	assignmentseven/cubeobjectcenter [I
 ldc 0
 iaload
 invokestatic  java/lang/Integer/valueOf(I)Ljava/lang/Integer;
 aastore
 dup
 ldc 1
-getstatic	cubeobjectcenter [I
+getstatic	assignmentseven/cubeobjectcenter [I
 ldc 1
 iaload
 invokestatic  java/lang/Integer/valueOf(I)Ljava/lang/Integer;
 aastore
 dup
 ldc 2
-getstatic	cubeobjectcenter [I
+getstatic	assignmentseven/cubeobjectcenter [I
 ldc 2
 iaload
 invokestatic  java/lang/Integer/valueOf(I)Ljava/lang/Integer;

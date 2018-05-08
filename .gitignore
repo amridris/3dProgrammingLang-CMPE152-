@@ -1,6 +1,5 @@
 /build
 Clouds
-/scripts
 *.vscode
 *.o
 .DS_Store
