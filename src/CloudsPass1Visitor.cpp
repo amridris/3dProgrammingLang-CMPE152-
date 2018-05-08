@@ -74,7 +74,21 @@ antlrcpp::Any CloudsPass1Visitor::visitHeader(CloudsParser::HeaderContext *ctx)
 
 antlrcpp::Any CloudsPass1Visitor::visitBody(CloudsParser::BodyContext *ctx)
 {
+     auto value = visitChildren(ctx);
 
+    // Emit the class constructor.
+    j_file << endl;
+    j_file << ".method public <init>()V" << endl;
+    j_file << endl;
+    j_file << "\taload_0" << endl;
+    j_file << "\tinvokenonvirtual    java/lang/Object/<init>()V" << endl;
+    j_file << "\treturn" << endl;
+    j_file << endl;
+    j_file << ".limit locals 1" << endl;
+    j_file << ".limit stack 1" << endl;
+    j_file << ".end method" << endl;
+
+    return value;
 }
 
 
@@ -82,7 +96,23 @@ antlrcpp::Any CloudsPass1Visitor::visitEnvironments(CloudsParser::EnvironmentsCo
 {
     //change to dynamic if this doesn't work
     j_file << ".field private static "
-               << ctx->ID()->toString() << " " << "[[[I" << endl;
+               << ctx->ID()->toString() << " " << "[[[I;" << endl;
+    return visitChildren(ctx);
+}
+
+
+antlrcpp::Any CloudsPass1Visitor::visitInit_var(CloudsParser::Init_varContext *ctx)
+{
+    string var_type = ctx->TYPE()->toString();
+    string jas_type;
+    if(var_type == "cube"){
+        jas_type = "[I";
+    }
+     j_file << ".field private static "
+               << ctx->ID()->toString() << " " << jas_type << ";" << endl;
+    j_file << ".field private static "
+               << ctx->ID()->toString() << "center " << "[I" << ";" << endl;
+    
     return visitChildren(ctx);
 }
 

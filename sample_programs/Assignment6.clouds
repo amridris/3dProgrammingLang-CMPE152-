@@ -35,8 +35,8 @@ environment environmentObject
     int movecubeime = 20;
     int degreestorotate = 10;
 
-    putnenv cubeobject center;
-    putnenv sphereobject spherepoint;
+    putnenv cubeobject; // always at center now
+    putnenv sphereobject;
 
     tetra tetraobject = [p= pointObjectOne, p = pointObjectTwo, p = pointObjectThree, p = pointObjectFour];
 

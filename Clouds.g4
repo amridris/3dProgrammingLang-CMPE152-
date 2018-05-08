@@ -38,6 +38,7 @@ stmt_list       : stat SEMICOLON (stat SEMICOLON)* ;
 
 stat : //scope            # scope_node| 
         assignment_stmt // # assignmentStmt
+     | init_stmt
      | function         //# Function_
      | repeat_stmt      //# repeatStmt
      | if_stmt          //# ifStmt
@@ -54,17 +55,18 @@ stat : //scope            # scope_node|
 
 
 assignment_stmt : variable assignment_operators expr 
-                | init_var assignment_operators expr
+               // | init_var assignment_operators expr
                 ;
+
+init_stmt       : init_var assignment_operators expr ; 
 
 repeat_stmt     : REPEAT stmt_list UNTIL expr ;
 
 if_stmt         : IF expr THEN stat ( ELSE stat )? ;
 
 
-put_stmt        : PUTNENV variable CENTER
+put_stmt        : PUTNENV ID
  //               | PUTNENV variable TYPE
-                | PUTNENV variable variable
                 ;
 
 collision_stmt  : COLISION variable BETWEEN variable variable 
@@ -91,6 +93,7 @@ expr locals [ TypeSpec *type = nullptr ]
      | expr rel_op expr         # relExpr    //done first visit
      | expr rot_op expr         # rotExpr    //done first visit  
      | '[' init_list ']'        # initList   //done first visit
+     | signedNumber             # signedNumberConst
      | number                   # numberConst //done first visit
      | variable                 # identifier  //done first visit
      | '(' expr ')'             # parens       //done first visit
@@ -98,7 +101,7 @@ expr locals [ TypeSpec *type = nullptr ]
 
 init_list   : obj_vars '=' expr (',' obj_vars '=' expr)*  ;  //done first visit
 
-init_var    : TYPE variable; 
+init_var    : TYPE ID; 
 
 obj_vars    : 'p'
             | HEIGHT
@@ -139,9 +142,15 @@ methodCall_ref
     | '&' expr (',' '&'expr)*  // Some arguments
     ;
 
-number : sign? INT | sign? FLOAT;
-sign   : '+' | '-' ;
+signedNumber locals [ TypeSpec *type = nullptr ] 
+    : sign number 
+    ;
+sign : ADD | SUB ;
 
+number locals [ TypeSpec *type = nullptr ]
+    : INT    # integerConst
+    | FLOAT      # floatConst
+    ;
 assignment_operators : EQ_OP | ADD_EQ | SUB_EQ | MUL_EQ | DIV_EQ ;
 
 mul_div_op : MUL | DIV ; //multiple or divide

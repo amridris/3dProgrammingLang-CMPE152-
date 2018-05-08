@@ -59,6 +59,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitInit_stmt(CloudsParser::Init_stmtContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitRepeat_stmt(CloudsParser::Repeat_stmtContext *ctx) override {
     return visitChildren(ctx);
   }
@@ -119,6 +123,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitSignedNumberConst(CloudsParser::SignedNumberConstContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitRelExpr(CloudsParser::RelExprContext *ctx) override {
     return visitChildren(ctx);
   }
@@ -159,11 +167,19 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitNumber(CloudsParser::NumberContext *ctx) override {
+  virtual antlrcpp::Any visitSignedNumber(CloudsParser::SignedNumberContext *ctx) override {
     return visitChildren(ctx);
   }
 
   virtual antlrcpp::Any visitSign(CloudsParser::SignContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitIntegerConst(CloudsParser::IntegerConstContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitFloatConst(CloudsParser::FloatConstContext *ctx) override {
     return visitChildren(ctx);
   }
 

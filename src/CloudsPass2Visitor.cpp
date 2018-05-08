@@ -30,8 +30,10 @@ antlrcpp::Any CloudsPass2Visitor::visitHeader(CloudsParser::HeaderContext *ctx)
     return visitChildren(ctx);
 }
 
-antlrcpp::Any CloudsPass2Visitor::visitBlock(CloudsParser::BlockContext *ctx)
+antlrcpp::Any CloudsPass2Visitor::visitBody(CloudsParser::BodyContext *ctx)
 {
+    j_file << endl;
+    j_file << ".method public static main([Ljava/lang/String;)V" << endl;
     j_file << endl;
     j_file << "\tnew RunTimer" << endl;
     j_file << "\tdup" << endl;
@@ -42,7 +44,7 @@ antlrcpp::Any CloudsPass2Visitor::visitBlock(CloudsParser::BlockContext *ctx)
     j_file << "\tdup" << endl;
     j_file << "\tinvokenonvirtual PascalTextIn/<init>()V" << endl;
     j_file << "\tputstatic        " + program_name
-           << "/_standardIn LPascalTextIn;" << endl;
+           << "/_standardIn LPascalTextIn;\n" << endl;
 
     auto value = visitChildren(ctx);
 
@@ -60,13 +62,18 @@ antlrcpp::Any CloudsPass2Visitor::visitBlock(CloudsParser::BlockContext *ctx)
 
     return value;
 }
+antlrcpp::Any CloudsPass2Visitor::visitBlock(CloudsParser::BlockContext *ctx)
+{
+    return visitChildren(ctx);
+
+}
 
 antlrcpp::Any CloudsPass2Visitor::visitEnvironments(CloudsParser::EnvironmentsContext *ctx)
 {
     current_environment_name = ctx->ID()->toString();
-    j_file << "iload 100\n" << "iload 100\n" << "iload 100\n";
-    j_file << "multianewarray [[[I 3\n";
-    j_file << "putstatic " << program_name << "/" 
+    j_file << "\tiload 100\n" << "\tiload 100\n" << "\tiload 100\n";
+    j_file << "\tmultianewarray [[[I 3\n";
+    j_file << "\tputstatic " << program_name << "/" 
                 << current_environment_name << " " << "[[[I\n" << endl;
     return visitChildren(ctx);
 }
@@ -96,6 +103,76 @@ antlrcpp::Any CloudsPass2Visitor::visitAssignment_stmt(CloudsParser::Assignment_
 
     return value;
 }
+
+antlrcpp::Any CloudsPass2Visitor::visitInit_stmt(CloudsParser::Init_stmtContext *ctx)
+{
+    string var_type = ctx->init_var()->TYPE()->toString();
+    var_name = ctx->init_var()->ID()->toString();
+    if(var_type == "cube") { 
+        jas_type = "[I";
+        var_size = 3;
+        j_file << "\tiload " << var_size << endl;
+        j_file << "\tnewarray int\n";
+    }
+    
+    
+    j_file << "\tputstatic " << program_name << "/" 
+                << var_name << " " << jas_type << "\n" << endl;
+
+   
+    
+    return visitChildren(ctx);
+}
+
+
+antlrcpp::Any CloudsPass2Visitor::visitInit_list(CloudsParser::Init_listContext *ctx)
+{
+    string number;
+     for(int counter = 0; counter < var_size; counter++){
+        number = ctx->expr(counter)->getText();
+        j_file << "\tgetstatic " << program_name << "/" << var_name << " " << jas_type <<endl;
+        j_file << "\tldc\t" << counter << endl;
+        j_file << "\tldc\t" << number << endl;//change to support multidimensional arrays
+        j_file << "\tiastore\n" << endl;
+    }
+    return visitChildren(ctx);
+
+}
+
+antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *ctx)
+{
+    string put_var_name = ctx->ID()->toString();
+    int put_var_number = 0;
+    for(int counter = 0; counter <3; counter++){
+        j_file << "\tgetstatic\t" << program_name <<"/"<< put_var_name << "center\n";
+        j_file << "\tldc\t" << counter << endl;
+        j_file << "\tldc\t0" <<endl;
+        j_file << "\tiastore\n" << endl;
+    }
+    
+
+    j_file << "\tgetstatic\t" << program_name << "/" << current_environment_name<<endl;
+    j_file << "\tldc 50\n" << "\taaload\n"
+            << "\tldc 50\n" << "\taaload\n"
+            << "\tldc 50\n";
+    if(put_var_name == "cube"){
+        put_var_number =1;
+    }
+    j_file << "\tldc\t" << put_var_number <<endl; //1 represents cube, make general later
+    j_file << "\taastore" << endl;
+
+    return visitChildren(ctx);
+
+}
+
+antlrcpp::Any CloudsPass2Visitor::visitIntegerConst(CloudsParser::IntegerConstContext *ctx)
+{
+    // Emit a load constant instruction.
+   // j_file << "\tldc\t" << ctx->getText() << endl;
+
+    return visitChildren(ctx);
+}
+
 /*
 antlrcpp::Any CloudsPass2Visitor::visitAdd_Sub_op(CloudsParser::Add_sub_opContext *ctx)
 {
@@ -165,7 +242,7 @@ antlrcpp::Any CloudsPass2Visitor::visitMul_div_op(CloudsParser::Mul_div_opContex
     return value;
 }
 
-antlrcpp::Any Pass2Visitor::visitIf_stmt(CloudsParser::If_stmtContext *ctx)
+antlrcpp::Any CloudsPass2Visitor::visitIf_stmt(CloudsParser::If_stmtContext *ctx)
 {
     auto value = visitChildren(ctx->expr());
     auto value2 = visitChildren(ctx->stat());
@@ -187,7 +264,28 @@ antlrcpp::Any Pass2Visitor::visitIf_stmt(CloudsParser::If_stmtContext *ctx)
             << "L003:" << endl << "\tifeq\tL001" << endl; 
 }
 */
-antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *ctx)
+
+
+
+antlrcpp::Any CloudsPass2Visitor::visitRun_simulation(CloudsParser::Run_simulationContext *ctx)
 {
-     return visitChildren(ctx);
+    auto value = visitChildren(ctx);
+    string output_var_name = "cubeobject";
+
+    j_file << "getstatic\tjava/lang/System/out Ljava/io/PrintStream;" <<endl;
+    j_file << "ldc\t\"Results of Simulation:";
+
+    j_file << "\tcubeobject at x=%d, y=%d, z=%d\"\n";
+    j_file << "iconst_3\nanewarray     java/lang/Object\ndup\n";
+    for(int counter = 0; counter <3; counter ++){
+        j_file << "ldc " << counter << endl;
+        j_file << "getstatic\t"<< output_var_name << "/center [I\n"
+                <<"ldc " << counter <<"\niaload\n";
+        j_file << "invokestatic  java/lang/Integer/valueOf(I)Ljava/lang/Integer;\naastore\n";
+        j_file << "dup\n";
+    }
+    j_file << "invokevirtual java/io/PrintStream/printf(Ljava/lang/String;\n[Ljava/lang/Object;) Ljava/io/PrintStream;\npop\n" <<endl;
+
+    return value;
+    
 }

@@ -48,6 +48,9 @@ public:
   virtual void enterAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) = 0;
   virtual void exitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) = 0;
 
+  virtual void enterInit_stmt(CloudsParser::Init_stmtContext *ctx) = 0;
+  virtual void exitInit_stmt(CloudsParser::Init_stmtContext *ctx) = 0;
+
   virtual void enterRepeat_stmt(CloudsParser::Repeat_stmtContext *ctx) = 0;
   virtual void exitRepeat_stmt(CloudsParser::Repeat_stmtContext *ctx) = 0;
 
@@ -93,6 +96,9 @@ public:
   virtual void enterRotExpr(CloudsParser::RotExprContext *ctx) = 0;
   virtual void exitRotExpr(CloudsParser::RotExprContext *ctx) = 0;
 
+  virtual void enterSignedNumberConst(CloudsParser::SignedNumberConstContext *ctx) = 0;
+  virtual void exitSignedNumberConst(CloudsParser::SignedNumberConstContext *ctx) = 0;
+
   virtual void enterRelExpr(CloudsParser::RelExprContext *ctx) = 0;
   virtual void exitRelExpr(CloudsParser::RelExprContext *ctx) = 0;
 
@@ -123,11 +129,17 @@ public:
   virtual void enterMethodCall_ref(CloudsParser::MethodCall_refContext *ctx) = 0;
   virtual void exitMethodCall_ref(CloudsParser::MethodCall_refContext *ctx) = 0;
 
-  virtual void enterNumber(CloudsParser::NumberContext *ctx) = 0;
-  virtual void exitNumber(CloudsParser::NumberContext *ctx) = 0;
+  virtual void enterSignedNumber(CloudsParser::SignedNumberContext *ctx) = 0;
+  virtual void exitSignedNumber(CloudsParser::SignedNumberContext *ctx) = 0;
 
   virtual void enterSign(CloudsParser::SignContext *ctx) = 0;
   virtual void exitSign(CloudsParser::SignContext *ctx) = 0;
+
+  virtual void enterIntegerConst(CloudsParser::IntegerConstContext *ctx) = 0;
+  virtual void exitIntegerConst(CloudsParser::IntegerConstContext *ctx) = 0;
+
+  virtual void enterFloatConst(CloudsParser::FloatConstContext *ctx) = 0;
+  virtual void exitFloatConst(CloudsParser::FloatConstContext *ctx) = 0;
 
   virtual void enterAssignment_operators(CloudsParser::Assignment_operatorsContext *ctx) = 0;
   virtual void exitAssignment_operators(CloudsParser::Assignment_operatorsContext *ctx) = 0;

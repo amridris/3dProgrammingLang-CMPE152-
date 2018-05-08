@@ -34,6 +34,7 @@ public:
 
     //antlrcpp::Any visitBlock(CloudsParser::BlockContext *ctx) override;
     antlrcpp::Any visitEnvironments(CloudsParser::EnvironmentsContext *ctx) override;
+    antlrcpp::Any visitInit_var(CloudsParser::Init_varContext *ctx) override;
     //antlrcpp::Any visitRun_simulation(CloudsParser::Run_simulationContext *ctx) override;
    /* antlrcpp::Any visitVariable(CloudsParser::VariableContext *ctx) override;
     antlrcpp::Any visitScope(CloudsParser::ScopeContext *ctx) override;

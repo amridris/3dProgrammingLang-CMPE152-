@@ -43,6 +43,8 @@ public:
 
     virtual antlrcpp::Any visitAssignment_stmt(CloudsParser::Assignment_stmtContext *context) = 0;
 
+    virtual antlrcpp::Any visitInit_stmt(CloudsParser::Init_stmtContext *context) = 0;
+
     virtual antlrcpp::Any visitRepeat_stmt(CloudsParser::Repeat_stmtContext *context) = 0;
 
     virtual antlrcpp::Any visitIf_stmt(CloudsParser::If_stmtContext *context) = 0;
@@ -73,6 +75,8 @@ public:
 
     virtual antlrcpp::Any visitRotExpr(CloudsParser::RotExprContext *context) = 0;
 
+    virtual antlrcpp::Any visitSignedNumberConst(CloudsParser::SignedNumberConstContext *context) = 0;
+
     virtual antlrcpp::Any visitRelExpr(CloudsParser::RelExprContext *context) = 0;
 
     virtual antlrcpp::Any visitMulDivExpr(CloudsParser::MulDivExprContext *context) = 0;
@@ -93,9 +97,13 @@ public:
 
     virtual antlrcpp::Any visitMethodCall_ref(CloudsParser::MethodCall_refContext *context) = 0;
 
-    virtual antlrcpp::Any visitNumber(CloudsParser::NumberContext *context) = 0;
+    virtual antlrcpp::Any visitSignedNumber(CloudsParser::SignedNumberContext *context) = 0;
 
     virtual antlrcpp::Any visitSign(CloudsParser::SignContext *context) = 0;
+
+    virtual antlrcpp::Any visitIntegerConst(CloudsParser::IntegerConstContext *context) = 0;
+
+    virtual antlrcpp::Any visitFloatConst(CloudsParser::FloatConstContext *context) = 0;
 
     virtual antlrcpp::Any visitAssignment_operators(CloudsParser::Assignment_operatorsContext *context) = 0;
 

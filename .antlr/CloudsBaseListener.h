@@ -50,6 +50,9 @@ public:
   virtual void enterAssignment_stmt(CloudsParser::Assignment_stmtContext * /*ctx*/) override { }
   virtual void exitAssignment_stmt(CloudsParser::Assignment_stmtContext * /*ctx*/) override { }
 
+  virtual void enterInit_stmt(CloudsParser::Init_stmtContext * /*ctx*/) override { }
+  virtual void exitInit_stmt(CloudsParser::Init_stmtContext * /*ctx*/) override { }
+
   virtual void enterRepeat_stmt(CloudsParser::Repeat_stmtContext * /*ctx*/) override { }
   virtual void exitRepeat_stmt(CloudsParser::Repeat_stmtContext * /*ctx*/) override { }
 
@@ -95,6 +98,9 @@ public:
   virtual void enterRotExpr(CloudsParser::RotExprContext * /*ctx*/) override { }
   virtual void exitRotExpr(CloudsParser::RotExprContext * /*ctx*/) override { }
 
+  virtual void enterSignedNumberConst(CloudsParser::SignedNumberConstContext * /*ctx*/) override { }
+  virtual void exitSignedNumberConst(CloudsParser::SignedNumberConstContext * /*ctx*/) override { }
+
   virtual void enterRelExpr(CloudsParser::RelExprContext * /*ctx*/) override { }
   virtual void exitRelExpr(CloudsParser::RelExprContext * /*ctx*/) override { }
 
@@ -125,11 +131,17 @@ public:
   virtual void enterMethodCall_ref(CloudsParser::MethodCall_refContext * /*ctx*/) override { }
   virtual void exitMethodCall_ref(CloudsParser::MethodCall_refContext * /*ctx*/) override { }
 
-  virtual void enterNumber(CloudsParser::NumberContext * /*ctx*/) override { }
-  virtual void exitNumber(CloudsParser::NumberContext * /*ctx*/) override { }
+  virtual void enterSignedNumber(CloudsParser::SignedNumberContext * /*ctx*/) override { }
+  virtual void exitSignedNumber(CloudsParser::SignedNumberContext * /*ctx*/) override { }
 
   virtual void enterSign(CloudsParser::SignContext * /*ctx*/) override { }
   virtual void exitSign(CloudsParser::SignContext * /*ctx*/) override { }
+
+  virtual void enterIntegerConst(CloudsParser::IntegerConstContext * /*ctx*/) override { }
+  virtual void exitIntegerConst(CloudsParser::IntegerConstContext * /*ctx*/) override { }
+
+  virtual void enterFloatConst(CloudsParser::FloatConstContext * /*ctx*/) override { }
+  virtual void exitFloatConst(CloudsParser::FloatConstContext * /*ctx*/) override { }
 
   virtual void enterAssignment_operators(CloudsParser::Assignment_operatorsContext * /*ctx*/) override { }
   virtual void exitAssignment_operators(CloudsParser::Assignment_operatorsContext * /*ctx*/) override { }
