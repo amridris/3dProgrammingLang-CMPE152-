@@ -117,9 +117,11 @@ obj_vars    : 'p'
             ;
 
 function
-    : funcName '(' argumentList ')'
-    | funcName '(' methodCall_ref ')'
+    : funcName '(' argumentList ')' scope?
+    | funcName '(' methodCall_ref ')' scope?
     ;
+
+
 
 funcName
     : ID

@@ -629,6 +629,7 @@ public:
     virtual size_t getRuleIndex() const override;
     FuncNameContext *funcName();
     ArgumentListContext *argumentList();
+    ScopeContext *scope();
     MethodCall_refContext *methodCall_ref();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
