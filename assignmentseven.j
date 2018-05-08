@@ -41,6 +41,10 @@
 	newarray int
 	putstatic assignmentseven/cubeobject [I
 
+	iload 3
+	newarray int
+	putstatic assignmentseven/cubeobjectcenter [I
+
 	getstatic assignmentseven/cubeobject [I
 	ldc	0
 	ldc	1
@@ -91,21 +95,21 @@ iconst_3
 anewarray     java/lang/Object
 dup
 ldc 0
-getstatic	cubeobject/center [I
+getstatic	cubeobjectcenter [I
 ldc 0
 iaload
 invokestatic  java/lang/Integer/valueOf(I)Ljava/lang/Integer;
 aastore
 dup
 ldc 1
-getstatic	cubeobject/center [I
+getstatic	cubeobjectcenter [I
 ldc 1
 iaload
 invokestatic  java/lang/Integer/valueOf(I)Ljava/lang/Integer;
 aastore
 dup
 ldc 2
-getstatic	cubeobject/center [I
+getstatic	cubeobjectcenter [I
 ldc 2
 iaload
 invokestatic  java/lang/Integer/valueOf(I)Ljava/lang/Integer;

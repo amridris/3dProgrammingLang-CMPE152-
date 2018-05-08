@@ -119,6 +119,14 @@ antlrcpp::Any CloudsPass2Visitor::visitInit_stmt(CloudsParser::Init_stmtContext 
     j_file << "\tputstatic " << program_name << "/" 
                 << var_name << " " << jas_type << "\n" << endl;
 
+    if(var_type == "cube") { 
+        j_file << "\tiload " << 3 << endl;
+        j_file << "\tnewarray int\n";
+    }
+    
+    
+    j_file << "\tputstatic " << program_name << "/" 
+                << var_name << "center"<< " [I" << "\n" << endl;
    
     
     return visitChildren(ctx);
@@ -279,7 +287,7 @@ antlrcpp::Any CloudsPass2Visitor::visitRun_simulation(CloudsParser::Run_simulati
     j_file << "iconst_3\nanewarray     java/lang/Object\ndup\n";
     for(int counter = 0; counter <3; counter ++){
         j_file << "ldc " << counter << endl;
-        j_file << "getstatic\t"<< output_var_name << "/center [I\n"
+        j_file << "getstatic\t"<< output_var_name << "center [I\n"
                 <<"ldc " << counter <<"\niaload\n";
         j_file << "invokestatic  java/lang/Integer/valueOf(I)Ljava/lang/Integer;\naastore\n";
         j_file << "dup\n";
