@@ -34,6 +34,52 @@
 	multianewarray [[[I 3
 	putstatic assignmentseven/environmentObject [[[I
 
+	ldc 3
+	newarray int
+	putstatic assignmentseven/cubeobject [I
+
+	ldc 3
+	newarray int
+	putstatic assignmentseven/cubeobjectcenter [I
+
+	getstatic assignmentseven/cubeobject [I
+	ldc	0
+	ldc	1
+	iastore
+
+	getstatic assignmentseven/cubeobject [I
+	ldc	1
+	ldc	1
+	iastore
+
+	getstatic assignmentseven/cubeobject [I
+	ldc	2
+	ldc	2
+	iastore
+
+	getstatic	assignmentseven/cubeobjectcenter [I
+	ldc	0
+	ldc	0
+	iastore
+
+	getstatic	assignmentseven/cubeobjectcenter [I
+	ldc	1
+	ldc	0
+	iastore
+
+	getstatic	assignmentseven/cubeobjectcenter [I
+	ldc	2
+	ldc	0
+	iastore
+
+	getstatic	assignmentseven/environmentObject [[[I
+	ldc 50
+	aaload
+	ldc 50
+	aaload
+	ldc 50
+	ldc	1
+	iastore
 
 ; cubecubeobject=[height=1,width=1,length=2]
 

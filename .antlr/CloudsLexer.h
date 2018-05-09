@@ -3,7 +3,7 @@
 using namespace wci::intermediate;
 
 
-// Generated from d:\UbuntuFiles\CMPE152Ubuntu\cmpe152newlanguage\Clouds.g4 by ANTLR 4.7.1
+// Generated from /Users/Jacob/cmpe152newlanguage/Clouds.g4 by ANTLR 4.7.1
 
 #pragma once
 
@@ -23,11 +23,12 @@ public:
     AT = 26, IN = 27, FOR = 28, FINISH = 29, PUTNENV = 30, FUNCTION = 31, 
     ENVIRONMENT = 32, SIMULATION = 33, PRINT = 34, BETWEEN = 35, TYPE = 36, 
     HEIGHT = 37, WIDTH = 38, LENGTH = 39, RADIUS = 40, X = 41, Y = 42, Z = 43, 
-    POINT = 44, VELOCITY = 45, SPEED = 46, MUL = 47, DIV = 48, ADD = 49, 
-    SUB = 50, MUL_EQ = 51, DIV_EQ = 52, ADD_EQ = 53, SUB_EQ = 54, EQ_OP = 55, 
-    NE_OP = 56, LT_OP = 57, LE_OP = 58, GT_OP = 59, GE_OP = 60, ROLL_OP = 61, 
-    PITCH_OP = 62, YAW_OP = 63, COM_OP = 64, SEMICOLON = 65, FLOAT = 66, 
-    ID = 67, INT = 68, NEWLINE = 69, WS = 70, COMMENT = 71, BLOCK_COM = 72
+    POINT = 44, VELOCITY = 45, SPEED = 46, ASSIGN_OP = 47, MUL = 48, DIV = 49, 
+    ADD = 50, SUB = 51, MUL_EQ = 52, DIV_EQ = 53, ADD_EQ = 54, SUB_EQ = 55, 
+    EQ_OP = 56, NE_OP = 57, LT_OP = 58, LE_OP = 59, GT_OP = 60, GE_OP = 61, 
+    ROLL_OP = 62, PITCH_OP = 63, YAW_OP = 64, COM_OP = 65, SEMICOLON = 66, 
+    FLOAT = 67, ID = 68, INT = 69, NEWLINE = 70, WS = 71, COMMENT = 72, 
+    BLOCK_COM = 73
   };
 
   CloudsLexer(antlr4::CharStream *input);

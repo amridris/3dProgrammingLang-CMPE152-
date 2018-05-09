@@ -92,9 +92,9 @@ antlrcpp::Any CloudsPass2Visitor::visitAssignment_stmt(CloudsParser::Assignment_
     auto value = visit(ctx->expr());
 
     string type_indicator =
-                  (ctx->expr()->type == Predefined::integer_type) ? "I"
-                : (ctx->expr()->type == Predefined::real_type)    ? "F"
-                :                                                   "?";
+                  (ctx->variable()->type() == Predefined::integer_type) ? "I"
+                : (ctx->variable()->type() == Predefined::real_type)    ? "F"
+                :                                                         "?";
 
     // Emit a field put instruction.
     j_file << "\tputstatic\t" << program_name
@@ -108,6 +108,20 @@ antlrcpp::Any CloudsPass2Visitor::visitInit_stmt(CloudsParser::Init_stmtContext 
 {
     string var_type = ctx->init_var()->TYPE()->toString();
     var_name = ctx->init_var()->ID()->toString();
+
+    if(var_type == "int")
+    {
+        j_file << "\tputstatic\t" << program_name
+           << "/" << var_name
+           << " I"  << endl;
+    }
+        if(var_type == "float")
+    {
+        j_file << "\tputstatic\t" << program_name
+           << "/" << var_name
+           << " F"  << endl;
+    }
+
     if(var_type == "cube") { 
         jas_type = "[I";
         var_size = 3;
@@ -116,8 +130,8 @@ antlrcpp::Any CloudsPass2Visitor::visitInit_stmt(CloudsParser::Init_stmtContext 
     }
     
     
-    j_file << "\tputstatic " << program_name << "/" 
-                << var_name << " " << jas_type << "\n" << endl;
+    // j_file << "\tputstatic " << program_name << "/" 
+    //             << var_name << " " << jas_type << "\n" << endl;
 
     if(var_type == "cube") { 
         j_file << "\tldc " << 3 << endl;
@@ -125,8 +139,8 @@ antlrcpp::Any CloudsPass2Visitor::visitInit_stmt(CloudsParser::Init_stmtContext 
     }
     
     
-    j_file << "\tputstatic " << program_name << "/" 
-                << var_name << "center"<< " [I" << "\n" << endl;
+    // j_file << "\tputstatic " << program_name << "/" 
+    //             << var_name << "center"<< " [I" << "\n" << endl;
    
     
     return visitChildren(ctx);
@@ -181,7 +195,6 @@ antlrcpp::Any CloudsPass2Visitor::visitIntegerConst(CloudsParser::IntegerConstCo
     return visitChildren(ctx);
 }
 
-/*
 antlrcpp::Any CloudsPass2Visitor::visitAdd_Sub_op(CloudsParser::Add_sub_opContext *ctx)
 {
     auto value = visitChildren(ctx);
@@ -251,29 +264,117 @@ antlrcpp::Any CloudsPass2Visitor::visitMul_div_op(CloudsParser::Mul_div_opContex
 }
 
 antlrcpp::Any CloudsPass2Visitor::visitIf_stmt(CloudsParser::If_stmtContext *ctx)
+{   
+    //evaluate first boolean expression
+    visitChildren(ctx->expr());
+    
+    //if-then-else
+    if (ctx->stmt_list().size() == 2)
+    {
+        j_file << "\tifeq\tFALSELABEL" << endl;
+        visitChildren(ctx->stmt_list(0));
+        j_file << "\tgoto\tNEXTLABEL" << endl;
+        j_file << "FALSELABEL:" << endl;
+        visitChildren(ctx->stmt_list(1));
+        j_file << "NEXTLABEL:" << endl;
+        }
+
+    //if-then
+    else
+    {
+        j_file << "\tifeq\tLABEL" << endl;
+        visitChildren(ctx->stmt_list(0));
+        j_file << "LABEL:" << endl;
+    }
+
+    return visitChildren(ctx);
+}
+
+antlrcpp::Any CloudsPass2Visitor::visitRel_op(CloudsParser::Rel_opContext *ctx)
 {
-    auto value = visitChildren(ctx->expr());
-    auto value2 = visitChildren(ctx->stat());
+    auto value = visitChildren(ctx);
+
+    string var1 = ctx->expr(0)->ID()->toString();
+    string var2 = ctx->expr(1)->ID()->toString();
+
+    TypeSpec *type1 = ctx->expr(0)->type;
+    TypeSpec *type2 = ctx->expr(1)->type;
+
+    bool integer_mode =    (type1 == Predefined::integer_type)
+                        && (type2 == Predefined::integer_type);
+    bool real_mode    =    (type1 == Predefined::real_type)
+                        && (type2 == Predefined::real_type);
 
     string type_indicator = 
-                  (ctx->expr()->type == Predefined::integer_type) ? "I"
-                | (ctx->expr()->type == Predefined::real_type)    ? "F"
-                |                                                   "?";
+                  (integer_mode) ? "I"
+                : (real_mode)    ? "F"
+                :                ? "?";
 
-    j_file  << "\tgetstatic\t" << program_name
-            << "/" << ctx->variable()->ID()->toString()
-            << " " << type_indicator << endl; 
-    j_file  << "\tgetstatic\t" << program_name
-            << "/" << ctx->variable()->ID()->toString()
-            << " " << type_indicator << endl; 
-    j_file  << "\ticonst_0\t" << endl
-            << "\tgoto\tL003";
-    j_file  << "L002:" << endl << "\ticonst_1\t" << endl
-            << "L003:" << endl << "\tifeq\tL001" << endl; 
+    string op = ctx->rel_op()->getText();
+    string opcode;
+    
+    switch (op)
+    {
+        case "<":
+            opcode = "if_cmlt"
+            break;
+        case "<=":
+            opcode = "if_cmle"
+            break;
+        case ">":
+            opcode = "if_cmgt"
+            break;
+        case ">=":
+            opcode = "if_cmge"
+            break;
+        case "==":
+            opcode = "if_cmeq"
+            break;
+        case "!=":
+            opcode = "if_cmne"
+            break;    
+        default:
+            opcode = "???????"
+            break;
+    }
+    //push values of operands to top of stack
+    j_file  << "\tgetstatic\t" << program_name 
+            << "/" << var1 << " " << type_indicator << endl;
+    j_file  << "\tgetstatic\t" << program_name 
+            << "/" << var2 << " " << type_indicator << endl;
+    //comparison
+    j_file  << "\t" << opcode << "\tL001" << endl;
+    //push false
+    j_file  << "\ticonst_0" << endl;
+    //go to next statement
+    j_file  << "\tgoto\tNEXTLABEL" << endl;
+    //true section, push true
+    j_file  << "L001:" << endl;
+    j_file  << "\ticonst_1" << endl;
+    //false section, continue
+    j_file  << "NEXTLABEL:" << endl;
+
+    return value;
 }
-*/
 
+antlrcpp::Any CloudsPass2Visitor::visitStmt_list(CloudsParser::Stmt_listContext *ctx)
+{
+    for (int i = 0; i < ctx->stat().size(); i++)
+        visitChildren(ctx->stat(i));
+    return visitChildren(ctx);
+}
 
+// antlrcpp::Any CloudsPass2Visitor::visitRepeat_stmt(CloudsParser::Repeat_stmtContext *ctx)
+// {
+//     auto value = visitChldren(ctx);
+
+//     while(ctx->expr() == true)
+//     {
+//         visitChldren(ctx->stmt_list());
+//     }
+
+//     return value;
+// }
 
 antlrcpp::Any CloudsPass2Visitor::visitRun_simulation(CloudsParser::Run_simulationContext *ctx)
 {
