@@ -95,8 +95,8 @@ antlrcpp::Any CloudsPass1Visitor::visitBody(CloudsParser::BodyContext *ctx)
 antlrcpp::Any CloudsPass1Visitor::visitEnvironments(CloudsParser::EnvironmentsContext *ctx)
 {
     //change to dynamic if this doesn't work
-    j_file << ".field private static "
-               << ctx->ID()->toString() << " " << "[[[I" << endl;
+    j_file << ".field private static _"
+               << ctx->ID()->toString() << "Engine " << "Lcollisionengine/CollisionEngine;" << endl;
     return visitChildren(ctx);
 }
 
