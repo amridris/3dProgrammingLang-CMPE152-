@@ -13,7 +13,7 @@ java -jar jasmin-2.4/jasmin.jar assignmentseven.j
 
 java -cp .:PascalRTL.jar assignmentseven
 
-java collisionengine/*.java
+javac collisionengine/*.java
 # ./Clouds Assignment6.clouds
 # ./Clouds Assignment7.clouds
 

@@ -46,7 +46,6 @@ stat : //scope            # scope_node|
      | print_stmt       //# printStmt
      | put_stmt        // # putStmt
      | move_stmt     //#moveStmt
-     | PAUSE        // #pause
      | wait_stmt     //#waitStmt
      | collision_stmt// #collisionStmt
 //     |                  # emptyStmt
@@ -173,7 +172,6 @@ WHEN        : 'WHEN'        ;
 CENTER      : 'center'      ;
 TELEPORT    : 'teleport'    ;
 COLISION    : 'collision'   ;
-PAUSE       : 'pause'       ;
 WAIT        : 'wait'        ;
 MOVE        : 'move'        ;
 TO          : 'to'          ;

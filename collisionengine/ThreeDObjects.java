@@ -2,7 +2,7 @@ package collisionengine;
 
 public class ThreeDObjects
 {
-    static class point
+    public static class point
     {
         public int x, y, z;
         public point() { this(0,0,0); }
@@ -13,8 +13,14 @@ public class ThreeDObjects
             y = argy;
             z = argz;
         }
+        public void add(int argx, int argy, int argz)
+        {
+            x += argx;
+            y += argy;
+            z += argz;
+        }
     }
-    static class velocity
+    public static class velocity
     {
         public int dx, dy, dz;
         public velocity() { this(0,0,0); }
@@ -23,6 +29,12 @@ public class ThreeDObjects
             dx = argdx;
             dy = argdy;
             dz = argdz;
+        }
+        public void add(int argx, int argy, int argz)
+        {
+            dx += argx;
+            dy += argy;
+            dz += argz;
         }
     }
     abstract class ThreeDObject
@@ -132,7 +144,7 @@ public class ThreeDObjects
             for(int x = -radius; x<radius; x++){
                 for(int y = -radius; y<radius; y++){
                     for(int z = -radius; z<radius; z++){
-                        int dist = sqrt(x*x+y*y+z*z);
+                        dist = (int)Math.sqrt(x*x+y*y+z*z);
                         if(dist <= radius) { hasSphere = true;}
                         else {hasSphere = false;}
                         objectSpace[x+radius][y+radius][z+radius] = hasSphere;
@@ -156,11 +168,11 @@ public class ThreeDObjects
         void buildSpace(){
             int dist = 0;
             Boolean hasSphere = false;
-                objectSpace = new Boolean[radius*2][height][radius*2];
+            objectSpace = new Boolean[radius*2][height][radius*2];
             for(int x = -radius; x<radius; x++){
                 for(int y = -radius; y<radius; y++){
                     for(int z = -radius; z<radius; z++){
-                        int dist = sqrt(x*x+y*y+z*z);
+                        dist = (int)Math.sqrt(x*x+y*y+z*z);
                         if(dist <= radius) { hasSphere = true;}
                         else {hasSphere = false;}
                         objectSpace[x+radius][y+radius][z+radius] = hasSphere;
@@ -183,6 +195,7 @@ public class ThreeDObjects
     }
 */
 
+/*
     public static void main(String[] args) {
         
         System.out.println("ThreeDObjects ... ");
@@ -191,4 +204,5 @@ public class ThreeDObjects
         r.move(new point(1,1,1), 1);
         System.out.println(r.objvelocity.dx);
     }
+*/
 }

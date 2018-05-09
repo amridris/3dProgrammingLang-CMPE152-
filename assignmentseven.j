@@ -6,8 +6,6 @@
 .field private static environmentObject [[[I
 .field private static cubeobject [I
 .field private static cubeobjectcenter [I
-.field private static _helloworld Lhello/HelloWorld;
-.field private static _testengine Lcollisionengine/CollisionEngine;
 
 .method public <init>()V
 
@@ -29,21 +27,6 @@
 	dup
 	invokenonvirtual PascalTextIn/<init>()V
 	putstatic        assignmentseven/_standardIn LPascalTextIn;
-
-	new hello/HelloWorld
-	dup
-	invokenonvirtual hello/HelloWorld/<init>()V
-	putstatic 		assignmentseven/_helloworld Lhello/HelloWorld;
-
-	new collisionengine/CollisionEngine
-	dup
-	ldc 1
-	ldc 2
-	ldc 3
-	invokenonvirtual collisionengine/CollisionEngine/<init>(III)V
-	putstatic 		assignmentseven/_testengine Lcollisionengine/CollisionEngine;
-
-
 
 	ldc 100
 	ldc 100
@@ -104,7 +87,7 @@
 	ldc	1
 	iastore
 
-; pause
+; wait10
 
 	getstatic	java/lang/System/out Ljava/io/PrintStream;
 	ldc	"Results of Simulation:
