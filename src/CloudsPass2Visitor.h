@@ -36,17 +36,19 @@ public:
     antlrcpp::Any visitEnvironments(CloudsParser::EnvironmentsContext *ctx) override;
 	antlrcpp::Any visitRun_simulation(CloudsParser::Run_simulationContext *ctx) override;	
 	antlrcpp::Any visitStat(CloudsParser::StatContext *ctx) override;
-	antlrcpp::Any visitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) override;
+	//antlrcpp::Any visitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) override;
 	antlrcpp::Any visitInit_stmt(CloudsParser::Init_stmtContext *ctx) override;
 	antlrcpp::Any visitInit_list(CloudsParser::Init_listContext *ctx) override;
 	antlrcpp::Any visitPut_stmt(CloudsParser::Put_stmtContext *ctx) override;
-
+/*
 	antlrcpp::Any visitIntegerConst(CloudsParser::IntegerConstContext *ctx) override;
-	//antlrcpp::Any visitAdd_sub_op(CloudsParser::Add_sub_opContext *ctx) override;
-	//antlrcpp::Any visitMul_div_op(CloudsParser::mul_div_opContext *ctx) override;
-	//antlrcpp::Any visitIf_stmt(CloudsParser::If_stmtContext *ctx) override;
-
-
+	antlrcpp::Any visitAdd_sub_op(CloudsParser::Add_sub_opContext *ctx) override;
+	antlrcpp::Any visitMul_div_op(CloudsParser::Mul_div_opContext *ctx) override;
+	antlrcpp::Any visitIf_stmt(CloudsParser::If_stmtContext *ctx) override;
+	antlrcpp::Any visitRepeat_stmt(CloudsParser::Repeat_stmtContext *ctx) override;
+	antlrcpp::Any visitRel_op(CloudsParser::Rel_opContext *ctx) override;
+	antlrcpp::Any visitStmt_list(CloudsParser::Stmt_listContext *ctx) override;
+*/
 };
 
 #endif /* CLOUDSPASS2VISITOR_H_ */

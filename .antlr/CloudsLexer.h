@@ -23,11 +23,11 @@ public:
     IN = 26, FOR = 27, FINISH = 28, PUTNENV = 29, FUNCTION = 30, ENVIRONMENT = 31, 
     SIMULATION = 32, PRINT = 33, BETWEEN = 34, TYPE = 35, HEIGHT = 36, WIDTH = 37, 
     LENGTH = 38, RADIUS = 39, X = 40, Y = 41, Z = 42, POINT = 43, VELOCITY = 44, 
-    SPEED = 45, MUL = 46, DIV = 47, ADD = 48, SUB = 49, MUL_EQ = 50, DIV_EQ = 51, 
-    ADD_EQ = 52, SUB_EQ = 53, EQ_OP = 54, NE_OP = 55, LT_OP = 56, LE_OP = 57, 
-    GT_OP = 58, GE_OP = 59, ROLL_OP = 60, PITCH_OP = 61, YAW_OP = 62, COM_OP = 63, 
-    SEMICOLON = 64, FLOAT = 65, ID = 66, INT = 67, NEWLINE = 68, WS = 69, 
-    COMMENT = 70, BLOCK_COM = 71
+    SPEED = 45, ASSIGN_OP = 46, MUL = 47, DIV = 48, ADD = 49, SUB = 50, 
+    MUL_EQ = 51, DIV_EQ = 52, ADD_EQ = 53, SUB_EQ = 54, EQ_OP = 55, NE_OP = 56, 
+    LT_OP = 57, LE_OP = 58, GT_OP = 59, GE_OP = 60, ROLL_OP = 61, PITCH_OP = 62, 
+    YAW_OP = 63, COM_OP = 64, SEMICOLON = 65, FLOAT = 66, ID = 67, INT = 68, 
+    NEWLINE = 69, WS = 70, COMMENT = 71, BLOCK_COM = 72
   };
 
   CloudsLexer(antlr4::CharStream *input);

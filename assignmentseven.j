@@ -3,7 +3,7 @@
 
 .field private static _runTimer LRunTimer;
 .field private static _standardIn LPascalTextIn;
-.field private static environmentObject [[[I
+.field private static environmentObjectEngine Lcollisionengine/CollisionEngine;
 .field private static cubeobject [I
 .field private static cubeobjectcenter [I
 
@@ -28,12 +28,13 @@
 	invokenonvirtual PascalTextIn/<init>()V
 	putstatic        assignmentseven/_standardIn LPascalTextIn;
 
+	new collisionengine/CollisionEngine
+	dup
 	ldc 100
 	ldc 100
 	ldc 100
-	multianewarray [[[I 3
-	putstatic assignmentseven/environmentObject [[[I
-
+	invokenonvirtual collisionengine/CollisionEngine/<init>(III)V
+	putstatic	assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
 
 ; cubecubeobject=[height=1,width=1,length=2]
 
@@ -78,14 +79,6 @@
 	ldc	0
 	iastore
 
-	getstatic	assignmentseven/environmentObject [[[I
-	ldc 50
-	aaload
-	ldc 50
-	aaload
-	ldc 50
-	ldc	1
-	iastore
 
 ; wait10
 

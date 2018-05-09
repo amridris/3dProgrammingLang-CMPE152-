@@ -61,7 +61,7 @@ init_stmt       : init_var assignment_operators expr ;
 
 repeat_stmt     : REPEAT stmt_list UNTIL expr ;
 
-if_stmt         : IF expr THEN stat ( ELSE stat )? ;
+if_stmt         : IF expr THEN scope ( ELSE scope )? ;
 
 
 put_stmt        : PUTNENV ID
@@ -143,7 +143,7 @@ methodCall_ref
     | '&' expr (',' '&'expr)*  // Some arguments
     ;
 
-signedNumber locals [ TypeSpec *type = nullptr ] 
+signedNumber locals [  TypeSpec *type = nullptr ] 
     : sign number 
     ;
 sign : ADD | SUB ;
@@ -152,7 +152,7 @@ number locals [ TypeSpec *type = nullptr ]
     : INT    # integerConst
     | FLOAT      # floatConst
     ;
-assignment_operators : EQ_OP | ADD_EQ | SUB_EQ | MUL_EQ | DIV_EQ ;
+assignment_operators : ASSIGN_OP | ADD_EQ | SUB_EQ | MUL_EQ | DIV_EQ ;
 
 mul_div_op : MUL | DIV ; //multiple or divide
 add_sub_op : ADD | SUB ; //add or subtract
@@ -215,6 +215,8 @@ SPEED   : 'speed';
 
 
 //operators
+
+ASSIGN_OP : '=' ;
 MUL :   '*' ; // assigns token name to '*' used above in grammar
 DIV :   '/' ;
 ADD :   '+' ;
@@ -225,7 +227,7 @@ DIV_EQ :   '/=';
 ADD_EQ :   '+=';
 SUB_EQ :   '-=';
 
-EQ_OP :    '=' ;
+EQ_OP :    '==';
 NE_OP :    '!=';
 LT_OP :    '<' ;
 LE_OP :    '<=';

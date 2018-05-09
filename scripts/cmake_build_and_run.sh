@@ -11,9 +11,14 @@ cd ..
 # java -jar jasmin-2.4/jasmin.jar assignmentseven.j hello/*.j
 java -jar jasmin-2.4/jasmin.jar assignmentseven.j
 
+javac collisionengine/*.java
+
 java -cp .:PascalRTL.jar assignmentseven
 
-javac collisionengine/*.java
+
+# cmake
+# PATH="/Applications/CMake.app/Contents/bin":"$PATH"
+
 # ./Clouds Assignment6.clouds
 # ./Clouds Assignment7.clouds
 
