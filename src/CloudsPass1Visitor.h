@@ -31,10 +31,9 @@ public:
     antlrcpp::Any visitProgram(CloudsParser::ProgramContext *ctx) override;
     antlrcpp::Any visitHeader(CloudsParser::HeaderContext *ctx) override;  
     antlrcpp::Any visitBody(CloudsParser::BodyContext *ctx) override;
-
-    //antlrcpp::Any visitBlock(CloudsParser::BlockContext *ctx) override;
     antlrcpp::Any visitEnvironments(CloudsParser::EnvironmentsContext *ctx) override;
     antlrcpp::Any visitInit_var(CloudsParser::Init_varContext *ctx) override;
+    antlrcpp::Any visitObj_vars(CloudsParser::Obj_varsContext *ctx) override;
     //antlrcpp::Any visitRun_simulation(CloudsParser::Run_simulationContext *ctx) override;
    /* antlrcpp::Any visitVariable(CloudsParser::VariableContext *ctx) override;
     antlrcpp::Any visitScope(CloudsParser::ScopeContext *ctx) override;

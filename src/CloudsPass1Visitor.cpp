@@ -118,7 +118,7 @@ antlrcpp::Any CloudsPass1Visitor::visitInit_var(CloudsParser::Init_varContext *c
 
 /*
  antlrcpp::Any visitScope(CloudsParser::ScopeContext *ctx){
-     //visiting stmt_list
+     
      return visitChildren(ctx);
 
  }
