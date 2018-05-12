@@ -8,39 +8,64 @@ public class CollisionEngine
     public CollisionEngine(int xdim, int ydim, int zdim)
     {
         environment = new int[xdim][ydim][zdim];
-        collisionMap = new HashMap<Set<ThreeDObjects.ThreeDObject>, Integer>();
+        collisionMap = new HashMap<Set<ThreeDObject>, Integer>();
         numCollisions = 1;
+        engineObjects = new LinkedList<ThreeDObject>();
     }
     int[][][] environment;
     int[] objectNumbers;
     String[] objectNames;
-    ThreeDObjects ThreeDobjs = new ThreeDObjects();
     int numCollisions;
-    Map<Set<ThreeDObjects.ThreeDObject>, Integer> collisionMap; 
+    Map<Set<ThreeDObject>, Integer> collisionMap; 
+    List<ThreeDObject> engineObjects;
     //hashtable of actions?
 
-    public boolean detectCollisionAtPoint(ThreeDObjects.point destination)
+    public void timestep()
+    {
+        for(ThreeDObject obj: engineObjects){
+            obj.timestep();
+        }
+        detectCollisions();
+        handleCollisions();
+    }
+
+    public void detectCollisions()
+    {
+
+    }
+
+    public void handleCollisions()
+    {
+
+    }
+
+    public void addObject(ThreeDObject argobj)
+    {
+        engineObjects.add(argobj);
+    }
+
+    public boolean detectCollisionAtPoint(Point destination)
     {
         return true;
     }
     
-    public void moveObject(ThreeDObjects.ThreeDObject object)
+    public void moveObject(ThreeDObject object)
     {
         
     }
 
-    public void addCollision(ThreeDObjects.ThreeDObject object1, ThreeDObjects.ThreeDObject object2)
+    public void addCollision(ThreeDObject object1, ThreeDObject object2)
     {
-        Set<ThreeDObjects.ThreeDObject> objlist = new HashSet<ThreeDObjects.ThreeDObject>();
+        Set<ThreeDObject> objlist = new HashSet<ThreeDObject>();
         objlist.add(object1);
         objlist.add(object2);
         collisionMap.put(objlist, new Integer(numCollisions));
         numCollisions++;
     }
 
-    public int getCollision(ThreeDObjects.ThreeDObject object1, ThreeDObjects.ThreeDObject object2)
+    public int getCollision(ThreeDObject object1, ThreeDObject object2)
     {
-        Set<ThreeDObjects.ThreeDObject> objlist = new HashSet<ThreeDObjects.ThreeDObject>();                
+        Set<ThreeDObject> objlist = new HashSet<ThreeDObject>();                
         return collisionMap.get(objlist);
     }
 
@@ -49,8 +74,30 @@ public class CollisionEngine
         int x = environment.length;
         int y = environment[0].length;
         int z = environment[0][0].length;
-        System.out.printf("Size of Envirnoment: x = %d, y = %d, z = %d\n", x, y,z);
+        System.out.printf("Size of Environment: x = %d, y = %d, z = %d\n", x, y,z);
     }
+
+    public ThreeDObject createObject(String argtype, HashMap<String, Integer> argmap)
+    {  
+        //String type = argmap.get("type");
+       ThreeDObject obj;
+        if(argtype == "cube"){
+
+            obj = new RectPrism(argmap.get("height"), 
+                                argmap.get("width"),
+                                argmap.get("length"));
+        }
+        else {
+            obj = new RectPrism(0,0,0);
+        }
+        return obj;
+    }
+
+    public static void main(String[] args) {
+        RectPrism rect = new RectPrism(1,2,3);
+        System.out.println(rect.height);
+    }
+    //map has type, 
 /*
     public static void main(String[] args) {
         
@@ -61,4 +108,7 @@ public class CollisionEngine
         System.out.println(r.objvelocity.dx);
     }
 */
+
+   
+   
 }

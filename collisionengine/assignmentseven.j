@@ -1,4 +1,4 @@
-.class public assignmentseven
+.class public collisionengine/assignmentseven
 .super java/lang/Object
 
 .field private static _runTimer LRunTimer;
@@ -22,11 +22,11 @@
 	new RunTimer
 	dup
 	invokenonvirtual RunTimer/<init>()V
-	putstatic        assignmentseven/_runTimer LRunTimer;
+	putstatic        collisionengine/assignmentseven/_runTimer LRunTimer;
 	new PascalTextIn
 	dup
 	invokenonvirtual PascalTextIn/<init>()V
-	putstatic        assignmentseven/_standardIn LPascalTextIn;
+	putstatic        collisionengine/assignmentseven/_standardIn LPascalTextIn;
 
 	new collisionengine/CollisionEngine
 	dup
@@ -34,29 +34,29 @@
 	ldc 100
 	ldc 100
 	invokenonvirtual collisionengine/CollisionEngine/<init>(III)V
-	putstatic	assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
+	putstatic	collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
 
 ; cubecubeobject=[height=1,width=1,length=2]
 
 	ldc 3
 	newarray int
-	putstatic assignmentseven/cubeobject [I
+	putstatic collisionengine/assignmentseven/cubeobject [I
 
 	ldc 3
 	newarray int
-	putstatic assignmentseven/cubeobjectcenter [I
+	putstatic collisionengine/assignmentseven/cubeobjectcenter [I
 
-	getstatic assignmentseven/cubeobject [I
+	getstatic collisionengine/assignmentseven/cubeobject [I
 	ldc	0
 	ldc	1
 	iastore
 
-	getstatic assignmentseven/cubeobject [I
+	getstatic collisionengine/assignmentseven/cubeobject [I
 	ldc	1
 	ldc	1
 	iastore
 
-	getstatic assignmentseven/cubeobject [I
+	getstatic collisionengine/assignmentseven/cubeobject [I
 	ldc	2
 	ldc	2
 	iastore
@@ -64,17 +64,17 @@
 
 ; putnenvcubeobject
 
-	getstatic	assignmentseven/cubeobjectcenter [I
+	getstatic	collisionengine/assignmentseven/cubeobjectcenter [I
 	ldc	0
 	ldc	0
 	iastore
 
-	getstatic	assignmentseven/cubeobjectcenter [I
+	getstatic	collisionengine/assignmentseven/cubeobjectcenter [I
 	ldc	1
 	ldc	0
 	iastore
 
-	getstatic	assignmentseven/cubeobjectcenter [I
+	getstatic	collisionengine/assignmentseven/cubeobjectcenter [I
 	ldc	2
 	ldc	0
 	iastore
@@ -84,26 +84,27 @@
 
 	getstatic	java/lang/System/out Ljava/io/PrintStream;
 	ldc	"Results of Simulation:
-	cubeobject at x=%d, y=%d, z=%d"
+	cubeobject at x=%d, y=%d, z=%d
+"
 	iconst_3
 	anewarray java/lang/Object
 	dup
 	ldc 0
-	getstatic	assignmentseven/cubeobjectcenter [I
+	getstatic	collisionengine/assignmentseven/cubeobjectcenter [I
 	ldc	0
 	iaload
 	invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
 	aastore
 	dup
 	ldc 1
-	getstatic	assignmentseven/cubeobjectcenter [I
+	getstatic	collisionengine/assignmentseven/cubeobjectcenter [I
 	ldc	1
 	iaload
 	invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
 	aastore
 	dup
 	ldc 2
-	getstatic	assignmentseven/cubeobjectcenter [I
+	getstatic	collisionengine/assignmentseven/cubeobjectcenter [I
 	ldc	2
 	iaload
 	invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
@@ -111,8 +112,10 @@
 	invokevirtual java/io/PrintStream/printf(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;
 pop
 
+	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
+	invokevirtual collisionengine/CollisionEngine/printStatus()V
 
-	getstatic     assignmentseven/_runTimer LRunTimer;
+	getstatic     collisionengine/assignmentseven/_runTimer LRunTimer;
 	invokevirtual RunTimer.printElapsedTime()V
 
 	return

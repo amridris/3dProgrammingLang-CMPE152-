@@ -77,6 +77,8 @@ move_stmt       : MOVE expr TO expr MOVE_3 expr (MOVE_3 expr)?
                 ;
 
 when_stmt       : WHEN expr THEN stat ;
+//change stat to a function pointer, then have
+//function built before main?
 
 print_stmt      : PRINT '(' variable ')';
 

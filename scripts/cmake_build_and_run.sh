@@ -9,11 +9,20 @@ cd ..
 
 
 # java -jar jasmin-2.4/jasmin.jar assignmentseven.j hello/*.j
-java -jar jasmin-2.4/jasmin.jar assignmentseven.j
+java -jar jasmin-2.4/jasmin.jar collisionengine/assignmentseven.j
 
 javac collisionengine/*.java
 
-java -cp .:PascalRTL.jar assignmentseven
+java -cp .:PascalRTL.jar collisionengine/assignmentseven
+
+
+# FOR JASMIN TESTING
+java -jar jasmin-2.4/jasmin.jar testing.j
+
+javac collisionengine/*.java
+
+java -cp .:PascalRTL.jar collisionengine/testing
+
 
 
 # cmake
@@ -33,4 +42,4 @@ cd ../../..
 
 
 # use jasmin disassembler
-java -jar jasper.jar src/java/hello/HelloWorld.class
+java -jar jasper.jar collisionengine/*.class

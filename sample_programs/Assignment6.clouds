@@ -43,7 +43,7 @@ environment environmentObject
 
     collision colisionobject between sphereobject cubeobject;
 
-    WHEN(colisionobject) THEN sphereobject.velocity = 2*sphereobject.velocity;
+    WHEN(colisionobject) THEN sphereobject.velocity = 2*sphereobject.velocity;//in first pass, mark all WHEN statments
 
     move cubeobject to [ x = 2, y = 0, z = 0] in timetomovecube at movecubetime;
 

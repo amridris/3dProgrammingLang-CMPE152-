@@ -26,7 +26,7 @@ antlrcpp::Any CloudsPass2Visitor::visitProgram(CloudsParser::ProgramContext *ctx
 
 antlrcpp::Any CloudsPass2Visitor::visitHeader(CloudsParser::HeaderContext *ctx)
 {
-    program_name = ctx->ID()->toString();
+    program_name = "collisionengine/" + ctx->ID()->toString();
     return visitChildren(ctx);
 }
 
@@ -406,7 +406,7 @@ antlrcpp::Any CloudsPass2Visitor::visitRun_simulation(CloudsParser::Run_simulati
 */
 
  // USING printf
-    j_file << "\n\tcubeobject at x=%d, y=%d, z=%d\"\n";
+    j_file << "\n\tcubeobject at x=%d, y=%d, z=%d\n\"\n";
     j_file << "\ticonst_3\n\tanewarray java/lang/Object\n\tdup\n";
     for(int counter = 0; counter <3; counter ++){
         j_file << "\tldc " << counter << endl;
@@ -423,6 +423,8 @@ antlrcpp::Any CloudsPass2Visitor::visitRun_simulation(CloudsParser::Run_simulati
 
 //END USING printf
 
+    j_file << "\tgetstatic " << program_name << "/" << current_environment_name << "Engine Lcollisionengine/CollisionEngine;\n";
+    j_file << "\tinvokevirtual collisionengine/CollisionEngine/printStatus()V\n";
     return value;
     
 }

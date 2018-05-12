@@ -1,4 +1,4 @@
-.class public assignmentseven
+.class public collisionengine/testing
 .super java/lang/Object
 
 .field private static _runTimer LRunTimer;
@@ -6,9 +6,10 @@
 .field private static environmentObject [[[I
 .field private static cubeobject [I
 .field private static cubeobjectcenter [I
-.field private static _helloworld Lhello/HelloWorld;
 .field private static _testengine Lcollisionengine/CollisionEngine;
-.field private static _testpoint Lcollisionengine/ThreeDObjects$point;
+.field private static _testPoint Lcollisionengine/Point;
+.field private static _testrectprism Lcollisionengine/RectPrism;
+
 
 .method public <init>()V
 
@@ -25,121 +26,41 @@
 	new RunTimer
 	dup
 	invokenonvirtual RunTimer/<init>()V
-	putstatic        assignmentseven/_runTimer LRunTimer;
+	putstatic        collisionengine/testing/_runTimer LRunTimer;
 	new PascalTextIn
 	dup
 	invokenonvirtual PascalTextIn/<init>()V
-	putstatic        assignmentseven/_standardIn LPascalTextIn;
+	putstatic        collisionengine/testing/_standardIn LPascalTextIn;
 
 	new collisionengine/CollisionEngine
 	dup
 	ldc 1
 	ldc 2
 	ldc 3
-	invokenonvirtual collisionengine/CollisionEngine/<init>(III)V
-	putstatic 		assignmentseven/_testengine Lcollisionengine/CollisionEngine;
+	invokespecial collisionengine/CollisionEngine/<init>(III)V
+	putstatic 		collisionengine/testing/_testengine Lcollisionengine/CollisionEngine;
 
-	getstatic assignmentseven/_testengine Lcollisionengine/CollisionEngine;
+	getstatic collisionengine/testing/_testengine Lcollisionengine/CollisionEngine;
 	invokevirtual collisionengine/CollisionEngine/printStatus()V
 
-	new collisionengine/ThreeDObjects$point
+    new collisionengine/Point
 	dup
-	invokenonvirtual collisionengine/ThreeDObjects$point/<init>()V
-	putstatic 		assignmentseven/_testpoint Lcollisionengine/ThreeDObjects$point;
+	invokenonvirtual collisionengine/Point/<init>()V
+	putstatic collisionengine/testing/_testPoint Lcollisionengine/Point;
 
-
-	ldc 100
-	ldc 100
-	ldc 100
-	multianewarray [[[I 3
-	putstatic assignmentseven/environmentObject [[[I
+    new collisionengine/RectPrism
+	dup
+	iconst_1
+	iconst_2
+	iconst_3
+    invokenonvirtual collisionengine/RectPrism/<init>(III)V
+	putstatic collisionengine/testing/_testrectprism Lcollisionengine/RectPrism;
 
 
 ; cubecubeobject=[height=1,width=1,length=2]
 
-	ldc 3
-	newarray int
-	putstatic assignmentseven/cubeobject [I
 
-	ldc 3
-	newarray int
-	putstatic assignmentseven/cubeobjectcenter [I
-
-	getstatic assignmentseven/cubeobject [I
-	ldc	0
-	ldc	1
-	iastore
-
-	getstatic assignmentseven/cubeobject [I
-	ldc	1
-	ldc	1
-	iastore
-
-	getstatic assignmentseven/cubeobject [I
-	ldc	2
-	ldc	2
-	iastore
-
-
-; putnenvcubeobject
-
-	getstatic	assignmentseven/cubeobjectcenter [I
-	ldc	0
-	ldc	0
-	iastore
-
-	getstatic	assignmentseven/cubeobjectcenter [I
-	ldc	1
-	ldc	0
-	iastore
-
-	getstatic	assignmentseven/cubeobjectcenter [I
-	ldc	2
-	ldc	0
-	iastore
-
-	getstatic	assignmentseven/environmentObject [[[I
-	ldc 50
-	aaload
-	ldc 50
-	aaload
-	ldc 50
-	ldc	1
-	iastore
-
-; pause
-
-	getstatic	java/lang/System/out Ljava/io/PrintStream;
-	ldc	"Results of Simulation:
-	cubeobject at x=%d, y=%d, z=%d"
-	iconst_3
-	anewarray java/lang/Object
-	dup
-	ldc 0
-	getstatic	assignmentseven/cubeobjectcenter [I
-	ldc	0
-	iaload
-	invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
-	aastore
-	dup
-	ldc 1
-	getstatic	assignmentseven/cubeobjectcenter [I
-	ldc	1
-	iaload
-	invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
-	aastore
-	dup
-	ldc 2
-	getstatic	assignmentseven/cubeobjectcenter [I
-	ldc	2
-	iaload
-	invokestatic	java/lang/Integer.valueOf(I)Ljava/lang/Integer;
-	aastore
-	invokevirtual java/io/PrintStream/printf(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;
-pop
-
-
-	getstatic     assignmentseven/_runTimer LRunTimer;
+	getstatic     collisionengine/testing/_runTimer LRunTimer;
 	invokevirtual RunTimer.printElapsedTime()V
 
 	return
