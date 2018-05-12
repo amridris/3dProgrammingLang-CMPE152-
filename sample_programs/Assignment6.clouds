@@ -52,7 +52,7 @@ environment environmentObject
 simulation
 {
     move cubeobject to [ x = 1, y = 0, z = 0 ] in timetomovecube;
-    IF(cubeobject.speed > 20) THEN cubeobject.speed = 10;
+    IF(cubeobject.speed > 20) THEN {cubeobject.speed = 10;};
     wait timetomovecube; // calls timestep that many times
 
     move sphereobject to [ x=19, y = 0, z = 0] in timetomovecube;
