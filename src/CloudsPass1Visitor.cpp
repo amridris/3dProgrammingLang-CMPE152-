@@ -30,6 +30,7 @@ ostream& CloudsPass1Visitor::get_assembly_file() { return j_file; }
 antlrcpp::Any CloudsPass1Visitor::visitProgram(CloudsParser::ProgramContext *ctx)
 {
     auto value = visitChildren(ctx);
+    
 
 //    cout << "=== visitProgram: Printing xref table." << endl;
 
@@ -103,46 +104,58 @@ antlrcpp::Any CloudsPass1Visitor::visitEnvironments(CloudsParser::EnvironmentsCo
 
 antlrcpp::Any CloudsPass1Visitor::visitInit_var(CloudsParser::Init_varContext *ctx)
 {
+
+    //init_var = TYPE and ID
+
+    //TYPE
     string var_type = ctx->TYPE()->toString();
     string jas_type;
     if(var_type == "cube"){
         jas_type = "[I";
     }
+    //SPhere has radius
+    else if(var_type == "sphere"){
+        jas_type = "[I"; //array (not sure)
+    }
+    //cylinder (radius, height)
+    else if(var_type == "cylinder"){
+        jas_type = "[I"; //array (not sure)
+    }
+    else if(var_type == "tetra"){
+        jas_type = "[I"; //array (not sure)
+    }
+    else if(var_type == "point"){
+       jas_type = "[I"; //array (not sure)
+    }
+    else if(var_type == "int"){
+        jas_type = "I"; //integer
+    }
+    else if(var_type == "float"){
+        jas_type = "F"; //float 
+    }
+    else{
+        jas_type = "?"; //nullptr
+    }
+
+    //jasmin code
      j_file << ".field private static "
                << ctx->ID()->toString() << " " << jas_type << endl;
     j_file << ".field private static "
                << ctx->ID()->toString() << "center " << "[I" << endl;
     
-    return visitChildren(ctx);
-}
-
-/*
- antlrcpp::Any visitScope(CloudsParser::ScopeContext *ctx){
-     //visiting stmt_list
-     return visitChildren(ctx);
-
- }
-
- antlrcpp::Any visitStmt_list(CloudsParser::Stmt_listContext *ctx){
-     //visiting assignment list to parse declarations
-     return visitChildren(ctx);
- }
-
-
-antlrcpp::Any visitAssignmentStmt(CloudsParser::Assignment_stmtContext *ctx){
-    //take the variable name and push it to the stack
+    //parsing identifiers and placing it in the system table
     string variable_name = ctx->ID()->toString();
     SymTabEntry *variable_id = symtab_stack->enter_local(variable_name);
-    variable_id->set_definition((Definition) DF_VARIABLE);
+    variable_id->set_definition((Definition)DF_VARIABLE);
     variable_id_list.push_back(variable_id);
-    //visit expressions
+
+
     return visitChildren(ctx);
 }
 
-antlrcpp::Any visitAddSubExpr(CloudsParser::AddSubExprContext *ctx){
+antlrcpp::Any CloudsPass1Visitor::visitAddSubExpr(CloudsParser::AddSubExprContext *ctx){
 
-    //AddsubExpr has two nodes and op
-   auto value = visitChildren(ctx);
+    auto value = visitChildren(ctx);
 
     TypeSpec *type1 = ctx->expr(0)->type;
     TypeSpec *type2 = ctx->expr(1)->type;
@@ -155,32 +168,123 @@ antlrcpp::Any visitAddSubExpr(CloudsParser::AddSubExprContext *ctx){
     TypeSpec *type = integer_mode ? Predefined::integer_type
                    : real_mode    ? Predefined::real_type
                    :                nullptr;
-                   
     ctx->type = type;
 
     return value;
+}
+
+antlrcpp::Any CloudsPass1Visitor::visitMulDivExpr(CloudsParser::MulDivExprContext *ctx){
+
+     auto value = visitChildren(ctx);
+
+    //check the expr type
+    TypeSpec *type1 = ctx->expr(0)->type;
+    TypeSpec *type2 = ctx->expr(1)->type;
+
+    //type checking if both nodes are of same type
+    bool integer_mode =    (type1 == Predefined::integer_type)
+                        && (type2 == Predefined::integer_type);
+    bool real_mode    =    (type1 == Predefined::real_type)
+                        && (type2 == Predefined::real_type);
+
+    TypeSpec *type = integer_mode ? Predefined::integer_type
+                   : real_mode    ? Predefined::real_type
+                   :                nullptr;
+
+    //set the type
+    ctx->type = type;
+
+    return value;
+}
+
+antlrcpp::Any CloudsPass1Visitor::visitRelExpr(CloudsParser::RelExprContext *ctx){
+
+       auto value = visitChildren(ctx);
+
+    //check the expr type
+    TypeSpec *type1 = ctx->expr(0)->type;
+    TypeSpec *type2 = ctx->expr(1)->type;
+
+    //type checking if both nodes are of same type
+    bool integer_mode =    (type1 == Predefined::integer_type)
+                        && (type2 == Predefined::integer_type);
+    bool real_mode    =    (type1 == Predefined::real_type)
+                        && (type2 == Predefined::real_type);
+
+    TypeSpec *type = integer_mode ? Predefined::integer_type
+                   : real_mode    ? Predefined::real_type
+                   :                nullptr;
+
+    //set the type
+    ctx->type = type;
+
+    return value;
+}
+
+antlrcpp::Any CloudsPass1Visitor::visitRotExpr(CloudsParser::RotExprContext *ctx){
+
+       auto value = visitChildren(ctx);
+
+    //check the expr type
+    TypeSpec *type1 = ctx->expr(0)->type;
+    TypeSpec *type2 = ctx->expr(1)->type;
+
+    //type checking if both nodes are of same type
+    bool integer_mode =    (type1 == Predefined::integer_type)
+                        && (type2 == Predefined::integer_type);
+    bool real_mode    =    (type1 == Predefined::real_type)
+                        && (type2 == Predefined::real_type);
+
+    TypeSpec *type = integer_mode ? Predefined::integer_type
+                   : real_mode    ? Predefined::real_type
+                   :                nullptr;
+
+    //set the type
+    ctx->type = type;
+
+    return value;
+}
+
+
+
+antlrcpp::Any CloudsPass1Visitor::visitSignedNumberConst(CloudsParser::SignedNumberConstContext *ctx){
+
+
+    auto value = visitChildren(ctx);
+    ctx->type = ctx->signedNumber()->type;
+    return value;
     
+
+}
+antlrcpp::Any CloudsPass1Visitor::visitSignedNumber(CloudsParser::SignedNumberContext *ctx){
+
+     auto value = visit(ctx->number());
+    ctx->type = ctx->number()->type;
+    return value;
 }
 
+antlrcpp::Any CloudsPass1Visitor::visitNumberConst(CloudsParser::NumberConstContext *ctx){
 
+    auto value = visit(ctx->number());
+    ctx->type = ctx->number()->type;
+    return value;
 
-antlrcpp::Any visitFunction(CloudsParser::FunctionContext *ctx) {
-     return visitChildren(ctx);
 }
 
-antlrcpp::Any visitFuncName(CloudsParser::FuncNameContext *ctx) {
-     return visitChildren(ctx);
+antlrcpp::Any CloudsPass1Visitor::visitIntegerConst(CloudsParser::IntegerConstContext *ctx){
+
+    ctx->type = Predefined::integer_type;
+    return visitChildren(ctx);
+
 }
 
-antlrcpp::Any visitArgumentList(CloudsParser::ArgumentListContext *ctx) {
-     return visitChildren(ctx);
+antlrcpp::Any CloudsPass1Visitor::visitFloatConst(CloudsParser::FloatConstContext *ctx){
+    ctx->type = Predefined::real_type;
+    return visitChildren(ctx);
 }
 
-antlrcpp::Any visitMethodCallArguments(CloudsParser::MethodCallArgumentsContext *ctx) {
-     return visitChildren(ctx);
+antlrcpp::Any CloudsPass1Visitor::visitParens(CloudsParser::ParensContext *ctx){
+    auto value = visitChildren(ctx);
+    ctx->type = ctx->expr()->type;
+    return value;
 }
-
-antlrcpp::Any visitMethodCall_ref(CloudsParser::MethodCall_refContext *ctx) {
-     return visitChildren(ctx);
-}
-*/

@@ -161,7 +161,6 @@ antlrcpp::Any Pass1Visitor::visitAddSubExpr(Pcl2Parser::AddSubExprContext *ctx)
 //    cout << "=== visitAddSubExpr: " + ctx->getText() << endl;
 
     auto value = visitChildren(ctx);
-
     TypeSpec *type1 = ctx->expr(0)->type;
     TypeSpec *type2 = ctx->expr(1)->type;
 
