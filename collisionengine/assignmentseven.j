@@ -43,11 +43,17 @@
 	ldc	1
 	ldc	2
 	invokenonvirtual collisionengine/RectPrism/<init>(III)V
+	dup
 	putstatic collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
+	ldc "cubeobject"
+	invokevirtual collisionengine/RectPrism/setName(Ljava/lang/String;)V
 
 
-; putnenvcubeobject
+; putnenvcubecubeobject
 
+	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
+	getstatic collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
+	invokevirtual collisionengine/CollisionEngine/addObject(Lcollisionengine/ThreeDObject;)V
 
 ; wait10
 

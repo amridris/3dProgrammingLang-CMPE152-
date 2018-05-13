@@ -12,7 +12,7 @@ environment environmentObject
 {
     cube cubeobject = [height=1, width=1, length=2];
 
-    putnenv cubeobject;
+    putnenv cube cubeobject;
 }
 
 simulation

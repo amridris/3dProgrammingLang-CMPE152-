@@ -64,7 +64,7 @@ repeat_stmt     : REPEAT stmt_list UNTIL expr ;
 if_stmt         : IF expr THEN scope ( ELSE scope )? ;
 
 
-put_stmt        : PUTNENV ID
+put_stmt        : PUTNENV TYPE ID
  //               | PUTNENV variable TYPE
                 ;
 
@@ -82,7 +82,8 @@ when_stmt       : WHEN expr THEN stat ;
 
 print_stmt      : PRINT '(' variable ')';
 
-variable:  //Done
+variable locals [ TypeSpec *type = nullptr ]
+        :  //Done 
         | variable '.' obj_vars
         | ID
         ;
@@ -102,7 +103,7 @@ expr locals [ TypeSpec *type = nullptr ]
 
 init_list   : obj_vars '=' expr (',' obj_vars '=' expr)*  ;  //done first visit
 
-init_var    : TYPE ID; 
+init_var    : TYPE variable; 
 
 obj_vars    : 'p'
             | HEIGHT
@@ -193,15 +194,17 @@ PRINT       : 'print'       ;
 BETWEEN     : 'between'     ;
 
 //types
-TYPE:   'sphere'
-    |   'cube'
-    |   'cylinder'
+TYPE:   SPHERE 
+    |   'cube' 
+    |   'cylinder' 
 //    |   'cone'
-    |   'tetra'
-    |   POINT
-    |   'float'
-    |   'int'
+    |   'tetra' 
+    |   POINT 
+    |   'float' 
+    |   'int' 
     ;
+
+SPHERE: 'sphere' ;
 
 //init keywords
 HEIGHT  : 'height';

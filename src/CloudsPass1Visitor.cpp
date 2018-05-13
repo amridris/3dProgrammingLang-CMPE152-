@@ -111,14 +111,17 @@ antlrcpp::Any CloudsPass1Visitor::visitInit_var(CloudsParser::Init_varContext *c
     string var_type = ctx->TYPE()->toString();
     string jas_type = "Lcollisionengine/";
     if(var_type == "cube"){
+        ctx->variable()->type = Predefined::RectPrism_type;
         jas_type += "RectPrism;";
     }
     //SPhere has radius
     else if(var_type == "sphere"){
+        ctx->variable()->type = Predefined::Sphere_type;
         jas_type += "Sphere;"; //array (not sure)
     }
     //cylinder (radius, height)
     else if(var_type == "cylinder"){
+        ctx->variable()->type = Predefined::Cylinder_type;
         jas_type += "Cylinder;"; //array (not sure)
     }
     /*
@@ -127,6 +130,7 @@ antlrcpp::Any CloudsPass1Visitor::visitInit_var(CloudsParser::Init_varContext *c
     }
     */
     else if(var_type == "point"){
+        ctx->variable()->type = Predefined::Point_type;
        jas_type += "Point;"; //array (not sure)
     }
     else if(var_type == "int"){
@@ -141,7 +145,7 @@ antlrcpp::Any CloudsPass1Visitor::visitInit_var(CloudsParser::Init_varContext *c
 
     //jasmin code
      j_file << ".field private static "
-               << ctx->ID()->toString() << " " << jas_type << endl;
+               << ctx->variable()->ID()->toString() << " " << jas_type << endl;
    
      /*
     //parsing identifiers and placing it in the system table

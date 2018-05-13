@@ -114,7 +114,7 @@ antlrcpp::Any CloudsPass2Visitor::visitAssignment_stmt(CloudsParser::Assignment_
 antlrcpp::Any CloudsPass2Visitor::visitInit_stmt(CloudsParser::Init_stmtContext *ctx)
 {
     string var_type = ctx->init_var()->TYPE()->toString();
-    var_name = ctx->init_var()->ID()->toString();
+    var_name = ctx->init_var()->variable()->ID()->toString();
     init_param = "";
 
 /*
@@ -167,7 +167,10 @@ antlrcpp::Any CloudsPass2Visitor::visitInit_stmt(CloudsParser::Init_stmtContext 
     else if(var_type == "cube" || var_type == "sphere"
             || var_type == "point" || var_type == "cylinder"){
         j_file << "\tinvokenonvirtual collisionengine/" << jas_type << "/<init>(" << init_param << ")V\n";
+        j_file << "\tdup\n";
         j_file << "\tputstatic " << program_name << "/" << var_name << " Lcollisionengine/" << jas_type << ";\n";
+        j_file << "\tldc \"" << var_name << "\"\n";
+        j_file << "\tinvokevirtual collisionengine/" << jas_type << "/setName(Ljava/lang/String;)V\n";
     }
     j_file << endl;
 
@@ -204,7 +207,25 @@ antlrcpp::Any CloudsPass2Visitor::visitObj_vars(CloudsParser::Obj_varsContext *c
 antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *ctx)
 {
     string put_var_name = ctx->ID()->toString();
+    string put_var_type = ctx->TYPE()->toString();
     int put_var_number = 0;
+
+    j_file << "\tgetstatic " << program_name << "/" << current_environment_name << "Engine Lcollisionengine/CollisionEngine;\n";
+    j_file << "\tgetstatic " << program_name << "/" << put_var_name << " Lcollisionengine/";
+    if(put_var_type == "cube"){
+        j_file << "RectPrism";
+    }
+    else if(put_var_type == "sphere"){
+        j_file << "Sphere";
+    }
+    else if(put_var_type == "cylinder"){
+        j_file << "Cylinder";
+    }
+    else { j_file << "?";}
+
+    j_file << ";\n\tinvokevirtual collisionengine/CollisionEngine/addObject(Lcollisionengine/ThreeDObject;)V\n";
+
+
     /*
     for(int counter = 0; counter <3; counter++){
         j_file << "\tgetstatic\t" << program_name <<"/"<< put_var_name << "center [I\n";

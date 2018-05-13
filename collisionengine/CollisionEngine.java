@@ -74,7 +74,13 @@ public class CollisionEngine
         int x = environment.length;
         int y = environment[0].length;
         int z = environment[0][0].length;
-        System.out.printf("Size of Environment: x = %d, y = %d, z = %d\n", x, y,z);
+        System.out.printf("Size of Environment: x = %d, y = %d, z = %d\n\n", x, y,z);
+        System.out.printf("Current Object Status:\n");
+        for(ThreeDObject obj: engineObjects){
+            System.out.print(obj.name);
+            System.out.print(" is at: ");
+            obj.printLocation();
+        }
     }
 
     public ThreeDObject createObject(String argtype, HashMap<String, Integer> argmap)
@@ -94,7 +100,9 @@ public class CollisionEngine
     }
 
     public static void main(String[] args) {
+        CollisionEngine col = new CollisionEngine(100,100,100);
         RectPrism rect = new RectPrism(1,2,3);
+        col.addObject(rect);
         System.out.println(rect.height);
     }
     //map has type, 
