@@ -19,6 +19,8 @@ Clouds assignmentseven;
 
 environment environmentObject           
 {
+    int timetomovecube = 2;
+    
     point pointObjectOne = [ x = 0, y = 0, z = 0 ];
     point pointObjectTwo = [ x = 10, y = 0, z = 0 ];
 
@@ -31,5 +33,6 @@ environment environmentObject
 
 simulation
 {
+    move cube cubeobject to pointObjectTwo in timetomovecube;
     wait 10;
 }

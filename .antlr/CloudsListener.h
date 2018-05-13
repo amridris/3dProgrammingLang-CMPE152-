@@ -48,6 +48,9 @@ public:
   virtual void enterAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) = 0;
   virtual void exitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) = 0;
 
+  virtual void enterBasic_types(CloudsParser::Basic_typesContext *ctx) = 0;
+  virtual void exitBasic_types(CloudsParser::Basic_typesContext *ctx) = 0;
+
   virtual void enterInit_stmt(CloudsParser::Init_stmtContext *ctx) = 0;
   virtual void exitInit_stmt(CloudsParser::Init_stmtContext *ctx) = 0;
 
@@ -69,6 +72,9 @@ public:
   virtual void enterMove_stmt(CloudsParser::Move_stmtContext *ctx) = 0;
   virtual void exitMove_stmt(CloudsParser::Move_stmtContext *ctx) = 0;
 
+  virtual void enterPoint_var(CloudsParser::Point_varContext *ctx) = 0;
+  virtual void exitPoint_var(CloudsParser::Point_varContext *ctx) = 0;
+
   virtual void enterWhen_stmt(CloudsParser::When_stmtContext *ctx) = 0;
   virtual void exitWhen_stmt(CloudsParser::When_stmtContext *ctx) = 0;
 
@@ -78,9 +84,6 @@ public:
   virtual void enterVariable(CloudsParser::VariableContext *ctx) = 0;
   virtual void exitVariable(CloudsParser::VariableContext *ctx) = 0;
 
-  virtual void enterIdentifier(CloudsParser::IdentifierContext *ctx) = 0;
-  virtual void exitIdentifier(CloudsParser::IdentifierContext *ctx) = 0;
-
   virtual void enterParens(CloudsParser::ParensContext *ctx) = 0;
   virtual void exitParens(CloudsParser::ParensContext *ctx) = 0;
 
@@ -89,6 +92,9 @@ public:
 
   virtual void enterNumberConst(CloudsParser::NumberConstContext *ctx) = 0;
   virtual void exitNumberConst(CloudsParser::NumberConstContext *ctx) = 0;
+
+  virtual void enterExprvariable(CloudsParser::ExprvariableContext *ctx) = 0;
+  virtual void exitExprvariable(CloudsParser::ExprvariableContext *ctx) = 0;
 
   virtual void enterRotExpr(CloudsParser::RotExprContext *ctx) = 0;
   virtual void exitRotExpr(CloudsParser::RotExprContext *ctx) = 0;

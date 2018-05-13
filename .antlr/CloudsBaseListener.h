@@ -50,6 +50,9 @@ public:
   virtual void enterAssignment_stmt(CloudsParser::Assignment_stmtContext * /*ctx*/) override { }
   virtual void exitAssignment_stmt(CloudsParser::Assignment_stmtContext * /*ctx*/) override { }
 
+  virtual void enterBasic_types(CloudsParser::Basic_typesContext * /*ctx*/) override { }
+  virtual void exitBasic_types(CloudsParser::Basic_typesContext * /*ctx*/) override { }
+
   virtual void enterInit_stmt(CloudsParser::Init_stmtContext * /*ctx*/) override { }
   virtual void exitInit_stmt(CloudsParser::Init_stmtContext * /*ctx*/) override { }
 
@@ -71,6 +74,9 @@ public:
   virtual void enterMove_stmt(CloudsParser::Move_stmtContext * /*ctx*/) override { }
   virtual void exitMove_stmt(CloudsParser::Move_stmtContext * /*ctx*/) override { }
 
+  virtual void enterPoint_var(CloudsParser::Point_varContext * /*ctx*/) override { }
+  virtual void exitPoint_var(CloudsParser::Point_varContext * /*ctx*/) override { }
+
   virtual void enterWhen_stmt(CloudsParser::When_stmtContext * /*ctx*/) override { }
   virtual void exitWhen_stmt(CloudsParser::When_stmtContext * /*ctx*/) override { }
 
@@ -80,9 +86,6 @@ public:
   virtual void enterVariable(CloudsParser::VariableContext * /*ctx*/) override { }
   virtual void exitVariable(CloudsParser::VariableContext * /*ctx*/) override { }
 
-  virtual void enterIdentifier(CloudsParser::IdentifierContext * /*ctx*/) override { }
-  virtual void exitIdentifier(CloudsParser::IdentifierContext * /*ctx*/) override { }
-
   virtual void enterParens(CloudsParser::ParensContext * /*ctx*/) override { }
   virtual void exitParens(CloudsParser::ParensContext * /*ctx*/) override { }
 
@@ -91,6 +94,9 @@ public:
 
   virtual void enterNumberConst(CloudsParser::NumberConstContext * /*ctx*/) override { }
   virtual void exitNumberConst(CloudsParser::NumberConstContext * /*ctx*/) override { }
+
+  virtual void enterExprvariable(CloudsParser::ExprvariableContext * /*ctx*/) override { }
+  virtual void exitExprvariable(CloudsParser::ExprvariableContext * /*ctx*/) override { }
 
   virtual void enterRotExpr(CloudsParser::RotExprContext * /*ctx*/) override { }
   virtual void exitRotExpr(CloudsParser::RotExprContext * /*ctx*/) override { }

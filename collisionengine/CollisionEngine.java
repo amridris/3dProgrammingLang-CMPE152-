@@ -2,6 +2,7 @@ package collisionengine;
 
 import java.lang.String;
 import java.util.*;
+import javafx.util.*;
 
 public class CollisionEngine
 {
@@ -11,12 +12,16 @@ public class CollisionEngine
         collisionMap = new HashMap<Set<ThreeDObject>, Integer>();
         numCollisions = 1;
         engineObjects = new LinkedList<ThreeDObject>();
+        moveVelocityMap = new HashMap<Integer, LinkedList<Pair<ThreeDObject, Velocity>>>();
+        movePointMap = new HashMap<Integer, LinkedList<Pair<ThreeDObject, Point>>>();
     }
     int[][][] environment;
     int[] objectNumbers;
     String[] objectNames;
     int numCollisions = 0;
-    Map<Set<ThreeDObject>, Integer> collisionMap; 
+    Map<Set<ThreeDObject>, Integer> collisionMap;
+    HashMap<Integer, LinkedList<Pair<ThreeDObject, Point>>> movePointMap;
+    HashMap<Integer, LinkedList<Pair<ThreeDObject, Velocity>>> moveVelocityMap;
     List<ThreeDObject> engineObjects;
     //hashtable of actions?
 
@@ -52,8 +57,17 @@ public class CollisionEngine
         return true;
     }
     
-    public void moveObject(ThreeDObject object)
+    public void moveObject(ThreeDObject argobj, Point argPoint, int argmovetime,int argstarttime)
     {
+        Velocity vel = new Velocity(argPoint.x/argmovetime, argPoint.y/argmovetime, argPoint.z/argmovetime);
+
+        Pair<ThreeDObject, Velocity> newPair = new Pair<ThreeDObject, Velocity>(argobj, vel);
+        LinkedList<Pair<ThreeDObject, Velocity>> linked = moveVelocityMap.get(argstarttime);
+        if(linked == null){
+            linked = new LinkedList<Pair<ThreeDObject, Velocity>>();
+            moveVelocityMap.put(argstarttime, linked);
+        }
+        linked.add(newPair);
         
     }
 

@@ -53,8 +53,12 @@ stat : //scope            # scope_node|
 
 
 
-assignment_stmt : variable assignment_operators expr 
-               // | init_var assignment_operators expr
+assignment_stmt :  assignment_operators expr 
+                | basic_types ID assignment_operators expr
+                ;
+
+basic_types     : 'float'
+                | 'int'
                 ;
 
 init_stmt       : init_var ASSIGN_OP '[' init_list ']'; 
@@ -73,8 +77,12 @@ collision_stmt  : COLISION variable BETWEEN variable variable
 
 wait_stmt       : WAIT expr;
 
-move_stmt       : MOVE expr TO expr MOVE_3 expr (MOVE_3 expr)?
+move_stmt       : MOVE TYPE ID TO point_var MOVE_3 expr (MOVE_3 expr)?
                 ;
+
+point_var   : '[' init_list ']'
+            | ID
+            ;
 
 when_stmt       : WHEN expr THEN stat ;
 //change stat to a function pointer, then have
@@ -88,7 +96,6 @@ variable locals [ TypeSpec *type = nullptr ]
         | ID
         ;
 
-
 expr locals [ TypeSpec *type = nullptr ]
      : expr mul_div_op expr     # mulDivExpr //done first visit
      | expr add_sub_op expr     # addSubExpr //done first visit
@@ -97,7 +104,7 @@ expr locals [ TypeSpec *type = nullptr ]
      //| '[' init_list ']'        # initList   //done first visit
      | signedNumber             # signedNumberConst
      | number                   # numberConst //done first visit
-     | variable                 # identifier  //done first visit
+     | variable                 # Exprvariable  //done first visit
      | '(' expr ')'             # parens       //done first visit
      ;
 
@@ -200,8 +207,6 @@ TYPE:   SPHERE
 //    |   'cone'
     |   'tetra' 
     |   POINT 
-    |   'float' 
-    |   'int' 
     ;
 
 SPHERE: 'sphere' ;
