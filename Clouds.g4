@@ -64,7 +64,7 @@ repeat_stmt     : REPEAT stmt_list UNTIL expr ;
 if_stmt         : IF expr THEN scope ( ELSE scope )? ;
 
 
-put_stmt        : PUTNENV TYPE ID
+put_stmt        : PUTNENV TYPE ID ID
  //               | PUTNENV variable TYPE
                 ;
 

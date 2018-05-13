@@ -116,6 +116,7 @@ antlrcpp::Any CloudsPass2Visitor::visitInit_stmt(CloudsParser::Init_stmtContext 
     string var_type = ctx->init_var()->TYPE()->toString();
     var_name = ctx->init_var()->variable()->ID()->toString();
     init_param = "";
+    jas_type = "";
 
 /*
     for(auto ex: ctx->init_list()->expr()){
@@ -165,12 +166,17 @@ antlrcpp::Any CloudsPass2Visitor::visitInit_stmt(CloudsParser::Init_stmtContext 
            << " F"  << endl;
     }
     else if(var_type == "cube" || var_type == "sphere"
-            || var_type == "point" || var_type == "cylinder"){
+            || var_type == "cylinder"){
         j_file << "\tinvokenonvirtual collisionengine/" << jas_type << "/<init>(" << init_param << ")V\n";
         j_file << "\tdup\n";
         j_file << "\tputstatic " << program_name << "/" << var_name << " Lcollisionengine/" << jas_type << ";\n";
         j_file << "\tldc \"" << var_name << "\"\n";
         j_file << "\tinvokevirtual collisionengine/" << jas_type << "/setName(Ljava/lang/String;)V\n";
+    }
+    else if(var_type == "point" ){
+        j_file << "\tinvokenonvirtual collisionengine/" << jas_type << "/<init>(" << init_param << ")V\n";
+        j_file << "\tputstatic " << program_name << "/" << var_name << " Lcollisionengine/" << jas_type << ";\n";
+
     }
     j_file << endl;
 
@@ -206,7 +212,8 @@ antlrcpp::Any CloudsPass2Visitor::visitObj_vars(CloudsParser::Obj_varsContext *c
 
 antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *ctx)
 {
-    string put_var_name = ctx->ID()->toString();
+    string put_var_name = ctx->ID(0)->toString();
+    string put_point_name = ctx->ID(1)->toString();
     string put_var_type = ctx->TYPE()->toString();
     int put_var_number = 0;
 
@@ -223,7 +230,9 @@ antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *c
     }
     else { j_file << "?";}
 
-    j_file << ";\n\tinvokevirtual collisionengine/CollisionEngine/addObject(Lcollisionengine/ThreeDObject;)V\n";
+    j_file << ";\n\tgetstatic " << program_name << "/" << put_point_name << " Lcollisionengine/Point;\n";
+
+    j_file << "\tinvokevirtual collisionengine/CollisionEngine/addObject(Lcollisionengine/ThreeDObject;Lcollisionengine/Point;)V\n";
 
 
     /*
@@ -249,6 +258,12 @@ antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *c
     return visitChildren(ctx);
 
 }
+
+antlrcpp::Any CloudsPass2Visitor::visitWait_stmt(CloudsParser::Wait_stmtContext *ctx)
+{
+    return visitChildren(ctx);
+
+}    
 
 antlrcpp::Any CloudsPass2Visitor::visitIntegerConst(CloudsParser::IntegerConstContext *ctx)
 {

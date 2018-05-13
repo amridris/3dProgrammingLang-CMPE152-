@@ -15,23 +15,25 @@ public class CollisionEngine
     int[][][] environment;
     int[] objectNumbers;
     String[] objectNames;
-    int numCollisions;
+    int numCollisions = 0;
     Map<Set<ThreeDObject>, Integer> collisionMap; 
     List<ThreeDObject> engineObjects;
     //hashtable of actions?
 
-    public void timestep()
+    public int[] timestep()
     {
         for(ThreeDObject obj: engineObjects){
             obj.timestep();
         }
-        detectCollisions();
-        handleCollisions();
+        return detectCollisions();
+        // handleCollisions();
     }
 
-    public void detectCollisions()
+    public int[] detectCollisions()
     {
-
+        int[] collisions = new int[numCollisions+1];
+        //actually detect collisions
+        return collisions;
     }
 
     public void handleCollisions()
@@ -39,8 +41,9 @@ public class CollisionEngine
 
     }
 
-    public void addObject(ThreeDObject argobj)
+    public void addObject(ThreeDObject argobj, Point argPoint)
     {
+        argobj.putInEnvironment(argPoint);
         engineObjects.add(argobj);
     }
 
@@ -78,8 +81,10 @@ public class CollisionEngine
         System.out.printf("Current Object Status:\n");
         for(ThreeDObject obj: engineObjects){
             System.out.print(obj.name);
-            System.out.print(" is at: ");
+            System.out.print(" center is at: ");
             obj.printLocation();
+            System.out.printf(" and velocity is: dx=%d, dy=%d, dz=%d", obj.objvelocity.dx, obj.objvelocity.dy, obj.objvelocity.dz);
+            System.out.println();
         }
     }
 
@@ -101,8 +106,9 @@ public class CollisionEngine
 
     public static void main(String[] args) {
         CollisionEngine col = new CollisionEngine(100,100,100);
+        Point p = new Point(10,0,0);
         RectPrism rect = new RectPrism(1,2,3);
-        col.addObject(rect);
+        col.addObject(rect, p);
         System.out.println(rect.height);
     }
     //map has type, 

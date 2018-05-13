@@ -42,7 +42,7 @@ public:
 	antlrcpp::Any visitInit_list(CloudsParser::Init_listContext *ctx) override;
 	antlrcpp::Any visitObj_vars(CloudsParser::Obj_varsContext *ctx) override;
 	antlrcpp::Any visitPut_stmt(CloudsParser::Put_stmtContext *ctx) override;
-
+	antlrcpp::Any visitWait_stmt(CloudsParser::Wait_stmtContext *ctx) override;
 	antlrcpp::Any visitIntegerConst(CloudsParser::IntegerConstContext *ctx) override;
 /*
 	antlrcpp::Any visitAdd_sub_op(CloudsParser::Add_sub_opContext *ctx) override;

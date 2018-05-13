@@ -4,7 +4,10 @@
 .field private static _runTimer LRunTimer;
 .field private static _standardIn LPascalTextIn;
 .field private static environmentObjectEngine Lcollisionengine/CollisionEngine;
+.field private static pointObjectOne Lcollisionengine/Point;
+.field private static pointObjectTwo Lcollisionengine/Point;
 .field private static cubeobject Lcollisionengine/RectPrism;
+.field private static sphereobject Lcollisionengine/Sphere;
 
 .method public <init>()V
 
@@ -35,6 +38,28 @@
 	invokenonvirtual collisionengine/CollisionEngine/<init>(III)V
 	putstatic	collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
 
+; pointpointObjectOne=[x=0,y=0,z=0]
+
+	new collisionengine/Point
+	dup
+	ldc	0
+	ldc	0
+	ldc	0
+	invokenonvirtual collisionengine/Point/<init>(III)V
+	putstatic collisionengine/assignmentseven/pointObjectOne Lcollisionengine/Point;
+
+
+; pointpointObjectTwo=[x=10,y=0,z=0]
+
+	new collisionengine/Point
+	dup
+	ldc	10
+	ldc	0
+	ldc	0
+	invokenonvirtual collisionengine/Point/<init>(III)V
+	putstatic collisionengine/assignmentseven/pointObjectTwo Lcollisionengine/Point;
+
+
 ; cubecubeobject=[height=1,width=1,length=2]
 
 	new collisionengine/RectPrism
@@ -49,11 +74,31 @@
 	invokevirtual collisionengine/RectPrism/setName(Ljava/lang/String;)V
 
 
-; putnenvcubecubeobject
+; spheresphereobject=[radius=2]
+
+	new collisionengine/Sphere
+	dup
+	ldc	2
+	invokenonvirtual collisionengine/Sphere/<init>(I)V
+	dup
+	putstatic collisionengine/assignmentseven/sphereobject Lcollisionengine/Sphere;
+	ldc "sphereobject"
+	invokevirtual collisionengine/Sphere/setName(Ljava/lang/String;)V
+
+
+; putnenvcubecubeobjectpointObjectOne
 
 	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
 	getstatic collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
-	invokevirtual collisionengine/CollisionEngine/addObject(Lcollisionengine/ThreeDObject;)V
+	getstatic collisionengine/assignmentseven/pointObjectOne Lcollisionengine/Point;
+	invokevirtual collisionengine/CollisionEngine/addObject(Lcollisionengine/ThreeDObject;Lcollisionengine/Point;)V
+
+; putnenvspheresphereobjectpointObjectTwo
+
+	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
+	getstatic collisionengine/assignmentseven/sphereobject Lcollisionengine/Sphere;
+	getstatic collisionengine/assignmentseven/pointObjectTwo Lcollisionengine/Point;
+	invokevirtual collisionengine/CollisionEngine/addObject(Lcollisionengine/ThreeDObject;Lcollisionengine/Point;)V
 
 ; wait10
 
