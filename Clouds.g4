@@ -57,7 +57,7 @@ assignment_stmt : variable assignment_operators expr
                // | init_var assignment_operators expr
                 ;
 
-init_stmt       : init_var assignment_operators expr ; 
+init_stmt       : init_var ASSIGN_OP '[' init_list ']'; 
 
 repeat_stmt     : REPEAT stmt_list UNTIL expr ;
 
@@ -93,7 +93,7 @@ expr locals [ TypeSpec *type = nullptr ]
      | expr add_sub_op expr     # addSubExpr //done first visit
      | expr rel_op expr         # relExpr    //done first visit
      | expr rot_op expr         # rotExpr    //done first visit  
-     | '[' init_list ']'        # initList   //done first visit
+     //| '[' init_list ']'        # initList   //done first visit
      | signedNumber             # signedNumberConst
      | number                   # numberConst //done first visit
      | variable                 # identifier  //done first visit

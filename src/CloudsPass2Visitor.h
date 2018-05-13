@@ -23,6 +23,7 @@ private:
 	ostream& j_file;
 	string var_name; //take out when symbol table support is complete
 	string jas_type;
+	string init_param;
 	size_t var_size = 0;
 
 public:
@@ -39,9 +40,11 @@ public:
 	//antlrcpp::Any visitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) override;
 	antlrcpp::Any visitInit_stmt(CloudsParser::Init_stmtContext *ctx) override;
 	antlrcpp::Any visitInit_list(CloudsParser::Init_listContext *ctx) override;
+	antlrcpp::Any visitObj_vars(CloudsParser::Obj_varsContext *ctx) override;
 	antlrcpp::Any visitPut_stmt(CloudsParser::Put_stmtContext *ctx) override;
-/*
+
 	antlrcpp::Any visitIntegerConst(CloudsParser::IntegerConstContext *ctx) override;
+/*
 	antlrcpp::Any visitAdd_sub_op(CloudsParser::Add_sub_opContext *ctx) override;
 	antlrcpp::Any visitMul_div_op(CloudsParser::Mul_div_opContext *ctx) override;
 	antlrcpp::Any visitIf_stmt(CloudsParser::If_stmtContext *ctx) override;

@@ -103,10 +103,6 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitInitList(CloudsParser::InitListContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
   virtual antlrcpp::Any visitParens(CloudsParser::ParensContext *ctx) override {
     return visitChildren(ctx);
   }

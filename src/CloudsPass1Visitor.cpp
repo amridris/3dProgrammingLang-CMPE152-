@@ -109,23 +109,25 @@ antlrcpp::Any CloudsPass1Visitor::visitInit_var(CloudsParser::Init_varContext *c
 
     //TYPE
     string var_type = ctx->TYPE()->toString();
-    string jas_type;
+    string jas_type = "Lcollisionengine/";
     if(var_type == "cube"){
-        jas_type = "[I";
+        jas_type += "RectPrism;";
     }
     //SPhere has radius
     else if(var_type == "sphere"){
-        jas_type = "[I"; //array (not sure)
+        jas_type += "Sphere;"; //array (not sure)
     }
     //cylinder (radius, height)
     else if(var_type == "cylinder"){
-        jas_type = "[I"; //array (not sure)
+        jas_type += "Cylinder;"; //array (not sure)
     }
+    /*
     else if(var_type == "tetra"){
         jas_type = "[I"; //array (not sure)
     }
+    */
     else if(var_type == "point"){
-       jas_type = "[I"; //array (not sure)
+       jas_type += "Point;"; //array (not sure)
     }
     else if(var_type == "int"){
         jas_type = "I"; //integer
@@ -140,19 +142,18 @@ antlrcpp::Any CloudsPass1Visitor::visitInit_var(CloudsParser::Init_varContext *c
     //jasmin code
      j_file << ".field private static "
                << ctx->ID()->toString() << " " << jas_type << endl;
-    j_file << ".field private static "
-               << ctx->ID()->toString() << "center " << "[I" << endl;
-    
+   
+     /*
     //parsing identifiers and placing it in the system table
     string variable_name = ctx->ID()->toString();
     SymTabEntry *variable_id = symtab_stack->enter_local(variable_name);
     variable_id->set_definition((Definition)DF_VARIABLE);
     variable_id_list.push_back(variable_id);
 
-
+*/
     return visitChildren(ctx);
 }
-/*
+
 antlrcpp::Any CloudsPass1Visitor::visitAddSubExpr(CloudsParser::AddSubExprContext *ctx){
 
     auto value = visitChildren(ctx);
@@ -288,4 +289,3 @@ antlrcpp::Any CloudsPass1Visitor::visitParens(CloudsParser::ParensContext *ctx){
     ctx->type = ctx->expr()->type;
     return value;
 }
-*/

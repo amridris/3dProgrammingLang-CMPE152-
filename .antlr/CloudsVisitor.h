@@ -65,8 +65,6 @@ public:
 
     virtual antlrcpp::Any visitIdentifier(CloudsParser::IdentifierContext *context) = 0;
 
-    virtual antlrcpp::Any visitInitList(CloudsParser::InitListContext *context) = 0;
-
     virtual antlrcpp::Any visitParens(CloudsParser::ParensContext *context) = 0;
 
     virtual antlrcpp::Any visitAddSubExpr(CloudsParser::AddSubExprContext *context) = 0;

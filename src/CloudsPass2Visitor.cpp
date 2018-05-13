@@ -115,6 +115,42 @@ antlrcpp::Any CloudsPass2Visitor::visitInit_stmt(CloudsParser::Init_stmtContext 
 {
     string var_type = ctx->init_var()->TYPE()->toString();
     var_name = ctx->init_var()->ID()->toString();
+    init_param = "";
+
+/*
+    for(auto ex: ctx->init_list()->expr()){
+
+    }
+*/
+    
+    if(var_type == "cube"){
+        jas_type += "RectPrism";
+        j_file << "\tnew collisionengine/" << jas_type << "\n\tdup\n";
+    }
+    //SPhere has radius
+    else if(var_type == "sphere"){
+        jas_type += "Sphere"; //array (not sure)
+        j_file << "\tnew collisionengine/" << jas_type << "\n\tdup\n";
+
+    }
+    //cylinder (radius, height)
+    else if(var_type == "cylinder"){
+        jas_type += "Cylinder"; //array (not sure)
+        j_file << "\tnew collisionengine/" << jas_type << "\n\tdup\n";
+        
+    }
+    /*
+    else if(var_type == "tetra"){
+        jas_type = "[I"; //array (not sure)
+    }
+    */
+    else if(var_type == "point"){
+       jas_type += "Point"; //array (not sure)
+        j_file << "\tnew collisionengine/" << jas_type << "\n\tdup\n";
+
+    }
+    
+    auto value = visitChildren(ctx);
 
     if(var_type == "int")
     {
@@ -122,40 +158,28 @@ antlrcpp::Any CloudsPass2Visitor::visitInit_stmt(CloudsParser::Init_stmtContext 
            << "/" << var_name
            << " I"  << endl;
     }
-        if(var_type == "float")
+    else if(var_type == "float")
     {
         j_file << "\tputstatic\t" << program_name
            << "/" << var_name
            << " F"  << endl;
     }
-
-    if(var_type == "cube") { 
-        jas_type = "[I";
-        var_size = 3;
-        j_file << "\tldc " << var_size << endl;
-        j_file << "\tnewarray int\n";
+    else if(var_type == "cube" || var_type == "sphere"
+            || var_type == "point" || var_type == "cylinder"){
+        j_file << "\tinvokenonvirtual collisionengine/" << jas_type << "/<init>(" << init_param << ")V\n";
+        j_file << "\tputstatic " << program_name << "/" << var_name << " Lcollisionengine/" << jas_type << ";\n";
     }
-    
-    
-     j_file << "\tputstatic " << program_name << "/" 
-                 << var_name << " " << jas_type << "\n" << endl;
+    j_file << endl;
 
-    if(var_type == "cube") { 
-        j_file << "\tldc " << 3 << endl;
-        j_file << "\tnewarray int\n";
-    }
-    
-    
-     j_file << "\tputstatic " << program_name << "/" 
-                << var_name << "center"<< " [I" << "\n" << endl;
-   
-    
-    return visitChildren(ctx);
+
+    return value;
 }
 
 
 antlrcpp::Any CloudsPass2Visitor::visitInit_list(CloudsParser::Init_listContext *ctx)
 {
+    //MIGHT NEED TO ADD SUPPORT SO ORDER OF VARIABLES DOESN"T MATTER
+    /*
     string number;
      for(int counter = 0; counter < var_size; counter++){
         number = ctx->expr(counter)->getText();
@@ -164,7 +188,16 @@ antlrcpp::Any CloudsPass2Visitor::visitInit_list(CloudsParser::Init_listContext 
         j_file << "\tldc\t" << number << endl;//change to support multidimensional arrays
         j_file << "\tiastore\n" << endl;
     }
-    return visitChildren(ctx);
+    */
+    return visitChildren(ctx);;
+
+}
+
+antlrcpp::Any CloudsPass2Visitor::visitObj_vars(CloudsParser::Obj_varsContext *ctx)
+{
+    init_param+="I";//check type of expr later
+    
+    return visitChildren(ctx);;
 
 }
 
@@ -172,12 +205,14 @@ antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *c
 {
     string put_var_name = ctx->ID()->toString();
     int put_var_number = 0;
+    /*
     for(int counter = 0; counter <3; counter++){
         j_file << "\tgetstatic\t" << program_name <<"/"<< put_var_name << "center [I\n";
         j_file << "\tldc\t" << counter << endl;
         j_file << "\tldc\t0" <<endl;
         j_file << "\tiastore\n" << endl;
     }
+    */
     
 /*
     j_file << "\tgetstatic\t" << program_name << "/" << current_environment_name << " [[[I" <<endl;
@@ -193,15 +228,15 @@ antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *c
     return visitChildren(ctx);
 
 }
-/*
+
 antlrcpp::Any CloudsPass2Visitor::visitIntegerConst(CloudsParser::IntegerConstContext *ctx)
 {
     // Emit a load constant instruction.
-   // j_file << "\tldc\t" << ctx->getText() << endl;
+    j_file << "\tldc\t" << ctx->getText() << endl;
 
     return visitChildren(ctx);
 }
-
+/*
 antlrcpp::Any CloudsPass2Visitor::visitAdd_Sub_op(CloudsParser::Add_sub_opContext *ctx)
 {
     auto value = visitChildren(ctx);
@@ -383,15 +418,17 @@ antlrcpp::Any CloudsPass2Visitor::visitStmt_list(CloudsParser::Stmt_listContext 
 //     return value;
 // }
 */
+
 antlrcpp::Any CloudsPass2Visitor::visitRun_simulation(CloudsParser::Run_simulationContext *ctx)
 {
     auto value = visitChildren(ctx);
     string output_var_name = "cubeobject";
-
+/*
     j_file << "\tgetstatic\tjava/lang/System/out Ljava/io/PrintStream;" <<endl;
+
     j_file << "\tldc\t\"Results of Simulation:";
     
-/*
+
 //NOT USING printf
     j_file << "\"\n\tinvokevirtual java/io/PrintStream.println(Ljava/lang/String;)V\n";
     j_file << "\tgetstatic\tjava/lang/System/out Ljava/io/PrintStream;" <<endl;
@@ -403,7 +440,7 @@ antlrcpp::Any CloudsPass2Visitor::visitRun_simulation(CloudsParser::Run_simulati
                 <<"ldc\t" << 0 <<"\niaload\n";
     j_file << "\tinvokevirtual java/io/PrintStream.print(Ljava/lang/String;)V\n";
 //END NOT USING printf
-*/
+
 
  // USING printf
     j_file << "\n\tcubeobject at x=%d, y=%d, z=%d\n\"\n";
@@ -422,7 +459,7 @@ antlrcpp::Any CloudsPass2Visitor::visitRun_simulation(CloudsParser::Run_simulati
     j_file << "\tinvokevirtual java/io/PrintStream/printf(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;\npop\n" <<endl;
 
 //END USING printf
-
+*/
     j_file << "\tgetstatic " << program_name << "/" << current_environment_name << "Engine Lcollisionengine/CollisionEngine;\n";
     j_file << "\tinvokevirtual collisionengine/CollisionEngine/printStatus()V\n";
     return value;

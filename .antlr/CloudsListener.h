@@ -81,9 +81,6 @@ public:
   virtual void enterIdentifier(CloudsParser::IdentifierContext *ctx) = 0;
   virtual void exitIdentifier(CloudsParser::IdentifierContext *ctx) = 0;
 
-  virtual void enterInitList(CloudsParser::InitListContext *ctx) = 0;
-  virtual void exitInitList(CloudsParser::InitListContext *ctx) = 0;
-
   virtual void enterParens(CloudsParser::ParensContext *ctx) = 0;
   virtual void exitParens(CloudsParser::ParensContext *ctx) = 0;
 

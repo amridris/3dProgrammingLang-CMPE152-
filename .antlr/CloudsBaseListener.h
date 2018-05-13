@@ -83,9 +83,6 @@ public:
   virtual void enterIdentifier(CloudsParser::IdentifierContext * /*ctx*/) override { }
   virtual void exitIdentifier(CloudsParser::IdentifierContext * /*ctx*/) override { }
 
-  virtual void enterInitList(CloudsParser::InitListContext * /*ctx*/) override { }
-  virtual void exitInitList(CloudsParser::InitListContext * /*ctx*/) override { }
-
   virtual void enterParens(CloudsParser::ParensContext * /*ctx*/) override { }
   virtual void exitParens(CloudsParser::ParensContext * /*ctx*/) override { }
 

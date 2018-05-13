@@ -33,7 +33,7 @@ public:
     antlrcpp::Any visitEnvironments(CloudsParser::EnvironmentsContext *ctx) override;
     antlrcpp::Any visitBody(CloudsParser::BodyContext *ctx) override;
     antlrcpp::Any visitInit_var(CloudsParser::Init_varContext *ctx) override;
-/*  
+
     antlrcpp::Any visitMulDivExpr(CloudsParser::MulDivExprContext *ctx) override;
     antlrcpp::Any visitAddSubExpr(CloudsParser::AddSubExprContext *ctx) override;
     antlrcpp::Any visitRelExpr(CloudsParser::RelExprContext *ctx) override;
@@ -44,7 +44,7 @@ public:
     antlrcpp::Any visitIntegerConst(CloudsParser::IntegerConstContext *ctx) override;
     antlrcpp::Any visitFloatConst(CloudsParser::FloatConstContext *ctx) override;
     antlrcpp::Any visitParens(CloudsParser::ParensContext *ctx) override;
-    */
+    
 
    
     

@@ -270,8 +270,8 @@ public:
     Init_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Init_varContext *init_var();
-    Assignment_operatorsContext *assignment_operators();
-    ExprContext *expr();
+    antlr4::tree::TerminalNode *ASSIGN_OP();
+    Init_listContext *init_list();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -460,17 +460,6 @@ public:
     IdentifierContext(ExprContext *ctx);
 
     VariableContext *variable();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  InitListContext : public ExprContext {
-  public:
-    InitListContext(ExprContext *ctx);
-
-    Init_listContext *init_list();
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
 
