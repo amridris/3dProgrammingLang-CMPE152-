@@ -8,7 +8,6 @@
 .field private static pointObjectTwo Lcollisionengine/Point;
 .field private static cubeobject Lcollisionengine/RectPrism;
 .field private static sphereobject Lcollisionengine/Sphere;
-.field private static timetomovecube I
 
 .method public <init>()V
 
@@ -42,7 +41,7 @@
 ; inttimetomovecube=2
 
 	ldc	2
-	putstatic	collisionengine/assignmentseven/timetomovecube I
+	putstatic	collisionengine/assignmentseven/timetomovecube ?
 
 ; pointpointObjectOne=[x=0,y=0,z=0]
 
@@ -110,20 +109,4 @@
 
 	getstatic collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
 	getstatic collisionengine/assignmentseven/pointObjectTwo Lcollisionengine/Point;
-	getstatic	collisionengine/assignmentseven/timetomovecube I
-	invokevirtual collisionengine/ThreeDObject.move(Lcollisionengine/Point;I)V
-
-; wait10
-
-	ldc	10
-	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
-	invokevirtual collisionengine/CollisionEngine/printStatus()V
-
-	getstatic     collisionengine/assignmentseven/_runTimer LRunTimer;
-	invokevirtual RunTimer.printElapsedTime()V
-
-	return
-
-.limit locals 16
-.limit stack 16
-.end method
+	getstatic	collisionengine/assignmentseven/timetomovecube ?
