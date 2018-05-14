@@ -1,5 +1,5 @@
-.source                  point.java
-.class                   public collisionengine/point
+.source                  Point.java
+.class                   public collisionengine/Point
 .super                   java/lang/Object
 
 .field                   public x I
@@ -14,7 +14,7 @@
    iconst_0              
    iconst_0              
    iconst_0              
-   invokespecial         collisionengine/point/<init>(III)V
+   invokespecial         collisionengine/Point/<init>(III)V
    return                
 .end method              
 
@@ -32,7 +32,7 @@
    aload_1               
    iconst_2              
    iaload                
-   invokespecial         collisionengine/point/<init>(III)V
+   invokespecial         collisionengine/Point/<init>(III)V
    return                
 .end method              
 
@@ -45,15 +45,15 @@
    .line                 10
    aload_0               
    iload_1               
-   putfield              collisionengine/point/x I
+   putfield              collisionengine/Point/x I
    .line                 11
    aload_0               
    iload_2               
-   putfield              collisionengine/point/y I
+   putfield              collisionengine/Point/y I
    .line                 12
    aload_0               
    iload_3               
-   putfield              collisionengine/point/z I
+   putfield              collisionengine/Point/z I
    .line                 13
    return                
 .end method              
@@ -64,25 +64,40 @@
    .line                 16
    aload_0               
    dup                   
-   getfield              collisionengine/point/x I
+   getfield              collisionengine/Point/x I
    iload_1               
    iadd                  
-   putfield              collisionengine/point/x I
+   putfield              collisionengine/Point/x I
    .line                 17
    aload_0               
    dup                   
-   getfield              collisionengine/point/y I
+   getfield              collisionengine/Point/y I
    iload_2               
    iadd                  
-   putfield              collisionengine/point/y I
+   putfield              collisionengine/Point/y I
    .line                 18
    aload_0               
    dup                   
-   getfield              collisionengine/point/z I
+   getfield              collisionengine/Point/z I
    iload_3               
    iadd                  
-   putfield              collisionengine/point/z I
+   putfield              collisionengine/Point/z I
    .line                 19
+   return                
+.end method              
+
+.method                  public static main([Ljava/lang/String;)V
+   .limit stack          5
+   .limit locals         2
+   .line                 22
+   new                   collisionengine/RectPrism
+   dup                   
+   iconst_1              
+   iconst_1              
+   iconst_1              
+   invokespecial         collisionengine/RectPrism/<init>(III)V
+   astore_1              
+   .line                 23
    return                
 .end method              
 

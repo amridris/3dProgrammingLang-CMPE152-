@@ -111,7 +111,7 @@
 
 	getstatic collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
 	getstatic collisionengine/assignmentseven/pointObjectTwo Lcollisionengine/Point;
-	getstatic	collisionengine/assignmentseven/timetomovecube ?
+	getstatic	collisionengine/assignmentseven/timetomovecube I
 	invokevirtual collisionengine/ThreeDObject.move(Lcollisionengine/Point;I)V
 
 ; wait10
