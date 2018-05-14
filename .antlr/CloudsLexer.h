@@ -17,18 +17,17 @@ class  CloudsLexer : public antlr4::Lexer {
 public:
   enum {
     T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, 
-    T__7 = 8, T__8 = 9, T__9 = 10, T__10 = 11, T__11 = 12, CLOUDS = 13, 
-    REPEAT = 14, UNTIL = 15, IF = 16, THEN = 17, ELSE = 18, WHEN = 19, CENTER = 20, 
-    TELEPORT = 21, COLISION = 22, WAIT = 23, MOVE = 24, TO = 25, MOVE_3 = 26, 
-    AT = 27, IN = 28, FOR = 29, FINISH = 30, PUTNENV = 31, FUNCTION = 32, 
-    ENVIRONMENT = 33, SIMULATION = 34, PRINT = 35, BETWEEN = 36, TYPE = 37, 
-    SPHERE = 38, HEIGHT = 39, WIDTH = 40, LENGTH = 41, RADIUS = 42, X = 43, 
-    Y = 44, Z = 45, POINT = 46, VELOCITY = 47, SPEED = 48, ASSIGN_OP = 49, 
-    MUL = 50, DIV = 51, ADD = 52, SUB = 53, MUL_EQ = 54, DIV_EQ = 55, ADD_EQ = 56, 
-    SUB_EQ = 57, EQ_OP = 58, NE_OP = 59, LT_OP = 60, LE_OP = 61, GT_OP = 62, 
-    GE_OP = 63, ROLL_OP = 64, PITCH_OP = 65, YAW_OP = 66, COM_OP = 67, SEMICOLON = 68, 
-    FLOAT = 69, ID = 70, INT = 71, NEWLINE = 72, WS = 73, COMMENT = 74, 
-    BLOCK_COM = 75
+    T__7 = 8, T__8 = 9, T__9 = 10, CLOUDS = 11, REPEAT = 12, UNTIL = 13, 
+    IF = 14, THEN = 15, ELSE = 16, WHEN = 17, CENTER = 18, TELEPORT = 19, 
+    COLISION = 20, WAIT = 21, MOVE = 22, TO = 23, MOVE_3 = 24, AT = 25, 
+    IN = 26, FOR = 27, FINISH = 28, PUTNENV = 29, FUNCTION = 30, ENVIRONMENT = 31, 
+    SIMULATION = 32, PRINT = 33, BETWEEN = 34, TYPE = 35, SPHERE = 36, HEIGHT = 37, 
+    WIDTH = 38, LENGTH = 39, RADIUS = 40, X = 41, Y = 42, Z = 43, POINT = 44, 
+    VELOCITY = 45, SPEED = 46, ASSIGN_OP = 47, MUL = 48, DIV = 49, ADD = 50, 
+    SUB = 51, MUL_EQ = 52, DIV_EQ = 53, ADD_EQ = 54, SUB_EQ = 55, EQ_OP = 56, 
+    NE_OP = 57, LT_OP = 58, LE_OP = 59, GT_OP = 60, GE_OP = 61, ROLL_OP = 62, 
+    PITCH_OP = 63, YAW_OP = 64, COM_OP = 65, SEMICOLON = 66, FLOAT = 67, 
+    ID = 68, INT = 69, NEWLINE = 70, WS = 71, COMMENT = 72, BLOCK_COM = 73
   };
 
   CloudsLexer(antlr4::CharStream *input);

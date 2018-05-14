@@ -29,6 +29,8 @@ ostream& CloudsPass1Visitor::get_assembly_file() { return j_file; }
 
 antlrcpp::Any CloudsPass1Visitor::visitProgram(CloudsParser::ProgramContext *ctx)
 {
+    variable_id_list.resize(0);
+
     auto value = visitChildren(ctx);
     
 
@@ -37,6 +39,7 @@ antlrcpp::Any CloudsPass1Visitor::visitProgram(CloudsParser::ProgramContext *ctx
     // Print the cross-reference table.
     CrossReferencer cross_referencer;
     cross_referencer.print(symtab_stack);
+
 
     return value;
 }
@@ -134,12 +137,15 @@ antlrcpp::Any CloudsPass1Visitor::visitInit_var(CloudsParser::Init_varContext *c
        jas_type += "Point;"; //array (not sure)
     }
     else if(var_type == "int"){
+        ctx->variable()->type = Predefined::integer_type;
         jas_type = "I"; //integer
     }
     else if(var_type == "float"){
+        ctx->variable()->type = Predefined::real_type;
         jas_type = "F"; //float 
     }
     else{
+        ctx->variable()->type = nullptr;
         jas_type = "?"; //nullptr
     }
 
@@ -147,14 +153,15 @@ antlrcpp::Any CloudsPass1Visitor::visitInit_var(CloudsParser::Init_varContext *c
      j_file << ".field private static "
                << ctx->variable()->ID()->toString() << " " << jas_type << endl;
    
-     /*
+     
     //parsing identifiers and placing it in the system table
-    string variable_name = ctx->ID()->toString();
+    string variable_name = ctx->variable()->ID()->toString();
     SymTabEntry *variable_id = symtab_stack->enter_local(variable_name);
     variable_id->set_definition((Definition)DF_VARIABLE);
+    variable_id->set_typespec(ctx->variable()->type);
     variable_id_list.push_back(variable_id);
 
-*/
+
     return visitChildren(ctx);
 }
 
@@ -292,4 +299,13 @@ antlrcpp::Any CloudsPass1Visitor::visitParens(CloudsParser::ParensContext *ctx){
     auto value = visitChildren(ctx);
     ctx->type = ctx->expr()->type;
     return value;
+}
+
+antlrcpp::Any CloudsPass1Visitor::visitExprvariable(CloudsParser::ExprvariableContext *ctx)
+{
+    string variable_name = ctx->variable()->ID()->toString();
+    SymTabEntry *variable_id = symtab_stack->lookup(variable_name);
+
+    ctx->type = variable_id->get_typespec();
+    return visitChildren(ctx);
 }

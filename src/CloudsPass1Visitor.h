@@ -44,7 +44,8 @@ public:
     antlrcpp::Any visitIntegerConst(CloudsParser::IntegerConstContext *ctx) override;
     antlrcpp::Any visitFloatConst(CloudsParser::FloatConstContext *ctx) override;
     antlrcpp::Any visitParens(CloudsParser::ParensContext *ctx) override;
-    
+    antlrcpp::Any visitExprvariable(CloudsParser::ExprvariableContext *ctx) override;
+
 
    
     

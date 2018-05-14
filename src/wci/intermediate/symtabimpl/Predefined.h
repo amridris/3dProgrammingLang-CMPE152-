@@ -37,6 +37,11 @@ public:
 
 
     // Predefined identifiers.
+    static SymTabEntry *RectPrism_id;
+    static SymTabEntry *Point_id;
+    static SymTabEntry *Sphere_id;
+    static SymTabEntry *Cylinder_id;
+    static SymTabEntry *Tetra_id;
     static SymTabEntry *integer_id;
     static SymTabEntry *real_id;
     static SymTabEntry *boolean_id;

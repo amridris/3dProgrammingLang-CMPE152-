@@ -50,9 +50,6 @@ public:
   virtual void enterAssignment_stmt(CloudsParser::Assignment_stmtContext * /*ctx*/) override { }
   virtual void exitAssignment_stmt(CloudsParser::Assignment_stmtContext * /*ctx*/) override { }
 
-  virtual void enterBasic_types(CloudsParser::Basic_typesContext * /*ctx*/) override { }
-  virtual void exitBasic_types(CloudsParser::Basic_typesContext * /*ctx*/) override { }
-
   virtual void enterInit_stmt(CloudsParser::Init_stmtContext * /*ctx*/) override { }
   virtual void exitInit_stmt(CloudsParser::Init_stmtContext * /*ctx*/) override { }
 
@@ -122,8 +119,11 @@ public:
   virtual void enterFunction(CloudsParser::FunctionContext * /*ctx*/) override { }
   virtual void exitFunction(CloudsParser::FunctionContext * /*ctx*/) override { }
 
-  virtual void enterFuncName(CloudsParser::FuncNameContext * /*ctx*/) override { }
-  virtual void exitFuncName(CloudsParser::FuncNameContext * /*ctx*/) override { }
+  virtual void enterFunctionInit(CloudsParser::FunctionInitContext * /*ctx*/) override { }
+  virtual void exitFunctionInit(CloudsParser::FunctionInitContext * /*ctx*/) override { }
+
+  virtual void enterFunctionCall(CloudsParser::FunctionCallContext * /*ctx*/) override { }
+  virtual void exitFunctionCall(CloudsParser::FunctionCallContext * /*ctx*/) override { }
 
   virtual void enterArgumentList(CloudsParser::ArgumentListContext * /*ctx*/) override { }
   virtual void exitArgumentList(CloudsParser::ArgumentListContext * /*ctx*/) override { }

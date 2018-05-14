@@ -4,8 +4,8 @@
 #include "antlr4-runtime.h"
 #include "Pcl2Lexer.h"
 #include "Pcl2Parser.h"
-#include "Pass1Visitor.h"
-#include "Pass2Visitor.h"
+#include "Pcl2Pass1Visitor.h"
+#include "Pcl2Pass2Visitor.h"
 
 using namespace std;
 using namespace antlrcpp;

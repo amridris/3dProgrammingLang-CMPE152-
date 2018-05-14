@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include "Pass2Visitor.h"
+#include "Pcl2Pass2Visitor.h"
 #include "wci/intermediate/SymTabStack.h"
 #include "wci/intermediate/SymTabEntry.h"
 #include "wci/intermediate/TypeSpec.h"

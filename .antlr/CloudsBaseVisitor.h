@@ -59,10 +59,6 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitBasic_types(CloudsParser::Basic_typesContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
   virtual antlrcpp::Any visitInit_stmt(CloudsParser::Init_stmtContext *ctx) override {
     return visitChildren(ctx);
   }
@@ -155,7 +151,11 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitFuncName(CloudsParser::FuncNameContext *ctx) override {
+  virtual antlrcpp::Any visitFunctionInit(CloudsParser::FunctionInitContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitFunctionCall(CloudsParser::FunctionCallContext *ctx) override {
     return visitChildren(ctx);
   }
 

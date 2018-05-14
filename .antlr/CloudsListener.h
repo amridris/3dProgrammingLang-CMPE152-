@@ -48,9 +48,6 @@ public:
   virtual void enterAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) = 0;
   virtual void exitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) = 0;
 
-  virtual void enterBasic_types(CloudsParser::Basic_typesContext *ctx) = 0;
-  virtual void exitBasic_types(CloudsParser::Basic_typesContext *ctx) = 0;
-
   virtual void enterInit_stmt(CloudsParser::Init_stmtContext *ctx) = 0;
   virtual void exitInit_stmt(CloudsParser::Init_stmtContext *ctx) = 0;
 
@@ -120,8 +117,11 @@ public:
   virtual void enterFunction(CloudsParser::FunctionContext *ctx) = 0;
   virtual void exitFunction(CloudsParser::FunctionContext *ctx) = 0;
 
-  virtual void enterFuncName(CloudsParser::FuncNameContext *ctx) = 0;
-  virtual void exitFuncName(CloudsParser::FuncNameContext *ctx) = 0;
+  virtual void enterFunctionInit(CloudsParser::FunctionInitContext *ctx) = 0;
+  virtual void exitFunctionInit(CloudsParser::FunctionInitContext *ctx) = 0;
+
+  virtual void enterFunctionCall(CloudsParser::FunctionCallContext *ctx) = 0;
+  virtual void exitFunctionCall(CloudsParser::FunctionCallContext *ctx) = 0;
 
   virtual void enterArgumentList(CloudsParser::ArgumentListContext *ctx) = 0;
   virtual void exitArgumentList(CloudsParser::ArgumentListContext *ctx) = 0;

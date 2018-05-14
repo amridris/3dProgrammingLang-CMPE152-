@@ -4,11 +4,11 @@
 .field private static _runTimer LRunTimer;
 .field private static _standardIn LPascalTextIn;
 .field private static environmentObjectEngine Lcollisionengine/CollisionEngine;
+.field private static timetomovecube I
 .field private static pointObjectOne Lcollisionengine/Point;
 .field private static pointObjectTwo Lcollisionengine/Point;
 .field private static cubeobject Lcollisionengine/RectPrism;
 .field private static sphereobject Lcollisionengine/Sphere;
-.field private static timetomovecube I
 
 .method public <init>()V
 
@@ -43,6 +43,7 @@
 
 	ldc	2
 	putstatic	collisionengine/assignmentseven/timetomovecube I
+
 
 ; pointpointObjectOne=[x=0,y=0,z=0]
 
@@ -110,7 +111,7 @@
 
 	getstatic collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
 	getstatic collisionengine/assignmentseven/pointObjectTwo Lcollisionengine/Point;
-	getstatic	collisionengine/assignmentseven/timetomovecube I
+	getstatic	collisionengine/assignmentseven/timetomovecube ?
 	invokevirtual collisionengine/ThreeDObject.move(Lcollisionengine/Point;I)V
 
 ; wait10

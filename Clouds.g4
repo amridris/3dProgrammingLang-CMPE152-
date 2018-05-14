@@ -53,15 +53,13 @@ stat : //scope            # scope_node|
 
 
 
-assignment_stmt :  assignment_operators expr 
-                | basic_types ID assignment_operators expr
+assignment_stmt : variable assignment_operators expr 
                 ;
 
-basic_types     : 'float'
-                | 'int'
-                ;
 
-init_stmt       : init_var ASSIGN_OP '[' init_list ']'; 
+init_stmt       : init_var (ASSIGN_OP '[' init_list ']')?
+                | init_var (ASSIGN_OP expr)?
+                ; 
 
 repeat_stmt     : REPEAT stmt_list UNTIL expr ;
 
@@ -126,14 +124,16 @@ obj_vars    : 'p'
             ;
 
 function
-    : funcName '(' argumentList ')' scope?
-    | funcName '(' methodCall_ref ')' scope?
+    : ID '(' argumentList ')' scope?
+    | ID '(' methodCall_ref ')' scope?
     ;
 
+functionInit
+    : ID '(' TYPE ID (',' TYPE ID)* ')'
+    ;
 
-
-funcName
-    : ID
+functionCall
+    : ID '(' ID (',' ID)* ')'
     ;
 
 argumentList
@@ -206,7 +206,9 @@ TYPE:   SPHERE
     |   'cylinder' 
 //    |   'cone'
     |   'tetra' 
-    |   POINT 
+    |   POINT
+    | 'int'
+    | 'float' 
     ;
 
 SPHERE: 'sphere' ;

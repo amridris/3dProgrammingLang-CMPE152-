@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-#include "Pass1Visitor.h"
+#include "Pcl2Pass1Visitor.h"
 #include "wci/intermediate/SymTabFactory.h"
 #include "wci/intermediate/symtabimpl/Predefined.h"
 #include "wci/util/CrossReferencer.h"

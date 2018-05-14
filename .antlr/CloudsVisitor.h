@@ -43,8 +43,6 @@ public:
 
     virtual antlrcpp::Any visitAssignment_stmt(CloudsParser::Assignment_stmtContext *context) = 0;
 
-    virtual antlrcpp::Any visitBasic_types(CloudsParser::Basic_typesContext *context) = 0;
-
     virtual antlrcpp::Any visitInit_stmt(CloudsParser::Init_stmtContext *context) = 0;
 
     virtual antlrcpp::Any visitRepeat_stmt(CloudsParser::Repeat_stmtContext *context) = 0;
@@ -91,7 +89,9 @@ public:
 
     virtual antlrcpp::Any visitFunction(CloudsParser::FunctionContext *context) = 0;
 
-    virtual antlrcpp::Any visitFuncName(CloudsParser::FuncNameContext *context) = 0;
+    virtual antlrcpp::Any visitFunctionInit(CloudsParser::FunctionInitContext *context) = 0;
+
+    virtual antlrcpp::Any visitFunctionCall(CloudsParser::FunctionCallContext *context) = 0;
 
     virtual antlrcpp::Any visitArgumentList(CloudsParser::ArgumentListContext *context) = 0;
 

@@ -38,6 +38,11 @@ TypeSpec *Predefined::Cylinder_type;
 TypeSpec *Predefined::Tetra_type;
 
 // Predefined identifiers.
+SymTabEntry *Predefined::RectPrism_id;
+SymTabEntry *Predefined::Point_id;
+SymTabEntry *Predefined::Sphere_id;
+SymTabEntry *Predefined::Cylinder_id;
+SymTabEntry *Predefined::Tetra_id;
 SymTabEntry *Predefined::integer_id;
 SymTabEntry *Predefined::real_id;
 SymTabEntry *Predefined::boolean_id;
@@ -80,6 +85,38 @@ void Predefined::initialize(SymTabStack *symtab_stack)
 void Predefined::initialize_types(SymTabStack *symtab_stack)
 {
     // Type integer.
+    RectPrism_id = symtab_stack->enter_local("RectPrism");
+    RectPrism_type = TypeFactory::create_type((TypeForm) TF_SCALAR);
+    RectPrism_type->set_identifier(RectPrism_id);
+    RectPrism_id->set_definition((Definition) DF_TYPE);
+    RectPrism_id->set_typespec(RectPrism_type);
+
+    Sphere_id = symtab_stack->enter_local("Sphere");
+    Sphere_type = TypeFactory::create_type((TypeForm) TF_SCALAR);
+    Sphere_type->set_identifier(Sphere_id);
+    Sphere_id->set_definition((Definition) DF_TYPE);
+    Sphere_id->set_typespec(Sphere_type);
+
+    Cylinder_id = symtab_stack->enter_local("Cylinder");
+    RectPrism_type = TypeFactory::create_type((TypeForm) TF_SCALAR);
+    RectPrism_type->set_identifier(Cylinder_id);
+    Cylinder_id->set_definition((Definition) DF_TYPE);
+    Cylinder_id->set_typespec(RectPrism_type);
+
+    Point_id = symtab_stack->enter_local("Point");
+    Point_type = TypeFactory::create_type((TypeForm) TF_SCALAR);
+    Point_type->set_identifier(Point_id);
+    Point_id->set_definition((Definition) DF_TYPE);
+    Point_id->set_typespec(Point_type);
+
+    Tetra_id = symtab_stack->enter_local("Tetra");
+    Tetra_type = TypeFactory::create_type((TypeForm) TF_SCALAR);
+    Tetra_type->set_identifier(Tetra_id);
+    Tetra_id->set_definition((Definition) DF_TYPE);
+    Tetra_id->set_typespec(Tetra_type);
+
+
+
     integer_id = symtab_stack->enter_local("integer");
     integer_type = TypeFactory::create_type((TypeForm) TF_SCALAR);
     integer_type->set_identifier(integer_id);

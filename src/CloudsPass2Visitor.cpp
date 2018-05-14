@@ -99,13 +99,13 @@ antlrcpp::Any CloudsPass2Visitor::visitAssignment_stmt(CloudsParser::Assignment_
     auto value = visit(ctx->expr());
 
     string type_indicator =
-                  (ctx->basic_types()->toString() == "int") ? "I"
-                : (ctx->basic_types()->toString() == "float")    ? "F"
+                  (ctx->variable()->type == Predefined::integer_type) ? "I"
+                : (ctx->variable()->type == Predefined::real_type)    ? "F"
                 :                                                         "?";
 
     // Emit a field put instruction.
     j_file << "\tputstatic\t" << program_name
-           << "/" << ctx->ID()->toString()
+           << "/" << ctx->variable()->ID()->toString()
            << " " << type_indicator << endl;
 
     return value;
@@ -322,7 +322,7 @@ antlrcpp::Any CloudsPass2Visitor::visitIntegerConst(CloudsParser::IntegerConstCo
 antlrcpp::Any CloudsPass2Visitor::visitExprvariable(CloudsParser::ExprvariableContext *ctx)
 {
       string variable_name = ctx->variable()->ID()->toString();
-    TypeSpec *type = ctx->type;
+    TypeSpec *type = ctx->variable()->type;
 
     string type_indicator = (type == Predefined::integer_type) ? "I"
                           : (type == Predefined::real_type)    ? "F"
