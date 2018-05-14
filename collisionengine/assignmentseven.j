@@ -120,9 +120,11 @@
 	getstatic	collisionengine/assignmentseven/timetomovecube I
 	invokevirtual collisionengine/ThreeDObject.move(Lcollisionengine/Point;I)V
 
-; wait10
+; waitcubeobject.dx
 
-	ldc	10
+	getstatic	collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
+
+	invokevirtual collisionengine/RectPrism.getdx()I
 	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
 	invokevirtual collisionengine/CollisionEngine/printStatus()V
 

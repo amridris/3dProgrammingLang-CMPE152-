@@ -36,5 +36,5 @@ environment environmentObject
 simulation
 {
     move cubeobject to pointObjectTwo in timetomovecube;
-    wait 10;
+    wait cubeobject.dx;
 }

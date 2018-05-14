@@ -351,17 +351,52 @@ antlrcpp::Any CloudsPass2Visitor::visitIntegerConst(CloudsParser::IntegerConstCo
 
 antlrcpp::Any CloudsPass2Visitor::visitExprvariable(CloudsParser::ExprvariableContext *ctx)
 {
-      string variable_name = ctx->variable()->ID()->toString();
-    TypeSpec *type = ctx->variable()->type;
 
-    string type_indicator = (type == Predefined::integer_type) ? "I"
-                          : (type == Predefined::real_type)    ? "F"
-                          :                                      "?";
+    string variable_name;
+    string objvar_name = "?";
+  
+    if(ctx->variable()->obj_vars() != nullptr) 
+    { 
+        auto type_name = ctx->variable()->variable()->type;
+        variable_name = ctx->variable()->variable()->ID()->toString();
+        jas_type = "";
 
-    // Emit a field get instruction.
-    j_file << "\tgetstatic\t" << program_name
-           << "/" << variable_name << " " << type_indicator << endl;
+        if(type_name == Predefined::RectPrism_type){
+            jas_type = "RectPrism";
+        }
+        else if(type_name == Predefined::Sphere_type){
+            jas_type = "Sphere";
+        }
+        else if(type_name == Predefined::Cylinder_type){
+            jas_type = "Cylinder";
+        }
+        else { jas_type = "?";}
 
+        objvar_name = ctx->variable()->obj_vars()->getText(); 
+
+         j_file << "\tgetstatic\t" << program_name
+                << "/" << variable_name << " Lcollisionengine/" << jas_type << ";\n" << endl;
+        j_file << "\tinvokevirtual collisionengine/" << jas_type << ".get" << objvar_name << "()I\n";
+        
+        
+    }
+    else 
+    {
+        auto type_name = ctx->variable()->type;
+        variable_name = ctx->variable()->ID()->toString();
+        string type_indicator = (type_name == Predefined::integer_type) ? "I"
+                            : (type_name == Predefined::real_type)    ? "F"
+                            :                                      "?";
+
+        // Emit a field get instruction.
+        j_file << "\tgetstatic\t" << program_name
+            << "/" << variable_name << " " << type_indicator << endl;
+
+    }
+
+    return visitChildren(ctx);
+
+    
 }
 
 /*

@@ -111,14 +111,16 @@ init_list   : obj_vars '=' expr (',' obj_vars '=' expr)*  ;  //done first visit
 
 init_var    : TYPE variable; 
 
-obj_vars    : 'p'
-            | HEIGHT
+obj_vars    : HEIGHT
             | WIDTH
             | LENGTH
             | RADIUS
             | X 
             | Y 
             | Z 
+            | DX 
+            | DY 
+            | DZ
             | CENTER
             | VELOCITY
             | SPEED
@@ -222,6 +224,9 @@ RADIUS  : 'radius';
 X       : 'x';
 Y       : 'y';
 Z       : 'z';
+DX      : 'dx';
+DY      : 'dy';
+DZ      : 'dz';
 POINT   : 'point';
 VELOCITY: 'velocity';
 SPEED   : 'speed';

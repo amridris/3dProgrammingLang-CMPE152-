@@ -70,6 +70,19 @@ abstract class ThreeDObject
         {
             System.out.printf("x=%d, y=%d, z=%d", center.x, center.y, center.z);
         }
+        public int getx(){ return center.x; }
+        public int gety(){ return center.y; }
+        public int getz(){ return center.z; }
+        public int getdx(){ return objvelocity.dx; }
+        public int getdy(){ return objvelocity.dy; }
+        public int getdz(){ return objvelocity.dz; }
+
+        public void setx(int argx) { center.x = argx;}
+        public void sety(int argy) { center.y = argy;}
+        public void setz(int argz) { center.z = argz;}
+        public void setdx(int argdx) { objvelocity.dx = argdx;}
+        public void setdy(int argdy) { objvelocity.dy = argdy;}
+        public void setdz(int argdz) { objvelocity.dz = argdz;}
 
         Point center;
         //private int moveTime;

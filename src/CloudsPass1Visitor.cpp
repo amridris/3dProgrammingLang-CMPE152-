@@ -316,10 +316,13 @@ antlrcpp::Any CloudsPass1Visitor::visitExprvariable(CloudsParser::ExprvariableCo
 
 antlrcpp::Any CloudsPass1Visitor::visitVariable(CloudsParser::VariableContext *ctx)
 {
-    string variable_name = ctx->ID()->toString();
-    SymTabEntry *variable_id = symtab_stack->lookup(variable_name);
+    if(ctx->obj_vars() == nullptr){
+        string variable_name = ctx->ID()->toString();
+        SymTabEntry *variable_id = symtab_stack->lookup(variable_name);
 
-    ctx->type = variable_id->get_typespec();
+        ctx->type = variable_id->get_typespec();
+    }
+    
     return visitChildren(ctx);
 
 }

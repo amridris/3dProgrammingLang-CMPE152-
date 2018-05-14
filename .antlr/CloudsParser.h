@@ -17,17 +17,17 @@ class  CloudsParser : public antlr4::Parser {
 public:
   enum {
     T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, 
-    T__7 = 8, T__8 = 9, T__9 = 10, CLOUDS = 11, REPEAT = 12, UNTIL = 13, 
-    IF = 14, THEN = 15, ELSE = 16, WHEN = 17, CENTER = 18, TELEPORT = 19, 
-    COLISION = 20, WAIT = 21, MOVE = 22, TO = 23, MOVE_3 = 24, AT = 25, 
-    IN = 26, FOR = 27, FINISH = 28, PUTNENV = 29, FUNCTION = 30, ENVIRONMENT = 31, 
-    SIMULATION = 32, PRINT = 33, BETWEEN = 34, TYPE = 35, SPHERE = 36, HEIGHT = 37, 
-    WIDTH = 38, LENGTH = 39, RADIUS = 40, X = 41, Y = 42, Z = 43, POINT = 44, 
-    VELOCITY = 45, SPEED = 46, ASSIGN_OP = 47, MUL = 48, DIV = 49, ADD = 50, 
-    SUB = 51, MUL_EQ = 52, DIV_EQ = 53, ADD_EQ = 54, SUB_EQ = 55, EQ_OP = 56, 
-    NE_OP = 57, LT_OP = 58, LE_OP = 59, GT_OP = 60, GE_OP = 61, ROLL_OP = 62, 
-    PITCH_OP = 63, YAW_OP = 64, COM_OP = 65, SEMICOLON = 66, FLOAT = 67, 
-    ID = 68, INT = 69, NEWLINE = 70, WS = 71, COMMENT = 72, BLOCK_COM = 73
+    T__7 = 8, T__8 = 9, CLOUDS = 10, REPEAT = 11, UNTIL = 12, IF = 13, THEN = 14, 
+    ELSE = 15, WHEN = 16, CENTER = 17, TELEPORT = 18, COLISION = 19, WAIT = 20, 
+    MOVE = 21, TO = 22, MOVE_3 = 23, AT = 24, IN = 25, FOR = 26, FINISH = 27, 
+    PUTNENV = 28, FUNCTION = 29, ENVIRONMENT = 30, SIMULATION = 31, PRINT = 32, 
+    BETWEEN = 33, TYPE = 34, SPHERE = 35, HEIGHT = 36, WIDTH = 37, LENGTH = 38, 
+    RADIUS = 39, X = 40, Y = 41, Z = 42, DX = 43, DY = 44, DZ = 45, POINT = 46, 
+    VELOCITY = 47, SPEED = 48, ASSIGN_OP = 49, MUL = 50, DIV = 51, ADD = 52, 
+    SUB = 53, MUL_EQ = 54, DIV_EQ = 55, ADD_EQ = 56, SUB_EQ = 57, EQ_OP = 58, 
+    NE_OP = 59, LT_OP = 60, LE_OP = 61, GT_OP = 62, GE_OP = 63, ROLL_OP = 64, 
+    PITCH_OP = 65, YAW_OP = 66, COM_OP = 67, SEMICOLON = 68, FLOAT = 69, 
+    ID = 70, INT = 71, NEWLINE = 72, WS = 73, COMMENT = 74, BLOCK_COM = 75
   };
 
   enum {
@@ -628,6 +628,9 @@ public:
     antlr4::tree::TerminalNode *X();
     antlr4::tree::TerminalNode *Y();
     antlr4::tree::TerminalNode *Z();
+    antlr4::tree::TerminalNode *DX();
+    antlr4::tree::TerminalNode *DY();
+    antlr4::tree::TerminalNode *DZ();
     antlr4::tree::TerminalNode *CENTER();
     antlr4::tree::TerminalNode *VELOCITY();
     antlr4::tree::TerminalNode *SPEED();
