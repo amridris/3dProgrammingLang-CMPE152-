@@ -27,13 +27,13 @@ environment environmentObject
     cube cubeobject = [height=1, width=1, length=2];
     sphere sphereobject = [radius = 2];
 
-    putnenv cube cubeobject pointObjectOne;
-    putnenv sphere sphereobject pointObjectTwo;
+    putnenv cubeobject pointObjectOne;
+    putnenv sphereobject pointObjectTwo;
     
 }
 
 simulation
 {
-    move cube cubeobject to pointObjectTwo in timetomovecube;
+    move cubeobject to pointObjectTwo in timetomovecube;
     wait 10;
 }

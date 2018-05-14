@@ -212,20 +212,20 @@ antlrcpp::Any CloudsPass2Visitor::visitObj_vars(CloudsParser::Obj_varsContext *c
 
 antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *ctx)
 {
-    string put_var_name = ctx->ID(0)->toString();
-    string put_point_name = ctx->ID(1)->toString();
-    string put_var_type = ctx->TYPE()->toString();
+    string put_var_name = ctx->variable()->ID()->toString();
+    string put_point_name = ctx->ID()->toString();
+    auto put_var_type = ctx->variable()->type; 
     int put_var_number = 0;
 
     j_file << "\tgetstatic " << program_name << "/" << current_environment_name << "Engine Lcollisionengine/CollisionEngine;\n";
     j_file << "\tgetstatic " << program_name << "/" << put_var_name << " Lcollisionengine/";
-    if(put_var_type == "cube"){
+    if(put_var_type == Predefined::RectPrism_type){
         j_file << "RectPrism";
     }
-    else if(put_var_type == "sphere"){
+    else if(put_var_type == Predefined::Sphere_type){
         j_file << "Sphere";
     }
-    else if(put_var_type == "cylinder"){
+    else if(put_var_type == Predefined::Cylinder_type){
         j_file << "Cylinder";
     }
     else { j_file << "?";}
@@ -268,18 +268,18 @@ antlrcpp::Any CloudsPass2Visitor::visitWait_stmt(CloudsParser::Wait_stmtContext 
 antlrcpp::Any CloudsPass2Visitor::visitMove_stmt(CloudsParser::Move_stmtContext *ctx)
 {
     string move_params = "";
-    string move_var_name = ctx->ID()->toString();
+    string move_var_name = ctx->variable()->ID()->toString();
     string move_point_name = ctx->point_var()->ID()->toString(); // check if null in future
-    string move_type_name = ctx->TYPE()->toString();
+    auto move_type_name = ctx->variable()->type;
     jas_type = "";
 
-    if(move_type_name == "cube"){
+    if(move_type_name == Predefined::RectPrism_type){
         jas_type = "RectPrism";
     }
-    else if(move_type_name == "sphere"){
+    else if(move_type_name == Predefined::Sphere_type){
         jas_type = "Sphere";
     }
-    else if(move_type_name == "cylinder"){
+    else if(move_type_name == Predefined::Cylinder_type){
         jas_type = "Cylinder";
     }
     else { jas_type = "?";}

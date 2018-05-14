@@ -93,21 +93,21 @@
 	invokevirtual collisionengine/Sphere/setName(Ljava/lang/String;)V
 
 
-; putnenvcubecubeobjectpointObjectOne
+; putnenvcubeobjectpointObjectOne
 
 	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
 	getstatic collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
 	getstatic collisionengine/assignmentseven/pointObjectOne Lcollisionengine/Point;
 	invokevirtual collisionengine/CollisionEngine/addObject(Lcollisionengine/ThreeDObject;Lcollisionengine/Point;)V
 
-; putnenvspheresphereobjectpointObjectTwo
+; putnenvsphereobjectpointObjectTwo
 
 	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
 	getstatic collisionengine/assignmentseven/sphereobject Lcollisionengine/Sphere;
 	getstatic collisionengine/assignmentseven/pointObjectTwo Lcollisionengine/Point;
 	invokevirtual collisionengine/CollisionEngine/addObject(Lcollisionengine/ThreeDObject;Lcollisionengine/Point;)V
 
-; movecubecubeobjecttopointObjectTwointimetomovecube
+; movecubeobjecttopointObjectTwointimetomovecube
 
 	getstatic collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
 	getstatic collisionengine/assignmentseven/pointObjectTwo Lcollisionengine/Point;

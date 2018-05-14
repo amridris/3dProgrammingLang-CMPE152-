@@ -328,9 +328,8 @@ public:
     Put_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *PUTNENV();
-    antlr4::tree::TerminalNode *TYPE();
-    std::vector<antlr4::tree::TerminalNode *> ID();
-    antlr4::tree::TerminalNode* ID(size_t i);
+    VariableContext *variable();
+    antlr4::tree::TerminalNode *ID();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -380,8 +379,7 @@ public:
     Move_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *MOVE();
-    antlr4::tree::TerminalNode *TYPE();
-    antlr4::tree::TerminalNode *ID();
+    VariableContext *variable();
     antlr4::tree::TerminalNode *TO();
     Point_varContext *point_var();
     std::vector<antlr4::tree::TerminalNode *> MOVE_3();

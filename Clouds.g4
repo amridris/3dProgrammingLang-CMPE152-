@@ -66,7 +66,7 @@ repeat_stmt     : REPEAT stmt_list UNTIL expr ;
 if_stmt         : IF expr THEN scope ( ELSE scope )? ;
 
 
-put_stmt        : PUTNENV TYPE ID ID
+put_stmt        : PUTNENV variable ID
  //               | PUTNENV variable TYPE
                 ;
 
@@ -75,7 +75,7 @@ collision_stmt  : COLISION variable BETWEEN variable variable
 
 wait_stmt       : WAIT expr;
 
-move_stmt       : MOVE TYPE ID TO point_var MOVE_3 expr (MOVE_3 expr)?
+move_stmt       : MOVE variable TO point_var MOVE_3 expr (MOVE_3 expr)?
                 ;
 
 point_var   : '[' init_list ']'
