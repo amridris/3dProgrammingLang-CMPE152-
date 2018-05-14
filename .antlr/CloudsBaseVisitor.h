@@ -55,6 +55,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitRotation_stmt(CloudsParser::Rotation_stmtContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) override {
     return visitChildren(ctx);
   }
@@ -116,10 +120,6 @@ public:
   }
 
   virtual antlrcpp::Any visitExprvariable(CloudsParser::ExprvariableContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitRotExpr(CloudsParser::RotExprContext *ctx) override {
     return visitChildren(ctx);
   }
 

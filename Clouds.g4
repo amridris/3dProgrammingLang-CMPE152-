@@ -39,6 +39,7 @@ stmt_list       : stat SEMICOLON (stat SEMICOLON)* ;
 stat : //scope            # scope_node| 
         assignment_stmt // # assignmentStmt
      | init_stmt
+     | rotation_stmt
      | function         //# Function_
      | repeat_stmt      //# repeatStmt
      | if_stmt          //# ifStmt
@@ -51,7 +52,7 @@ stat : //scope            # scope_node|
 //     |                  # emptyStmt
      ;
 
-
+rotation_stmt   : variable rot_op expr ;
 
 assignment_stmt : variable assignment_operators expr 
                 ;
@@ -98,7 +99,7 @@ expr locals [ TypeSpec *type = nullptr ]
      : expr mul_div_op expr     # mulDivExpr //done first visit
      | expr add_sub_op expr     # addSubExpr //done first visit
      | expr rel_op expr         # relExpr    //done first visit
-     | expr rot_op expr         # rotExpr    //done first visit  
+    // | expr rot_op expr         # rotExpr    //done first visit  
      //| '[' init_list ']'        # initList   //done first visit
      | signedNumber             # signedNumberConst
      | number                   # numberConst //done first visit

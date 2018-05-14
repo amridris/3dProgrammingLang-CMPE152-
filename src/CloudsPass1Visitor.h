@@ -37,7 +37,7 @@ public:
     antlrcpp::Any visitMulDivExpr(CloudsParser::MulDivExprContext *ctx) override;
     antlrcpp::Any visitAddSubExpr(CloudsParser::AddSubExprContext *ctx) override;
     antlrcpp::Any visitRelExpr(CloudsParser::RelExprContext *ctx) override;
-    antlrcpp::Any visitRotExpr(CloudsParser::RotExprContext *ctx) override;
+//    antlrcpp::Any visitRotExpr(CloudsParser::RotExprContext *ctx) override;
     antlrcpp::Any visitSignedNumberConst(CloudsParser::SignedNumberConstContext *ctx)override;
     antlrcpp::Any visitSignedNumber(CloudsParser::SignedNumberContext *ctx) override;
     antlrcpp::Any visitNumberConst(CloudsParser::NumberConstContext *ctx) override;

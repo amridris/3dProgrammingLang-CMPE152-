@@ -47,6 +47,9 @@ public:
   virtual void enterStat(CloudsParser::StatContext * /*ctx*/) override { }
   virtual void exitStat(CloudsParser::StatContext * /*ctx*/) override { }
 
+  virtual void enterRotation_stmt(CloudsParser::Rotation_stmtContext * /*ctx*/) override { }
+  virtual void exitRotation_stmt(CloudsParser::Rotation_stmtContext * /*ctx*/) override { }
+
   virtual void enterAssignment_stmt(CloudsParser::Assignment_stmtContext * /*ctx*/) override { }
   virtual void exitAssignment_stmt(CloudsParser::Assignment_stmtContext * /*ctx*/) override { }
 
@@ -94,9 +97,6 @@ public:
 
   virtual void enterExprvariable(CloudsParser::ExprvariableContext * /*ctx*/) override { }
   virtual void exitExprvariable(CloudsParser::ExprvariableContext * /*ctx*/) override { }
-
-  virtual void enterRotExpr(CloudsParser::RotExprContext * /*ctx*/) override { }
-  virtual void exitRotExpr(CloudsParser::RotExprContext * /*ctx*/) override { }
 
   virtual void enterSignedNumberConst(CloudsParser::SignedNumberConstContext * /*ctx*/) override { }
   virtual void exitSignedNumberConst(CloudsParser::SignedNumberConstContext * /*ctx*/) override { }

@@ -233,6 +233,8 @@ antlrcpp::Any CloudsPass1Visitor::visitRelExpr(CloudsParser::RelExprContext *ctx
     return value;
 }
 
+
+/*
 antlrcpp::Any CloudsPass1Visitor::visitRotExpr(CloudsParser::RotExprContext *ctx){
 
        auto value = visitChildren(ctx);
@@ -256,6 +258,7 @@ antlrcpp::Any CloudsPass1Visitor::visitRotExpr(CloudsParser::RotExprContext *ctx
 
     return value;
 }
+*/
 
 
 

@@ -56,6 +56,10 @@ abstract class ThreeDObject
             center.y += objvelocity.dy;
             center.z += objvelocity.dz;
         }
+        public void rotate(int argDegrees)
+        {
+
+        }
         abstract void buildSpace(); 
 
         public void setName(String argName)

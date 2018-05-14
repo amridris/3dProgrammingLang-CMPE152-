@@ -44,6 +44,8 @@ public:
 	antlrcpp::Any visitPut_stmt(CloudsParser::Put_stmtContext *ctx) override;
 	antlrcpp::Any visitWait_stmt(CloudsParser::Wait_stmtContext *ctx) override;
 	antlrcpp::Any visitMove_stmt(CloudsParser::Move_stmtContext *ctx) override;
+	antlrcpp::Any visitRotation_stmt(CloudsParser::Rotation_stmtContext *ctx) override;
+
 
 	antlrcpp::Any visitIntegerConst(CloudsParser::IntegerConstContext *ctx) override;
 	antlrcpp::Any visitExprvariable(CloudsParser::ExprvariableContext *ctx) override;

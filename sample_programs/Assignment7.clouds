@@ -30,6 +30,7 @@ environment environmentObject
     putnenv cubeobject pointObjectOne;
     putnenv sphereobject pointObjectTwo;
     
+    cubeobject ~R 5; 
 }
 
 simulation

@@ -41,6 +41,8 @@ public:
 
     virtual antlrcpp::Any visitStat(CloudsParser::StatContext *context) = 0;
 
+    virtual antlrcpp::Any visitRotation_stmt(CloudsParser::Rotation_stmtContext *context) = 0;
+
     virtual antlrcpp::Any visitAssignment_stmt(CloudsParser::Assignment_stmtContext *context) = 0;
 
     virtual antlrcpp::Any visitInit_stmt(CloudsParser::Init_stmtContext *context) = 0;
@@ -72,8 +74,6 @@ public:
     virtual antlrcpp::Any visitNumberConst(CloudsParser::NumberConstContext *context) = 0;
 
     virtual antlrcpp::Any visitExprvariable(CloudsParser::ExprvariableContext *context) = 0;
-
-    virtual antlrcpp::Any visitRotExpr(CloudsParser::RotExprContext *context) = 0;
 
     virtual antlrcpp::Any visitSignedNumberConst(CloudsParser::SignedNumberConstContext *context) = 0;
 

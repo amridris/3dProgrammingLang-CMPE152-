@@ -45,6 +45,9 @@ public:
   virtual void enterStat(CloudsParser::StatContext *ctx) = 0;
   virtual void exitStat(CloudsParser::StatContext *ctx) = 0;
 
+  virtual void enterRotation_stmt(CloudsParser::Rotation_stmtContext *ctx) = 0;
+  virtual void exitRotation_stmt(CloudsParser::Rotation_stmtContext *ctx) = 0;
+
   virtual void enterAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) = 0;
   virtual void exitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx) = 0;
 
@@ -92,9 +95,6 @@ public:
 
   virtual void enterExprvariable(CloudsParser::ExprvariableContext *ctx) = 0;
   virtual void exitExprvariable(CloudsParser::ExprvariableContext *ctx) = 0;
-
-  virtual void enterRotExpr(CloudsParser::RotExprContext *ctx) = 0;
-  virtual void exitRotExpr(CloudsParser::RotExprContext *ctx) = 0;
 
   virtual void enterSignedNumberConst(CloudsParser::SignedNumberConstContext *ctx) = 0;
   virtual void exitSignedNumberConst(CloudsParser::SignedNumberConstContext *ctx) = 0;

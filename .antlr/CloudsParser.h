@@ -33,14 +33,15 @@ public:
   enum {
     RuleProgram = 0, RuleHeader = 1, RuleBody = 2, RuleBlock = 3, RuleEnvironments = 4, 
     RuleRun_simulation = 5, RuleScope = 6, RuleStmt_list = 7, RuleStat = 8, 
-    RuleAssignment_stmt = 9, RuleInit_stmt = 10, RuleRepeat_stmt = 11, RuleIf_stmt = 12, 
-    RulePut_stmt = 13, RuleCollision_stmt = 14, RuleWait_stmt = 15, RuleMove_stmt = 16, 
-    RulePoint_var = 17, RuleWhen_stmt = 18, RulePrint_stmt = 19, RuleVariable = 20, 
-    RuleExpr = 21, RuleInit_list = 22, RuleInit_var = 23, RuleObj_vars = 24, 
-    RuleFunction = 25, RuleFunctionInit = 26, RuleFunctionCall = 27, RuleArgumentList = 28, 
-    RuleMethodCallArguments = 29, RuleMethodCall_ref = 30, RuleSignedNumber = 31, 
-    RuleSign = 32, RuleNumber = 33, RuleAssignment_operators = 34, RuleMul_div_op = 35, 
-    RuleAdd_sub_op = 36, RuleRel_op = 37, RuleRot_op = 38
+    RuleRotation_stmt = 9, RuleAssignment_stmt = 10, RuleInit_stmt = 11, 
+    RuleRepeat_stmt = 12, RuleIf_stmt = 13, RulePut_stmt = 14, RuleCollision_stmt = 15, 
+    RuleWait_stmt = 16, RuleMove_stmt = 17, RulePoint_var = 18, RuleWhen_stmt = 19, 
+    RulePrint_stmt = 20, RuleVariable = 21, RuleExpr = 22, RuleInit_list = 23, 
+    RuleInit_var = 24, RuleObj_vars = 25, RuleFunction = 26, RuleFunctionInit = 27, 
+    RuleFunctionCall = 28, RuleArgumentList = 29, RuleMethodCallArguments = 30, 
+    RuleMethodCall_ref = 31, RuleSignedNumber = 32, RuleSign = 33, RuleNumber = 34, 
+    RuleAssignment_operators = 35, RuleMul_div_op = 36, RuleAdd_sub_op = 37, 
+    RuleRel_op = 38, RuleRot_op = 39
   };
 
   CloudsParser(antlr4::TokenStream *input);
@@ -62,6 +63,7 @@ public:
   class ScopeContext;
   class Stmt_listContext;
   class StatContext;
+  class Rotation_stmtContext;
   class Assignment_stmtContext;
   class Init_stmtContext;
   class Repeat_stmtContext;
@@ -231,6 +233,7 @@ public:
     virtual size_t getRuleIndex() const override;
     Assignment_stmtContext *assignment_stmt();
     Init_stmtContext *init_stmt();
+    Rotation_stmtContext *rotation_stmt();
     FunctionContext *function();
     Repeat_stmtContext *repeat_stmt();
     If_stmtContext *if_stmt();
@@ -249,6 +252,23 @@ public:
   };
 
   StatContext* stat();
+
+  class  Rotation_stmtContext : public antlr4::ParserRuleContext {
+  public:
+    Rotation_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    VariableContext *variable();
+    Rot_opContext *rot_op();
+    ExprContext *expr();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  Rotation_stmtContext* rotation_stmt();
 
   class  Assignment_stmtContext : public antlr4::ParserRuleContext {
   public:
@@ -518,19 +538,6 @@ public:
     ExprvariableContext(ExprContext *ctx);
 
     VariableContext *variable();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  RotExprContext : public ExprContext {
-  public:
-    RotExprContext(ExprContext *ctx);
-
-    std::vector<ExprContext *> expr();
-    ExprContext* expr(size_t i);
-    Rot_opContext *rot_op();
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
 

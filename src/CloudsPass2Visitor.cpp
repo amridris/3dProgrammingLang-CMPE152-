@@ -311,6 +311,36 @@ antlrcpp::Any CloudsPass2Visitor::visitMove_stmt(CloudsParser::Move_stmtContext 
 
 }
 
+antlrcpp::Any CloudsPass2Visitor::visitRotation_stmt(CloudsParser::Rotation_stmtContext *ctx)
+{
+    string var_name = ctx->variable()->ID()->toString();
+    string rot_op_name = ctx->rot_op()->getText(); // check if null in future
+    auto type_name = ctx->variable()->type;
+    jas_type = "";
+
+    if(type_name == Predefined::RectPrism_type){
+        jas_type = "RectPrism";
+    }
+    else if(type_name == Predefined::Sphere_type){
+        jas_type = "Sphere";
+    }
+    else if(type_name == Predefined::Cylinder_type){
+        jas_type = "Cylinder";
+    }
+    else { jas_type = "?";}
+
+    j_file << "\tgetstatic " << program_name << "/" << var_name << " Lcollisionengine/" << jas_type << ";\n";
+
+    auto value = visitChildren(ctx);
+
+    j_file << "\tinvokevirtual collisionengine/ThreeDObject.rotate(I)V\n";
+
+    return value;
+
+}
+
+
+
 antlrcpp::Any CloudsPass2Visitor::visitIntegerConst(CloudsParser::IntegerConstContext *ctx)
 {
     // Emit a load constant instruction.

@@ -107,6 +107,12 @@
 	getstatic collisionengine/assignmentseven/pointObjectTwo Lcollisionengine/Point;
 	invokevirtual collisionengine/CollisionEngine/addObject(Lcollisionengine/ThreeDObject;Lcollisionengine/Point;)V
 
+; cubeobject~R5
+
+	getstatic collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
+	ldc	5
+	invokevirtual collisionengine/ThreeDObject.rotate(I)V
+
 ; movecubeobjecttopointObjectTwointimetomovecube
 
 	getstatic collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
