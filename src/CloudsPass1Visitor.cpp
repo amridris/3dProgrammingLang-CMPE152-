@@ -306,6 +306,6 @@ antlrcpp::Any CloudsPass1Visitor::visitExprvariable(CloudsParser::ExprvariableCo
     string variable_name = ctx->variable()->ID()->toString();
     SymTabEntry *variable_id = symtab_stack->lookup(variable_name);
 
-    ctx->type = variable_id->get_typespec();
+    ctx->variable()->type = variable_id->get_typespec();
     return visitChildren(ctx);
 }
