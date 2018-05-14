@@ -17,6 +17,11 @@ Clouds assignmentseven;
 
 */
 
+functionOne (int i)
+{
+    wait i;
+}
+
 environment environmentObject           
 {
     int timetomovecube = 2;

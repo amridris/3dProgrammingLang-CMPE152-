@@ -122,6 +122,9 @@ public:
   virtual void enterFunctionInit(CloudsParser::FunctionInitContext * /*ctx*/) override { }
   virtual void exitFunctionInit(CloudsParser::FunctionInitContext * /*ctx*/) override { }
 
+  virtual void enterReturn_type(CloudsParser::Return_typeContext * /*ctx*/) override { }
+  virtual void exitReturn_type(CloudsParser::Return_typeContext * /*ctx*/) override { }
+
   virtual void enterFunctionCall(CloudsParser::FunctionCallContext * /*ctx*/) override { }
   virtual void exitFunctionCall(CloudsParser::FunctionCallContext * /*ctx*/) override { }
 

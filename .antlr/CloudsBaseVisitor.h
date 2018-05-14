@@ -155,6 +155,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitReturn_type(CloudsParser::Return_typeContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitFunctionCall(CloudsParser::FunctionCallContext *ctx) override {
     return visitChildren(ctx);
   }

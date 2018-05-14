@@ -3,6 +3,7 @@
 
 .field private static _runTimer LRunTimer;
 .field private static _standardIn LPascalTextIn;
+.field private static i I
 .field private static environmentObjectEngine Lcollisionengine/CollisionEngine;
 .field private static timetomovecube I
 .field private static pointObjectOne Lcollisionengine/Point;
@@ -20,6 +21,16 @@
 .limit stack 1
 .end method
 
+
+.method private static functionOne(I)V
+
+; waiti
+
+	getstatic	collisionengine/assignmentseven/i I
+
+.limit locals 1
+.limit stack 50
+.end method
 .method public static main([Ljava/lang/String;)V
 
 	new RunTimer

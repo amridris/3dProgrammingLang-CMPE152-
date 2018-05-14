@@ -120,6 +120,9 @@ public:
   virtual void enterFunctionInit(CloudsParser::FunctionInitContext *ctx) = 0;
   virtual void exitFunctionInit(CloudsParser::FunctionInitContext *ctx) = 0;
 
+  virtual void enterReturn_type(CloudsParser::Return_typeContext *ctx) = 0;
+  virtual void exitReturn_type(CloudsParser::Return_typeContext *ctx) = 0;
+
   virtual void enterFunctionCall(CloudsParser::FunctionCallContext *ctx) = 0;
   virtual void exitFunctionCall(CloudsParser::FunctionCallContext *ctx) = 0;
 

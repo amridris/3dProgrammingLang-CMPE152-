@@ -30,6 +30,77 @@ antlrcpp::Any CloudsPass2Visitor::visitHeader(CloudsParser::HeaderContext *ctx)
     return visitChildren(ctx);
 }
 
+antlrcpp::Any CloudsPass2Visitor::visitFunction(CloudsParser::FunctionContext *ctx)
+{
+    func_locals = 0;
+    j_file << "\n\n.method private static ";
+    auto value = visitChildren(ctx);
+
+    j_file << "\n.limit locals " << func_locals << endl;
+    j_file << ".limit stack 50\n";
+    j_file << ".end method";
+
+    return value;
+}
+
+antlrcpp::Any CloudsPass2Visitor::visitFunctionInit(CloudsParser::FunctionInitContext *ctx)
+{
+    string type_name;
+    j_file << ctx->ID()->toString() << "(";
+    for(auto init_var: ctx->init_var()){
+        func_locals++;
+        type_name = init_var->TYPE()->toString();
+        if(type_name == "int"){
+            j_file << "I";
+        }
+        else if(type_name == "float"){
+            j_file << "F";
+        }
+        else if(type_name == "cube"){
+            j_file << "Lcollisionengine/RectPrism;";
+        }
+        else if(type_name == "sphere"){
+            j_file << "Lcollisionengine/Sphere;" ;
+        }
+        else if(type_name == "cylinder"){
+            j_file << "Lcollisionengine/Cylinder;";
+        }
+        else {
+            j_file << "?";
+        }
+    }
+    j_file << ")";
+
+    if(ctx->return_type() != nullptr){
+        type_name = ctx->return_type()->TYPE()->toString();
+        if(type_name == "int"){
+            j_file << "I";
+        }
+        else if(type_name == "float"){
+            j_file << "F";
+        }
+        else if(type_name == "cube"){
+            j_file << "Lcollisionengine/RectPrism;";
+        }
+        else if(type_name == "sphere"){
+            j_file << "Lcollisionengine/Sphere;"; 
+        }
+        else if(type_name == "cylinder"){
+            j_file << "Lcollisionengine/Cylinder;";
+        }
+        else {
+            j_file << "?";
+        }
+    }
+    else {
+        j_file << "V";
+    }
+    j_file << "\n";
+
+    return visitChildren(ctx);    
+
+}
+
 antlrcpp::Any CloudsPass2Visitor::visitBody(CloudsParser::BodyContext *ctx)
 {
     j_file << endl;

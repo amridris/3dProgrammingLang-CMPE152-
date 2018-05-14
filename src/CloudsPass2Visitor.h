@@ -24,6 +24,7 @@ private:
 	string var_name; //take out when symbol table support is complete
 	string jas_type;
 	string init_param;
+	int func_locals;
 	size_t var_size = 0;
 
 public:
@@ -32,6 +33,8 @@ public:
 
 	antlrcpp::Any visitProgram(CloudsParser::ProgramContext *ctx) override;
     antlrcpp::Any visitHeader(CloudsParser::HeaderContext *ctx) override;
+	antlrcpp::Any visitFunction(CloudsParser::FunctionContext *ctx) override;
+	antlrcpp::Any visitFunctionInit(CloudsParser::FunctionInitContext *ctx) override;
 	antlrcpp::Any visitBody(CloudsParser::BodyContext *ctx) override;
 	antlrcpp::Any visitBlock(CloudsParser::BlockContext *ctx) override;
     antlrcpp::Any visitEnvironments(CloudsParser::EnvironmentsContext *ctx) override;

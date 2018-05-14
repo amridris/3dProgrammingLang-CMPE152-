@@ -91,6 +91,8 @@ public:
 
     virtual antlrcpp::Any visitFunctionInit(CloudsParser::FunctionInitContext *context) = 0;
 
+    virtual antlrcpp::Any visitReturn_type(CloudsParser::Return_typeContext *context) = 0;
+
     virtual antlrcpp::Any visitFunctionCall(CloudsParser::FunctionCallContext *context) = 0;
 
     virtual antlrcpp::Any visitArgumentList(CloudsParser::ArgumentListContext *context) = 0;

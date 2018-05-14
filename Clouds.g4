@@ -5,7 +5,7 @@ grammar Clouds;
 using namespace wci::intermediate;
 }
 
-program : header function? body ; //done 
+program : header function* body ; //done 
 header  : CLOUDS ID SEMICOLON; //done
 
 body: block+;
@@ -40,7 +40,7 @@ stat : //scope            # scope_node|
         assignment_stmt // # assignmentStmt
      | init_stmt
      | rotation_stmt
-     | function         //# Function_
+     | functionCall         //# Function_
      | repeat_stmt      //# repeatStmt
      | if_stmt          //# ifStmt
      | when_stmt       // # whenStmt
@@ -127,16 +127,17 @@ obj_vars    : HEIGHT
             ;
 
 function
-    : ID '(' argumentList ')' scope?
-    | ID '(' methodCall_ref ')' scope?
+    : functionInit scope
     ;
 
 functionInit
-    : ID '(' TYPE ID (',' TYPE ID)* ')'
+    : (return_type)? ID '(' init_var (',' init_var )* ')'
     ;
 
-functionCall
-    : ID '(' ID (',' ID)* ')'
+return_type : TYPE;
+
+functionCall 
+    : ID '(' expr (',' expr)* ')'
     ;
 
 argumentList
