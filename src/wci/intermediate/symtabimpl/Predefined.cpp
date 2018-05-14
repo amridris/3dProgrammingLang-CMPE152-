@@ -31,6 +31,11 @@ TypeSpec *Predefined::real_type;
 TypeSpec *Predefined::boolean_type;
 TypeSpec *Predefined::char_type;
 TypeSpec *Predefined::undefined_type;
+TypeSpec *Predefined::RectPrism_type;
+TypeSpec *Predefined::Point_type;
+TypeSpec *Predefined::Sphere_type;
+TypeSpec *Predefined::Cylinder_type;
+TypeSpec *Predefined::Tetra_type;
 
 // Predefined identifiers.
 SymTabEntry *Predefined::integer_id;

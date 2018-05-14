@@ -29,6 +29,12 @@ public:
     static TypeSpec *boolean_type;
     static TypeSpec *char_type;
     static TypeSpec *undefined_type;
+    static TypeSpec *RectPrism_type;
+    static TypeSpec *Point_type;
+    static TypeSpec *Sphere_type;
+    static TypeSpec *Cylinder_type;
+    static TypeSpec *Tetra_type;
+
 
     // Predefined identifiers.
     static SymTabEntry *integer_id;

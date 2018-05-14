@@ -58,8 +58,18 @@ abstract class ThreeDObject
         }
         abstract void buildSpace(); 
 
+        public void setName(String argName)
+        {
+            name = argName;
+        }
+        public void printLocation()
+        {
+            System.out.printf("x=%d, y=%d, z=%d", center.x, center.y, center.z);
+        }
+
         Point center;
         //private int moveTime;
         Velocity objvelocity;
         Boolean[][][] objectSpace;
+        String name = "no name";
     }

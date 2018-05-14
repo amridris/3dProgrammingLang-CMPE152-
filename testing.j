@@ -59,6 +59,9 @@
 
 ; cubecubeobject=[height=1,width=1,length=2]
 
+	getstatic collisionengine/testing/_testengine Lcollisionengine/CollisionEngine;
+	getstatic collisionengine/testing/_testrectprism Lcollisionengine/RectPrism;
+	invokevirtual collisionengine/CollisionEngine/addObject(Lcollisionengine/ThreeDObject;)V
 
 	getstatic     collisionengine/testing/_runTimer LRunTimer;
 	invokevirtual RunTimer.printElapsedTime()V

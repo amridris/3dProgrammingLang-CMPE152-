@@ -93,29 +93,30 @@ antlrcpp::Any CloudsPass2Visitor::visitStat(CloudsParser::StatContext *ctx)
 
     return visitChildren(ctx);
 }
-/*
+
 antlrcpp::Any CloudsPass2Visitor::visitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx)
 {
     auto value = visit(ctx->expr());
 
     string type_indicator =
-                  (ctx->variable()->type() == Predefined::integer_type) ? "I"
-                : (ctx->variable()->type() == Predefined::real_type)    ? "F"
+                  (ctx->basic_types()->toString() == "int") ? "I"
+                : (ctx->basic_types()->toString() == "float")    ? "F"
                 :                                                         "?";
 
     // Emit a field put instruction.
     j_file << "\tputstatic\t" << program_name
-           << "/" << ctx->variable()->ID()->toString()
+           << "/" << ctx->ID()->toString()
            << " " << type_indicator << endl;
 
     return value;
 }
-*/
+
 antlrcpp::Any CloudsPass2Visitor::visitInit_stmt(CloudsParser::Init_stmtContext *ctx)
 {
     string var_type = ctx->init_var()->TYPE()->toString();
-    var_name = ctx->init_var()->ID()->toString();
+    var_name = ctx->init_var()->variable()->ID()->toString();
     init_param = "";
+    jas_type = "";
 
 /*
     for(auto ex: ctx->init_list()->expr()){
@@ -165,9 +166,17 @@ antlrcpp::Any CloudsPass2Visitor::visitInit_stmt(CloudsParser::Init_stmtContext 
            << " F"  << endl;
     }
     else if(var_type == "cube" || var_type == "sphere"
-            || var_type == "point" || var_type == "cylinder"){
+            || var_type == "cylinder"){
+        j_file << "\tinvokenonvirtual collisionengine/" << jas_type << "/<init>(" << init_param << ")V\n";
+        j_file << "\tdup\n";
+        j_file << "\tputstatic " << program_name << "/" << var_name << " Lcollisionengine/" << jas_type << ";\n";
+        j_file << "\tldc \"" << var_name << "\"\n";
+        j_file << "\tinvokevirtual collisionengine/" << jas_type << "/setName(Ljava/lang/String;)V\n";
+    }
+    else if(var_type == "point" ){
         j_file << "\tinvokenonvirtual collisionengine/" << jas_type << "/<init>(" << init_param << ")V\n";
         j_file << "\tputstatic " << program_name << "/" << var_name << " Lcollisionengine/" << jas_type << ";\n";
+
     }
     j_file << endl;
 
@@ -203,8 +212,29 @@ antlrcpp::Any CloudsPass2Visitor::visitObj_vars(CloudsParser::Obj_varsContext *c
 
 antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *ctx)
 {
-    string put_var_name = ctx->ID()->toString();
+    string put_var_name = ctx->ID(0)->toString();
+    string put_point_name = ctx->ID(1)->toString();
+    string put_var_type = ctx->TYPE()->toString();
     int put_var_number = 0;
+
+    j_file << "\tgetstatic " << program_name << "/" << current_environment_name << "Engine Lcollisionengine/CollisionEngine;\n";
+    j_file << "\tgetstatic " << program_name << "/" << put_var_name << " Lcollisionengine/";
+    if(put_var_type == "cube"){
+        j_file << "RectPrism";
+    }
+    else if(put_var_type == "sphere"){
+        j_file << "Sphere";
+    }
+    else if(put_var_type == "cylinder"){
+        j_file << "Cylinder";
+    }
+    else { j_file << "?";}
+
+    j_file << ";\n\tgetstatic " << program_name << "/" << put_point_name << " Lcollisionengine/Point;\n";
+
+    j_file << "\tinvokevirtual collisionengine/CollisionEngine/addObject(Lcollisionengine/ThreeDObject;Lcollisionengine/Point;)V\n";
+
+
     /*
     for(int counter = 0; counter <3; counter++){
         j_file << "\tgetstatic\t" << program_name <<"/"<< put_var_name << "center [I\n";
@@ -229,6 +259,58 @@ antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *c
 
 }
 
+antlrcpp::Any CloudsPass2Visitor::visitWait_stmt(CloudsParser::Wait_stmtContext *ctx)
+{
+    return visitChildren(ctx);
+
+}    
+
+antlrcpp::Any CloudsPass2Visitor::visitMove_stmt(CloudsParser::Move_stmtContext *ctx)
+{
+    string move_params = "";
+    string move_var_name = ctx->ID()->toString();
+    string move_point_name = ctx->point_var()->ID()->toString(); // check if null in future
+    string move_type_name = ctx->TYPE()->toString();
+    jas_type = "";
+
+    if(move_type_name == "cube"){
+        jas_type = "RectPrism";
+    }
+    else if(move_type_name == "sphere"){
+        jas_type = "Sphere";
+    }
+    else if(move_type_name == "cylinder"){
+        jas_type = "Cylinder";
+    }
+    else { jas_type = "?";}
+
+    for(auto e: ctx->expr()){
+        move_params += "I";
+    }
+
+    if (move_params == "II")
+    {
+        j_file << "\tgetstatic " << program_name << "/" << current_environment_name << "Engine Lcollisionengine/CollisionEngine;\n";
+    }
+
+    j_file << "\tgetstatic " << program_name << "/" << move_var_name << " Lcollisionengine/" << jas_type << ";\n";
+    j_file << "\tgetstatic " << program_name << "/" << move_point_name << " Lcollisionengine/Point;\n";
+
+    auto value = visitChildren(ctx);
+
+    if(move_params == "I")
+    {
+        j_file << "\tinvokevirtual collisionengine/ThreeDObject.move(Lcollisionengine/Point;I)V\n";
+    }
+    else if(move_params == "II")
+    { 
+        j_file << "\tinvokevirtual collisionengine/ThreeDObject.move(Lcollisionengine/ThreeDObject;Lcollisionengine/Point;II)V\n";
+    }
+
+    return value;
+
+}
+
 antlrcpp::Any CloudsPass2Visitor::visitIntegerConst(CloudsParser::IntegerConstContext *ctx)
 {
     // Emit a load constant instruction.
@@ -236,6 +318,22 @@ antlrcpp::Any CloudsPass2Visitor::visitIntegerConst(CloudsParser::IntegerConstCo
 
     return visitChildren(ctx);
 }
+
+antlrcpp::Any CloudsPass2Visitor::visitExprvariable(CloudsParser::ExprvariableContext *ctx)
+{
+      string variable_name = ctx->variable()->ID()->toString();
+    TypeSpec *type = ctx->type;
+
+    string type_indicator = (type == Predefined::integer_type) ? "I"
+                          : (type == Predefined::real_type)    ? "F"
+                          :                                      "?";
+
+    // Emit a field get instruction.
+    j_file << "\tgetstatic\t" << program_name
+           << "/" << variable_name << " " << type_indicator << endl;
+
+}
+
 /*
 antlrcpp::Any CloudsPass2Visitor::visitAdd_Sub_op(CloudsParser::Add_sub_opContext *ctx)
 {

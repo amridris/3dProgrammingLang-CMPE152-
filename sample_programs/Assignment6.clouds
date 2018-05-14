@@ -31,11 +31,11 @@ environment environmentObject
     cube cubeobject = [height=1, width=1, length=2];
 
     int timetomovecube = 5;
-    int movecubeime = 20;
+    int movecubetime = 20;
     int degreestorotate = 10;
 
-    putnenv cubeobject; // always at center now
-    putnenv sphereobject;
+    putnenv cube cubeobject; // always at center now
+    putnenv sphere sphereobject;
 
     tetra tetraobject = [p= pointObjectOne, p = pointObjectTwo, p = pointObjectThree, p = pointObjectFour];
 

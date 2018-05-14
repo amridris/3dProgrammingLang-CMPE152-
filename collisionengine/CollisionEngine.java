@@ -2,6 +2,7 @@ package collisionengine;
 
 import java.lang.String;
 import java.util.*;
+import javafx.util.*;
 
 public class CollisionEngine
 {
@@ -11,27 +12,33 @@ public class CollisionEngine
         collisionMap = new HashMap<Set<ThreeDObject>, Integer>();
         numCollisions = 1;
         engineObjects = new LinkedList<ThreeDObject>();
+        moveVelocityMap = new HashMap<Integer, LinkedList<Pair<ThreeDObject, Velocity>>>();
+        movePointMap = new HashMap<Integer, LinkedList<Pair<ThreeDObject, Point>>>();
     }
     int[][][] environment;
     int[] objectNumbers;
     String[] objectNames;
-    int numCollisions;
-    Map<Set<ThreeDObject>, Integer> collisionMap; 
+    int numCollisions = 0;
+    Map<Set<ThreeDObject>, Integer> collisionMap;
+    HashMap<Integer, LinkedList<Pair<ThreeDObject, Point>>> movePointMap;
+    HashMap<Integer, LinkedList<Pair<ThreeDObject, Velocity>>> moveVelocityMap;
     List<ThreeDObject> engineObjects;
     //hashtable of actions?
 
-    public void timestep()
+    public int[] timestep()
     {
         for(ThreeDObject obj: engineObjects){
             obj.timestep();
         }
-        detectCollisions();
-        handleCollisions();
+        return detectCollisions();
+        // handleCollisions();
     }
 
-    public void detectCollisions()
+    public int[] detectCollisions()
     {
-
+        int[] collisions = new int[numCollisions+1];
+        //actually detect collisions
+        return collisions;
     }
 
     public void handleCollisions()
@@ -39,8 +46,9 @@ public class CollisionEngine
 
     }
 
-    public void addObject(ThreeDObject argobj)
+    public void addObject(ThreeDObject argobj, Point argPoint)
     {
+        argobj.putInEnvironment(argPoint);
         engineObjects.add(argobj);
     }
 
@@ -49,8 +57,17 @@ public class CollisionEngine
         return true;
     }
     
-    public void moveObject(ThreeDObject object)
+    public void moveObject(ThreeDObject argobj, Point argPoint, int argmovetime,int argstarttime)
     {
+        Velocity vel = new Velocity(argPoint.x/argmovetime, argPoint.y/argmovetime, argPoint.z/argmovetime);
+
+        Pair<ThreeDObject, Velocity> newPair = new Pair<ThreeDObject, Velocity>(argobj, vel);
+        LinkedList<Pair<ThreeDObject, Velocity>> linked = moveVelocityMap.get(argstarttime);
+        if(linked == null){
+            linked = new LinkedList<Pair<ThreeDObject, Velocity>>();
+            moveVelocityMap.put(argstarttime, linked);
+        }
+        linked.add(newPair);
         
     }
 
@@ -74,7 +91,15 @@ public class CollisionEngine
         int x = environment.length;
         int y = environment[0].length;
         int z = environment[0][0].length;
-        System.out.printf("Size of Environment: x = %d, y = %d, z = %d\n", x, y,z);
+        System.out.printf("Size of Environment: x = %d, y = %d, z = %d\n\n", x, y,z);
+        System.out.printf("Current Object Status:\n");
+        for(ThreeDObject obj: engineObjects){
+            System.out.print(obj.name);
+            System.out.print(" center is at: ");
+            obj.printLocation();
+            System.out.printf(" and velocity is: dx=%d, dy=%d, dz=%d", obj.objvelocity.dx, obj.objvelocity.dy, obj.objvelocity.dz);
+            System.out.println();
+        }
     }
 
     public ThreeDObject createObject(String argtype, HashMap<String, Integer> argmap)
@@ -94,7 +119,10 @@ public class CollisionEngine
     }
 
     public static void main(String[] args) {
+        CollisionEngine col = new CollisionEngine(100,100,100);
+        Point p = new Point(10,0,0);
         RectPrism rect = new RectPrism(1,2,3);
+        col.addObject(rect, p);
         System.out.println(rect.height);
     }
     //map has type, 
