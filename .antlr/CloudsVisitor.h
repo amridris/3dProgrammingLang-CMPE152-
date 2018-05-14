@@ -37,9 +37,13 @@ public:
 
     virtual antlrcpp::Any visitScope(CloudsParser::ScopeContext *context) = 0;
 
+    virtual antlrcpp::Any visitFuncscope(CloudsParser::FuncscopeContext *context) = 0;
+
     virtual antlrcpp::Any visitStmt_list(CloudsParser::Stmt_listContext *context) = 0;
 
     virtual antlrcpp::Any visitStat(CloudsParser::StatContext *context) = 0;
+
+    virtual antlrcpp::Any visitReturn_stmt(CloudsParser::Return_stmtContext *context) = 0;
 
     virtual antlrcpp::Any visitRotation_stmt(CloudsParser::Rotation_stmtContext *context) = 0;
 
@@ -52,8 +56,6 @@ public:
     virtual antlrcpp::Any visitIf_stmt(CloudsParser::If_stmtContext *context) = 0;
 
     virtual antlrcpp::Any visitPut_stmt(CloudsParser::Put_stmtContext *context) = 0;
-
-    virtual antlrcpp::Any visitCollision_stmt(CloudsParser::Collision_stmtContext *context) = 0;
 
     virtual antlrcpp::Any visitWait_stmt(CloudsParser::Wait_stmtContext *context) = 0;
 
@@ -68,6 +70,8 @@ public:
     virtual antlrcpp::Any visitVariable(CloudsParser::VariableContext *context) = 0;
 
     virtual antlrcpp::Any visitParens(CloudsParser::ParensContext *context) = 0;
+
+    virtual antlrcpp::Any visitExprFunctionCall(CloudsParser::ExprFunctionCallContext *context) = 0;
 
     virtual antlrcpp::Any visitAddSubExpr(CloudsParser::AddSubExprContext *context) = 0;
 

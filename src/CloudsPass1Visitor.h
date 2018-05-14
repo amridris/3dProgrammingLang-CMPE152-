@@ -21,6 +21,8 @@ private:
     SymTabEntry *program_id;
     vector<SymTabEntry *> variable_id_list;
     ofstream j_file;
+    vector<string> collisionFunctions;
+    string program_name;
 
 public:
     CloudsPass1Visitor();
@@ -30,9 +32,12 @@ public:
 
     antlrcpp::Any visitProgram(CloudsParser::ProgramContext *ctx) override;
     antlrcpp::Any visitHeader(CloudsParser::HeaderContext *ctx) override;  
+    antlrcpp::Any visitFunctionInit(CloudsParser::FunctionInitContext *ctx) override;
     antlrcpp::Any visitEnvironments(CloudsParser::EnvironmentsContext *ctx) override;
     antlrcpp::Any visitBody(CloudsParser::BodyContext *ctx) override;
     antlrcpp::Any visitInit_var(CloudsParser::Init_varContext *ctx) override;
+
+    antlrcpp::Any visitWhen_stmt(CloudsParser::When_stmtContext *ctx) override;
 
     antlrcpp::Any visitMulDivExpr(CloudsParser::MulDivExprContext *ctx) override;
     antlrcpp::Any visitAddSubExpr(CloudsParser::AddSubExprContext *ctx) override;
@@ -44,8 +49,10 @@ public:
     antlrcpp::Any visitIntegerConst(CloudsParser::IntegerConstContext *ctx) override;
     antlrcpp::Any visitFloatConst(CloudsParser::FloatConstContext *ctx) override;
     antlrcpp::Any visitParens(CloudsParser::ParensContext *ctx) override;
-   // antlrcpp::Any visitExprvariable(CloudsParser::ExprvariableContext *ctx) override;
+    antlrcpp::Any visitExprvariable(CloudsParser::ExprvariableContext *ctx) override;
     antlrcpp::Any visitVariable(CloudsParser::VariableContext *ctx) override;
+    antlrcpp::Any visitFunctionCall(CloudsParser::FunctionCallContext *ctx) override;
+    antlrcpp::Any visitExprFunctionCall(CloudsParser::ExprFunctionCallContext *ctx) override;
 
    
     

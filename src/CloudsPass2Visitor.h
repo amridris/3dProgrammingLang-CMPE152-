@@ -25,6 +25,7 @@ private:
 	string jas_type;
 	string init_param;
 	int func_locals;
+	int numberOfWaitStmt = 0;
 	size_t var_size = 0;
 
 public:
@@ -48,6 +49,8 @@ public:
 	antlrcpp::Any visitWait_stmt(CloudsParser::Wait_stmtContext *ctx) override;
 	antlrcpp::Any visitMove_stmt(CloudsParser::Move_stmtContext *ctx) override;
 	antlrcpp::Any visitRotation_stmt(CloudsParser::Rotation_stmtContext *ctx) override;
+	antlrcpp::Any visitFunctionCall(CloudsParser::FunctionCallContext *ctx) override;
+	antlrcpp::Any visitWhen_stmt(CloudsParser::When_stmtContext *ctx) override;
 
 
 	antlrcpp::Any visitIntegerConst(CloudsParser::IntegerConstContext *ctx) override;

@@ -30,8 +30,10 @@ ostream& CloudsPass1Visitor::get_assembly_file() { return j_file; }
 antlrcpp::Any CloudsPass1Visitor::visitProgram(CloudsParser::ProgramContext *ctx)
 {
     variable_id_list.resize(0);
+    collisionFunctions.resize(0);
 
     auto value = visitChildren(ctx);
+
     
 
 //    cout << "=== visitProgram: Printing xref table." << endl;
@@ -39,6 +41,42 @@ antlrcpp::Any CloudsPass1Visitor::visitProgram(CloudsParser::ProgramContext *ctx
     // Print the cross-reference table.
     CrossReferencer cross_referencer;
     cross_referencer.print(symtab_stack);
+
+    //Generate collisions switch case function
+    j_file << "\n\n.method private static handleCollision(I)V\n\n";
+
+//put switch case for collisions from collisionFunctions vector here
+
+    int counter = 1;
+
+    j_file << "\tiload_0\n";
+    j_file<< "\tlookupswitch\n";
+    for(string name: collisionFunctions)
+    {
+        j_file <<"\t\t" << counter << ": L" << counter << "\n";
+        counter++;
+    }
+
+    j_file << "\t\tdefault: END_COLLISION\n\n";
+
+
+    counter = 1;
+    for(string name: collisionFunctions)
+    {
+        
+        //function call
+        j_file << "\tL" <<counter << ":\n";
+        j_file << "\t\tinvokestatic " << program_name << "/" << name << "()V\n";
+        j_file << "\t\tgoto END_COLLISION\n";
+        counter++;
+    }
+
+    j_file << "\tEND_COLLISION:\n";
+    j_file << "\treturn\n\n";
+
+    j_file << ".limit locals 1\n";
+    j_file << ".limit stack 50\n";
+    j_file << ".end method\n\n";
 
 
     return value;
@@ -48,7 +86,7 @@ antlrcpp::Any CloudsPass1Visitor::visitHeader(CloudsParser::HeaderContext *ctx)
 {
 //    cout << "=== visitHeader: " + ctx->getText() << endl;
 
-    string program_name = "collisionengine/" + ctx->ID()->toString();
+    program_name = "collisionengine/" + ctx->ID()->toString();
 
     program_id = symtab_stack->enter_local(program_name);
     program_id->set_definition((Definition)DF_PROGRAM);
@@ -72,8 +110,48 @@ antlrcpp::Any CloudsPass1Visitor::visitHeader(CloudsParser::HeaderContext *ctx)
     j_file << endl;
     j_file << ".field private static _runTimer LRunTimer;" << endl;
     j_file << ".field private static _standardIn LPascalTextIn;" << endl;
+    
 
     return visitChildren(ctx);
+}
+
+antlrcpp::Any CloudsPass1Visitor::visitFunctionInit(CloudsParser::FunctionInitContext *ctx)
+{
+    
+    auto type = Predefined::undefined_type;
+    if(ctx->return_type() != nullptr){
+        string type_name = ctx->return_type()->TYPE()->toString();
+        if(type_name == "int"){
+            type = Predefined::integer_type;
+        }
+        else if(type_name == "float"){
+            type = Predefined::real_type;
+        }
+        else if(type_name == "cube"){
+            type = Predefined::RectPrism_type;
+        }
+        else if(type_name == "sphere"){
+            type = Predefined::Sphere_type;
+        }
+        else if(type_name == "cylinder"){
+            type = Predefined::Cylinder_type;
+        }
+        else {
+            type = Predefined::undefined_type;
+        }
+    }
+    else{
+        type = Predefined::undefined_type;
+    }
+
+    string variable_name = ctx->ID()->toString() + "()";
+    SymTabEntry *variable_id = symtab_stack->enter_local(variable_name);
+    variable_id->set_definition((Definition)DF_VARIABLE);
+    variable_id->set_typespec(type);
+    variable_id_list.push_back(variable_id);
+
+    return visitChildren(ctx);
+
 }
 
 antlrcpp::Any CloudsPass1Visitor::visitBody(CloudsParser::BodyContext *ctx)
@@ -161,6 +239,13 @@ antlrcpp::Any CloudsPass1Visitor::visitInit_var(CloudsParser::Init_varContext *c
     variable_id->set_typespec(ctx->variable()->type);
     variable_id_list.push_back(variable_id);
 
+
+    return visitChildren(ctx);
+}
+
+antlrcpp::Any CloudsPass1Visitor::visitWhen_stmt(CloudsParser::When_stmtContext *ctx)
+{
+    collisionFunctions.push_back(ctx->ID()->toString());
 
     return visitChildren(ctx);
 }
@@ -303,21 +388,23 @@ antlrcpp::Any CloudsPass1Visitor::visitParens(CloudsParser::ParensContext *ctx){
     ctx->type = ctx->expr()->type;
     return value;
 }
-/*
+
 antlrcpp::Any CloudsPass1Visitor::visitExprvariable(CloudsParser::ExprvariableContext *ctx)
 {
-    string variable_name = ctx->variable()->ID()->toString();
-    SymTabEntry *variable_id = symtab_stack->lookup(variable_name);
+    
+    auto value = visitChildren(ctx);
+    
+    ctx->type = ctx->variable()->type;
 
-    ctx->variable()->type = variable_id->get_typespec();
-    return visitChildren(ctx);
+    return value;
+
 }
-*/
+
 
 antlrcpp::Any CloudsPass1Visitor::visitVariable(CloudsParser::VariableContext *ctx)
 {
     if(ctx->obj_vars() == nullptr){
-        string variable_name = ctx->ID()->toString();
+       string variable_name = ctx->ID()->toString();
         SymTabEntry *variable_id = symtab_stack->lookup(variable_name);
 
         ctx->type = variable_id->get_typespec();
@@ -325,4 +412,33 @@ antlrcpp::Any CloudsPass1Visitor::visitVariable(CloudsParser::VariableContext *c
     
     return visitChildren(ctx);
 
+}
+
+
+antlrcpp::Any CloudsPass1Visitor::visitFunctionCall(CloudsParser::FunctionCallContext *ctx)
+{
+    string variable_name = ctx->ID()->toString() + "()";
+    SymTabEntry *variable_id = symtab_stack->lookup(variable_name);
+    if(variable_id != nullptr){
+        if(variable_id->get_typespec() != nullptr){
+            ctx->type = variable_id->get_typespec();
+        }
+        else{
+            ctx->type = nullptr;
+        }
+    }
+   
+    
+    return visitChildren(ctx);
+    
+}
+
+
+antlrcpp::Any CloudsPass1Visitor::visitExprFunctionCall(CloudsParser::ExprFunctionCallContext *ctx)
+{
+    auto value = visitChildren(ctx);
+
+    ctx->type = ctx->functionCall()->type;
+
+    return value;
 }

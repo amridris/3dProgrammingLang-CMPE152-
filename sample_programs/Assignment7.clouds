@@ -10,16 +10,29 @@ Clouds assignmentseven;
 
 //TODO
 /*
-1.  change stat to function call for when in grammar
-2.  make functions for every wait
+1.  add loading in of parameters or switch to pass by reference(somehow)
+2.  make functions for every when
 3.  make switch case to handle collisions(in jasmin)
 4.  implement collision detection system
 
 */
-
+/*
 functionOne (int i)
 {
     wait i;
+}
+
+int functionTwo (int j)
+{
+    wait j;
+    return j;
+}
+*/
+collisionOne(){
+    //cubeobject.dy = 5;
+}
+
+collisionTwo(){
 }
 
 environment environmentObject           
@@ -31,9 +44,15 @@ environment environmentObject
 
     cube cubeobject = [height=1, width=1, length=2];
     sphere sphereobject = [radius = 2];
+    cube cubeobjectTwo = [height=3, width=3, length=4];
 
     putnenv cubeobject pointObjectOne;
     putnenv sphereobject pointObjectTwo;
+
+    WHEN(cubeobject, sphereobject) THEN collisionOne;
+    WHEN(cubeobject, cubeobjectTwo) THEN collisionTwo;
+
+    int time = 2;
     
     cubeobject ~R 5; 
 }
@@ -42,4 +61,5 @@ simulation
 {
     move cubeobject to pointObjectTwo in timetomovecube;
     wait cubeobject.dx;
+    //functionOne(10);
 }

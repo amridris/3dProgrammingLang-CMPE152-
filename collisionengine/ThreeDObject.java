@@ -70,6 +70,18 @@ abstract class ThreeDObject
         {
             System.out.printf("x=%d, y=%d, z=%d", center.x, center.y, center.z);
         }
+
+        public ThreeDObject test1(){
+            ThreeDObject t = new ThreeDObject(){
+            
+                    @Override
+                    void buildSpace() {
+                        
+                    }
+            };
+
+            return t;
+        }
         public int getx(){ return center.x; }
         public int gety(){ return center.y; }
         public int getz(){ return center.z; }

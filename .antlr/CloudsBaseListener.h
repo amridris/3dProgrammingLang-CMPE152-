@@ -41,11 +41,17 @@ public:
   virtual void enterScope(CloudsParser::ScopeContext * /*ctx*/) override { }
   virtual void exitScope(CloudsParser::ScopeContext * /*ctx*/) override { }
 
+  virtual void enterFuncscope(CloudsParser::FuncscopeContext * /*ctx*/) override { }
+  virtual void exitFuncscope(CloudsParser::FuncscopeContext * /*ctx*/) override { }
+
   virtual void enterStmt_list(CloudsParser::Stmt_listContext * /*ctx*/) override { }
   virtual void exitStmt_list(CloudsParser::Stmt_listContext * /*ctx*/) override { }
 
   virtual void enterStat(CloudsParser::StatContext * /*ctx*/) override { }
   virtual void exitStat(CloudsParser::StatContext * /*ctx*/) override { }
+
+  virtual void enterReturn_stmt(CloudsParser::Return_stmtContext * /*ctx*/) override { }
+  virtual void exitReturn_stmt(CloudsParser::Return_stmtContext * /*ctx*/) override { }
 
   virtual void enterRotation_stmt(CloudsParser::Rotation_stmtContext * /*ctx*/) override { }
   virtual void exitRotation_stmt(CloudsParser::Rotation_stmtContext * /*ctx*/) override { }
@@ -64,9 +70,6 @@ public:
 
   virtual void enterPut_stmt(CloudsParser::Put_stmtContext * /*ctx*/) override { }
   virtual void exitPut_stmt(CloudsParser::Put_stmtContext * /*ctx*/) override { }
-
-  virtual void enterCollision_stmt(CloudsParser::Collision_stmtContext * /*ctx*/) override { }
-  virtual void exitCollision_stmt(CloudsParser::Collision_stmtContext * /*ctx*/) override { }
 
   virtual void enterWait_stmt(CloudsParser::Wait_stmtContext * /*ctx*/) override { }
   virtual void exitWait_stmt(CloudsParser::Wait_stmtContext * /*ctx*/) override { }
@@ -88,6 +91,9 @@ public:
 
   virtual void enterParens(CloudsParser::ParensContext * /*ctx*/) override { }
   virtual void exitParens(CloudsParser::ParensContext * /*ctx*/) override { }
+
+  virtual void enterExprFunctionCall(CloudsParser::ExprFunctionCallContext * /*ctx*/) override { }
+  virtual void exitExprFunctionCall(CloudsParser::ExprFunctionCallContext * /*ctx*/) override { }
 
   virtual void enterAddSubExpr(CloudsParser::AddSubExprContext * /*ctx*/) override { }
   virtual void exitAddSubExpr(CloudsParser::AddSubExprContext * /*ctx*/) override { }
