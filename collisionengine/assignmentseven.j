@@ -3,6 +3,8 @@
 
 .field private static _runTimer LRunTimer;
 .field private static _standardIn LPascalTextIn;
+.field private static i I
+.field private static j I
 .field private static environmentObjectEngine Lcollisionengine/CollisionEngine;
 .field private static timetomovecube I
 .field private static pointObjectOne Lcollisionengine/Point;
@@ -46,7 +48,97 @@
 
 
 
+.method private static functionOne(I)V
+
+; waiti
+
+	ldc 0
+	istore_3
+	getstatic	collisionengine/assignmentseven/i I
+	istore_2
+WAIT_STMT1LOOP1:
+	getstatic collisionengine/assignmentseven/Engine Lcollisionengine/CollisionEngine;
+	invokevirtual collisionengine/CollisionEngine.timestep()[I
+	ldc 0
+	istore 4
+	getstatic collisionengine/assignmentseven/Engine Lcollisionengine/CollisionEngine;
+	invokevirtual collisionengine/CollisionEngine.getNumCollisionHandles()I
+	istore 5
+WAIT_STMT1LOOP2:
+	dup
+	iload 4
+	iaload
+	ldc 0
+	ifeq WAIT_STMT1_NO_HANDLE
+	invokestatic collisionengine/assignmentseven/handleCollision(I)V
+	ldc 0
+WAIT_STMT1_NO_HANDLE:
+	pop
+	iinc 4 1
+	iload 5
+	ifeq WAIT_STMT1LOOP2
+	pop
+	iinc 3 1
+	iload_2
+	ifeq WAIT_STMT1LOOP1
+	return
+
+.limit locals 7
+.limit stack 50
+.end method
+
+
+
+.method private static functionTwo(I)I
+
+; waitj
+
+	ldc 0
+	istore_3
+	getstatic	collisionengine/assignmentseven/j I
+	istore_2
+WAIT_STMT2LOOP1:
+	getstatic collisionengine/assignmentseven/Engine Lcollisionengine/CollisionEngine;
+	invokevirtual collisionengine/CollisionEngine.timestep()[I
+	ldc 0
+	istore 4
+	getstatic collisionengine/assignmentseven/Engine Lcollisionengine/CollisionEngine;
+	invokevirtual collisionengine/CollisionEngine.getNumCollisionHandles()I
+	istore 5
+WAIT_STMT2LOOP2:
+	dup
+	iload 4
+	iaload
+	ldc 0
+	ifeq WAIT_STMT2_NO_HANDLE
+	invokestatic collisionengine/assignmentseven/handleCollision(I)V
+	ldc 0
+WAIT_STMT2_NO_HANDLE:
+	pop
+	iinc 4 1
+	iload 5
+	ifeq WAIT_STMT2LOOP2
+	pop
+	iinc 3 1
+	iload_2
+	ifeq WAIT_STMT2LOOP1
+	getstatic	collisionengine/assignmentseven/j I
+	ireturn
+
+.limit locals 7
+.limit stack 50
+.end method
+
+
+
 .method private static collisionOne()V
+
+; cubeobject.dy=5
+
+	ldc	5
+	getstatic	collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
+
+	invokevirtual collisionengine/RectPrism.setdy()I
 	return
 
 .limit locals 6
@@ -205,7 +297,7 @@
 
 	invokevirtual collisionengine/RectPrism.getdx()I
 	istore_2
-WAIT_STMT1LOOP1:
+WAIT_STMT3LOOP1:
 	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
 	invokevirtual collisionengine/CollisionEngine.timestep()[I
 	ldc 0
@@ -213,23 +305,66 @@ WAIT_STMT1LOOP1:
 	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
 	invokevirtual collisionengine/CollisionEngine.getNumCollisionHandles()I
 	istore 5
-WAIT_STMT1LOOP2:
+WAIT_STMT3LOOP2:
 	dup
 	iload 4
 	iaload
 	ldc 0
-	ifeq WAIT_STMT1_NO_HANDLE
+	ifeq WAIT_STMT3_NO_HANDLE
 	invokestatic collisionengine/assignmentseven/handleCollision(I)V
 	ldc 0
-WAIT_STMT1_NO_HANDLE:
+WAIT_STMT3_NO_HANDLE:
 	pop
 	iinc 4 1
 	iload 5
-	ifeq WAIT_STMT1LOOP2
+	ifeq WAIT_STMT3LOOP2
 	pop
 	iinc 3 1
 	iload_2
-	ifeq WAIT_STMT1LOOP1
+	ifeq WAIT_STMT3LOOP1
+	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
+	invokevirtual collisionengine/CollisionEngine/printStatus()V
+
+; movecubeobjecttopointObjectTwointimetomovecube
+
+	getstatic collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
+	getstatic collisionengine/assignmentseven/pointObjectTwo Lcollisionengine/Point;
+	getstatic	collisionengine/assignmentseven/timetomovecube I
+	invokevirtual collisionengine/ThreeDObject.move(Lcollisionengine/Point;I)V
+
+; waitcubeobject.dx
+
+	ldc 0
+	istore_3
+	getstatic	collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
+
+	invokevirtual collisionengine/RectPrism.getdx()I
+	istore_2
+WAIT_STMT4LOOP1:
+	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
+	invokevirtual collisionengine/CollisionEngine.timestep()[I
+	ldc 0
+	istore 4
+	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
+	invokevirtual collisionengine/CollisionEngine.getNumCollisionHandles()I
+	istore 5
+WAIT_STMT4LOOP2:
+	dup
+	iload 4
+	iaload
+	ldc 0
+	ifeq WAIT_STMT4_NO_HANDLE
+	invokestatic collisionengine/assignmentseven/handleCollision(I)V
+	ldc 0
+WAIT_STMT4_NO_HANDLE:
+	pop
+	iinc 4 1
+	iload 5
+	ifeq WAIT_STMT4LOOP2
+	pop
+	iinc 3 1
+	iload_2
+	ifeq WAIT_STMT4LOOP1
 	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
 	invokevirtual collisionengine/CollisionEngine/printStatus()V
 

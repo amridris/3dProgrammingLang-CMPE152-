@@ -16,7 +16,7 @@ Clouds assignmentseven;
 4.  implement collision detection system
 
 */
-/*
+
 functionOne (int i)
 {
     wait i;
@@ -27,13 +27,8 @@ int functionTwo (int j)
     wait j;
     return j;
 }
-*/
-collisionOne(){
-    //cubeobject.dy = 5;
-}
 
-collisionTwo(){
-}
+
 
 environment environmentObject           
 {
@@ -55,6 +50,13 @@ environment environmentObject
     int time = 2;
     
     cubeobject ~R 5; 
+}
+
+collisionOne(){
+    cubeobject.dy = 5;
+}
+
+collisionTwo(){
 }
 
 simulation

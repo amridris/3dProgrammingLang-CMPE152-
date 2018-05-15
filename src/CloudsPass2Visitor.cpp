@@ -136,6 +136,13 @@ antlrcpp::Any CloudsPass2Visitor::visitFunctionInit(CloudsParser::FunctionInitCo
 
 antlrcpp::Any CloudsPass2Visitor::visitBody(CloudsParser::BodyContext *ctx)
 {
+    for(auto block: ctx->block()){
+        if(block->function() != nullptr){
+            auto value = visit(block);
+        }
+    }
+
+
     j_file << endl;
     j_file << ".method public static main([Ljava/lang/String;)V" << endl;
     j_file << endl;
@@ -150,8 +157,16 @@ antlrcpp::Any CloudsPass2Visitor::visitBody(CloudsParser::BodyContext *ctx)
     j_file << "\tputstatic        " + program_name
            << "/_standardIn LPascalTextIn;\n" << endl;
 
-    auto value = visitChildren(ctx);
 
+    for(auto block: ctx->block()){
+        if(block->function() == nullptr){
+            auto value = visit(block);
+        }
+    }
+
+    int size = ctx->block().size();
+    auto value = visit(ctx->block(size-1));
+    
     // Emit the main program epilogue.
     j_file << endl;
     j_file << "\tgetstatic     " << program_name

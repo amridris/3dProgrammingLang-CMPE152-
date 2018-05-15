@@ -11,7 +11,7 @@ header  : CLOUDS ID SEMICOLON; //done
 body: block+;
 
 block   : environments //done
-//        | function    //add if pass1 creates them 
+        | function    //add if pass1 creates them 
         | run_simulation //remove when fixed 
         ;
 

@@ -154,6 +154,7 @@ public:
     BlockContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     EnvironmentsContext *environments();
+    FunctionContext *function();
     Run_simulationContext *run_simulation();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
