@@ -5,7 +5,7 @@
 .field private static _standardIn LPascalTextIn;
 .field private static basicenvEngine Lcollisionengine/CollisionEngine;
 .field private static xp I
-.field private static yp I
+.field private static cubeobj Lcollisionengine/RectPrism;
 
 .method public <init>()V
 
@@ -16,6 +16,21 @@
 .limit locals 1
 .limit stack 1
 .end method
+
+
+.method private static handleCollision(I)V
+
+	iload_0
+	lookupswitch
+		default: END_COLLISION
+
+	END_COLLISION:
+	return
+
+.limit locals 1
+.limit stack 50
+.end method
+
 
 .method public static main([Ljava/lang/String;)V
 
@@ -35,34 +50,58 @@
 	ldc 100
 	invokenonvirtual collisionengine/CollisionEngine/<init>(III)V
 	putstatic	collisionengine/basictest/basicenvEngine Lcollisionengine/CollisionEngine;
+	ldc	5
+	putstatic	collisionengine/basictest/xp I
+
+	new collisionengine/RectPrism
+	dup
 	ldc	3
-	putstatic	collisionengine/basictest/xp I
-
-	ldc	4
-	putstatic	collisionengine/basictest/yp I
-
-	getstatic	collisionengine/basictest/xp I
-	getstatic	collisionengine/basictest/yp I
-	????
-	putstatic	collisionengine/basictest/xp I
-
-; intxp=3
-
 	ldc	3
+	ldc	3
+	invokenonvirtual collisionengine/RectPrism/<init>(III)V
+	dup
+	putstatic collisionengine/basictest/cubeobj Lcollisionengine/RectPrism;
+	ldc "cubeobj"
+	invokevirtual collisionengine/RectPrism/setName(Ljava/lang/String;)V
+
+	getstatic	collisionengine/basictest/cubeobj Lcollisionengine/RectPrism;
+
+	invokevirtual collisionengine/RectPrism.getdx()I
+	getstatic	collisionengine/basictest/cubeobj Lcollisionengine/RectPrism;
+
+	invokevirtual collisionengine/RectPrism.getdy()I
+	iadd
+	putstatic	collisionengine/basictest/xp I
+
+; intxp=5
+
+	ldc	5
 	putstatic	collisionengine/basictest/xp I
 
 
-; intyp=4
+; cubecubeobj=[height=3,width=3,length=3]
 
-	ldc	4
-	putstatic	collisionengine/basictest/yp I
+	new collisionengine/RectPrism
+	dup
+	ldc	3
+	ldc	3
+	ldc	3
+	invokenonvirtual collisionengine/RectPrism/<init>(III)V
+	dup
+	putstatic collisionengine/basictest/cubeobj Lcollisionengine/RectPrism;
+	ldc "cubeobj"
+	invokevirtual collisionengine/RectPrism/setName(Ljava/lang/String;)V
 
 
-; xp=xp+yp
+; xp=cubeobj.dx+cubeobj.dy
 
-	getstatic	collisionengine/basictest/xp I
-	getstatic	collisionengine/basictest/yp I
-	????
+	getstatic	collisionengine/basictest/cubeobj Lcollisionengine/RectPrism;
+
+	invokevirtual collisionengine/RectPrism.getdx()I
+	getstatic	collisionengine/basictest/cubeobj Lcollisionengine/RectPrism;
+
+	invokevirtual collisionengine/RectPrism.getdy()I
+	iadd
 	putstatic	collisionengine/basictest/xp I
 	ldc	5
 	putstatic	collisionengine/basictest/xp I

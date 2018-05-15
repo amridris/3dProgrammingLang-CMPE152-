@@ -37,6 +37,103 @@ antlrcpp::Any CloudsPass2Visitor::visitHeader(CloudsParser::HeaderContext *ctx)
     return visitChildren(ctx);
 }
 
+antlrcpp::Any CloudsPass2Visitor::visitFunction(CloudsParser::FunctionContext *ctx)
+{
+    func_locals = 0;
+    j_file << "\n\n.method private static ";
+    auto value = visitChildren(ctx);
+
+    j_file << "\t";
+
+    if(ctx->functionInit()->return_type() != nullptr){
+        string type_name = ctx->functionInit()->return_type()->TYPE()->toString();
+        if(type_name == "int"){
+            j_file << "i";
+        }
+        else if(type_name == "float"){
+            j_file << "f";
+        }
+        else if(type_name == "cube"){
+            j_file << "a";
+        }
+        else if(type_name == "sphere"){
+            j_file << "a"; 
+        }
+        else if(type_name == "cylinder"){
+            j_file << "a";
+        }
+        else {
+            j_file << "?";
+        }
+    }
+
+    j_file << "return\n";
+
+    j_file << "\n.limit locals " << func_locals+6 << endl;
+    j_file << ".limit stack 50\n";
+    j_file << ".end method\n\n";
+
+    return value;
+}
+
+antlrcpp::Any CloudsPass2Visitor::visitFunctionInit(CloudsParser::FunctionInitContext *ctx)
+{
+    string type_name;
+    j_file << ctx->ID()->toString() << "(";
+    for(auto init_var: ctx->init_var()){
+        func_locals++;
+        type_name = init_var->TYPE()->toString();
+        if(type_name == "int"){
+            j_file << "I";
+        }
+        else if(type_name == "float"){
+            j_file << "F";
+        }
+        else if(type_name == "cube"){
+            j_file << "Lcollisionengine/RectPrism;";
+        }
+        else if(type_name == "sphere"){
+            j_file << "Lcollisionengine/Sphere;" ;
+        }
+        else if(type_name == "cylinder"){
+            j_file << "Lcollisionengine/Cylinder;";
+        }
+        else {
+            j_file << "?";
+        }
+    }
+    j_file << ")";
+
+    if(ctx->return_type() != nullptr){
+        type_name = ctx->return_type()->TYPE()->toString();
+        if(type_name == "int"){
+            j_file << "I";
+        }
+        else if(type_name == "float"){
+            j_file << "F";
+        }
+        else if(type_name == "cube"){
+            j_file << "Lcollisionengine/RectPrism;";
+        }
+        else if(type_name == "sphere"){
+            j_file << "Lcollisionengine/Sphere;"; 
+        }
+        else if(type_name == "cylinder"){
+            j_file << "Lcollisionengine/Cylinder;";
+        }
+        else {
+            j_file << "?";
+        }
+    }
+    else {
+        j_file << "V";
+    }
+    j_file << "\n";
+
+    return visitChildren(ctx);    
+
+}
+
 antlrcpp::Any CloudsPass2Visitor::visitBody(CloudsParser::BodyContext *ctx)
 {
     j_file << endl;
@@ -104,16 +201,54 @@ antlrcpp::Any CloudsPass2Visitor::visitStat(CloudsParser::StatContext *ctx)
 antlrcpp::Any CloudsPass2Visitor::visitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx)
 {
     auto value = visit(ctx->expr());
-
-    string type_indicator =
+   
+    string type_indicator;   
+    string variable_name;                                                   
+    if(ctx->variable()->obj_vars() == nullptr){
+        type_indicator =
                   (ctx->variable()->type == Predefined::integer_type) ? "I"
                 : (ctx->variable()->type == Predefined::real_type)    ? "F"
-                :                                                         "?";
+                :                                                       "?";
+    
+        // Emit a field put instruction.
+        j_file << "\tputstatic\t" << program_name
+            << "/" << ctx->variable()->ID()->toString()
+            << " " << type_indicator << endl;
+    }
+    else{
+        auto type_name = ctx->variable()->variable()->type;
+        variable_name = ctx->variable()->variable()->ID()->toString();
+        jas_type = "";
 
-    // Emit a field put instruction.
-    j_file << "\tputstatic\t" << program_name
-           << "/" << ctx->variable()->ID()->toString()
-           << " " << type_indicator << endl;
+        if(type_name == Predefined::RectPrism_type){
+            jas_type = "RectPrism";
+        }
+        else if(type_name == Predefined::Sphere_type){
+            jas_type = "Sphere";
+        }
+        else if(type_name == Predefined::Cylinder_type){
+            jas_type = "Cylinder";
+        }
+        else { jas_type = "?";}
+
+        auto expr_type = ctx->expr()->type;
+        string param_name;
+
+         if(type_name == Predefined::integer_type){
+                param_name = "I";
+            }
+            else if(type_name == Predefined::real_type){
+                param_name = "F";
+            }
+
+
+        string objvar_name = ctx->variable()->obj_vars()->getText(); 
+
+         j_file << "\tgetstatic\t" << program_name
+                << "/" << variable_name << " Lcollisionengine/" << jas_type << ";\n" << endl;
+        j_file << "\tinvokevirtual collisionengine/" << jas_type << ".set" << objvar_name << "(" << param_name << ")I\n";
+        
+    }
 
     return value;
 }
@@ -267,8 +402,55 @@ antlrcpp::Any CloudsPass2Visitor::visitPut_stmt(CloudsParser::Put_stmtContext *c
 }
 
 antlrcpp::Any CloudsPass2Visitor::visitWait_stmt(CloudsParser::Wait_stmtContext *ctx)
-{
-    return visitChildren(ctx);
+{ //for loop in assembly
+    numberOfWaitStmt++;
+
+    j_file << "\tldc 0\n";
+    j_file << "\tistore_3\n";
+    auto value = visitChildren(ctx);
+    j_file << "\tistore_2\n";
+    //outer for begin
+    j_file << "WAIT_STMT" << numberOfWaitStmt << "LOOP1:\n";
+    j_file << "\tgetstatic " << program_name << "/" << current_environment_name << "Engine Lcollisionengine/CollisionEngine;\n";
+    j_file << "\tinvokevirtual collisionengine/CollisionEngine.timestep()[I\n";
+    j_file << "\tldc 0\n";
+    j_file << "\tistore 4\n";
+    j_file << "\tgetstatic " << program_name << "/" << current_environment_name << "Engine Lcollisionengine/CollisionEngine;\n";
+    j_file << "\tinvokevirtual collisionengine/CollisionEngine.getNumCollisionHandles()I\n";
+    j_file << "\tistore 5\n";
+    //inner for begin
+    j_file << "WAIT_STMT" << numberOfWaitStmt << "LOOP2:\n";
+    j_file << "\tdup\n";
+    j_file << "\tiload 4\n";
+    j_file << "\tiaload\n";
+    j_file << "\tldc 0\n";
+    j_file << "\tifeq WAIT_STMT" << numberOfWaitStmt << "_NO_HANDLE\n";//assuming one to handle
+    j_file << "\tinvokestatic " << program_name << "/handleCollision(I)V\n";
+    j_file << "\tldc 0\n";
+    j_file << "WAIT_STMT" << numberOfWaitStmt << "_NO_HANDLE:\n";
+    j_file << "\tpop\n";
+
+    j_file << "\tiinc 4 1\n";
+    j_file << "\tiload 5\n";
+    j_file << "\tifeq " << "WAIT_STMT" << numberOfWaitStmt << "LOOP2\n";
+    j_file << "\tpop\n";
+    //end inner loop
+
+
+
+    j_file << "\tiinc 3 1\n";
+    j_file << "\tiload_2\n";
+    j_file << "\tifeq " << "WAIT_STMT" << numberOfWaitStmt << "LOOP1\n";
+    //end outerfor loop
+
+
+    //for loop with if stmt checking if each one is zero, if not, call handleCollision(I)V
+
+
+    //in if
+
+
+    return value;
 
 }    
 
@@ -346,6 +528,78 @@ antlrcpp::Any CloudsPass2Visitor::visitRotation_stmt(CloudsParser::Rotation_stmt
 
 }
 
+antlrcpp::Any CloudsPass2Visitor::visitFunctionCall(CloudsParser::FunctionCallContext *ctx)
+{
+    auto value = visitChildren(ctx);
+
+    j_file << "\tinvokestatic " << program_name << "/" << ctx->ID()->toString() << "(";
+
+    if(ctx->expr(0)!= nullptr){
+        auto type_name = ctx->expr(0)->type;
+
+        for(auto ex: ctx->expr()){
+            if(type_name == Predefined::integer_type){
+                j_file << "I";
+            }
+            else if(type_name == Predefined::real_type){
+                j_file << "F";
+            }
+            else if(type_name == Predefined::RectPrism_type){
+                j_file << "Lcollisionengine/RectPrism;";
+            }
+            else if(type_name == Predefined::Sphere_type){
+                j_file << "Lcollisionengine/Sphere;" ;
+            }
+            else if(type_name == Predefined::Cylinder_type){
+                j_file << "Lcollisionengine/Cylinder;";
+            }
+            else {
+                j_file << "?";
+            }
+        }
+    }
+    
+
+    j_file << ")";
+
+    auto func_type_name = ctx->type;
+    if(func_type_name == Predefined::integer_type){
+        j_file << "I";
+    }
+    else if(func_type_name == Predefined::real_type){
+        j_file << "F";
+    }
+    else if(func_type_name == Predefined::RectPrism_type){
+        j_file << "Lcollisionengine/RectPrism;";
+    }
+    else if(func_type_name == Predefined::Sphere_type){
+        j_file << "Lcollisionengine/Sphere;" ;
+    }
+    else if(func_type_name == Predefined::Cylinder_type){
+        j_file << "Lcollisionengine/Cylinder;";
+    }
+    else {
+        j_file << "V";
+    }
+    j_file << "\n";
+
+    return value;
+
+}
+
+antlrcpp::Any CloudsPass2Visitor::visitWhen_stmt(CloudsParser::When_stmtContext *ctx)
+{
+    j_file << "\tgetstatic " << program_name << "/" << current_environment_name<< "Engine Lcollisionengine/CollisionEngine;\n";
+
+    auto value = visitChildren(ctx);
+
+
+    j_file << "\tinvokevirtual collisionengine/CollisionEngine.addCollision(Lcollisionengine/ThreeDObject;Lcollisionengine/ThreeDObject;)V\n";
+
+    return value;
+
+}
+
 
 
 antlrcpp::Any CloudsPass2Visitor::visitIntegerConst(CloudsParser::IntegerConstContext *ctx)
@@ -391,14 +645,25 @@ antlrcpp::Any CloudsPass2Visitor::visitExprvariable(CloudsParser::ExprvariableCo
     {
         auto type_name = ctx->variable()->type;
         variable_name = ctx->variable()->ID()->toString();
-        string type_indicator = (type_name == Predefined::integer_type) ? "I"
-                            : (type_name == Predefined::real_type)    ? "F"
-                            :                                      "?";
+        if(type_name == Predefined::RectPrism_type){
+            jas_type = "Lcollisionengine/RectPrism;";
+        }
+        else if(type_name == Predefined::Sphere_type){
+            jas_type = "Lcollisionengine/Sphere;";
+        }
+        else if(type_name == Predefined::Cylinder_type){
+            jas_type = "Lcollisionengine/Cylinder;";
+        }
+        else { 
+            jas_type = (type_name == Predefined::integer_type) ? "I"
+                                : (type_name == Predefined::real_type)    ? "F"
+                                :                                      "?";
+        }   
 
         // Emit a field get instruction.
         j_file << "\tgetstatic\t" << program_name
-            << "/" << variable_name << " " << type_indicator << endl;
-
+            << "/" << variable_name << " " << jas_type << endl;
+    
     }
 
     return visitChildren(ctx);

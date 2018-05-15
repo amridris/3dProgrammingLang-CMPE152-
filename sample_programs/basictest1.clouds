@@ -2,10 +2,11 @@ Clouds basictest;
 
 environment basicenv
 {
-	int xp = 3;
+	int xp = 5;
+    cube cubeobj = [height = 3, width = 3, length = 3];
+    xp = cubeobj.dx + cubeobj.dy;
+    /*
     int yp = 4;
-    xp = xp + yp;
-	/*
     IF xp == 3 THEN
     {
         xp = xp + 5;

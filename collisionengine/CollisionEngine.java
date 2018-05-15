@@ -37,6 +37,7 @@ public class CollisionEngine
     public int[] detectCollisions()
     {
         int[] collisions = new int[numCollisions+1];
+        collisions[0] = 1;
         //actually detect collisions
         return collisions;
     }
@@ -86,6 +87,11 @@ public class CollisionEngine
         return collisionMap.get(objlist);
     }
 
+    public int getNumCollisionHandles()
+    {
+        return numCollisions-1;
+    }
+
     public void printStatus()
     {
         int x = environment.length;
@@ -100,6 +106,10 @@ public class CollisionEngine
             System.out.printf(" and velocity is: dx=%d, dy=%d, dz=%d", obj.objvelocity.dx, obj.objvelocity.dy, obj.objvelocity.dz);
             System.out.println();
         }
+
+        System.out.println("Collisions being handled:");
+        System.out.printf("\tNumber of Collisions = %d\n", numCollisions);
+        // loop over collisions in hashmap?
     }
 
     public ThreeDObject createObject(String argtype, HashMap<String, Integer> argmap)

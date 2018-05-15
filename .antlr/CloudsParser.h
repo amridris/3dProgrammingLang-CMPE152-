@@ -17,31 +17,32 @@ class  CloudsParser : public antlr4::Parser {
 public:
   enum {
     T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, 
-    T__7 = 8, T__8 = 9, CLOUDS = 10, REPEAT = 11, UNTIL = 12, IF = 13, THEN = 14, 
-    ELSE = 15, WHEN = 16, CENTER = 17, TELEPORT = 18, COLISION = 19, WAIT = 20, 
-    MOVE = 21, TO = 22, MOVE_3 = 23, AT = 24, IN = 25, FOR = 26, FINISH = 27, 
-    PUTNENV = 28, FUNCTION = 29, ENVIRONMENT = 30, SIMULATION = 31, PRINT = 32, 
-    BETWEEN = 33, TYPE = 34, SPHERE = 35, HEIGHT = 36, WIDTH = 37, LENGTH = 38, 
-    RADIUS = 39, X = 40, Y = 41, Z = 42, DX = 43, DY = 44, DZ = 45, POINT = 46, 
-    VELOCITY = 47, SPEED = 48, ASSIGN_OP = 49, MUL = 50, DIV = 51, ADD = 52, 
-    SUB = 53, MUL_EQ = 54, DIV_EQ = 55, ADD_EQ = 56, SUB_EQ = 57, EQ_OP = 58, 
-    NE_OP = 59, LT_OP = 60, LE_OP = 61, GT_OP = 62, GE_OP = 63, ROLL_OP = 64, 
-    PITCH_OP = 65, YAW_OP = 66, COM_OP = 67, SEMICOLON = 68, FLOAT = 69, 
-    ID = 70, INT = 71, NEWLINE = 72, WS = 73, COMMENT = 74, BLOCK_COM = 75
+    T__7 = 8, T__8 = 9, T__9 = 10, T__10 = 11, T__11 = 12, CLOUDS = 13, 
+    REPEAT = 14, UNTIL = 15, IF = 16, THEN = 17, ELSE = 18, WHEN = 19, CENTER = 20, 
+    TELEPORT = 21, COLISION = 22, WAIT = 23, MOVE = 24, TO = 25, MOVE_3 = 26, 
+    AT = 27, IN = 28, FOR = 29, FINISH = 30, PUTNENV = 31, FUNCTION = 32, 
+    ENVIRONMENT = 33, SIMULATION = 34, PRINT = 35, BETWEEN = 36, TYPE = 37, 
+    SPHERE = 38, HEIGHT = 39, WIDTH = 40, LENGTH = 41, RADIUS = 42, X = 43, 
+    Y = 44, Z = 45, DX = 46, DY = 47, DZ = 48, POINT = 49, VELOCITY = 50, 
+    SPEED = 51, ASSIGN_OP = 52, MUL = 53, DIV = 54, ADD = 55, SUB = 56, 
+    MUL_EQ = 57, DIV_EQ = 58, ADD_EQ = 59, SUB_EQ = 60, EQ_OP = 61, NE_OP = 62, 
+    LT_OP = 63, LE_OP = 64, GT_OP = 65, GE_OP = 66, ROLL_OP = 67, PITCH_OP = 68, 
+    YAW_OP = 69, COM_OP = 70, SEMICOLON = 71, FLOAT = 72, ID = 73, INT = 74, 
+    NEWLINE = 75, WS = 76, COMMENT = 77, BLOCK_COM = 78
   };
 
   enum {
     RuleProgram = 0, RuleHeader = 1, RuleBody = 2, RuleBlock = 3, RuleEnvironments = 4, 
-    RuleRun_simulation = 5, RuleScope = 6, RuleStmt_list = 7, RuleStat = 8, 
-    RuleRotation_stmt = 9, RuleAssignment_stmt = 10, RuleInit_stmt = 11, 
-    RuleRepeat_stmt = 12, RuleIf_stmt = 13, RulePut_stmt = 14, RuleCollision_stmt = 15, 
-    RuleWait_stmt = 16, RuleMove_stmt = 17, RulePoint_var = 18, RuleWhen_stmt = 19, 
-    RulePrint_stmt = 20, RuleVariable = 21, RuleExpr = 22, RuleInit_list = 23, 
-    RuleInit_var = 24, RuleObj_vars = 25, RuleFunction = 26, RuleFunctionInit = 27, 
-    RuleFunctionCall = 28, RuleArgumentList = 29, RuleMethodCallArguments = 30, 
-    RuleMethodCall_ref = 31, RuleSignedNumber = 32, RuleSign = 33, RuleNumber = 34, 
-    RuleAssignment_operators = 35, RuleMul_div_op = 36, RuleAdd_sub_op = 37, 
-    RuleRel_op = 38, RuleRot_op = 39
+    RuleRun_simulation = 5, RuleScope = 6, RuleFuncscope = 7, RuleStmt_list = 8, 
+    RuleStat = 9, RuleReturn_stmt = 10, RuleRotation_stmt = 11, RuleAssignment_stmt = 12, 
+    RuleInit_stmt = 13, RuleRepeat_stmt = 14, RuleIf_stmt = 15, RulePut_stmt = 16, 
+    RuleWait_stmt = 17, RuleMove_stmt = 18, RulePoint_var = 19, RuleWhen_stmt = 20, 
+    RulePrint_stmt = 21, RuleVariable = 22, RuleExpr = 23, RuleInit_list = 24, 
+    RuleInit_var = 25, RuleObj_vars = 26, RuleFunction = 27, RuleFunctionInit = 28, 
+    RuleReturn_type = 29, RuleFunctionCall = 30, RuleArgumentList = 31, 
+    RuleMethodCallArguments = 32, RuleMethodCall_ref = 33, RuleSignedNumber = 34, 
+    RuleSign = 35, RuleNumber = 36, RuleAssignment_operators = 37, RuleMul_div_op = 38, 
+    RuleAdd_sub_op = 39, RuleRel_op = 40, RuleRot_op = 41
   };
 
   CloudsParser(antlr4::TokenStream *input);
@@ -61,15 +62,16 @@ public:
   class EnvironmentsContext;
   class Run_simulationContext;
   class ScopeContext;
+  class FuncscopeContext;
   class Stmt_listContext;
   class StatContext;
+  class Return_stmtContext;
   class Rotation_stmtContext;
   class Assignment_stmtContext;
   class Init_stmtContext;
   class Repeat_stmtContext;
   class If_stmtContext;
   class Put_stmtContext;
-  class Collision_stmtContext;
   class Wait_stmtContext;
   class Move_stmtContext;
   class Point_varContext;
@@ -82,6 +84,7 @@ public:
   class Obj_varsContext;
   class FunctionContext;
   class FunctionInitContext;
+  class Return_typeContext;
   class FunctionCallContext;
   class ArgumentListContext;
   class MethodCallArgumentsContext;
@@ -101,7 +104,8 @@ public:
     virtual size_t getRuleIndex() const override;
     HeaderContext *header();
     BodyContext *body();
-    FunctionContext *function();
+    std::vector<FunctionContext *> function();
+    FunctionContext* function(size_t i);
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -209,6 +213,22 @@ public:
 
   ScopeContext* scope();
 
+  class  FuncscopeContext : public antlr4::ParserRuleContext {
+  public:
+    FuncscopeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    Stmt_listContext *stmt_list();
+    Return_stmtContext *return_stmt();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  FuncscopeContext* funcscope();
+
   class  Stmt_listContext : public antlr4::ParserRuleContext {
   public:
     Stmt_listContext(antlr4::ParserRuleContext *parent, size_t invokingState);
@@ -234,7 +254,7 @@ public:
     Assignment_stmtContext *assignment_stmt();
     Init_stmtContext *init_stmt();
     Rotation_stmtContext *rotation_stmt();
-    FunctionContext *function();
+    FunctionCallContext *functionCall();
     Repeat_stmtContext *repeat_stmt();
     If_stmtContext *if_stmt();
     When_stmtContext *when_stmt();
@@ -242,7 +262,6 @@ public:
     Put_stmtContext *put_stmt();
     Move_stmtContext *move_stmt();
     Wait_stmtContext *wait_stmt();
-    Collision_stmtContext *collision_stmt();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -252,6 +271,22 @@ public:
   };
 
   StatContext* stat();
+
+  class  Return_stmtContext : public antlr4::ParserRuleContext {
+  public:
+    Return_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    ExprContext *expr();
+    antlr4::tree::TerminalNode *SEMICOLON();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  Return_stmtContext* return_stmt();
 
   class  Rotation_stmtContext : public antlr4::ParserRuleContext {
   public:
@@ -360,24 +395,6 @@ public:
 
   Put_stmtContext* put_stmt();
 
-  class  Collision_stmtContext : public antlr4::ParserRuleContext {
-  public:
-    Collision_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *COLISION();
-    std::vector<VariableContext *> variable();
-    VariableContext* variable(size_t i);
-    antlr4::tree::TerminalNode *BETWEEN();
-
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-   
-  };
-
-  Collision_stmtContext* collision_stmt();
-
   class  Wait_stmtContext : public antlr4::ParserRuleContext {
   public:
     Wait_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
@@ -437,9 +454,10 @@ public:
     When_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *WHEN();
-    ExprContext *expr();
+    std::vector<ExprContext *> expr();
+    ExprContext* expr(size_t i);
     antlr4::tree::TerminalNode *THEN();
-    StatContext *stat();
+    antlr4::tree::TerminalNode *ID();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -456,6 +474,8 @@ public:
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *PRINT();
     VariableContext *variable();
+    std::vector<antlr4::tree::TerminalNode *> ID();
+    antlr4::tree::TerminalNode* ID(size_t i);
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -503,6 +523,17 @@ public:
     ParensContext(ExprContext *ctx);
 
     ExprContext *expr();
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+  };
+
+  class  ExprFunctionCallContext : public ExprContext {
+  public:
+    ExprFunctionCallContext(ExprContext *ctx);
+
+    FunctionCallContext *functionCall();
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
 
@@ -648,10 +679,8 @@ public:
   public:
     FunctionContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *ID();
-    ArgumentListContext *argumentList();
-    ScopeContext *scope();
-    MethodCall_refContext *methodCall_ref();
+    FunctionInitContext *functionInit();
+    FuncscopeContext *funcscope();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -666,10 +695,10 @@ public:
   public:
     FunctionInitContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    std::vector<antlr4::tree::TerminalNode *> ID();
-    antlr4::tree::TerminalNode* ID(size_t i);
-    std::vector<antlr4::tree::TerminalNode *> TYPE();
-    antlr4::tree::TerminalNode* TYPE(size_t i);
+    antlr4::tree::TerminalNode *ID();
+    std::vector<Init_varContext *> init_var();
+    Init_varContext* init_var(size_t i);
+    Return_typeContext *return_type();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -680,12 +709,29 @@ public:
 
   FunctionInitContext* functionInit();
 
+  class  Return_typeContext : public antlr4::ParserRuleContext {
+  public:
+    Return_typeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *TYPE();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  Return_typeContext* return_type();
+
   class  FunctionCallContext : public antlr4::ParserRuleContext {
   public:
+    TyxpeSpec * type = nullptr;
     FunctionCallContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    std::vector<antlr4::tree::TerminalNode *> ID();
-    antlr4::tree::TerminalNode* ID(size_t i);
+    antlr4::tree::TerminalNode *ID();
+    std::vector<ExprContext *> expr();
+    ExprContext* expr(size_t i);
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;

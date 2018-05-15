@@ -39,11 +39,17 @@ public:
   virtual void enterScope(CloudsParser::ScopeContext *ctx) = 0;
   virtual void exitScope(CloudsParser::ScopeContext *ctx) = 0;
 
+  virtual void enterFuncscope(CloudsParser::FuncscopeContext *ctx) = 0;
+  virtual void exitFuncscope(CloudsParser::FuncscopeContext *ctx) = 0;
+
   virtual void enterStmt_list(CloudsParser::Stmt_listContext *ctx) = 0;
   virtual void exitStmt_list(CloudsParser::Stmt_listContext *ctx) = 0;
 
   virtual void enterStat(CloudsParser::StatContext *ctx) = 0;
   virtual void exitStat(CloudsParser::StatContext *ctx) = 0;
+
+  virtual void enterReturn_stmt(CloudsParser::Return_stmtContext *ctx) = 0;
+  virtual void exitReturn_stmt(CloudsParser::Return_stmtContext *ctx) = 0;
 
   virtual void enterRotation_stmt(CloudsParser::Rotation_stmtContext *ctx) = 0;
   virtual void exitRotation_stmt(CloudsParser::Rotation_stmtContext *ctx) = 0;
@@ -62,9 +68,6 @@ public:
 
   virtual void enterPut_stmt(CloudsParser::Put_stmtContext *ctx) = 0;
   virtual void exitPut_stmt(CloudsParser::Put_stmtContext *ctx) = 0;
-
-  virtual void enterCollision_stmt(CloudsParser::Collision_stmtContext *ctx) = 0;
-  virtual void exitCollision_stmt(CloudsParser::Collision_stmtContext *ctx) = 0;
 
   virtual void enterWait_stmt(CloudsParser::Wait_stmtContext *ctx) = 0;
   virtual void exitWait_stmt(CloudsParser::Wait_stmtContext *ctx) = 0;
@@ -86,6 +89,9 @@ public:
 
   virtual void enterParens(CloudsParser::ParensContext *ctx) = 0;
   virtual void exitParens(CloudsParser::ParensContext *ctx) = 0;
+
+  virtual void enterExprFunctionCall(CloudsParser::ExprFunctionCallContext *ctx) = 0;
+  virtual void exitExprFunctionCall(CloudsParser::ExprFunctionCallContext *ctx) = 0;
 
   virtual void enterAddSubExpr(CloudsParser::AddSubExprContext *ctx) = 0;
   virtual void exitAddSubExpr(CloudsParser::AddSubExprContext *ctx) = 0;
@@ -119,6 +125,9 @@ public:
 
   virtual void enterFunctionInit(CloudsParser::FunctionInitContext *ctx) = 0;
   virtual void exitFunctionInit(CloudsParser::FunctionInitContext *ctx) = 0;
+
+  virtual void enterReturn_type(CloudsParser::Return_typeContext *ctx) = 0;
+  virtual void exitReturn_type(CloudsParser::Return_typeContext *ctx) = 0;
 
   virtual void enterFunctionCall(CloudsParser::FunctionCallContext *ctx) = 0;
   virtual void exitFunctionCall(CloudsParser::FunctionCallContext *ctx) = 0;

@@ -5,7 +5,7 @@ grammar Clouds;
 using namespace wci::intermediate;
 }
 
-program : header function? body ; //done 
+program : header function* body ; //done 
 header  : CLOUDS ID SEMICOLON; //done
 
 body: block+;
@@ -29,7 +29,9 @@ run_simulation: SIMULATION scope;    //Done
 
 
 
-scope : '{' stmt_list '}';  
+scope : '{' stmt_list '}'; 
+
+funcscope : '{' (stmt_list)? (return_stmt)? '}' ; 
 
 //statements
 stmt_list       : stat SEMICOLON (stat SEMICOLON)* ;
@@ -40,7 +42,7 @@ stat : //scope            # scope_node|
         assignment_stmt // # assignmentStmt
      | init_stmt
      | rotation_stmt
-     | function         //# Function_
+     | functionCall         //# Function_
      | repeat_stmt      //# repeatStmt
      | if_stmt          //# ifStmt
      | when_stmt       // # whenStmt
@@ -48,9 +50,11 @@ stat : //scope            # scope_node|
      | put_stmt        // # putStmt
      | move_stmt     //#moveStmt
      | wait_stmt     //#waitStmt
-     | collision_stmt// #collisionStmt
-//     |                  # emptyStmt
+    // |                  //# emptyStmt
      ;
+
+
+return_stmt : 'return' expr SEMICOLON;
 
 rotation_stmt   : variable rot_op expr ;
 
@@ -71,9 +75,6 @@ put_stmt        : PUTNENV variable ID
  //               | PUTNENV variable TYPE
                 ;
 
-collision_stmt  : COLISION variable BETWEEN variable variable 
-                ;
-
 wait_stmt       : WAIT expr;
 
 move_stmt       : MOVE variable TO point_var MOVE_3 expr (MOVE_3 expr)?
@@ -83,11 +84,13 @@ point_var   : '[' init_list ']'
             | ID
             ;
 
-when_stmt       : WHEN expr THEN stat ;
+when_stmt       : WHEN '(' expr (',' expr)* ')' THEN ID ;
 //change stat to a function pointer, then have
 //function built before main?
 
-print_stmt      : PRINT '(' variable ')';
+print_stmt      : PRINT '(' variable ')'
+                | PRINT '(' '"' (ID)* '"' ')'
+                ;
 
 variable locals [ TypeSpec *type = nullptr ]
         :  //Done 
@@ -101,6 +104,7 @@ expr locals [ TypeSpec *type = nullptr ]
      | expr rel_op expr         # relExpr    //done first visit
     // | expr rot_op expr         # rotExpr    //done first visit  
      //| '[' init_list ']'        # initList   //done first visit
+     | functionCall             # ExprFunctionCall
      | signedNumber             # signedNumberConst
      | number                   # numberConst //done first visit
      | variable                 # Exprvariable  //done first visit
@@ -127,16 +131,19 @@ obj_vars    : HEIGHT
             ;
 
 function
-    : ID '(' argumentList ')' scope?
-    | ID '(' methodCall_ref ')' scope?
+    : functionInit funcscope
     ;
 
 functionInit
-    : ID '(' TYPE ID (',' TYPE ID)* ')'
+    : (return_type)? ID '(' init_var (',' init_var )* ')'
+    | (return_type)? ID '()'
     ;
 
-functionCall
-    : ID '(' ID (',' ID)* ')'
+return_type : TYPE;
+
+functionCall locals [ TyxpeSpec *type = nullptr ]
+    : ID '(' expr (',' expr)* ')'
+    | ID '()'
     ;
 
 argumentList

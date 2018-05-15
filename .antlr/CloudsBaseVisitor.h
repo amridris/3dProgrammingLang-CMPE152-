@@ -47,11 +47,19 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitFuncscope(CloudsParser::FuncscopeContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitStmt_list(CloudsParser::Stmt_listContext *ctx) override {
     return visitChildren(ctx);
   }
 
   virtual antlrcpp::Any visitStat(CloudsParser::StatContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitReturn_stmt(CloudsParser::Return_stmtContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -76,10 +84,6 @@ public:
   }
 
   virtual antlrcpp::Any visitPut_stmt(CloudsParser::Put_stmtContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitCollision_stmt(CloudsParser::Collision_stmtContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -108,6 +112,10 @@ public:
   }
 
   virtual antlrcpp::Any visitParens(CloudsParser::ParensContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitExprFunctionCall(CloudsParser::ExprFunctionCallContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -152,6 +160,10 @@ public:
   }
 
   virtual antlrcpp::Any visitFunctionInit(CloudsParser::FunctionInitContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitReturn_type(CloudsParser::Return_typeContext *ctx) override {
     return visitChildren(ctx);
   }
 

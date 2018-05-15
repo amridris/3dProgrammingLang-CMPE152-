@@ -24,6 +24,8 @@ private:
 	string var_name; //take out when symbol table support is complete
 	string jas_type;
 	string init_param;
+	int func_locals;
+	int numberOfWaitStmt = 0;
 	size_t var_size = 0;
 	int labelNum = 0;
 
@@ -34,6 +36,8 @@ public:
 
 	antlrcpp::Any visitProgram(CloudsParser::ProgramContext *ctx) override;
     antlrcpp::Any visitHeader(CloudsParser::HeaderContext *ctx) override;
+	antlrcpp::Any visitFunction(CloudsParser::FunctionContext *ctx) override;
+	antlrcpp::Any visitFunctionInit(CloudsParser::FunctionInitContext *ctx) override;
 	antlrcpp::Any visitBody(CloudsParser::BodyContext *ctx) override;
 	antlrcpp::Any visitBlock(CloudsParser::BlockContext *ctx) override;
     antlrcpp::Any visitEnvironments(CloudsParser::EnvironmentsContext *ctx) override;
@@ -47,6 +51,8 @@ public:
 	antlrcpp::Any visitWait_stmt(CloudsParser::Wait_stmtContext *ctx) override;
 	antlrcpp::Any visitMove_stmt(CloudsParser::Move_stmtContext *ctx) override;
 	antlrcpp::Any visitRotation_stmt(CloudsParser::Rotation_stmtContext *ctx) override;
+	antlrcpp::Any visitFunctionCall(CloudsParser::FunctionCallContext *ctx) override;
+	antlrcpp::Any visitWhen_stmt(CloudsParser::When_stmtContext *ctx) override;
 
 
 	antlrcpp::Any visitIntegerConst(CloudsParser::IntegerConstContext *ctx) override;
