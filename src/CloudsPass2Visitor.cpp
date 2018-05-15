@@ -18,6 +18,13 @@ CloudsPass2Visitor::CloudsPass2Visitor(ostream& j_file)
 
 CloudsPass2Visitor::~CloudsPass2Visitor() {}
 
+string CloudsPass2Visitor::createLabel()
+{
+    string label = "L" + std::to_string(labelNum);
+    labelNum++;
+    return label;
+}
+
 antlrcpp::Any CloudsPass2Visitor::visitProgram(CloudsParser::ProgramContext *ctx)
 {
     auto value = visitChildren(ctx);
@@ -306,7 +313,7 @@ antlrcpp::Any CloudsPass2Visitor::visitInit_stmt(CloudsParser::Init_stmtContext 
         j_file << "\tdup\n";
         j_file << "\tputstatic " << program_name << "/" << var_name << " Lcollisionengine/" << jas_type << ";\n";
         j_file << "\tldc \"" << var_name << "\"\n";
-        j_file << "\tinvokevirtual collisionengine/" << jas_type << "/setName(Ljava/lang/String;)V\n";
+        j_file << "\tinvokevirtual collisionengine/" << jas_type << ".setName(Ljava/lang/String;)V\n";
     }
     else if(var_type == "point" ){
         j_file << "\tinvokenonvirtual collisionengine/" << jas_type << "/<init>(" << init_param << ")V\n";
@@ -664,8 +671,8 @@ antlrcpp::Any CloudsPass2Visitor::visitExprvariable(CloudsParser::ExprvariableCo
     
 }
 
-/*
-antlrcpp::Any CloudsPass2Visitor::visitAdd_Sub_op(CloudsParser::Add_sub_opContext *ctx)
+
+antlrcpp::Any CloudsPass2Visitor::visitAddSubExpr(CloudsParser::AddSubExprContext *ctx)
 {
     auto value = visitChildren(ctx);
 
@@ -699,7 +706,7 @@ antlrcpp::Any CloudsPass2Visitor::visitAdd_Sub_op(CloudsParser::Add_sub_opContex
     return value;
 }
 
-antlrcpp::Any CloudsPass2Visitor::visitMul_div_op(CloudsParser::Mul_div_opContext *ctx)
+antlrcpp::Any CloudsPass2Visitor::visitMulDivExpr(CloudsParser::MulDivExprContext *ctx)
 {
     auto value = visitChildren(ctx);
 
@@ -727,7 +734,7 @@ antlrcpp::Any CloudsPass2Visitor::visitMul_div_op(CloudsParser::Mul_div_opContex
                :                "????";
     }
 
-    // Emit an add or subtract instruction.
+    // Emit an multiply or divide instruction.
     j_file << "\t" << opcode << endl;
 
     return value;
@@ -736,116 +743,95 @@ antlrcpp::Any CloudsPass2Visitor::visitMul_div_op(CloudsParser::Mul_div_opContex
 antlrcpp::Any CloudsPass2Visitor::visitIf_stmt(CloudsParser::If_stmtContext *ctx)
 {   
     //evaluate first boolean expression
-    visitChildren(ctx->expr());
+    auto value = visit(ctx->expr());
+    string thenLabel = createLabel();
+    string elseLabel = createLabel();
     
     //if-then-else
-    if (ctx->stmt_list().size() == 2)
+    if (ctx->scope().size() == 2)
     {
-        j_file << "\tifeq\tFALSELABEL" << endl;
-        visitChildren(ctx->stmt_list(0));
-        j_file << "\tgoto\tNEXTLABEL" << endl;
-        j_file << "FALSELABEL:" << endl;
-        visitChildren(ctx->stmt_list(1));
-        j_file << "NEXTLABEL:" << endl;
+        j_file << "\tifeq\t" << elseLabel << endl;
+        value = visitChildren(ctx->scope(0));
+        j_file << "\tgoto\t" << thenLabel << endl;
+        j_file << elseLabel << ":" << endl;
+        value = visitChildren(ctx->scope(1));
+        j_file << thenLabel << ":" << endl;
         }
 
     //if-then
     else
     {
-        j_file << "\tifeq\tLABEL" << endl;
-        visitChildren(ctx->stmt_list(0));
-        j_file << "LABEL:" << endl;
+        j_file << "\tifeq\t" << thenLabel << endl;
+        value = visit(ctx->scope(0));
+        j_file << thenLabel << ":" << endl;
     }
 
-    return visitChildren(ctx);
+    return value;
 }
 
-antlrcpp::Any CloudsPass2Visitor::visitRel_op(CloudsParser::Rel_opContext *ctx)
+
+antlrcpp::Any CloudsPass2Visitor::visitRelExpr(CloudsParser::RelExprContext *ctx)
 {
-    auto value = visitChildren(ctx);
-
-    string var1 = ctx->expr(0)->ID()->toString();
-    string var2 = ctx->expr(1)->ID()->toString();
-
-    TypeSpec *type1 = ctx->expr(0)->type;
-    TypeSpec *type2 = ctx->expr(1)->type;
-
-    bool integer_mode =    (type1 == Predefined::integer_type)
-                        && (type2 == Predefined::integer_type);
-    bool real_mode    =    (type1 == Predefined::real_type)
-                        && (type2 == Predefined::real_type);
-
-    string type_indicator = 
-                  (integer_mode) ? "I"
-                : (real_mode)    ? "F"
-                :                ? "?";
+    string falseLabel = createLabel();
+    string continueLabel = createLabel();
 
     string op = ctx->rel_op()->getText();
     string opcode;
     
-    switch (op)
-    {
-        case "<":
-            opcode = "if_cmlt"
-            break;
-        case "<=":
-            opcode = "if_cmle"
-            break;
-        case ">":
-            opcode = "if_cmgt"
-            break;
-        case ">=":
-            opcode = "if_cmge"
-            break;
-        case "==":
-            opcode = "if_cmeq"
-            break;
-        case "!=":
-            opcode = "if_cmne"
-            break;    
-        default:
-            opcode = "???????"
-            break;
-    }
-    //push values of operands to top of stack
-    j_file  << "\tgetstatic\t" << program_name 
-            << "/" << var1 << " " << type_indicator << endl;
-    j_file  << "\tgetstatic\t" << program_name 
-            << "/" << var2 << " " << type_indicator << endl;
+    if (op == "<")
+        opcode = "if_cmlt";
+    else if (op == "<=")
+        opcode = "if_cmle";
+    else if (op == ">")
+        opcode = "if_cmgt";
+    else if (op == ">=")  
+        opcode = "if_cmge";
+    else if (op == "==")
+        opcode = "if_cmeq"; 
+    else if (op == "!=")
+        opcode = "if_cmne";
+    else
+        opcode = "???????";
+
+    //evaluate expressions and load to top of stack
+    visit(ctx->expr(0));
+    j_file << "\t" << "iload_0" << endl;
+    auto value = visit(ctx->expr(1));
+    j_file << "\t" << "iload_1" << endl;
     //comparison
-    j_file  << "\t" << opcode << "\tL001" << endl;
+    j_file  << "\t" << opcode << "\t" << continueLabel << endl;
     //push false
     j_file  << "\ticonst_0" << endl;
     //go to next statement
-    j_file  << "\tgoto\tNEXTLABEL" << endl;
+    j_file  << "\tgoto\t" << falseLabel << endl;
     //true section, push true
-    j_file  << "L001:" << endl;
+    j_file  << continueLabel << ":" << endl;
     j_file  << "\ticonst_1" << endl;
     //false section, continue
-    j_file  << "NEXTLABEL:" << endl;
+    j_file  << falseLabel << ":" << endl;
 
     return value;
 }
 
 antlrcpp::Any CloudsPass2Visitor::visitStmt_list(CloudsParser::Stmt_listContext *ctx)
 {
-    for (int i = 0; i < ctx->stat().size(); i++)
-        visitChildren(ctx->stat(i));
     return visitChildren(ctx);
 }
 
-// antlrcpp::Any CloudsPass2Visitor::visitRepeat_stmt(CloudsParser::Repeat_stmtContext *ctx)
-// {
-//     auto value = visitChldren(ctx);
+antlrcpp::Any CloudsPass2Visitor::visitRepeat_stmt(CloudsParser::Repeat_stmtContext *ctx)
+{
+    string loopLabel = createLabel();
+    string nextLabel = createLabel();
+    j_file << loopLabel << ":" << endl;
+    auto value = visitChildren(ctx);
+    j_file << "\tifne\t" << nextLabel << endl;
+    j_file << "\tgoto\t" << loopLabel << endl;
+    j_file << nextLabel << ":" << endl;
+    
 
-//     while(ctx->expr() == true)
-//     {
-//         visitChldren(ctx->stmt_list());
-//     }
+    return value;
+}
 
-//     return value;
-// }
-*/
 
 antlrcpp::Any CloudsPass2Visitor::visitRun_simulation(CloudsParser::Run_simulationContext *ctx)
 {

@@ -121,7 +121,7 @@
 	dup
 	putstatic collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
 	ldc "cubeobject"
-	invokevirtual collisionengine/RectPrism/setName(Ljava/lang/String;)V
+	invokevirtual collisionengine/RectPrism.setName(Ljava/lang/String;)V
 
 
 ; spheresphereobject=[radius=2]
@@ -133,7 +133,7 @@
 	dup
 	putstatic collisionengine/assignmentseven/sphereobject Lcollisionengine/Sphere;
 	ldc "sphereobject"
-	invokevirtual collisionengine/Sphere/setName(Ljava/lang/String;)V
+	invokevirtual collisionengine/Sphere.setName(Ljava/lang/String;)V
 
 
 ; cubecubeobjectTwo=[height=3,width=3,length=4]
@@ -147,7 +147,7 @@
 	dup
 	putstatic collisionengine/assignmentseven/cubeobjectTwo Lcollisionengine/RectPrism;
 	ldc "cubeobjectTwo"
-	invokevirtual collisionengine/RectPrism/setName(Ljava/lang/String;)V
+	invokevirtual collisionengine/RectPrism.setName(Ljava/lang/String;)V
 
 
 ; putnenvcubeobjectpointObjectOne

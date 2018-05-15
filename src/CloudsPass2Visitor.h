@@ -27,10 +27,12 @@ private:
 	int func_locals;
 	int numberOfWaitStmt = 0;
 	size_t var_size = 0;
+	int labelNum = 0;
 
 public:
 	CloudsPass2Visitor(ostream& j_file);
     virtual ~CloudsPass2Visitor();
+	string createLabel();
 
 	antlrcpp::Any visitProgram(CloudsParser::ProgramContext *ctx) override;
     antlrcpp::Any visitHeader(CloudsParser::HeaderContext *ctx) override;
@@ -56,14 +58,14 @@ public:
 	antlrcpp::Any visitIntegerConst(CloudsParser::IntegerConstContext *ctx) override;
 	antlrcpp::Any visitExprvariable(CloudsParser::ExprvariableContext *ctx) override;
 	//DO NOT IMPLEMENT visitVaraible
-/*
-	antlrcpp::Any visitAdd_sub_op(CloudsParser::Add_sub_opContext *ctx) override;
-	antlrcpp::Any visitMul_div_op(CloudsParser::Mul_div_opContext *ctx) override;
+
+	antlrcpp::Any visitAddSubExpr(CloudsParser::AddSubExprContext *ctx) override;
+	antlrcpp::Any visitMulDivExpr(CloudsParser::MulDivExprContext *ctx) override;
 	antlrcpp::Any visitIf_stmt(CloudsParser::If_stmtContext *ctx) override;
 	antlrcpp::Any visitRepeat_stmt(CloudsParser::Repeat_stmtContext *ctx) override;
-	antlrcpp::Any visitRel_op(CloudsParser::Rel_opContext *ctx) override;
+	antlrcpp::Any visitRelExpr(CloudsParser::RelExprContext *ctx) override;
 	antlrcpp::Any visitStmt_list(CloudsParser::Stmt_listContext *ctx) override;
-*/
+
 };
 
 #endif /* CLOUDSPASS2VISITOR_H_ */

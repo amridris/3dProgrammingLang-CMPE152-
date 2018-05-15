@@ -108,7 +108,7 @@ public class CollisionEngine
         }
 
         System.out.println("Collisions being handled:");
-        System.out.printf("\tNumber of Collisions = %d\n", numCollisions);
+        System.out.printf("\tNumber of Collisions = %d\n", numCollisions-1);
         // loop over collisions in hashmap?
     }
 
