@@ -3,9 +3,22 @@ Clouds basictest;
 environment basicenv
 {
 	int xp = 3;
+    int yp = 4;
+    xp = xp + yp;
+	/*
+    IF xp == 3 THEN
+    {
+        xp = xp + 5;
+    }
+    ELSE
+    {
+        yp = 0;
+    };
+    REPEAT xp = xp + 5; UNTIL xp > 10;
+    */
 }
 
 simulation
 {
-    pause;
+    xp = 5;
 }
