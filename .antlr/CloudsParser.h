@@ -17,18 +17,18 @@ class  CloudsParser : public antlr4::Parser {
 public:
   enum {
     T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, 
-    T__7 = 8, T__8 = 9, T__9 = 10, T__10 = 11, CLOUDS = 12, REPEAT = 13, 
-    UNTIL = 14, IF = 15, THEN = 16, ELSE = 17, WHEN = 18, CENTER = 19, TELEPORT = 20, 
-    COLISION = 21, WAIT = 22, MOVE = 23, TO = 24, MOVE_3 = 25, AT = 26, 
-    IN = 27, FOR = 28, FINISH = 29, PUTNENV = 30, FUNCTION = 31, ENVIRONMENT = 32, 
-    SIMULATION = 33, PRINT = 34, BETWEEN = 35, TYPE = 36, SPHERE = 37, HEIGHT = 38, 
-    WIDTH = 39, LENGTH = 40, RADIUS = 41, X = 42, Y = 43, Z = 44, DX = 45, 
-    DY = 46, DZ = 47, POINT = 48, VELOCITY = 49, SPEED = 50, ASSIGN_OP = 51, 
-    MUL = 52, DIV = 53, ADD = 54, SUB = 55, MUL_EQ = 56, DIV_EQ = 57, ADD_EQ = 58, 
-    SUB_EQ = 59, EQ_OP = 60, NE_OP = 61, LT_OP = 62, LE_OP = 63, GT_OP = 64, 
-    GE_OP = 65, ROLL_OP = 66, PITCH_OP = 67, YAW_OP = 68, COM_OP = 69, SEMICOLON = 70, 
-    FLOAT = 71, ID = 72, INT = 73, NEWLINE = 74, WS = 75, COMMENT = 76, 
-    BLOCK_COM = 77
+    T__7 = 8, T__8 = 9, T__9 = 10, T__10 = 11, T__11 = 12, CLOUDS = 13, 
+    REPEAT = 14, UNTIL = 15, IF = 16, THEN = 17, ELSE = 18, WHEN = 19, CENTER = 20, 
+    TELEPORT = 21, COLISION = 22, WAIT = 23, MOVE = 24, TO = 25, MOVE_3 = 26, 
+    AT = 27, IN = 28, FOR = 29, FINISH = 30, PUTNENV = 31, FUNCTION = 32, 
+    ENVIRONMENT = 33, SIMULATION = 34, PRINT = 35, BETWEEN = 36, TYPE = 37, 
+    SPHERE = 38, HEIGHT = 39, WIDTH = 40, LENGTH = 41, RADIUS = 42, X = 43, 
+    Y = 44, Z = 45, DX = 46, DY = 47, DZ = 48, POINT = 49, VELOCITY = 50, 
+    SPEED = 51, ASSIGN_OP = 52, MUL = 53, DIV = 54, ADD = 55, SUB = 56, 
+    MUL_EQ = 57, DIV_EQ = 58, ADD_EQ = 59, SUB_EQ = 60, EQ_OP = 61, NE_OP = 62, 
+    LT_OP = 63, LE_OP = 64, GT_OP = 65, GE_OP = 66, ROLL_OP = 67, PITCH_OP = 68, 
+    YAW_OP = 69, COM_OP = 70, SEMICOLON = 71, FLOAT = 72, ID = 73, INT = 74, 
+    NEWLINE = 75, WS = 76, COMMENT = 77, BLOCK_COM = 78
   };
 
   enum {
@@ -473,7 +473,9 @@ public:
     Print_stmtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *PRINT();
-    VariableContext *variable();
+    ExprContext *expr();
+    std::vector<antlr4::tree::TerminalNode *> ID();
+    antlr4::tree::TerminalNode* ID(size_t i);
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;

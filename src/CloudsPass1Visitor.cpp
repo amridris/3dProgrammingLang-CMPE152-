@@ -409,6 +409,9 @@ antlrcpp::Any CloudsPass1Visitor::visitVariable(CloudsParser::VariableContext *c
 
         ctx->type = variable_id->get_typespec();
     }
+    else{
+        ctx->type = Predefined::integer_type;
+    }
     
     return visitChildren(ctx);
 

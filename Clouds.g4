@@ -88,7 +88,9 @@ when_stmt       : WHEN '(' expr (',' expr)* ')' THEN ID ;
 //change stat to a function pointer, then have
 //function built before main?
 
-print_stmt      : PRINT '(' variable ')';
+print_stmt      : PRINT '(' expr ')'
+                | PRINT '(' '"' (ID)* '"' ')'
+                ;
 
 variable locals [ TypeSpec *type = nullptr ]
         :  //Done 
