@@ -81,7 +81,6 @@ antlrcpp::Any CloudsPass2Visitor::visitFunctionInit(CloudsParser::FunctionInitCo
     string type_name;
     j_file << ctx->ID()->toString() << "(";
     for(auto init_var: ctx->init_var()){
-        func_locals++;
         type_name = init_var->TYPE()->toString();
         if(type_name == "int"){
             j_file << "I";
@@ -104,6 +103,8 @@ antlrcpp::Any CloudsPass2Visitor::visitFunctionInit(CloudsParser::FunctionInitCo
     }
     j_file << ")";
 
+   
+
     if(ctx->return_type() != nullptr){
         type_name = ctx->return_type()->TYPE()->toString();
         if(type_name == "int"){
@@ -116,7 +117,7 @@ antlrcpp::Any CloudsPass2Visitor::visitFunctionInit(CloudsParser::FunctionInitCo
             j_file << "Lcollisionengine/RectPrism;";
         }
         else if(type_name == "sphere"){
-            j_file << "Lcollisionengine/Sphere;"; 
+            j_file << "Lcollisionengine/Sphere;" ;
         }
         else if(type_name == "cylinder"){
             j_file << "Lcollisionengine/Cylinder;";
@@ -128,7 +129,44 @@ antlrcpp::Any CloudsPass2Visitor::visitFunctionInit(CloudsParser::FunctionInitCo
     else {
         j_file << "V";
     }
-    j_file << "\n";
+
+    j_file << "\n\n";
+
+
+    jas_type = "";
+    string load_type;
+    for(auto init_var: ctx->init_var()){
+        type_name = init_var->TYPE()->toString();
+        if(type_name == "int"){
+            jas_type = "I";
+            load_type = "i";
+        }
+        else if(type_name == "float"){
+            jas_type =  "F";
+            load_type = "f";
+        }
+        else if(type_name == "cube"){
+            jas_type = "Lcollisionengine/RectPrism;";
+            load_type = "a";
+        }
+        else if(type_name == "sphere"){
+            jas_type = "Lcollisionengine/Sphere;"; 
+            load_type = "a";            
+        }
+        else if(type_name == "cylinder"){
+            jas_type = "Lcollisionengine/Cylinder;";
+            load_type = "a";
+        }
+        else {
+            jas_type = "?";
+        }
+        j_file << "\t" << load_type << "load " << func_locals << "\n";
+        j_file << "\tputstatic " << program_name << "/" << init_var->variable()->ID()->toString();
+        j_file << " " << jas_type<<endl;
+        func_locals++;
+
+    }
+
 
     return visitChildren(ctx);    
 
@@ -159,7 +197,7 @@ antlrcpp::Any CloudsPass2Visitor::visitBody(CloudsParser::BodyContext *ctx)
 
 
     for(auto block: ctx->block()){
-        if(block->function() == nullptr){
+        if(block->environments() != nullptr){
             auto value = visit(block);
         }
     }

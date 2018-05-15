@@ -50,6 +50,9 @@
 
 .method private static functionOne(I)V
 
+	iload 0
+	putstatic collisionengine/assignmentseven/i I
+
 ; waiti
 
 	ldc 0
@@ -90,6 +93,9 @@ WAIT_STMT1_NO_HANDLE:
 
 
 .method private static functionTwo(I)I
+
+	iload 0
+	putstatic collisionengine/assignmentseven/j I
 
 ; waitj
 
@@ -133,6 +139,7 @@ WAIT_STMT2_NO_HANDLE:
 
 .method private static collisionOne()V
 
+
 ; cubeobject.dy=5
 
 	ldc	5
@@ -148,6 +155,7 @@ WAIT_STMT2_NO_HANDLE:
 
 
 .method private static collisionTwo()V
+
 	return
 
 .limit locals 6
@@ -322,49 +330,6 @@ WAIT_STMT3_NO_HANDLE:
 	iinc 3 1
 	iload_2
 	ifeq WAIT_STMT3LOOP1
-	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
-	invokevirtual collisionengine/CollisionEngine/printStatus()V
-
-; movecubeobjecttopointObjectTwointimetomovecube
-
-	getstatic collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
-	getstatic collisionengine/assignmentseven/pointObjectTwo Lcollisionengine/Point;
-	getstatic	collisionengine/assignmentseven/timetomovecube I
-	invokevirtual collisionengine/ThreeDObject.move(Lcollisionengine/Point;I)V
-
-; waitcubeobject.dx
-
-	ldc 0
-	istore_3
-	getstatic	collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
-
-	invokevirtual collisionengine/RectPrism.getdx()I
-	istore_2
-WAIT_STMT4LOOP1:
-	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
-	invokevirtual collisionengine/CollisionEngine.timestep()[I
-	ldc 0
-	istore 4
-	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
-	invokevirtual collisionengine/CollisionEngine.getNumCollisionHandles()I
-	istore 5
-WAIT_STMT4LOOP2:
-	dup
-	iload 4
-	iaload
-	ldc 0
-	ifeq WAIT_STMT4_NO_HANDLE
-	invokestatic collisionengine/assignmentseven/handleCollision(I)V
-	ldc 0
-WAIT_STMT4_NO_HANDLE:
-	pop
-	iinc 4 1
-	iload 5
-	ifeq WAIT_STMT4LOOP2
-	pop
-	iinc 3 1
-	iload_2
-	ifeq WAIT_STMT4LOOP1
 	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
 	invokevirtual collisionengine/CollisionEngine/printStatus()V
 
