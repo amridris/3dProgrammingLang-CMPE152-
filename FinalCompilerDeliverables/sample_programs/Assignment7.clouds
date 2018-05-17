@@ -1,22 +1,8 @@
 Clouds assignmentseven;
 
 /*
-    this 
-    is
-    a
-    block
-    comment
+    Clouds Example Program
 */
-
-//TODO
-/*
-1.  add loading in of parameters or switch to pass by reference(somehow)
-2.  make functions for every when
-3.  make switch case to handle collisions(in jasmin)
-4.  implement collision detection system
-
-*/
-
 
 int functionTwo (int j)
 {
