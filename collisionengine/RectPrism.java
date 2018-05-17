@@ -12,18 +12,15 @@ public class RectPrism extends ThreeDObject
         height = argHeight;
         width = argWidth;
         length = argLength;
+        buildSpace();
     }
 
-    RectPrism()
-    {
-       // RectPrism(0,0,0);
-    }
     @Override
     void buildSpace() {
-        objectSpace = new Boolean[width] [height] [length];
-        for(Boolean[][] twoD: objectSpace){
-            for(Boolean[] oneD: twoD){
-                for(Boolean elem: oneD){
+        objectSpace = new boolean[width] [height] [length];
+        for(boolean[][] twoD: objectSpace){
+            for(boolean[] oneD: twoD){
+                for(boolean elem: oneD){
                     elem = true;
                 }
             }

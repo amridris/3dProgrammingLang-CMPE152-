@@ -88,6 +88,7 @@ abstract class ThreeDObject
         public int getdx(){ return objvelocity.dx; }
         public int getdy(){ return objvelocity.dy; }
         public int getdz(){ return objvelocity.dz; }
+        public boolean[][][] getObjectSpace() { return objectSpace; }
 
         public void setx(int argx) { center.x = argx;}
         public void sety(int argy) { center.y = argy;}
@@ -99,6 +100,6 @@ abstract class ThreeDObject
         Point center;
         //private int moveTime;
         Velocity objvelocity;
-        Boolean[][][] objectSpace;
+        boolean[][][] objectSpace;
         String name = "no name";
     }

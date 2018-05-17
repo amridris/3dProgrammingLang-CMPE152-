@@ -53,15 +53,17 @@ environment environmentObject
 }
 
 collisionOne(){
-    cubeobject.dy = 5;
+    print("col one");
+    cubeobject.dy = 20;
 }
 
 collisionTwo(){
+    print("col two");
 }
 
 simulation
 {
     move cubeobject to pointObjectTwo in timetomovecube;
-    wait cubeobject.dx;
+    wait 2;
     //functionOne(10);
 }

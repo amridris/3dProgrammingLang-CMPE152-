@@ -253,11 +253,12 @@ antlrcpp::Any CloudsPass2Visitor::visitStat(CloudsParser::StatContext *ctx)
 
 antlrcpp::Any CloudsPass2Visitor::visitAssignment_stmt(CloudsParser::Assignment_stmtContext *ctx)
 {
-    auto value = visit(ctx->expr());
-   
+    auto value = visit(ctx->assignment_operators());
     string type_indicator;   
     string variable_name;                                                   
     if(ctx->variable()->obj_vars() == nullptr){
+
+        value = visit(ctx->expr());
         type_indicator =
                   (ctx->variable()->type == Predefined::integer_type) ? "I"
                 : (ctx->variable()->type == Predefined::real_type)    ? "F"
@@ -285,7 +286,7 @@ antlrcpp::Any CloudsPass2Visitor::visitAssignment_stmt(CloudsParser::Assignment_
         else { jas_type = "?";}
 
         auto expr_type = ctx->expr()->type;
-        string param_name;
+        string param_name = "I";
 
          if(type_name == Predefined::integer_type){
                 param_name = "I";
@@ -299,7 +300,10 @@ antlrcpp::Any CloudsPass2Visitor::visitAssignment_stmt(CloudsParser::Assignment_
 
          j_file << "\tgetstatic\t" << program_name
                 << "/" << variable_name << " Lcollisionengine/" << jas_type << ";\n" << endl;
-        j_file << "\tinvokevirtual collisionengine/" << jas_type << ".set" << objvar_name << "(" << param_name << ")I\n";
+        
+            value = visit(ctx->expr());
+
+        j_file << "\tinvokevirtual collisionengine/" << jas_type << ".set" << objvar_name << "(" << param_name << ")V\n";
         
     }
 
@@ -466,7 +470,7 @@ antlrcpp::Any CloudsPass2Visitor::visitWait_stmt(CloudsParser::Wait_stmtContext 
     j_file << "WAIT_STMT" << numberOfWaitStmt << "LOOP1:\n";
     j_file << "\tgetstatic " << program_name << "/" << current_environment_name << "Engine Lcollisionengine/CollisionEngine;\n";
     j_file << "\tinvokevirtual collisionengine/CollisionEngine.timestep()[I\n";
-    j_file << "\tldc 0\n";
+    j_file << "\tldc 1\n";
     j_file << "\tistore 4\n";
     j_file << "\tgetstatic " << program_name << "/" << current_environment_name << "Engine Lcollisionengine/CollisionEngine;\n";
     j_file << "\tinvokevirtual collisionengine/CollisionEngine.getNumCollisionHandles()I\n";
@@ -476,24 +480,24 @@ antlrcpp::Any CloudsPass2Visitor::visitWait_stmt(CloudsParser::Wait_stmtContext 
     j_file << "\tdup\n";
     j_file << "\tiload 4\n";
     j_file << "\tiaload\n";
-    j_file << "\tldc 0\n";
-    j_file << "\tifeq WAIT_STMT" << numberOfWaitStmt << "_NO_HANDLE\n";//assuming one to handle
+    j_file << "\tifne WAIT_STMT" << numberOfWaitStmt << "_NO_HANDLE\n";//assuming one to handle
+    j_file << "\tiload 4\n";
     j_file << "\tinvokestatic " << program_name << "/handleCollision(I)V\n";
-    j_file << "\tldc 0\n";
     j_file << "WAIT_STMT" << numberOfWaitStmt << "_NO_HANDLE:\n";
-    j_file << "\tpop\n";
 
     j_file << "\tiinc 4 1\n";
+    j_file << "\tiload 4\n";
     j_file << "\tiload 5\n";
-    j_file << "\tifeq " << "WAIT_STMT" << numberOfWaitStmt << "LOOP2\n";
+    j_file << "\tif_icmpne " << "WAIT_STMT" << numberOfWaitStmt << "LOOP2\n";
     j_file << "\tpop\n";
     //end inner loop
 
 
 
     j_file << "\tiinc 3 1\n";
+    j_file << "\tiload 3\n";
     j_file << "\tiload_2\n";
-    j_file << "\tifeq " << "WAIT_STMT" << numberOfWaitStmt << "LOOP1\n";
+    j_file << "\tif_icmpne " << "WAIT_STMT" << numberOfWaitStmt << "LOOP1\n";
     //end outerfor loop
 
 
@@ -791,6 +795,21 @@ antlrcpp::Any CloudsPass2Visitor::visitMulDivExpr(CloudsParser::MulDivExprContex
     j_file << "\t" << opcode << endl;
 
     return value;
+}
+
+antlrcpp::Any CloudsPass2Visitor::visitPrint_stmt(CloudsParser::Print_stmtContext *ctx)
+{
+    if(ctx->ID(0) != nullptr)
+    {
+        j_file << "\tgetstatic\tjava/lang/System/out Ljava/io/PrintStream;" <<endl;
+        j_file << "\tldc \"";
+        for(auto id: ctx->ID()){
+            j_file << id->toString() << " ";
+        }
+        j_file << "\"\n\tinvokevirtual java/io/PrintStream.println(Ljava/lang/String;)V\n";
+    }
+
+    return visitChildren(ctx);
 }
 
 antlrcpp::Any CloudsPass2Visitor::visitIf_stmt(CloudsParser::If_stmtContext *ctx)

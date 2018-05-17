@@ -8,13 +8,14 @@ public class Sphere extends ThreeDObject
     {
         super();
         radius = argradius;
+        buildSpace();
     }
 
     @Override
     void buildSpace(){
         int dist = 0;
-        Boolean hasSphere = false;
-        objectSpace = new Boolean[radius*2][radius*2][radius*2];
+        boolean hasSphere = false;
+        objectSpace = new boolean[radius*2][radius*2][radius*2];
         for(int x = -radius; x<radius; x++){
             for(int y = -radius; y<radius; y++){
                 for(int z = -radius; z<radius; z++){

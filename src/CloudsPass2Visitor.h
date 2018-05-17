@@ -53,6 +53,7 @@ public:
 	antlrcpp::Any visitRotation_stmt(CloudsParser::Rotation_stmtContext *ctx) override;
 	antlrcpp::Any visitFunctionCall(CloudsParser::FunctionCallContext *ctx) override;
 	antlrcpp::Any visitWhen_stmt(CloudsParser::When_stmtContext *ctx) override;
+	antlrcpp::Any visitPrint_stmt(CloudsParser::Print_stmtContext *ctx) override;
 
 
 	antlrcpp::Any visitIntegerConst(CloudsParser::IntegerConstContext *ctx) override;

@@ -62,7 +62,7 @@
 WAIT_STMT1LOOP1:
 	getstatic collisionengine/assignmentseven/Engine Lcollisionengine/CollisionEngine;
 	invokevirtual collisionengine/CollisionEngine.timestep()[I
-	ldc 0
+	ldc 1
 	istore 4
 	getstatic collisionengine/assignmentseven/Engine Lcollisionengine/CollisionEngine;
 	invokevirtual collisionengine/CollisionEngine.getNumCollisionHandles()I
@@ -71,19 +71,19 @@ WAIT_STMT1LOOP2:
 	dup
 	iload 4
 	iaload
-	ldc 0
-	ifeq WAIT_STMT1_NO_HANDLE
+	ifne WAIT_STMT1_NO_HANDLE
+	iload 4
 	invokestatic collisionengine/assignmentseven/handleCollision(I)V
-	ldc 0
 WAIT_STMT1_NO_HANDLE:
-	pop
 	iinc 4 1
+	iload 4
 	iload 5
-	ifeq WAIT_STMT1LOOP2
+	if_icmpne WAIT_STMT1LOOP2
 	pop
 	iinc 3 1
+	iload 3
 	iload_2
-	ifeq WAIT_STMT1LOOP1
+	if_icmpne WAIT_STMT1LOOP1
 	return
 
 .limit locals 7
@@ -106,7 +106,7 @@ WAIT_STMT1_NO_HANDLE:
 WAIT_STMT2LOOP1:
 	getstatic collisionengine/assignmentseven/Engine Lcollisionengine/CollisionEngine;
 	invokevirtual collisionengine/CollisionEngine.timestep()[I
-	ldc 0
+	ldc 1
 	istore 4
 	getstatic collisionengine/assignmentseven/Engine Lcollisionengine/CollisionEngine;
 	invokevirtual collisionengine/CollisionEngine.getNumCollisionHandles()I
@@ -115,19 +115,19 @@ WAIT_STMT2LOOP2:
 	dup
 	iload 4
 	iaload
-	ldc 0
-	ifeq WAIT_STMT2_NO_HANDLE
+	ifne WAIT_STMT2_NO_HANDLE
+	iload 4
 	invokestatic collisionengine/assignmentseven/handleCollision(I)V
-	ldc 0
 WAIT_STMT2_NO_HANDLE:
-	pop
 	iinc 4 1
+	iload 4
 	iload 5
-	ifeq WAIT_STMT2LOOP2
+	if_icmpne WAIT_STMT2LOOP2
 	pop
 	iinc 3 1
+	iload 3
 	iload_2
-	ifeq WAIT_STMT2LOOP1
+	if_icmpne WAIT_STMT2LOOP1
 	getstatic	collisionengine/assignmentseven/j I
 	ireturn
 
@@ -140,12 +140,18 @@ WAIT_STMT2_NO_HANDLE:
 .method private static collisionOne()V
 
 
-; cubeobject.dy=5
+; print("colone")
 
-	ldc	5
+	getstatic	java/lang/System/out Ljava/io/PrintStream;
+	ldc "col one "
+	invokevirtual java/io/PrintStream.println(Ljava/lang/String;)V
+
+; cubeobject.dy=20
+
 	getstatic	collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
 
-	invokevirtual collisionengine/RectPrism.setdy()I
+	ldc	20
+	invokevirtual collisionengine/RectPrism.setdy(I)V
 	return
 
 .limit locals 6
@@ -156,6 +162,12 @@ WAIT_STMT2_NO_HANDLE:
 
 .method private static collisionTwo()V
 
+
+; print("coltwo")
+
+	getstatic	java/lang/System/out Ljava/io/PrintStream;
+	ldc "col two "
+	invokevirtual java/io/PrintStream.println(Ljava/lang/String;)V
 	return
 
 .limit locals 6
@@ -297,18 +309,16 @@ WAIT_STMT2_NO_HANDLE:
 	getstatic	collisionengine/assignmentseven/timetomovecube I
 	invokevirtual collisionengine/ThreeDObject.move(Lcollisionengine/Point;I)V
 
-; waitcubeobject.dx
+; wait2
 
 	ldc 0
 	istore_3
-	getstatic	collisionengine/assignmentseven/cubeobject Lcollisionengine/RectPrism;
-
-	invokevirtual collisionengine/RectPrism.getdx()I
+	ldc	2
 	istore_2
 WAIT_STMT3LOOP1:
 	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
 	invokevirtual collisionengine/CollisionEngine.timestep()[I
-	ldc 0
+	ldc 1
 	istore 4
 	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
 	invokevirtual collisionengine/CollisionEngine.getNumCollisionHandles()I
@@ -317,19 +327,19 @@ WAIT_STMT3LOOP2:
 	dup
 	iload 4
 	iaload
-	ldc 0
-	ifeq WAIT_STMT3_NO_HANDLE
+	ifne WAIT_STMT3_NO_HANDLE
+	iload 4
 	invokestatic collisionengine/assignmentseven/handleCollision(I)V
-	ldc 0
 WAIT_STMT3_NO_HANDLE:
-	pop
 	iinc 4 1
+	iload 4
 	iload 5
-	ifeq WAIT_STMT3LOOP2
+	if_icmpne WAIT_STMT3LOOP2
 	pop
 	iinc 3 1
+	iload 3
 	iload_2
-	ifeq WAIT_STMT3LOOP1
+	if_icmpne WAIT_STMT3LOOP1
 	getstatic collisionengine/assignmentseven/environmentObjectEngine Lcollisionengine/CollisionEngine;
 	invokevirtual collisionengine/CollisionEngine/printStatus()V
 
